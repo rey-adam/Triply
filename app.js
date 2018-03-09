@@ -1,5 +1,6 @@
 // DEPENDENCIES
-const express = require("express"),
+const
+    express = require("express"),
     bodyParser = require("body-parser"),
 
     // DB MODELS
@@ -7,18 +8,18 @@ const express = require("express"),
 
     // PORT
     PORT = process.env.PORT || 3001,
-    app = express();
+    app = express(),
 
-// ROUTES FILE CONTAINING OUR ROUTES
-// const routes = require("./app_api/routes/");
+    // ROUTES FILE CONTAINING OUR ROUTES
+    modelRoutes = require("./app_api/routes/model");
 
 // BODY PARSER CONFIG
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('app_client/build'));
 
-// API ROUTES
-// app.use("/api", routes);
+// MODEL ROUTES
+app.use("/api", modelRoutes);
 
 // SYNC THE SQL DB AND THEN LISTEN TO PORT
 db.sequelize.sync({ force: true })
@@ -27,4 +28,3 @@ db.sequelize.sync({ force: true })
             console.log(`Listening on PORT: ${PORT}`);
         }); // END THEN 
     }); // END APP LISTEN
-
