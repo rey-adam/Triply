@@ -1,6 +1,6 @@
 // DEPENDENCIES
 const express = require("express"),
-    ctrl = require("../controllers/model/location.ctrl"),
+    ctrl = require("../../controllers/model/location.ctrl"),
     router = express.Router();
 
 // CREATE AN LOCATION

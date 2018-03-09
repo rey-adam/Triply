@@ -11,7 +11,9 @@ const
     app = express(),
 
     // ROUTES FILE CONTAINING OUR ROUTES
-    modelRoutes = require("./app_api/routes/model");
+    tripRoute = require("./app_api/routes/model/trip.route"),
+    locationRoute = require("./app_api/routes/model/location.route");
+    
 
 // BODY PARSER CONFIG
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,7 +21,8 @@ app.use(bodyParser.json());
 app.use(express.static('app_client/build'));
 
 // MODEL ROUTES
-app.use("/api", modelRoutes);
+app.use("/api", tripRoute);
+app.use("/api", locationRoute);
 
 // SYNC THE SQL DB AND THEN LISTEN TO PORT
 db.sequelize.sync({ force: true })
