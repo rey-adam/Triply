@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoginForm from '../../components/LoginForm';
 import './Login.css';
 
 class Login extends Component {
@@ -29,7 +30,7 @@ class Login extends Component {
 
         this.props.history.push('/home');
 
-        // axios.post('/api/user/login', userData)
+        // axios.post('/api/user/Form', userData)
         //     .then(response => {
         //         console.log('=== backend ===');
         //         console.log(response.data);
@@ -46,42 +47,12 @@ class Login extends Component {
     render() {
         return (
             <div className="login-background">
-                <div className="login-form">
-                    <form>
-                        <div id="logo"></div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input
-                                className="form-control"
-                                type="email"
-                                placeholder="rangersmith@gmail.com"
-                                id="email"
-                                name="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                className="form-control"
-                                type="password"
-                                placeholder="**********"
-                                id="password"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <button
-                            id="login-btn"
-                            type="submit"
-                            className="btn btn-info form-control"
-                            onClick={this.handleSubmit}>
-                            Login
-                        </button>
-                    </form>
-                </div>
+                <LoginForm
+                    email={this.state.email}
+                    password={this.state.password}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                />
             </div>
         );
     };
