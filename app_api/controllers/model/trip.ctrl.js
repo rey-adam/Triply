@@ -19,8 +19,8 @@ module.exports = {
         db
             .Trip
             .findAll({})
-            .then(dbEmp => {
-                res.json(dbEmp);
+            .then(dbTrip => {
+                res.json(dbTrip);
             })
             .catch(err => {
                 console.error(err);
@@ -36,8 +36,8 @@ module.exports = {
                     id: req.params.id
                 }
             })
-            .then(dbEmp => {
-                res.json(dbEmp);
+            .then(dbTrip => {
+                res.json(dbTrip);
             })
             .catch(err => {
                 console.error(err);
@@ -53,7 +53,7 @@ module.exports = {
                     id: req.params.id
                 }
             })
-            .then(dbEmp => {
+            .then(dbTrip => {
                 res.json("Success!");
             })
             .catch(err => {

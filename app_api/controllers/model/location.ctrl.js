@@ -6,9 +6,9 @@ module.exports = {
     createLocation: (req, res) => {
         db
             .Location
-            .create({firstName: req.body.firstName, lastName: req.body.lastName, age: req.body.age, jobTitle: req.body.jobTitle})
-            .then(dbEmp => {
-                res.json(dbEmp);
+            .create(req.body)
+            .then(dbLocation => {
+                res.json(dbLocation);
             })
             .catch(err => {
                 console.error(err);
@@ -19,8 +19,8 @@ module.exports = {
         db
             .Location
             .findAll({})
-            .then(dbEmp => {
-                res.json(dbEmp);
+            .then(dbLocation => {
+                res.json(dbLocation);
             })
             .catch(err => {
                 console.error(err);
@@ -33,11 +33,11 @@ module.exports = {
             .Location
             .findOne({
                 where: {
-                    id: req.params.id
+                    TripId: req.params.id
                 }
             })
-            .then(dbEmp => {
-                res.json(dbEmp);
+            .then(dbLocation => {
+                res.json(dbLocation);
             })
             .catch(err => {
                 console.error(err);
@@ -53,7 +53,7 @@ module.exports = {
                     id: req.params.id
                 }
             })
-            .then(dbEmp => {
+            .then(dbLocation => {
                 res.json("Success!");
             })
             .catch(err => {
