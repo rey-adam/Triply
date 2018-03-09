@@ -11,7 +11,7 @@
 
     background-color: white;
     height: 355px;
-    padding: 50px 40px;
+    padding: 45px 40px;
     border-radius: 10px;
 
     box-shadow: 0 3px 20px rgb(68, 68, 68);
@@ -84,4 +84,22 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 #login-btn:hover {
     background-color: rgb(82, 98, 102);
+}
+
+/* REGISTER LINK */
+a {
+    /* color: rgb(209, 176, 30); */
+    /* color: rgb(30, 209, 200); */
+    color: rgb(160, 204, 202);
+    font-size: 12px;
+    display: block;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+}
+
+a:hover {
+    color: rgb(160, 204, 202);
+    text-decoration-color: rgb(160, 204, 202);
 }

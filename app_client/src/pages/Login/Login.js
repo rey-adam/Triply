@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from '../../components/LoginForm';
+import RegisterForm from '../../components/RegisterForm';
 import './Login.css';
 
 class Login extends Component {
@@ -7,10 +8,11 @@ class Login extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            confirmPassword: ''
         };
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     };
 
     handleChange(event) {
@@ -18,7 +20,7 @@ class Login extends Component {
         this.setState({ [name]: value });
     }
 
-    handleSubmit(event) {
+    handleLogin(event) {
         event.preventDefault();
         const userData = {
             email: this.state.email,
@@ -44,15 +46,51 @@ class Login extends Component {
         //     });
     }
 
+    handleRegister(event) {
+        event.preventDefault();
+        const userData = {
+            email: this.state.email,
+            password: this.state.password,
+            confirmPassword: this.state.confirmPassword
+        }
+        console.log('=== frontend ===');
+        console.log(userData);
+        console.log('================');
+
+        this.props.history.push('/home');
+
+        // axios.post('/api/user/Form', userData)
+        //     .then(response => {
+        //         console.log('=== backend ===');
+        //         console.log(response.data);
+        //         console.log('===============');
+        //         // alert('user successfully logged in');
+        //         // window.location = '/home';
+        //         this.props.history.push('/home');
+        //     })
+        //     .catch(err => {
+        //         console.error(err);
+        //     });
+    }
+
     render() {
         return (
             <div className="login-background">
-                <LoginForm
-                    email={this.state.email}
-                    password={this.state.password}
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit}
-                />
+                {this.props.location.pathname === '/' ?
+                    <LoginForm
+                        email={this.state.email}
+                        password={this.state.password}
+                        handleChange={this.handleChange}
+                        handleLogin={this.handleLogin}
+                    /> : 
+                    <RegisterForm
+                        email={this.state.email}
+                        password={this.state.password}
+                        confirmPassword={this.state.confirmPassword}
+                        handleChange={this.handleChange}
+                        handleRegister={this.handleRegister}
+                    />
+                }
             </div>
         );
     };

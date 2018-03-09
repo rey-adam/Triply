@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './LoginForm.css';
+import '../LoginForm/LoginForm.css';
+import './RegisterForm.css';
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
     constructor(props) {
         super(props);
     };
@@ -36,18 +37,30 @@ class LoginForm extends Component {
                             onChange={this.props.handleChange}
                         />
                     </div>
+                    <div className="form-group">
+                        <label htmlFor="confirm-password">Password</label>
+                        <input
+                            className="form-control"
+                            type="password"
+                            placeholder="**********"
+                            id="confirm-password"
+                            name="confirmPassword"
+                            value={this.props.confirmPassword}
+                            onChange={this.props.handleChange}
+                        />
+                    </div>
                     <button
                         id="login-btn"
                         type="submit"
                         className="btn btn-info form-control"
-                        onClick={this.props.handleLogin}>
+                        onClick={this.props.handleRegister}>
                         Login
                     </button>
-                    <Link to='/register' className="register-link">New user?</Link>
+                    <Link to='/' className="register-link">Have an account?</Link>
                 </form>
             </div>
         );
     };
 };
 
-export default LoginForm;
+export default RegisterForm;
