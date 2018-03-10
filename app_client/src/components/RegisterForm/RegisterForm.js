@@ -10,15 +10,15 @@ class RegisterForm extends Component {
 
     render() {
         return (
-            <div className="login-form">
+            <div className="form register-form">
                 <form>
                     <div id="logo"></div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
+                            autoFocus
                             className="form-control"
                             type="email"
-                            placeholder="rangersmith@gmail.com"
                             id="email"
                             name="email"
                             value={this.props.email}
@@ -30,7 +30,6 @@ class RegisterForm extends Component {
                         <input
                             className="form-control"
                             type="password"
-                            placeholder="**********"
                             id="password"
                             name="password"
                             value={this.props.password}
@@ -38,11 +37,10 @@ class RegisterForm extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="confirm-password">Password</label>
+                        <label htmlFor="confirm-password">Confirm Password</label>
                         <input
                             className="form-control"
                             type="password"
-                            placeholder="**********"
                             id="confirm-password"
                             name="confirmPassword"
                             value={this.props.confirmPassword}
@@ -50,13 +48,12 @@ class RegisterForm extends Component {
                         />
                     </div>
                     <button
-                        id="login-btn"
                         type="submit"
-                        className="btn btn-info form-control"
+                        className="btn login-btn form-control"
                         onClick={this.props.handleRegister}>
-                        Login
+                        Register
                     </button>
-                    <Link to='/' className="register-link">Have an account?</Link>
+                    <Link to='/' className="login-link">Have an account?</Link>
                 </form>
             </div>
         );

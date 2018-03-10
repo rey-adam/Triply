@@ -15,7 +15,7 @@ class Home extends Component {
         return (
             <div className="home-container">
                 <h3>Home</h3>
-                <button className="btn btn-info" onClick={this.handleClick}>Back</button>
+                <button className="btn btn-default" onClick={this.handleClick}>Back</button>
             </div>
         );
     };
