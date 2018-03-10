@@ -60,7 +60,7 @@ models.sequelize.sync({ force: isDev }).then(function() {
         {
             email: "rey@adam.com",
             salt: salt,
-            hash: authCtrl._generateHash("reyadam", salt)
+            hash: authCtrl._generateHash("reyadamcruz", salt)
         }
     ]);
     app.listen(PORT, function() {
