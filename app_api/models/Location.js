@@ -11,7 +11,14 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             }
         }); // END LOCATION JOIN TRIP
-    }; // END LOCATION ASSOCIATION
+    }; // END ASSOCIATION
+
+    // JOINING TRIP TO LOCATION
+    Location.associate = function (models) {
+        Location.hasMany(models.Trail, {
+            onDelete: "cascade"
+        }); // END LOCATION JOIN TRAIL
+    }; // END ASSOCIATION
 
     return Location;
 
