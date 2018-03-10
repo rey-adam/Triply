@@ -9,15 +9,15 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <div className="login-form">
+            <div className="form login-form">
                 <form>
                     <div id="logo"></div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
+                            autoFocus
                             className="form-control"
                             type="email"
-                            placeholder="rangersmith@gmail.com"
                             id="email"
                             name="email"
                             value={this.props.email}
@@ -29,7 +29,6 @@ class LoginForm extends Component {
                         <input
                             className="form-control"
                             type="password"
-                            placeholder="**********"
                             id="password"
                             name="password"
                             value={this.props.password}
@@ -37,13 +36,12 @@ class LoginForm extends Component {
                         />
                     </div>
                     <button
-                        id="login-btn"
                         type="submit"
-                        className="btn btn-info form-control"
+                        className="btn login-btn form-control"
                         onClick={this.props.handleLogin}>
                         Login
                     </button>
-                    <Link to='/register' className="register-link">New user?</Link>
+                    <Link to='/register' className="link register-link">New user?</Link>
                 </form>
             </div>
         );
