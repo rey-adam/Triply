@@ -13,11 +13,18 @@ module.exports = function (sequelize, DataTypes) {
         }); // END LOCATION JOIN TRIP
     }; // END ASSOCIATION
 
-    // JOINING TRIP TO LOCATION
+    // JOINING TRAIL TO LOCATION
     Location.associate = function (models) {
         Location.hasMany(models.Trail, {
             onDelete: "cascade"
         }); // END LOCATION JOIN TRAIL
+    }; // END ASSOCIATION
+
+    // JOINING CAMPSITE TO LOCATION
+    Location.associate = function (models) {
+        Location.hasMany(models.Campsite, {
+            onDelete: "cascade"
+        }); // END LOCATION JOIN CAMPSITE
     }; // END ASSOCIATION
 
     return Location;

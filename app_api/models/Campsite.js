@@ -1,18 +1,18 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    const Trail = sequelize.define("Trail", {
+    const Campsite = sequelize.define("Campsite", {
         name: DataTypes.STRING
     }); // END CONSTRUCTOR
 
-    Trail.associate = function (models) {
-        Trail.belongsTo(models.Location, {
+    Campsite.associate = function (models) {
+        Campsite.belongsTo(models.Location, {
             foreignKey: {
                 allowNull: false
             }
-        }); // END TRAIL JOIN LOCATION
+        }); // END CAMPSITE JOIN LOCATION
     }; // END ASSOCIATION
 
-    return Trail;
+    return Campsite;
 
 }; // END EXPORT 

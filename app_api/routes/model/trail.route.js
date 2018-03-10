@@ -3,7 +3,7 @@ const express = require("express"),
     ctrl = require("../../controllers/model/trail.ctrl"),
     router = express.Router();
 
-// CREATE AN TRAIL
+// CREATE A TRAIL
 router.post("/trail", ctrl.createTrail);
 // FIND ALL TRAIL
 router.get("/trail", ctrl.findAllTrail);
