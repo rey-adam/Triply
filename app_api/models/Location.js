@@ -27,6 +27,13 @@ module.exports = function (sequelize, DataTypes) {
         }); // END LOCATION JOIN CAMPSITE
     }; // END ASSOCIATION
 
+    // JOINING EATERY TO LOCATION
+    Location.associate = function (models) {
+        Location.hasMany(models.Eatery, {
+            onDelete: "cascade"
+        }); // END LOCATION JOIN EATERY
+    }; // END ASSOCIATION
+
     return Location;
 
 }; // END EXPORT 

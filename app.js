@@ -14,7 +14,8 @@ const
     tripRoute = require("./app_api/routes/model/trip.route"),
     locationRoute = require("./app_api/routes/model/location.route"),
     trailRoute = require("./app_api/routes/model/trail.route"),
-    campsiteRoute = require("./app_api/routes/model/campsite.route");
+    campsiteRoute = require("./app_api/routes/model/campsite.route"),
+    eateryRoute = require("./app_api/routes/model/eatery.route");
     
 
 // BODY PARSER CONFIG
@@ -27,6 +28,7 @@ app.use("/api", tripRoute);
 app.use("/api", locationRoute);
 app.use("/api", trailRoute);
 app.use("/api", campsiteRoute);
+app.use("/api", eateryRoute);
 
 
 // SYNC THE SQL DB AND THEN LISTEN TO PORT
