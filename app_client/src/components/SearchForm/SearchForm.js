@@ -5,18 +5,52 @@ class SearchForm extends Component {
     render() {
         return (
             <div>
-
+                
+                 {/* Carousel Pictures */}
                 <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner">
+
                 <div className="carousel-item active">
-                    <img className="d-block w-100" src="/img/yosemite.jpg" alt="First slide" />
+                <img src="/img/yosemite.jpg" alt="Yosemite National Park" />
+                <div className="carousel-caption d-none d-md-block">
+                    <h5>Yosemite Nantional Park</h5>
+                    <p>...</p>
                 </div>
+                </div>
+
                 <div className="carousel-item">
-                    <img className="d-block w-100" src="/img/zion.jpg" alt="Second slide" />
+                <img src="/img/zion.jpg" alt="Zion National Park" />
+                <div className="carousel-caption d-none d-md-block">
+                    <h5>Zion National Park</h5>
+                    <p>Angel's Landing</p>
                 </div>
+                </div>
+
                 <div className="carousel-item">
-                    <img className="d-block w-100" src="/img/bryce.jpg" alt="Third slide" />
+                <img src="/img/glacier.jpg" alt="Glacier National Park" />
+                <div className="carousel-caption d-none d-md-block">
+                    <h5>Glacier National Park</h5>
+                    <p>Glacier Lake</p>
                 </div>
+                </div>
+
+                <div className="carousel-item">
+                <img src="/img/bryce.jpg" alt="Bryce National Park" />
+                <div className="carousel-caption d-none d-md-block">
+                    <h5>Bryce Canyon National Park</h5>
+                    <p>...</p>
+                </div>
+                </div>
+
+                <div className="carousel-item">
+                <img src="/img/yellowstone.jpg" alt="Yellowstone National Park" />
+                <div className="carousel-caption d-none d-md-block">
+                    <h5>Yellowstone National Park</h5>
+                    <p>...</p>
+                </div>
+                </div>
+
+
                 </div>
                 <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -28,6 +62,7 @@ class SearchForm extends Component {
                 </a>
                 </div>
 
+                {/* Search Bar  */}
                 <div className="col-lg-8">
                     <div className="input-group">
                     <input type="text" className="form-control" placeholder="Search your National Park here..." />
@@ -36,6 +71,9 @@ class SearchForm extends Component {
                     </span>
                     </div>
                 </div>
+
+                  {/* Popular National Parks  */}
+
                 </div>
         );
     };
