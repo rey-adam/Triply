@@ -33,7 +33,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(logger('dev'));
 app.use(routes);
-// app.use(express.static('app_client/build/'));
+app.use(express.static('app_client/build/'));
 
 // =====================================================================================
 // SYNC & START SERVERS
@@ -60,7 +60,7 @@ models.sequelize.sync({ force: isDev }).then(function() {
         {
             email: "rey@adam.com",
             salt: salt,
-            hash: authCtrl._generateHash("reyadam", salt)
+            hash: authCtrl._generateHash("reyadamcruz", salt)
         }
     ]);
     app.listen(PORT, function() {
