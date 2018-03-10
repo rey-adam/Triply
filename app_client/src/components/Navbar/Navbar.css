@@ -1,0 +1,21 @@
+/******************
+      NAVBAR
+******************/
+.navbar-default {
+    background-color: white;
+}
+
+.navbar-default > div {
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+#nav-logo {
+    width: 80px;
+    height: 30px;
+    margin: auto;
+    margin-top: -5px;
+    background-image: url('../../assets/img/logotype.svg');
+    background-size: cover;
+    background-position: center;
+}

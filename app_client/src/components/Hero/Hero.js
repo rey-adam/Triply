@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Search.css';
+import './Hero.css';
 
-class Search extends Component {
+class Hero extends Component {
     render() {
         return (
             <div></div>
@@ -9,4 +9,4 @@ class Search extends Component {
     };
 };
 
-export default Search;
+export default Hero;
