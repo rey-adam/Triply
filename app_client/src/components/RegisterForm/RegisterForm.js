@@ -10,7 +10,6 @@ class RegisterForm extends Component {
                 <form>
                     <div id="logo"></div>
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
                         <input
                             autoFocus
                             className="form-control"
@@ -20,9 +19,9 @@ class RegisterForm extends Component {
                             value={this.props.email}
                             onChange={this.props.handleChange}
                         />
+                        <label htmlFor="email">Email</label>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
                         <input
                             className="form-control"
                             type="password"
@@ -31,9 +30,9 @@ class RegisterForm extends Component {
                             value={this.props.password}
                             onChange={this.props.handleChange}
                         />
+                        <label htmlFor="password">Password</label>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="confirm-password">Confirm Password</label>
                         <input
                             className="form-control"
                             type="password"
@@ -42,6 +41,7 @@ class RegisterForm extends Component {
                             value={this.props.confirmPassword}
                             onChange={this.props.handleChange}
                         />
+                        <label htmlFor="confirm-password">Confirm Password</label>
                     </div>
                     <button
                         type="submit"
