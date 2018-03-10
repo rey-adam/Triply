@@ -22,6 +22,9 @@ const express = require('express')
 
     // specify environment
     , isDev = process.env.NODE_ENV === 'development';
+    if (isDev){
+        app.use(express.static('app_client/public'));
+    }
 
 // =====================================================================================
 // MIDDLEWARE
