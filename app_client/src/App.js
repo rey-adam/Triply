@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Search from './pages/Search';
+import Account from './pages/Account';
 import NoMatch from './components/NoMatch';
 import './App.css';
 
@@ -15,6 +17,8 @@ class App extends Component {
               <Route exact path='/' component={Login} />
               <Route exact path='/register' component={Login} />
               <ProtectedRoute exact path='/home' component={Home} />
+              <ProtectedRoute exact path='/search' component={Search} />
+              <ProtectedRoute exact path='/account' component={Account} />
               <Route component={NoMatch} />
             </Switch>
         </Router>
