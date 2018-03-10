@@ -1,0 +1,38 @@
+#root {
+    position: relative;
+}
+
+/******************
+    BACKGROUND
+******************/
+
+.login-background {
+    position: absolute;
+
+    /*To support older browsers*/
+    height: 100%;
+    width: 100%;
+
+    /* Set the height to match that of the viewport. */
+    height: 100vh;
+
+    /* Set the width to match that of the viewport. */
+    width: 100vw;
+
+    background-image: url('../../assets/img/fall-winter--igor-cibulsky.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 40%;
+}
+
+.login-background::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    opacity: 0.2;
+}
