@@ -8,6 +8,9 @@ const express = require('express')
     , sequelize = require('sequelize')
     , logger = require('morgan')
     
+    // controller
+    , authCtrl = require('./app_api/controllers/auth/authCtrl')
+
     // routes
     , routes = require('./app_api/routes/indexRoutes')
 
@@ -37,30 +40,32 @@ app.use(routes);
 // =====================================================================================
 // sync sequelize models and start express app
 models.sequelize.sync({ force: isDev }).then(function() {
-    const salt = authCtrl.getSalt();
+    const salt = authCtrl._generateSalt();
     models.User.bulkCreate([
         {
             email: "josh@spears.com",
             salt: salt,
-            hash: authCtrl.getHash("joshspears", salt)
+            hash: authCtrl._generateHash("joshspears", salt)
         },
         {
             email: "jason@daniel.com",
             salt: salt,
-            hash: authCtrl.getHash("jasondaniel", salt)
+            hash: authCtrl._generateHash("jasondaniel", salt)
         },
         {
             email: "melodie@chi.com",
             salt: salt,
-            hash: authCtrl.getHash("melodiechi", salt)
+            hash: authCtrl._generateHash("melodiechi", salt)
         },
         {
             email: "rey@adam.com",
             salt: salt,
-            hash: authCtrl.getHash("reyadam", salt)
+            hash: authCtrl._generateHash("reyadam", salt)
         }
     ]);
     app.listen(PORT, function() {
+        console.log("=============================");
         console.log("App listening on PORT " + PORT);
+        console.log("=============================");
     });
 });

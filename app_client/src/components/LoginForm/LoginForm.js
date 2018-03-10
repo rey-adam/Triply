@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 import './LoginForm.css';
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
-    };
-
     render() {
         return (
             <div className="form login-form">

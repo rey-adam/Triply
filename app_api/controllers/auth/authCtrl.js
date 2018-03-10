@@ -15,10 +15,16 @@ class AuthCtrl {
     // =====================================================================================
     static login(req, res) {
         // check if hashes match
-        models.User.findOne({ email: req.body.email })
+        models.User.findOne({
+            where: {
+                email: req.body.email
+            }
+        })
         .then(dbUser => {
             if (dbUser) {
-                console.log(dbUser);
+                console.log("=============================");
+                console.log(`USER FOUND: ${dbUser.dataValues.email}`);
+                console.log("=============================");
 
                 // need to generate a hash to check if hashes match
                 const validationHash = AuthCtrl._generateHash(req.body.password, dbUser.salt);
@@ -27,20 +33,31 @@ class AuthCtrl {
                 if (validationHash === dbUser.hash) {
                     // return JWT
                     const token = AuthCtrl._generateJWT(dbUser);
-                    res.json('User found', { token: token });
+                    res.json({
+                        msg: 'Pass match',
+                        token: token
+                    });
                 } else {
+                    console.log("=============================");
+                    console.log("INCORRECT PASSWORD");
+                    console.log("=============================");
                     // 400 = not found, authentication error
-                    res.status(400).json('Incorrect password');
+                    res.statusMessage = 'INCORRECT PASSWORD';
+                    res.status(400).end();
                 }
             } else {
+                console.log("=============================");
                 console.log("USER NOT FOUND");
-                return res.status(404).end('User not found');
+                console.log("=============================");
+                res.statusMessage = 'USER NOT FOUND';
+                res.status(404).end();
             }
             
         })
         .catch(err => {
             console.error(err);
-            res.status(400).json(`User ${req.body.email} not found`);
+            res.statusMessage = `USER ${req.body.email} NOT FOUND`;
+            res.status(400).end();
         });
     }
 
@@ -67,12 +84,12 @@ class AuthCtrl {
             }
         })
         .then(dbUser => {
-            // console.log(response);
             if (dbUser === null) {
                 models.User.create(user)
                     .then(newDbUser => {
-                        console.log(newDbUser);
-                        console.log("REGISTRATION SUCCESS");
+                        console.log("=============================");
+                        console.log(`REGISTRATION SUCCESS: ${newDbUser.email}`);
+                        console.log("=============================");
 
                         // don't want to do res.json(response) here because you don't want to include the salt and hash in the response to the user!!
                         res.json({
@@ -85,8 +102,11 @@ class AuthCtrl {
                         throw err;
                     });
             } else {
-                console.log("USER ALREADY EXISTS");
-                return res.status(404).end('User Already Exists');
+                console.log("=============================");
+                console.log(`USER ALREADY EXISTS: ${dbUser.dataValues.email}`);
+                console.log("=============================");
+                res.statusMessage = 'USER ALREADY EXISTS';
+                res.status(404).end();
             }
         })
         .catch(err => {
@@ -99,7 +119,7 @@ class AuthCtrl {
     // =====================================================================================
     // generate hash from user password
     static _generateHash(password, salt) {
-        return crypto.pbkdf2Sync(password, salt, 100000, 512, 'sha512').toString('hex');
+        return crypto.pbkdf2Sync(password, salt, 100000, 64, 'sha512').toString('hex');
     }
 
     // generate salt to increase hash complexity
