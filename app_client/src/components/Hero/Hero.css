@@ -54,12 +54,14 @@ nav > .pagination {
 
 nav > .pagination > li > a {
     /* font-size: 13px; */
+    font-size: calc(10px + 3 * (140vw - 320px)/ 2000);
     border-bottom: none;
     background: none;
     color: white;
     /* border-color: grey; */
     border-color: white;
     padding: 8px 20px;
+    text-shadow: 0 1px 5px black;
 }
 
 nav > .pagination > li > a:hover {
@@ -91,6 +93,7 @@ nav > .pagination > li > a.active {
 }
 
 .jumbotron input {
+    font-size: calc(10px + 3 * (140vw - 320px)/ 2000);
     height: 37px;
     border-top-left-radius: 0;
     background: none;
@@ -98,6 +101,7 @@ nav > .pagination > li > a.active {
     /* border-color: rgba(190, 190, 190, 0.534); */
     border-color: white;
     padding-left: 19px;
+    text-shadow: 0 1px 5px black;
 }
 
 .jumbotron input:focus {
@@ -119,6 +123,7 @@ nav > .pagination > li > a.active {
 .jumbotron #search-btn {
     height: 37px;
     border: 1px solid white;
+    font-size: calc(10px + 3 * (140vw - 320px)/ 2000);
 }
 
 .jubmotron #search-btn:hover,
@@ -131,4 +136,35 @@ nav > .pagination > li > a.active {
 #search-btn.focus, #search-btn:focus {
     outline: 2px auto -webkit-focus-ring-color;
     outline-offset: -2px;
+}
+
+@media only screen and (max-width: 756px) {
+    .jumbotron {
+        height: 50vh;
+        margin-top: 0;
+        padding-top: 0;
+    }
+    .search-div {
+        width: 80% !important;
+        padding-top: 6rem;
+    }
+    
+}
+
+@media only screen and (max-width: 476px) {
+    nav > .pagination > li > a {
+        padding: 8px 10px;
+    }
+    .jumbotron {
+        height: 40vh;
+    }
+    .search-div {
+        padding-top: 10rem;
+    }
+    .jumbotron input {
+        height: 30px;
+    }
+    .jumbotron #search-btn {
+        height: 30px;
+    }
 }

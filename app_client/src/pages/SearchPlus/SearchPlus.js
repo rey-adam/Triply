@@ -14,6 +14,7 @@ class Search extends Component {
             lodgingSearch: ''
         };
         this.validateSearch = this.validateSearch.bind(this);
+        this.handleEmptySearch = this.handleEmptySearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleTrailSearch = this.handleTrailSearch.bind(this);
         this.handleActivitySearch = this.handleActivitySearch.bind(this);
@@ -25,17 +26,22 @@ class Search extends Component {
         return input !== '';
     }
 
+    handleEmptySearch(input) {
+        if (!this.validateSearch(input)) {
+            alert('Please enter a search');
+        } else {
+            alert(input);
+        }
+    }
+
     handleChange(event) {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
 
     handleTrailSearch(input) {
-        if (!this.validateSearch(input)) {
-            alert('Please enter a search');
-        } else {
-            alert(input);
-        }
+        this.handleEmptySearch(input);
+
         // axios.get(`/api/trail/${input}`)
         // .then(response => {
         //     console.log(response);
@@ -46,33 +52,39 @@ class Search extends Component {
     }
 
     handleActivitySearch(input) {
-        axios.get(`/api/activity/${input}`)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        this.handleEmptySearch(input);
+
+        // axios.get(`/api/activity/${input}`)
+        // .then(response => {
+        //     console.log(response);
+        // })
+        // .catch(err => {
+        //     console.error(err);
+        // });
     }
 
     handleFoodSearch(input) {
-        axios.get(`/api/food/${input}`)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        this.handleEmptySearch(input);
+
+        // axios.get(`/api/food/${input}`)
+        // .then(response => {
+        //     console.log(response);
+        // })
+        // .catch(err => {
+        //     console.error(err);
+        // });
     }
 
     handleLodgingSearch(input) {
-        axios.get(`/api/lodging/${input}`)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => {
-            console.error(err);
-        });
+        this.handleEmptySearch(input);
+
+        // axios.get(`/api/lodging/${input}`)
+        // .then(response => {
+        //     console.log(response);
+        // })
+        // .catch(err => {
+        //     console.error(err);
+        // });
     }
 
     render() {
