@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
 import axios from 'axios';
-import './SearchPlus.css';
+import './NextSearch.css';
 
 class Search extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class Search extends Component {
             lodgingSearch: ''
         };
         this.validateSearch = this.validateSearch.bind(this);
-        this.handleEmptySearch = this.handleEmptySearch.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleTrailSearch = this.handleTrailSearch.bind(this);
         this.handleActivitySearch = this.handleActivitySearch.bind(this);
@@ -22,11 +22,20 @@ class Search extends Component {
         this.handleLodgingSearch = this.handleLodgingSearch.bind(this);
     };
 
+    // componentWillUnmount() {
+    //     this.setState({
+    //         trailSearch: '',
+    //         activitySearch: '',
+    //         foodSearch: '',
+    //         lodgingSearch: ''
+    //     });
+    // }
+
     validateSearch(input) {
         return input !== '';
     }
 
-    handleEmptySearch(input) {
+    handleSearch(input) {
         if (!this.validateSearch(input)) {
             alert('Please enter a search');
         } else {
@@ -40,7 +49,7 @@ class Search extends Component {
     }
 
     handleTrailSearch(input) {
-        this.handleEmptySearch(input);
+        this.handleSearch(input);
 
         // axios.get(`/api/trail/${input}`)
         // .then(response => {
@@ -52,7 +61,7 @@ class Search extends Component {
     }
 
     handleActivitySearch(input) {
-        this.handleEmptySearch(input);
+        this.handleSearch(input);
 
         // axios.get(`/api/activity/${input}`)
         // .then(response => {
@@ -64,7 +73,7 @@ class Search extends Component {
     }
 
     handleFoodSearch(input) {
-        this.handleEmptySearch(input);
+        this.handleSearch(input);
 
         // axios.get(`/api/food/${input}`)
         // .then(response => {
@@ -76,7 +85,7 @@ class Search extends Component {
     }
 
     handleLodgingSearch(input) {
-        this.handleEmptySearch(input);
+        this.handleSearch(input);
 
         // axios.get(`/api/lodging/${input}`)
         // .then(response => {
