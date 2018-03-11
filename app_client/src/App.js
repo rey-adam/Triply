@@ -18,7 +18,10 @@ class App extends Component {
               <Route exact path='/' component={Login} />
               <Route exact path='/register' component={Login} />
               <ProtectedRoute exact path='/home' component={Home} />
-              <ProtectedRoute exact path='/search' component={SearchPlus} />
+              <ProtectedRoute exact path='/search/trails' component={SearchPlus} />
+              <ProtectedRoute exact path='/search/activities' component={SearchPlus} />
+              <ProtectedRoute exact path='/search/food' component={SearchPlus} />
+              <ProtectedRoute exact path='/search/lodging' component={SearchPlus} />
               <ProtectedRoute exact path='/trips' component={Dashboard} />
               <ProtectedRoute exact path='/account' component={Account} />
               <Route component={NoMatch} />

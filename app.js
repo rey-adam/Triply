@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 // =====================================================================================
-// DEPENDENCIES/VARIABLES
+// DEPENDENCIES / VARIABLES
 // =====================================================================================
 const express = require('express')
     , bodyParser = require('body-parser')
@@ -18,10 +18,13 @@ const express = require('express')
     , models = require('./app_api/models')
 
     // specify port
-    , PORT = process.env.PORT || 8080
+    , PORT = process.env.PORT || 3001
 
     // specify environment
     , isDev = process.env.NODE_ENV === 'development';
+    // if (isDev) {
+    //     app.use(express.static('app_client/public/'));
+    // }
 
 // =====================================================================================
 // MIDDLEWARE
