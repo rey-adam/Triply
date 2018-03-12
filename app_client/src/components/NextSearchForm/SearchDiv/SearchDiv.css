@@ -1,18 +1,46 @@
 .jumbotron .search-div {
     width: 65%;
     margin: auto;
-    margin-top: -30rem;
+    margin-top: calc(-315px - 30 * (140vw - 320px)/ 2000);
 }
 
-@media only screen and (max-width: 756px) {
+/******************
+   MEDIA QUERIES
+******************/
+
+/**
+*** WIDTH
+**/
+@media only screen and (max-width: 768px) {
     .search-div {
         width: 80% !important;
-        padding-top: 6rem;
+        padding-top: 3rem;
     }
 }
 
 @media only screen and (max-width: 476px) {
     .search-div {
-        padding-top: 10rem;
+        padding-top: 7rem;
+    }
+}
+
+/**
+*** HEIGHT
+**/
+@media only screen and (max-height: 880px) {
+    .search-div {
+        padding-top: 9.5rem;
+    }
+}
+
+@media only screen and (max-height: 560px) {
+    .search-div {
+        padding-top: 12rem;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .search-div {
+        padding-top: 16rem;
     }
 }

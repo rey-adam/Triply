@@ -32,8 +32,16 @@ nav > .pagination > li > a {
     text-shadow: 0 1px 5px black;
 }
 
+/* nav > .pagination > li > a::before {
+    content: "";
+    background-color: rgb(37, 37, 37);
+    opacity: 0.2;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    z-index: 1;
+} */
 nav > .pagination > li > a:hover {
-    background: rgba(255, 255, 255, 0.034);
+    background: rgba(0, 0, 0, 0.178);
     color: white;
     /* border-color: grey; */
 }

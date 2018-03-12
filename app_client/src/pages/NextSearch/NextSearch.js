@@ -14,7 +14,6 @@ class Search extends Component {
             lodgingSearch: ''
         };
         this.validateSearch = this.validateSearch.bind(this);
-        this.handleSearch = this.handleSearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleTrailSearch = this.handleTrailSearch.bind(this);
         this.handleActivitySearch = this.handleActivitySearch.bind(this);
@@ -35,29 +34,29 @@ class Search extends Component {
         return input !== '';
     }
 
-    handleSearch(input) {
-        if (!this.validateSearch(input)) {
-            alert('Please enter a search');
-        } else {
-            alert(input);
-        }
-    }
-
     handleChange(event) {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
 
     handleTrailSearch(input) {
-        this.handleSearch(input);
-
-        // axios.get(`/api/trail/${input}`)
-        // .then(response => {
-        //     console.log(response);
-        // })
-        // .catch(err => {
-        //     console.error(err);
-        // });
+        if (!this.validateSearch(input)) {
+            alert('Please enter a search');
+        } else {
+            const userTrail = input.toLowerCase();
+            axios({
+                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                method: "GET",
+                // url: "/api/user/" + userInfo.id,
+                url: `/api/trails/yosemite+national+park/${userTrail}`
+            }).then(function(response) {
+                console.log(response);
+                // this.props.history.push('/search/trails');
+            })
+            .catch(function(err) {
+                console.error(err);
+            });
+        }
     }
 
     handleActivitySearch(input) {

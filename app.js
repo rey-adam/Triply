@@ -10,6 +10,7 @@ const express = require('express')
     
     // controller
     , authCtrl = require('./app_api/controllers/auth/authCtrl')
+    , apiCtrl = require('./app_api/controllers/api/apiCtrl')
 
     // routes
     , routes = require('./app_api/routes/indexRoutes')
