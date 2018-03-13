@@ -28,13 +28,29 @@
     background-image: url('../../assets/img/mountain-blue-lake-snow.png');
     background-size: cover;
     background-position: center;
+    margin-bottom: -21%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .jumbotron .hero-img {
+        margin-bottom: -30%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     .jumbotron {
-        height: 50vh;
+        height: 35vh;
         margin-top: 0;
         padding-top: 0;
+    }
+    .jumbotron .hero-img {
+        margin-bottom: -32%;
+    }
+}
+
+@media only screen and (max-width: 615px) {
+    .jumbotron .hero-img {
+        margin-bottom: -37%;
     }
 }
 
@@ -43,6 +59,9 @@
         padding: 8px 10px;
     }
     .jumbotron {
-        height: 40vh;
+        height: 30vh;
+    }
+    .jumbotron .hero-img {
+        margin-bottom: -43%;
     }
 }

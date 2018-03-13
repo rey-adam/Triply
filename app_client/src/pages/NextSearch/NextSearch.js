@@ -43,12 +43,14 @@ class Search extends Component {
         if (!this.validateSearch(input)) {
             alert('Please enter a search');
         } else {
-            const userTrail = input.toLowerCase();
+            const userPark = input.toLowerCase();
+            const userTrail = input.toLowerCase(); // just for now
+            // const userTrail = input.toLowerCase();
             axios({
                 headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
                 method: "GET",
                 // url: "/api/user/" + userInfo.id,
-                url: `/api/trails/yosemite+national+park/${userTrail}`
+                url: `/api/trails/${userPark}/${userTrail}`
             }).then(function(response) {
                 console.log(response);
                 // this.props.history.push('/search/trails');

@@ -9,6 +9,7 @@ class SearchBar extends Component {
             <div className="col-lg-12">
                 <div className="input-group search-bar">
                     <input
+                        autoComplete="true"
                         type="text"
                         className="form-control"
                         placeholder={ 

@@ -1,7 +1,8 @@
 .jumbotron .search-div {
     width: 65%;
     margin: auto;
-    margin-top: calc(-315px - 30 * (140vw - 320px)/ 2000);
+    /* margin-top: calc(-230px - 20 * (140vw - 320px)/ 1000); */
+    /* margin-top: -20.5%; */
 }
 
 /******************
@@ -11,36 +12,14 @@
 /**
 *** WIDTH
 **/
+@media only screen and (max-width: 1200px) {
+    .search-div {
+        margin-top: 20rem;
+    }
+}
+
 @media only screen and (max-width: 768px) {
     .search-div {
         width: 80% !important;
-        padding-top: 3rem;
-    }
-}
-
-@media only screen and (max-width: 476px) {
-    .search-div {
-        padding-top: 7rem;
-    }
-}
-
-/**
-*** HEIGHT
-**/
-@media only screen and (max-height: 880px) {
-    .search-div {
-        padding-top: 9.5rem;
-    }
-}
-
-@media only screen and (max-height: 560px) {
-    .search-div {
-        padding-top: 12rem;
-    }
-}
-
-@media only screen and (max-height: 400px) {
-    .search-div {
-        padding-top: 16rem;
     }
 }
