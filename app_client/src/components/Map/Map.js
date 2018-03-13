@@ -4,14 +4,11 @@ import { GoogleMap, Marker } from 'react-google-maps';
 import './Map.css';
 
 class Map extends Component {
-    render() {
-        return (
-            <div className="map">
-                
-                
-            </div>
-        );
-    };
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.google !== this.props.google) {
+            this.loadMap();
+        }
+    }
 };
 
 export default Map;
