@@ -5,7 +5,11 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "axios": "^0.18.0",
+<<<<<<< HEAD
     "history": "^4.7.2",
+=======
+    "google-maps-react": "^1.1.4",
+>>>>>>> 566d3a22112a2024fdf5597a0b0f4e6a2c518f74
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
