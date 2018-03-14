@@ -17,9 +17,9 @@ export default class MapContainer extends Component {
             const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
             const mapConfig = Object.assign({}, {
-                center: { lat: 40.7485722, lng: -74.0068633 }, // sets center of google map to NYC.
+                center: { lat: 37.8651, lng: -119.538330 }, // sets center of google map to NYC.
                 zoom: 11, // sets zoom. Lower numbers are zoomed further out.
-                mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
+                mapTypeId: 'terrain' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
             })
 
             this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
