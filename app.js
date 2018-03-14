@@ -7,24 +7,19 @@ require("dotenv").config();
     ===================================================================================== 
 */
 
-// =====================================================================================
-// DEPENDENCIES / VARIABLES
-// =====================================================================================
 const express = require('express')
     , bodyParser = require('body-parser')
     , sequelize = require('sequelize')
     , logger = require('morgan')
-    
+
     // CONTROLLERS
     , authCtrl = require('./app_api/controllers/auth/authCtrl')
 
-    // MODELS
     , models = require('./app_api/models')
 
-    // PORT
     , PORT = process.env.PORT || 3001
     // ENVIRONMENT
-    , isDev = process.env.NODE_ENV === 'development'    
+    , isDev = process.env.NODE_ENV === 'development'
     // ROUTES
     , routes = require('./app_api/routes/indexRoutes');
 
@@ -49,7 +44,6 @@ if (isDev) {
     ===================================================================================== 
 */
 
-// SYNC SEQUELIZE MODELS AND START EXPRESS APP
 models.sequelize.sync({ force: isDev }).then(function () {
 
     const salt = authCtrl._generateSalt();
@@ -74,10 +68,12 @@ models.sequelize.sync({ force: isDev }).then(function () {
             salt: salt,
             hash: authCtrl._generateHash("reyadamcruz", salt)
         }
-    ]);
-    app.listen(PORT, function() {
+    ]); // END CREATE
+
+    app.listen(PORT, function () {
         console.log("=============================");
         console.log("App listening on PORT " + PORT);
         console.log("=============================");
     }); // END LISTEN
+
 }); // END SYNC 
