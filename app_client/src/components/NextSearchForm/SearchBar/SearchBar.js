@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../../Hero/Hero.css';
 import '../SearchDiv/SearchDiv.css';
 import './SearchBar.css';
@@ -36,7 +35,7 @@ class SearchBar extends Component {
                     />
                     <div className="search-overlay"></div>
                     <span className="input-group-btn">
-                        <Link to='#scroll-to'><button
+                        <button
                             id="search-btn"
                             className="btn btn-default"
                             type="submit"
@@ -47,7 +46,7 @@ class SearchBar extends Component {
                                 window.location.pathname === '/search/lodging' ? () => this.props.handleLodgingSearch(this.props.lodgingSearch) :
                                 ""
                             }
-                        >Explore</button></Link>
+                        >Explore</button>
                     </span>
                 </div>
             </div>

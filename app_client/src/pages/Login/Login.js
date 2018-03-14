@@ -134,7 +134,7 @@ class Login extends Component {
                 console.log('=====================');
 
                 window.localStorage.setItem('token', response.data.token);
-                this.props.history.push('/home');
+                this.props.history.push('/park');
             })
             .catch(err => {
                 console.error(err.response);

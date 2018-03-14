@@ -9,7 +9,8 @@ const express = require('express')
 // ROUTES
 // =====================================================================================
 // must be logged in to view this route
-router.get('/trails/:userPark/:userTrail', ctrl.getTrailData);
+router.get('/parks/:userPark', ctrl.getParkData);
+router.get('/trails/:userTrail', ctrl.getTrailData);
 
 // =====================================================================================
 // EXPORT

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Login from './pages/Login';
-import Home from './pages/Home';
 import Search from './pages/Search';
 import NextSearch from './pages/NextSearch';
 import Dashboard from './pages/Dashboard';
@@ -22,13 +21,12 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Login} />
               <Route exact path='/register' component={Login} />
-              <ProtectedRoute exact path='/home' component={Home} />
-              <Route exact path='/search' component={Search} />
+              <ProtectedRoute exact path='/park' component={Search} />
               <ProtectedRoute exact path='/search/trails' component={NextSearch} />
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/food' component={NextSearch} />
               <ProtectedRoute exact path='/search/lodging' component={NextSearch} />
-              <ProtectedRoute exact path='/map' render={() => {
+              <Route exact path='/map' render={() => {
                 return <MapContainer google={this.props.google} />;
               }} />
               <ProtectedRoute exact path='/trips' component={Dashboard} />
