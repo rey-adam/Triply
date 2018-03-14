@@ -9,7 +9,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{ height: '100%' }}>
         <Router>
             <Switch>
               <Route exact path='/' component={Login} />

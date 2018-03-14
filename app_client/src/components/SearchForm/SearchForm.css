@@ -1,34 +1,56 @@
-/* .image {
-    background: url('../../assets/img/yosemite.jpg');
-    background-position: center;
-    background-size: cover;
-    width: 100%;
-    height: 100vh;
+
+/* .natParkImage { 
+    background-image: url("/img/bryce.jpg");
 } */
 
-.flex-container {
-    display: flex;
+html,body {
+	height:100%;
 }
 
-.flex-container > div {
-    /* background-color: #f1f1f1; */
-    margin: 10px;
-    padding: 20px;
-    /* font-size: 30px; */
-  }
+#root {
+    height: 100%;
+}
 
-  .carousel-container {
-    width: 100%;
-    margin: auto;
-    text-align: center;
-  }
+#carousel-wrapper {
+    height: 100%;
+}
 
-  .carousel-caption {
-    /* color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center; */
-  }
+.carousel {
+    height: 100%;
+}
+
+.carousel,.item,.active{
+	height:100%;
+}
+
+.carousel-inner{
+	height:100%;
+}
+
+.natParkImage {
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+    height: 100%;
+    opacity: 0.80;
+}
+
+#yosemite {
+	background-image: url('/img/yosemite.jpg');
+}
+
+#zion {
+	background-image: url('/img/zion.jpg');
+}
+
+#glacier {
+	background-image: url('/img/glacier.jpg');
+}
+
+#bryce {
+	background-image: url('/img/bryce.jpg');
+}
+
+#yellowstone {
+	background-image: url('/img/yellowstone.jpg');
+}

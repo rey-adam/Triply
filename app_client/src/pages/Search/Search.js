@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Search.css';
-import SearchForm from '../../components/SearchForm'
+import SearchForm from '../../components/SearchForm';
+import axios from 'axios';
 
 class Search extends Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class Search extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{ height: '100%' }}>
                 <SearchForm
                     nationalParkSearch={this.state.nationalParkSearch}
                 />
