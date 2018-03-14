@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 /*  
@@ -21,11 +22,12 @@ const express = require('express')
     // ROUTES
     , routes = require('./app_api/routes/indexRoutes')
     // ROUTES FILE
-    , tripRoute = require("./app_api/routes/model/trip.route")
-    , locationRoute = require("./app_api/routes/model/location.route")
-    , trailRoute = require("./app_api/routes/model/trail.route")
-    , campsiteRoute = require("./app_api/routes/model/campsite.route")
-    , eateryRoute = require("./app_api/routes/model/eatery.route");
+    , activityRoute = require("./app_api/routes/model/activity.route") 
+    , campsiteRoute = require("./app_api/routes/model/campsite.route")       
+    , eateryRoute = require("./app_api/routes/model/eatery.route")  
+    , locationRoute = require("./app_api/routes/model/location.route")  
+    , trailRoute = require("./app_api/routes/model/trail.route")        
+    , tripRoute = require("./app_api/routes/model/trip.route");
 
 /*  
     =====================================================================================
@@ -48,11 +50,12 @@ app.use(routes);
     ===================================================================================== 
 */
 
-app.use("/api", tripRoute);
-app.use("/api", locationRoute);
-app.use("/api", trailRoute);
+app.use("/api", activityRoute);
 app.use("/api", campsiteRoute);
 app.use("/api", eateryRoute);
+app.use("/api", locationRoute);
+app.use("/api", trailRoute);
+app.use("/api", tripRoute);
 
 /*  
     =====================================================================================
@@ -60,7 +63,7 @@ app.use("/api", eateryRoute);
     ===================================================================================== 
 */
 
-// sync sequelize models and start express app
+// SYNC SEQUELIZE MODELS AND START EXPRESS APP
 models.sequelize.sync({ force: isDev }).then(function () {
 
     const salt = authCtrl._generateSalt();
