@@ -22,19 +22,16 @@ class App extends Component {
               <Route exact path='/' component={Login} />
               <Route exact path='/register' component={Login} />
               <ProtectedRoute exact path='/home' component={Home} />
-<<<<<<< HEAD
               <ProtectedRoute exact path='/search/trails' component={NextSearch} />
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/food' component={NextSearch} />
               <ProtectedRoute exact path='/search/lodging' component={NextSearch} />
+              <ProtectedRoute exact path='/map' render={() => {
+                return <MapContainer google={this.props.google} />;
+              }} />
               <ProtectedRoute exact path='/trips' component={Dashboard} />
               <ProtectedRoute exact path='/account' component={Account} />
               <Route component={NoMatch} />
-=======
-              <Route exact path='/map' render={() => {
-                return <MapContainer google={this.props.google} />;
-              }} />
->>>>>>> 566d3a22112a2024fdf5597a0b0f4e6a2c518f74
             </Switch>
         </Router>
       </div>
