@@ -1,0 +1,25 @@
+.jumbotron .search-div {
+    width: 65%;
+    margin: auto;
+    /* margin-top: calc(-230px - 20 * (140vw - 320px)/ 1000); */
+    /* margin-top: -20.5%; */
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+/**
+*** WIDTH
+**/
+@media only screen and (max-width: 1200px) {
+    .search-div {
+        margin-top: 20rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .search-div {
+        width: 80% !important;
+    }
+}

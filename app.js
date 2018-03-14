@@ -7,17 +7,24 @@ require("dotenv").config();
     ===================================================================================== 
 */
 
+// =====================================================================================
+// DEPENDENCIES / VARIABLES
+// =====================================================================================
 const express = require('express')
     , bodyParser = require('body-parser')
     , sequelize = require('sequelize')
     , logger = require('morgan')
-    //CONTROLLER
+    
+    // CONTROLLERS
     , authCtrl = require('./app_api/controllers/auth/authCtrl')
-    // models
+    , apiCtrl = require('./app_api/controllers/api/apiCtrl')
+
+    // MODELS
     , models = require('./app_api/models')
-    // specify port
+
+    // PORT
     , PORT = process.env.PORT || 3001
-    // specify environment
+    // ENVIRONMENT
     , isDev = process.env.NODE_ENV === 'development'    
     // ROUTES
     , routes = require('./app_api/routes/indexRoutes')
@@ -29,12 +36,13 @@ const express = require('express')
     , trailRoute = require("./app_api/routes/model/trail.route")        
     , tripRoute = require("./app_api/routes/model/trip.route");
 
-/*  
-    =====================================================================================
-    MIDDLEWARE
-    ===================================================================================== 
-*/
+    // if (isDev) {
+    //     app.use(express.static('app_client/public/'));
+    // }
 
+// =====================================================================================
+// MIDDLEWARE
+// =====================================================================================
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -67,7 +75,6 @@ app.use("/api", tripRoute);
 models.sequelize.sync({ force: isDev }).then(function () {
 
     const salt = authCtrl._generateSalt();
-
     models.User.bulkCreate([
         {
             email: "josh@spears.com",
@@ -87,13 +94,12 @@ models.sequelize.sync({ force: isDev }).then(function () {
         {
             email: "rey@adam.com",
             salt: salt,
-            hash: authCtrl._generateHash("reyadam", salt)
+            hash: authCtrl._generateHash("reyadamcruz", salt)
         }
     ]);
-
-    app.listen(PORT, function () {
+    app.listen(PORT, function() {
         console.log("=============================");
         console.log("App listening on PORT " + PORT);
         console.log("=============================");
-    });
-});
+    }); // END LISTEN
+}); // END SYNC 
