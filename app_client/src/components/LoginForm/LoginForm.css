@@ -13,7 +13,7 @@
 .login-form {
     width: 240px;
     margin: auto;
-    margin-top: 15.2%;
+    margin-top: 15%;
     height: 312px;
     padding: 41px 40px;
 }
@@ -111,7 +111,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 }
 
 /* REGISTER LINK */
-a {
+.register-link,
+.login-link {
     color: rgb(255, 255, 255);
     font-size: 12px;
     width: 100%;
@@ -123,7 +124,8 @@ a {
     text-shadow: 0 2px 20px black;
 }
 
-a:hover {
+.register-link:hover,
+.login-link:hover {
     color: white;
     text-decoration-color: white;
 }

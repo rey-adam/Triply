@@ -11,6 +11,7 @@ class LoginForm extends Component {
                     <div className="form-group">
                         <input
                             autoFocus
+                            autoComplete="true"
                             className="form-control"
                             type="email"
                             id="email"
@@ -22,6 +23,7 @@ class LoginForm extends Component {
                     </div>
                     <div className="form-group">
                         <input
+                            autoComplete="true"
                             className="form-control"
                             type="password"
                             id="password"

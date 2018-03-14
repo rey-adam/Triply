@@ -255,6 +255,8 @@ class Login extends Component {
                 console.error(err.response);
                 if (err.response.statusText === 'USER ALREADY EXISTS') {
                     emailLabel.innerHTML = 'User already exists';
+                    emailLabel.style['text-transform'] = 'lowercase';
+                    emailLabel.style['letter-spacing'] = '0.2px';
                     emailLabel.style.color = 'red';
                 }
             });
