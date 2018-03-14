@@ -26,7 +26,7 @@ class App extends Component {
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/food' component={NextSearch} />
               <ProtectedRoute exact path='/search/lodging' component={NextSearch} />
-              <ProtectedRoute exact path='/map' render={() => {
+              <Route exact path='/map' render={() => {
                 return <MapContainer google={this.props.google} />;
               }} />
               <ProtectedRoute exact path='/trips' component={Dashboard} />
