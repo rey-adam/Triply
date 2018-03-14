@@ -21,6 +21,16 @@ class Search extends Component {
         this.handleLodgingSearch = this.handleLodgingSearch.bind(this);
     };
 
+    componentDidMount() {
+        const body = document.documentElement || document.body.parentNode;
+        const results = document.getElementById('scroll-to');
+        const bodyRect = body.getBoundingClientRect();
+        const resultsRect = results.getBoundingClientRect();
+        const offset = resultsRect.top - bodyRect.top;
+        console.log(offset);
+        document.documentElement.scrollTop = document.body.parentNode.scrollTop = 1000;
+    }
+
     // componentWillUnmount() {
     //     this.setState({
     //         trailSearch: '',
@@ -112,6 +122,7 @@ class Search extends Component {
                     handleFoodSearch={this.handleFoodSearch}
                     handleLodgingSearch={this.handleLodgingSearch}
                 />
+                <div id="scroll-to">hi</div>
             </div>
         );
     };
