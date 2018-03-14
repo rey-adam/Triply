@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
 
     Trip.associate = function (models) {
         Trip.hasMany(models.Location, {
-            onDelete: "cascade"
+            onDelete: 'cascade'
         }); // END TRIP JOIN LOCATION 
     }; // END TRIP ASSOCIATION
 
