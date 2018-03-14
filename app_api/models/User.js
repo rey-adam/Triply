@@ -1,6 +1,6 @@
-// MODEL
-// =====================================================================================
-module.exports = function(sequelize, DataTypes) {
+
+module.exports = function (sequelize, DataTypes) {
+
     var User = sequelize.define("User", {
         email: {
             type: DataTypes.STRING,
@@ -12,7 +12,8 @@ module.exports = function(sequelize, DataTypes) {
         },
         salt: DataTypes.STRING,
         hash: DataTypes.STRING(1500)
-    });
+    }); // END CONSTRUCTOR
 
     return User;
-};
+
+}; // END EXPORT
