@@ -29,16 +29,6 @@ class Search extends Component {
         smoothscroll.polyfill();
         // this.setState({ offset: 0 });
         // document.documentElement.scrollTop = document.body.parentNode.scrollTop = this.state.offset;
-        axios({
-                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-                method: "GET",
-                url: `/api/parks/${this.state.userPark}`
-            }).then(function(response) {
-                console.log(response.data);
-            })
-            .catch(err => {
-                console.error(err);
-            });
     }
 
     // setResultsPosition(element) {
