@@ -25,7 +25,7 @@ const express = require('express')
     // PORT
     , PORT = process.env.PORT || 3001
     // ENVIRONMENT
-    , isDev = process.env.NODE_ENV === 'development'    
+    // , isDev = process.env.NODE_ENV === 'development'    
     // ROUTES
     , routes = require('./app_api/routes/indexRoutes')
     // ROUTES FILE
