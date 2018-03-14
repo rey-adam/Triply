@@ -1,4 +1,11 @@
-require('dotenv').config();
+
+require("dotenv").config();
+
+/*  
+    =====================================================================================
+    DEPENDENCIES / VARIABLES
+    ===================================================================================== 
+*/
 
 // =====================================================================================
 // DEPENDENCIES / VARIABLES
@@ -8,18 +15,26 @@ const express = require('express')
     , sequelize = require('sequelize')
     , logger = require('morgan')
     
-    // controller
+    // CONTROLLERS
     , authCtrl = require('./app_api/controllers/auth/authCtrl')
     , apiCtrl = require('./app_api/controllers/api/apiCtrl')
 
-    // routes
-    , routes = require('./app_api/routes/indexRoutes')
-
-    // models
+    // MODELS
     , models = require('./app_api/models')
 
-    // specify port
+    // PORT
     , PORT = process.env.PORT || 3001
+    // ENVIRONMENT
+    , isDev = process.env.NODE_ENV === 'development'    
+    // ROUTES
+    , routes = require('./app_api/routes/indexRoutes')
+    // ROUTES FILE
+    , activityRoute = require("./app_api/routes/model/activity.route") 
+    , campsiteRoute = require("./app_api/routes/model/campsite.route")       
+    , eateryRoute = require("./app_api/routes/model/eatery.route")  
+    , locationRoute = require("./app_api/routes/model/location.route")  
+    , trailRoute = require("./app_api/routes/model/trail.route")        
+    , tripRoute = require("./app_api/routes/model/trip.route")
 
     // specify environment
     , isDev = process.env.NODE_ENV === 'development';
@@ -39,11 +54,28 @@ app.use(logger('dev'));
 app.use(routes);
 app.use(express.static('app_client/build/'));
 
-// =====================================================================================
-// SYNC & START SERVERS
-// =====================================================================================
-// sync sequelize models and start express app
-models.sequelize.sync({ force: isDev }).then(function() {
+/*  
+    =====================================================================================
+    MODEL ROUTES
+    ===================================================================================== 
+*/
+
+app.use("/api", activityRoute);
+app.use("/api", campsiteRoute);
+app.use("/api", eateryRoute);
+app.use("/api", locationRoute);
+app.use("/api", trailRoute);
+app.use("/api", tripRoute);
+
+/*  
+    =====================================================================================
+    SYNC & START SERVERS
+    ===================================================================================== 
+*/
+
+// SYNC SEQUELIZE MODELS AND START EXPRESS APP
+models.sequelize.sync({ force: isDev }).then(function () {
+
     const salt = authCtrl._generateSalt();
     models.User.bulkCreate([
         {
@@ -71,5 +103,5 @@ models.sequelize.sync({ force: isDev }).then(function() {
         console.log("=============================");
         console.log("App listening on PORT " + PORT);
         console.log("=============================");
-    });
-});
+    }); // END LISTEN
+}); // END SYNC 

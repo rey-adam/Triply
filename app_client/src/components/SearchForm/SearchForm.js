@@ -74,12 +74,12 @@ class SearchForm extends Component {
 
 
                 {/* dropdown */}
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <div className="dropdown">
+                <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Choose A National Park
-                    <span class="caret"></span>
+                    <span className="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="#">Yosemite</a></li>
                     <li><a href="#">Zion</a></li>
                     <li><a href="#">Glacier</a></li>

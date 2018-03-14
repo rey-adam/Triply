@@ -40,17 +40,17 @@ html,body {
 }
 
 #zion {
-	background-image: url('/img/zion.jpg');
+	background-image: url('../../assets/img/zion.jpg');
 }
 
 #glacier {
-	background-image: url('/img/glacier.jpg');
+	background-image: url('../../assets/img/glacier.jpg');
 }
 
 #bryce {
-	background-image: url('/img/bryce.jpg');
+	background-image: url('../../assets/img/bryce.jpg');
 }
 
 #yellowstone {
-	background-image: url('/img/yellowstone.jpg');
+	background-image: url('../../assets/img/yellowstone.jpg');
 }
