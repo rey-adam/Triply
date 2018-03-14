@@ -16,21 +16,21 @@ module.exports = function (sequelize, DataTypes) {
     // JOINING TRAIL TO LOCATION
     Location.associate = function (models) {
         Location.hasMany(models.Trail, {
-            onDelete: "cascade"
+            onDelete: 'cascade'
         }); // END LOCATION JOIN TRAIL
     }; // END ASSOCIATION
 
     // JOINING CAMPSITE TO LOCATION
     Location.associate = function (models) {
         Location.hasMany(models.Campsite, {
-            onDelete: "cascade"
+            onDelete: 'cascade'
         }); // END LOCATION JOIN CAMPSITE
     }; // END ASSOCIATION
 
     // JOINING EATERY TO LOCATION
     Location.associate = function (models) {
         Location.hasMany(models.Eatery, {
-            onDelete: "cascade"
+            onDelete: 'cascade' 
         }); // END LOCATION JOIN EATERY
     }; // END ASSOCIATION
 
