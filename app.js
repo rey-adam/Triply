@@ -34,11 +34,13 @@ const express = require('express')
     , eateryRoute = require("./app_api/routes/model/eatery.route")  
     , locationRoute = require("./app_api/routes/model/location.route")  
     , trailRoute = require("./app_api/routes/model/trail.route")        
-    , tripRoute = require("./app_api/routes/model/trip.route");
+    , tripRoute = require("./app_api/routes/model/trip.route")
 
-    // if (isDev) {
-    //     app.use(express.static('app_client/public/'));
-    // }
+    // specify environment
+    , isDev = process.env.NODE_ENV === 'development';
+    if (isDev){
+        app.use(express.static('app_client/public'));
+    }
 
 // =====================================================================================
 // MIDDLEWARE
@@ -50,7 +52,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(logger('dev'));
 app.use(routes);
-// app.use(express.static('app_client/build/'));
+app.use(express.static('app_client/build/'));
 
 /*  
     =====================================================================================

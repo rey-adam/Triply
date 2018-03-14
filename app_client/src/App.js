@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Search from './pages/Search';
 import NextSearch from './pages/NextSearch';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
@@ -16,12 +17,13 @@ import MapContainer from './pages/MapContainer';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div style={{ height: '100%' }}>
         <Router>
             <Switch>
               <Route exact path='/' component={Login} />
               <Route exact path='/register' component={Login} />
               <ProtectedRoute exact path='/home' component={Home} />
+              <Route exact path='/search' component={Search} />
               <ProtectedRoute exact path='/search/trails' component={NextSearch} />
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/food' component={NextSearch} />
