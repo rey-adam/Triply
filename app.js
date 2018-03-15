@@ -23,8 +23,6 @@ const express = require('express')
     // ROUTES
     , routes = require('./app_api/routes/indexRoutes')
 
-
-
 /*  
     =====================================================================================
     MIDDLEWARE
