@@ -4,6 +4,7 @@ import ProtectedRoute from './pages/ProtectedRoute';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Search from './pages/Search';
+import Accordion from './pages/Accordion';
 import NextSearch from './pages/NextSearch';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
@@ -24,6 +25,7 @@ class App extends Component {
               <Route exact path='/register' component={Login} />
               <ProtectedRoute exact path='/home' component={Home} />
               <Route exact path='/search' component={Search} />
+              <Route exact path='/accordion' component={Accordion} />
               <ProtectedRoute exact path='/search/trails' component={NextSearch} />
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/food' component={NextSearch} />
