@@ -22,7 +22,7 @@ class SearchForm extends Component {
                     <div className="item active">
                             <div className="natParkImage" id="yosemite"></div>
                     <div className="carousel-caption">
-                        Yosemite
+                        Yosemite National Park
                     </div>
                     </div>
 
@@ -30,7 +30,7 @@ class SearchForm extends Component {
                     <div className="item">
                             <div className="natParkImage" id="zion"></div>
                     <div className="carousel-caption">
-                        Yosemite
+                        Zion National Park
                     </div>
                     </div>
 
@@ -38,7 +38,7 @@ class SearchForm extends Component {
                     <div className="item">
                             <div className="natParkImage" id="glacier"></div>
                     <div className="carousel-caption">
-                        glacier
+                        Glacier National Park
                     </div>
                     </div>
 
@@ -46,7 +46,7 @@ class SearchForm extends Component {
                     <div className="item">
                             <div className="natParkImage" id="bryce"></div>
                     <div className="carousel-caption">
-                        bryce
+                        Bryce National Park
                     </div>
                     </div>
 
@@ -55,7 +55,7 @@ class SearchForm extends Component {
                     <div className="item">
                             <div className="natParkImage" id="yellowstone"></div>
                     <div className="carousel-caption">
-                        yellowstone
+                        Yellowstone National Park
                     </div>
                     </div>
 

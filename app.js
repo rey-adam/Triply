@@ -21,16 +21,11 @@ const express = require('express')
     // ENVIRONMENT
     , isDev = process.env.NODE_ENV === 'development'
     // ROUTES
-    , routes = require('./app_api/routes/indexRoutes')
+    , routes = require('./app_api/routes/indexRoutes');
 
-
-
-/*  
-    =====================================================================================
-    MIDDLEWARE
-    ===================================================================================== 
-*/
-
+// =====================================================================================
+// MIDDLEWARE
+// =====================================================================================
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,10 +34,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(logger('dev'));
 app.use(routes);
 app.use(express.static('app_client/build/'));
-
 if (isDev) {
     app.use(express.static('app_client/public'));
-}; // END IF
+}
 
 /*  
     =====================================================================================
