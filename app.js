@@ -14,7 +14,7 @@ const express = require('express')
 
     // CONTROLLERS
     , authCtrl = require('./app_api/controllers/auth/authCtrl')
-
+    // DB
     , models = require('./app_api/models')
 
     , PORT = process.env.PORT || 3001
@@ -23,13 +23,14 @@ const express = require('express')
     // ROUTES
     , routes = require('./app_api/routes/indexRoutes')
 
+    , app = express();
+
 /*  
     =====================================================================================
     MIDDLEWARE
     ===================================================================================== 
 */
 
-const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -40,7 +41,7 @@ app.use(express.static('app_client/build/'));
 
 if (isDev) {
     app.use(express.static('app_client/public'));
-}; // END IF
+}; 
 
 /*  
     =====================================================================================

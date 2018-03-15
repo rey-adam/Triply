@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const APIKEY = "mm0VlZmyUBOFM415HKtSZdiXhfB27a1ntlZU7ZT4"
-    , BASEURL = `https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=${APIKEY}&q=`;
+const BASEURL = `https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=${process.env.NATIONAL_PARKS_API_KEY}&q=`;
 
 /*  
     =====================================================================================

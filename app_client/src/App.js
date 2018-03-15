@@ -38,8 +38,8 @@ class App extends Component {
         </Router>
       </div>
     );
-  }
-}
+  };
+};
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo',
