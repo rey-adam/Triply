@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './Search.css';
 import Navbar from '../../components/Navbar';
-import Carousel from '../../components/Carousel';
-import Accordion from '../../components/Accordion';
-import SearchForm from '../../components/SearchForm';
+import ControlledCarousel from '../../components/Carousel';
+import SearchTabs from '../../components/NextSearchForm/SearchTabs';
 import axios from 'axios';
 
 class Search extends Component {
@@ -63,12 +62,12 @@ class Search extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <Navbar />
-                <Carousel
+                <ControlledCarousel
                     userPark={this.state.userPark}
                     handleParkSubmit={this.handleParkSubmit}
                     handleParkAPIRequest={this.handleParkAPIRequest}
                 />
-                <Accordion
+                <SearchTabs
                     handleNameClick={this.handleNameClick}
                 />
             </div>
