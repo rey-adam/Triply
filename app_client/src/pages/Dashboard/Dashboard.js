@@ -8,6 +8,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
+            <h1>Triply Dashboard</h1>
                 <MapContainer google={this.props.google}/>
             </div>
 
@@ -19,4 +20,3 @@ class Dashboard extends Component {
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo',
 })(Dashboard);
-// export default Dashboard;
