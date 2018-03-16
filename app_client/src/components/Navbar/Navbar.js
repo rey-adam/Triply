@@ -22,7 +22,7 @@ class Navbar extends Component {
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
-                                <li><Link to='/trips' className={window.location.pathname === '/trips' ? "active" : ""}>My Trips</Link></li>
+                                <li><Link to='/dashboard' className={window.location.pathname === '/dashboard' ? "active" : ""}>Dashboard</Link></li>
                                 <li className="dropdown">
                                     <Link to='#' className={window.location.pathname === '/account' ? "dropdown-toggle active" : "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span className="caret"></span></Link>
                                     <ul className="dropdown-menu">

@@ -35,7 +35,7 @@ app.use(logger('dev'));
 app.use(routes);
 app.use(express.static('app_client/build/'));
 if (isDev) {
-    app.use(express.static('app_client/public'));
+    app.use(express.static('app_client/src/assets/'));
 }
 
 /*  
