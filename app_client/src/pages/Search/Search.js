@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import Navbar from '../../components/Navbar';
+import Hero from '../../components/Hero';
 import './Search.css';
-import SearchForm from '../../components/SearchForm';
+import Carousel from '../../components/Carousel';
 
 class Search extends Component {
     render() {
         return (
             <div style={{ height: '100%' }}>
-                <SearchForm />
+                <Carousel />
             </div>
         );
     };
