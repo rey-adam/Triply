@@ -31,7 +31,7 @@ class App extends Component {
               <Route exact path='/map' render={() => {
                 return <MapContainer google={this.props.google} />;
               }} />
-              <ProtectedRoute exact path='/trips' component={Dashboard} />
+              <ProtectedRoute exact path='/dashboard' component={Dashboard} />
               <ProtectedRoute exact path='/account' component={Account} />
               <Route component={NoMatch} />
             </Switch>
