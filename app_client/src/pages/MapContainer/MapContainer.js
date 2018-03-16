@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-export default class MapContainer extends Component {
+class MapContainer extends Component {
 
     componentDidUpdate() {
         this.loadMap(); // call loadMap function to load the google map
@@ -17,8 +17,8 @@ export default class MapContainer extends Component {
             const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
             const mapConfig = Object.assign({}, {
-                center: { lat: 37.8651, lng: -119.538330 }, // sets center of google map to NYC.
-                zoom: 11, // sets zoom. Lower numbers are zoomed further out.
+                center: { lat: 37.7464, lng: -119.5962 }, // sets center of google map to NYC.
+                zoom: 15, // sets zoom. Lower numbers are zoomed further out.
                 mapTypeId: 'terrain' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
             })
 
@@ -40,3 +40,5 @@ export default class MapContainer extends Component {
         )
     }
 }
+
+export default MapContainer;
