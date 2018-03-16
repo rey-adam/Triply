@@ -7,7 +7,7 @@ const APIKEY = `&key=${process.env.GOOGLE_MAPS_API_KEY}`;
     =====================================================================================
 
     // GOOGLE MAPS API WORKING URL
-    GOOGLE MAPS: https://maps.googleapis.com/maps/api/geocode/json?address=yosemite&key=AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo
+    GOOGLE MAPS: https://maps.googleapis.com/maps/api/geocode/json?address=yosemite&key=GOOGLE_MAPS_API_KEY
     
     ===================================================================================== 
 */
