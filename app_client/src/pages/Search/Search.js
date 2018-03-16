@@ -4,6 +4,7 @@ import SearchForm from '../../components/SearchForm';
 import axios from 'axios';
 
 class Search extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,24 +21,24 @@ class Search extends Component {
 
     validateSearch(input) {
         return input !== '';
-    }
+    };
 
     handleSearch(input) {
         if (!this.validateSearch(input)) {
             alert('Please enter a National Park');
         } else {
             alert(input);
-        }
-    }
+        };
+    };
 
     handleChange(event) {
         const { name, value } = event.target;
         this.setState({ [name]: value });
-    }
+    };
 
     handlenationalParkSearch(input) {
         this.handleSearch(input)
-    }
+    };
 
     render() {
         return (
