@@ -15,7 +15,7 @@ const MAXDISTANCE = "&maxDistance=15";
 */
 
 export default {
-    trials : (lat, lon) => {
+    trails : (lat, lon) => {
         return axios.get(BASEURL + `lat=${lat}&lon=${lon}` + MAXDISTANCE + APIKEY);
     }
 }; // END EXPORT

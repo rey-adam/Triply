@@ -10,6 +10,7 @@ import './Search.css';
 // APIS 
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
 import REIAPI from "../../helpers/api/reiApi/reiApi";
+import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
 
 const styles = {
     modalStyles: {
@@ -124,8 +125,12 @@ class Search extends Component {
     };
 
     handleModalConfirm() {
-        console.log(this.state.userParkName);
-        this.handleLocationAPIRequest(this.state.userParkName)
+
+        const park = this.state.userParkName;        
+        console.log(park);
+
+        this.handleLocationAPIRequest(park)
+
             .then(locationObj => {
                 console.log(locationObj);
                 this.setState({
@@ -134,18 +139,20 @@ class Search extends Component {
                 });
                 return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
             })
-            .then(trailsResponse => {
+
+            .then(trailRes => {
                 // console.log(trailsResponse);
                 this.setState({
-                    parkTrails: trailsResponse
+                    parkTrails: trailRes
                 });
                 console.log(this.state.parkTrails);
                 this.props.history.push('/search/trails');
             })
+            
             .catch(err => {
                 console.error(err);
             });
-    };
+    }; // END HANDLE MODAL CONFIRM
 
 
 
@@ -197,34 +204,59 @@ class Search extends Component {
 
 
 
-    handleLocationAPIRequest(parkQuery) {
-        return axios({
-            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-            method: "GET",
-            url: `/api/parks/location/${parkQuery}`
-        }).then(function (response) {
-            console.log(response.data);
-            const locationObj = {
-                parkLat: response.data.latitude,
-                parkLong: response.data.longitude
-            };
-            return locationObj;
-        })
-            .catch(err => {
-                console.error(err);
-            });
-    };
+    handleLocationAPIRequest(query) {
 
-    handleTrailAPIRequest(lat, long) {
-        return REIAPI
-            .trials(lat, long)
+        return MAPAPI
+            .location(query)
             .then(res => {
-                console.log(`REI RESPONSE: ${res.data}`);
-                return res.data;
+
+                console.log ('We have entered Location api request');
+
+                const latitude = res.data.results[0].geometry.location.lat
+                    , longitude = res.data.results[0].geometry.location.lng;
+
+                return {
+                    parkLat: latitude,
+                    parkLong: longitude
+                };
             })
             .catch(err => console.log(err));
 
 
+
+
+        // return axios({
+        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+        //     method: "GET",
+        //     url: `/api/parks/location/${parkQuery}`
+        // }).then(function (response) {
+        //     console.log(response.data);
+        //     const locationObj = {
+        //         parkLat: response.data.latitude,
+        //         parkLong: response.data.longitude
+        //     };
+        //     return locationObj;
+        // })
+        //     .catch(err => {
+        //         console.error(err);
+        //     });
+
+
+    }; // END LOCATION API REQUEST
+
+    handleTrailAPIRequest(lat, long) {
+        return REIAPI
+            .trails(lat, long)
+            .then(res => {
+                console.log(res.data);
+                return res.data;
+            })
+            .catch(err => console.log(err));
+
+        /* 
+            MELODIES API CALL COMMENTED OUT
+        */
+       
         // return axios({
         //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
         //     method: "GET",

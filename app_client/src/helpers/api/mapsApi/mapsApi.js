@@ -14,7 +14,7 @@ const APIKEY = `&key=AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo`;
 */
 
 export default {
-    search : (query) => {
+    location : (query) => {
         const ADDRESS = `address=${query}`;
         return axios.get(BASEURL + ADDRESS + APIKEY);
     }
