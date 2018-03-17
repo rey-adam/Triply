@@ -35,7 +35,7 @@ class SearchTabs extends Component {
                         <Link to='/search/campsites' className={window.location.pathname === '/search/campsites' ? "active" : ""}>Campsites</Link>
                     </li>
                     <li>
-                        <Link to='/search/visitor' className={window.location.pathname === '/search/visitor' ? "active" : ""}>Visitor Center</Link>
+                        <Link to='/search/visitor' className={window.location.pathname === '/search/visitor' ? "active" : ""}>Visitor Centers</Link>
                     </li>
                 </ul>
             </nav>

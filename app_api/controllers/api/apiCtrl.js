@@ -24,7 +24,7 @@ const models = require('../../models')
 
 class ApiCtrl {
     static getParkData(req, res) {
-        ApiCtrl._queryNationalParkAPI(res, req.params.userPark)
+        ApiCtrl._queryNationalParkAPI(res, req.params.userParkCode)
         .then(parkResponse => {
             console.log('=============================');
             console.log(`'${parkResponse.data[0].fullName}' found`);
@@ -35,27 +35,50 @@ class ApiCtrl {
             console.error(err);
         })
     }
-    
-    static getTrailData(req, res) {
-        ApiCtrl._queryGoogleMapsAPI(res, req.params.userTrail)
+
+    static getLocationData(req, res) {
+        ApiCtrl._queryGoogleMapsAPI(res, req.params.userPark)
         .then(locationResponse => {
-            if (locationResponse) {
-                ApiCtrl._queryHikingProjectAPI(res, locationResponse.latitude, locationResponse.longitude)
-                .then(trailResponse => {
-                    console.log('====================');
-                    console.log(`${trailResponse.length} trails found`);
-                    console.log('====================');
-                    res.json(trailResponse);
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-            }
+            res.json(locationResponse);
+        })
+        .catch(err => {
+            console.error(err);
         });
     }
 
-    static _queryNationalParkAPI(res, userPark) {
-        const url = `https://developer.nps.gov/api/v1/parks?limit=1&q=${userPark}&api_key=${process.env.NATIONAL_PARKS_API_KEY}`;
+    static getTrailData(req, res) {
+        ApiCtrl._queryHikingProjectAPI(res, req.params.lat, req.params.long)
+        .then(trailResponse => {
+            console.log('====================');
+            console.log(`${trailResponse.length} trails found`);
+            console.log('====================');
+            res.json(trailResponse);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    }
+    
+    // static getTrailData(req, res) {
+    //     ApiCtrl._queryGoogleMapsAPI(res, req.params.userTrail)
+    //     .then(locationResponse => {
+    //         if (locationResponse) {
+    //             ApiCtrl._queryHikingProjectAPI(res, locationResponse.latitude, locationResponse.longitude)
+    //             .then(trailResponse => {
+    //                 console.log('====================');
+    //                 console.log(`${trailResponse.length} trails found`);
+    //                 console.log('====================');
+    //                 res.json(trailResponse);
+    //             })
+    //             .catch(err => {
+    //                 console.error(err);
+    //             });
+    //         }
+    //     });
+    // }
+
+    static _queryNationalParkAPI(res, userParkCode) {
+        const url = `https://developer.nps.gov/api/v1/parks?limit=1&parkCode=${userParkCode}&api_key=${process.env.NATIONAL_PARKS_API_KEY}`;
         console.log(url);
         return axios.get(url)
         .then(nationalParkResponse => {

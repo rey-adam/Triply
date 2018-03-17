@@ -1,6 +1,7 @@
 /* TABS BAR */
 .search-div nav {
     padding: 0;
+    position: absolute;
 }
 
 nav > .pagination {
@@ -15,7 +16,7 @@ nav > .pagination {
 }
 
 .pagination {
-    background: rgba(0, 0, 0, 0.20);
+    background: rgba(0, 0, 0, 0.15);
 }
 
 .pagination>li:last-child>a,
