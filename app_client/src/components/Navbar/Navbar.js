@@ -15,7 +15,7 @@ class Navbar extends Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <Link to='/home' className="navbar-brand">
+                            <Link to='/park' className="navbar-brand">
                                 <div id="nav-logo"></div>
                             </Link>
                         </div>

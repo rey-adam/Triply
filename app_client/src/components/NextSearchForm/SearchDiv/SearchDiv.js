@@ -5,9 +5,11 @@ import '../../Hero/Hero.css';
 import './SearchDiv.css';
 
 const SearchDiv = props => 
-    <div className="row search-div">
-        <SearchTabs />
-        <SearchBar {...props} />
+    <div className="search-wrapper">
+        <div className="row search-div">
+            <SearchTabs />
+            <SearchBar {...props} />
+        </div>
     </div>;
 
 export default SearchDiv;

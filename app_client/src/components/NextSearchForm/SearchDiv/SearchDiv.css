@@ -1,4 +1,11 @@
-.jumbotron .search-div {
+.search-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+}
+
+.search-div {
+    position: fixed;
     width: 65%;
     margin: auto;
     /* margin-top: calc(-230px - 20 * (140vw - 320px)/ 1000); */
@@ -8,15 +15,6 @@
 /******************
    MEDIA QUERIES
 ******************/
-
-/**
-*** WIDTH
-**/
-@media only screen and (max-width: 1200px) {
-    .search-div {
-        margin-top: 20rem;
-    }
-}
 
 @media only screen and (max-width: 768px) {
     .search-div {

@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar';
 import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import axios from 'axios';
-import parks from '../../parks.json';
+import parks from '../../parks2.json';
 import './Search.css';
 
 class Search extends Component {
@@ -15,7 +15,7 @@ class Search extends Component {
             parks: parks,
             selectedOption: ''
         };
-        this.handleNameClick = this.handleNameClick.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleParkAPIRequest = this.handleParkAPIRequest.bind(this);
         this.renderParkInfo = this.renderParkInfo.bind(this);
     };
@@ -24,15 +24,13 @@ class Search extends Component {
         console.log(this.state.parks);
     }
 
-    handleNameClick(e) {
+    handleSubmit(e) {
         e.preventDefault();
-        // const parks = document.getElementById("park-select");
-        // const userPark = parks.options[parks.selectedIndex].value; 
-        const park = e.target;
-        const parkName = park.getAttribute('data-value');
-        console.log(parkName);
+        const parks = document.getElementById("park-select");
+        const userPark = parks.options[parks.selectedIndex].value;
+        console.log(userPark);
 
-        this.handleParkAPIRequest(parkName)
+        this.handleParkAPIRequest(userPark)
         .then(parkObj => {
             this.renderParkInfo(parkObj);
         })
@@ -76,13 +74,20 @@ class Search extends Component {
                 />
                 <SelectWrapper>
                     <form className="park-form">
-                        <select className="form-control">
-                            <option>Choose a park</option>
-                            {parks.map(park => (
-                                <option>{park.parkName}</option>
-                            ))}
-                        </select>
-                        <button className="btn btn-default park-btn" type="submit">Submit</button>
+                        <div className="select-bar">
+                            <select className="form-control select2"></select>
+                            <select id="park-select" className="form-control">
+                                <option>Choose a park</option>
+                                {parks.map((park, i) => (
+                                    <option key={i} id={park.parkName} value={park.parkCode}>{`${park.parkName} National Park`}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <button 
+                            className="btn btn-default park-btn pull-right"
+                            type="submit"
+                            onClick={this.handleSubmit}
+                        >Submit</button>
                     </form>
                 </SelectWrapper>
             </div>
@@ -91,28 +96,3 @@ class Search extends Component {
 };
 
 export default Search;
-
-// <Wrapper>
-//     <h1 className="title">Friends List</h1>
-//     <FriendCard removeFriend={this.removeFriend} friends={friends}></FriendCard>
-//     {/* 
-//         <FriendCard
-//           name={friends[0].name}
-//           image={friends[0].image}
-//           occupation={friends[0].occupation}
-//           location={friends[0].location}
-//         />
-//         <FriendCard
-//           name={friends[1].name}
-//           image={friends[1].image}
-//           occupation={friends[1].occupation}
-//           location={friends[1].location}
-//         />
-//         <FriendCard
-//           name={friends[2].name}
-//           image={friends[2].image}
-//           occupation={friends[2].occupation}
-//           location={friends[2].location}
-//         />
-//         */}
-// </Wrapper>

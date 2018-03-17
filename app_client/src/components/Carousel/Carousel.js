@@ -55,14 +55,6 @@ class ControlledCarousel extends Component {
                     <div className="overlay"></div>
                 </Carousel.Item>
 
-                {/* sunlight through trees */}
-                <Carousel.Item>
-                    <video className="video-fluid d-block" autoPlay loop muted>
-                        <source src="https://player.vimeo.com/external/207276190.hd.mp4?s=495c64cea13c6fa661fc379132f45fb5d58fe10c&amp;profile_id=119&amp;oauth2_token_id=57447761" type="video/mp4" />
-                    </video>
-                    <div className="overlay"></div>
-                </Carousel.Item>
-
                 {/* tranquil river */}
                 <Carousel.Item>
                     <video className="video-fluid d-block" autoPlay loop muted>

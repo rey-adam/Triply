@@ -14,6 +14,10 @@ nav > .pagination {
     border-bottom-left-radius: 0;
 }
 
+.pagination {
+    background: rgba(0, 0, 0, 0.20);
+}
+
 .pagination>li:last-child>a,
 .pagination>li:last-child>span {
     /* border-top-right-radius: 0; */

@@ -1,5 +1,10 @@
+.select-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 22.5%;
+}
+
 .park-form {
-    background: none;
     position: fixed;
     width: 50%;
     margin: auto;
@@ -9,8 +14,67 @@
     display: none;
 }
 
+.select-bar {
+    position: relative;
+}
+
+.park-form select,
+.park-form .select2 {
+    height: 37px;
+    /* box-shadow: 0 1px 10px rgb(102, 102, 102); */
+    font-size: calc(11px + 3 * (140vw - 320px)/ 2000);
+    border: 1px solid white;
+    text-indent: 10px;
+}
+
 .park-form select {
     background: none;
     display: inline;
     color: white;
+    text-shadow: 0 1px 10px black;
+    z-index: 1;
+    position: absolute;
+    padding-left: 10px;
+}
+
+.park-form select:hover {
+    cursor: pointer;
+}
+
+.park-form .select2 {
+    position: absolute;
+    top: 0;
+    background: rgb(0, 0, 0);
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.park-form select .form-control {
+    border-color: white !important;
+}
+
+.park-form .form-control:focus {
+    border-color: white;
+    box-shadow: none;
+}
+
+.park-form select option {
+    text-shadow: 0 1px 10px black;
+}
+
+.park-form .park-btn {
+    position: absolute;
+    right: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: 1;
+    border: 1px solid white;
+    font-size: calc(10.5px + 3 * (140vw - 320px)/ 2000);
+    height: 37px;
+}
+
+@media only screen and (max-width: 500px) {
+    .park-form {
+        width: 80% !important;
+    }
 }
