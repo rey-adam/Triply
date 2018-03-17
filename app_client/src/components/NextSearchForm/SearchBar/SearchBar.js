@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../../Hero/Hero.css';
 import '../SearchDiv/SearchDiv.css';
 import './SearchBar.css';
@@ -17,7 +16,7 @@ class SearchBar extends Component {
                             window.location.pathname === '/search/trails' ? "Search trails..." :
                             window.location.pathname === '/search/activities' ? "Search activities..." : window.location.pathname === '/search/food' ? "Search food..." :
                             window.location.pathname === '/search/lodging' ? "Search lodging..." :
-                            "" 
+                            "Choose a category..." 
                         }
                         name={
                             window.location.pathname === '/search/trails' ? "trailSearch" : window.location.pathname === '/search/activities' ? "activitySearch" :
@@ -36,7 +35,7 @@ class SearchBar extends Component {
                     />
                     <div className="search-overlay"></div>
                     <span className="input-group-btn">
-                        <Link to='#scroll-to'><button
+                        <button
                             id="search-btn"
                             className="btn btn-default"
                             type="submit"
@@ -45,9 +44,9 @@ class SearchBar extends Component {
                                 window.location.pathname === '/search/activities' ? () => this.props.handleActivitySearch(this.props.activitySearch) :
                                 window.location.pathname === '/search/food' ? () => this.props.handleFoodSearch(this.props.foodSearch) :
                                 window.location.pathname === '/search/lodging' ? () => this.props.handleLodgingSearch(this.props.lodgingSearch) :
-                                ""
+                                () => alert('Please choose a category')
                             }
-                        >Explore</button></Link>
+                        >Explore</button>
                     </span>
                 </div>
             </div>

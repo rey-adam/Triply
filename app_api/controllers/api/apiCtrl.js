@@ -23,22 +23,75 @@ const models = require('../../models')
 */
 
 class ApiCtrl {
-    static getTrailData(req, res) {
-        ApiCtrl._queryGoogleMapsAPI(req.params.userPark)
-        .then(locationResponse => {
-            if (locationResponse) {
-                ApiCtrl._queryHikingProjectAPI(res, locationResponse.latitude, locationResponse.longitude)
-                .then(trailResponse => {
+    static getParkData(req, res) {
+        ApiCtrl._queryNationalParkAPI(res, req.params.userParkCode)
+        .then(parkResponse => {
+            console.log('=============================');
+            console.log(`'${parkResponse.data[0].fullName}' found`);
+            console.log('=============================');
+            res.json(parkResponse);
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    }
 
-                })
-                .catch(err => {
-                    console.error(err);
-                });
-            }
+    static getLocationData(req, res) {
+        ApiCtrl._queryGoogleMapsAPI(res, req.params.userPark)
+        .then(locationResponse => {
+            res.json(locationResponse);
+        })
+        .catch(err => {
+            console.error(err);
         });
     }
 
-    static _queryGoogleMapsAPI(userPark) {
+    static getTrailData(req, res) {
+        ApiCtrl._queryHikingProjectAPI(res, req.params.lat, req.params.long)
+        .then(trailResponse => {
+            console.log('====================');
+            console.log(`${trailResponse.length} trails found`);
+            console.log('====================');
+            res.json(trailResponse);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    }
+    
+    // static getTrailData(req, res) {
+    //     ApiCtrl._queryGoogleMapsAPI(res, req.params.userTrail)
+    //     .then(locationResponse => {
+    //         if (locationResponse) {
+    //             ApiCtrl._queryHikingProjectAPI(res, locationResponse.latitude, locationResponse.longitude)
+    //             .then(trailResponse => {
+    //                 console.log('====================');
+    //                 console.log(`${trailResponse.length} trails found`);
+    //                 console.log('====================');
+    //                 res.json(trailResponse);
+    //             })
+    //             .catch(err => {
+    //                 console.error(err);
+    //             });
+    //         }
+    //     });
+    // }
+
+    static _queryNationalParkAPI(res, userParkCode) {
+        const url = `https://developer.nps.gov/api/v1/parks?limit=1&parkCode=${userParkCode}&api_key=${process.env.NATIONAL_PARKS_API_KEY}`;
+        console.log(url);
+        return axios.get(url)
+        .then(nationalParkResponse => {
+            if (nationalParkResponse) {
+                return nationalParkResponse.data;
+            }
+        })
+        .catch(err => {
+            res.json(err);
+        });
+    }
+
+    static _queryGoogleMapsAPI(res, userPark) {
         console.log(`park: ${userPark}`);
         return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${userPark}&key=${process.env.GOOGLE_MAPS_API_KEY}`)
             .then(googleMapsResponse => {
@@ -60,7 +113,7 @@ class ApiCtrl {
         return axios.get(`https://www.hikingproject.com/data/get-trails?lat=${latitude}&lon=${longitude}&maxDistance=200&key=${process.env.HIKING_PROJECT_API_KEY}`)
             .then(hikingProjectResponse => {
                 if (hikingProjectResponse) {
-                    res.json(hikingProjectResponse.data.trails);
+                    return hikingProjectResponse.data.trails;
                 }
             })
             .catch(err => {
