@@ -36,12 +36,14 @@
 }
 
 /* LABEL */
-.form-group {
+.login-form .form-group,
+.register-form .form-group {
     position: relative;
     /* margin-top: 40px; */
 }
 
-label {
+.login-form .form-group label,
+.register-form .form-group label {
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 1px;
@@ -52,7 +54,8 @@ label {
     left: 12px;
 }
 
-.form-control:focus + label
+.login-form .form-group .form-control:focus + label,
+.register-form .form-group .form-control:focus + label
 {
     /* color: rgb(209, 176, 30); */
     color: rgb(160, 204, 202);
