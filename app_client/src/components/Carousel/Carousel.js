@@ -50,7 +50,7 @@ class ControlledCarousel extends Component {
                 {/* timelapse night sky */}
                 <Carousel.Item>
                     <video className="video-fluid d-block" autoPlay loop muted>
-                        <source src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/2215/9/236075858/840331843.mp4?token=1521200883-0x9b5f65a5921e0192257b81bb1fcf0a557482151e" type="video/mp4" />
+                        <source src="https://player.vimeo.com/external/236075858.hd.mp4?s=539faad12f040eb5afd8de3160db1220f1a5bac0&amp;profile_id=175&amp;oauth2_token_id=57447761" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>
                 </Carousel.Item>
@@ -99,14 +99,6 @@ class ControlledCarousel extends Component {
                 <Carousel.Item>
                     <video className="video-fluid d-block" autoPlay loop muted>
                         <source src="https://player.vimeo.com/external/185192576.hd.mp4?s=1519a891ae4379cf4a8858ebdfe26f8823002e81&amp;profile_id=119&amp;oauth2_token_id=57447761" type="video/mp4" />
-                    </video>
-                    <div className="overlay"></div>
-                </Carousel.Item>
-
-                {/* flowing brook */}
-                <Carousel.Item>
-                    <video className="video-fluid d-block" autoPlay loop muted>
-                        <source src="https://player.vimeo.com/external/198536487.hd.mp4?s=16eab0bd79f85e2bb7a2f22c990947b1255714c7&amp;profile_id=119&amp;oauth2_token_id=57447761" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>
                 </Carousel.Item>

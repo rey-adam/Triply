@@ -1,0 +1,16 @@
+.park-form {
+    background: none;
+    position: fixed;
+    width: 50%;
+    margin: auto;
+}
+
+.park-form label {
+    display: none;
+}
+
+.park-form select {
+    background: none;
+    display: inline;
+    color: white;
+}
