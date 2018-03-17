@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import NextSearch from '../../pages/NextSearch';
 import Navbar from '../../components/Navbar';
 import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
 import axios from 'axios';
-import parks from '../../parks2.json';
+import parks from '../../helpers/api/npsApi/parkCodes/parkCode.json';
 import './Search.css';
 
 const styles = {
@@ -119,21 +118,22 @@ class Search extends Component {
         console.log(this.state.userParkName);
         this.handleLocationAPIRequest(this.state.userParkName)
         .then(locationObj => {
-            console.log(locationObj);
-            this.setState({
-                parkLat: locationObj.parkLat,
-                parkLong: locationObj.parkLong
-            });
-        return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
+            // console.log(locationObj);
+            // this.setState({
+            //     parkLat: locationObj.parkLat,
+            //     parkLong: locationObj.parkLong
+            // });
+            this.props.history.push(`/search/trails?lat=${locationObj.parkLat}&long=${locationObj.parkLong}`);
+        //return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
         })
-        .then(trailsResponse => {
-            // console.log(trailsResponse);
-            this.setState({
-                parkTrails: trailsResponse
-            });
-            console.log(this.state.parkTrails);
-            this.props.history.push('/search/trails');
-        })
+        // .then(trailsResponse => {
+        //     // console.log(trailsResponse);
+        //     this.setState({
+        //         parkTrails: trailsResponse
+        //     });
+        //     console.log(this.state.parkTrails);
+        //     this.props.history.push('/search/trails?lat=&lng=');
+        // })
         .catch(err => {
             console.error(err);
         });
@@ -242,7 +242,7 @@ class Search extends Component {
                             <tbody>
                                 <tr>
                                     <td>Site</td>
-                                    <td><a href={this.state.parkURL}>{this.state.parkURL}</a></td>
+                                    <td><a href={this.state.parkURL} target="_blank">{this.state.parkURL}</a></td>
                                 </tr>
                                 <tr>
                                     <td>States</td>
@@ -254,7 +254,7 @@ class Search extends Component {
                                 </tr>
                                 <tr>
                                     <td>Weather</td>
-                                    <td>{this.state.parkWeather.includes('http') ? <a href={this.state.parkWeather}>{this.state.parkWeather}</a> : this.state.parkWeather}</td>
+                                    <td>{this.state.parkWeather.includes('http') ? <a href={this.state.parkWeather} target="_blank">{this.state.parkWeather}</a> : this.state.parkWeather}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -9,7 +9,6 @@ import Account from './pages/Account';
 import NoMatch from './components/NoMatch';
 import './App.css';
 // import the Google Maps API Wrapper from google-maps-react
-import { GoogleApiWrapper } from 'google-maps-react';
 // import child component
 import MapContainer from './pages/MapContainer';
 
@@ -22,6 +21,7 @@ class App extends Component {
               <Route exact path='/' component={Login} />
               <Route exact path='/register' component={Login} />
               <ProtectedRoute exact path='/park' component={Search} />
+              <ProtectedRoute exact path='/search' component={NextSearch} />
               <ProtectedRoute exact path='/search/trails' component={NextSearch} />
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/campsites' component={NextSearch} />
@@ -39,6 +39,4 @@ class App extends Component {
   };
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo',
-})(App);
+export default App;
