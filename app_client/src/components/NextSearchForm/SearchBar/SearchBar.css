@@ -33,7 +33,7 @@
     left: 0;
     z-index: auto;
     background-color: rgb(36, 36, 36);
-    opacity: 0.1;
+    opacity: 0.3;
 }
 
 .jumbotron #search-btn {
@@ -56,7 +56,7 @@
 
 @media only screen and (max-width: 768px) {
     .search-overlay {
-        background-color: rgb(36, 36, 36,);
+        background-color: rgb(36, 36, 36);
         opacity: 0.2;
     }
 }
@@ -69,7 +69,7 @@
         height: 30px;
     }
     .search-overlay {
-        background-color: rgb(36, 36, 36,);
+        background-color: rgb(36, 36, 36);
         opacity: 0.3;
     }
 }
