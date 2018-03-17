@@ -27,7 +27,7 @@ class ApiCtrl {
         ApiCtrl._queryNationalParkAPI(res, req.params.userParkCode)
         .then(parkResponse => {
             console.log('=============================');
-            console.log(`'${parkResponse.data[0].fullName}' found`);
+            console.log(`${parkResponse.data[0].fullName}' found`);
             console.log('=============================');
             res.json(parkResponse);
         })
