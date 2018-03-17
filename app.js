@@ -14,19 +14,23 @@ const express = require('express')
 
     // CONTROLLERS
     , authCtrl = require('./app_api/controllers/auth/authCtrl')
-
+    // DB
     , models = require('./app_api/models')
 
     , PORT = process.env.PORT || 3001
     // ENVIRONMENT
     , isDev = process.env.NODE_ENV === 'development'
     // ROUTES
-    , routes = require('./app_api/routes/indexRoutes');
+    , routes = require('./app_api/routes/indexRoutes')
 
-// =====================================================================================
-// MIDDLEWARE
-// =====================================================================================
-const app = express();
+    , app = express();
+
+/*  
+    =====================================================================================
+    MIDDLEWARE
+    ===================================================================================== 
+*/
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -34,9 +38,10 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(logger('dev'));
 app.use(routes);
 app.use(express.static('app_client/build/'));
+
 if (isDev) {
-    app.use(express.static('app_client/src/assets/'));
-}
+    app.use(express.static('app_client/public'));
+}; 
 
 /*  
     =====================================================================================
