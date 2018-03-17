@@ -101,10 +101,6 @@ class Search extends Component {
                 userParkCode,
                 userParkName
             });
-
-
-
-
             this.handleParkAPIRequest(userParkCode)
                 .then(parkObj => {
                     console.log(parkObj);
@@ -119,18 +115,12 @@ class Search extends Component {
                 .catch(err => {
                     console.error(err);
                 });
-
-
         };
-    };
+    }; // END HANDLE SUBMIT
 
     handleModalConfirm() {
-
         const park = this.state.userParkName;        
-        console.log(park);
-
         this.handleLocationAPIRequest(park)
-
             .then(locationObj => {
                 console.log(locationObj);
                 this.setState({
@@ -154,16 +144,12 @@ class Search extends Component {
             });
     }; // END HANDLE MODAL CONFIRM
 
-
-
-
-
-    handleParkAPIRequest = parkQuery => {
+    handleParkAPIRequest = query => {
         return NPSAPI
-            .park(parkQuery)
-            .then(res => {
-                console.log(res.data);
-                const park = res.data.data[0];
+            .park(query)
+            .then(npsRes => {
+                console.log(npsRes.data);
+                const park = npsRes.data.data[0];
                 const parkObj = {
                     name: park.fullName,
                     url: park.url,
@@ -201,20 +187,12 @@ class Search extends Component {
 
     }; // END PARK API REQUEST
 
-
-
-
     handleLocationAPIRequest(query) {
-
         return MAPAPI
             .location(query)
-            .then(res => {
-
-                console.log ('We have entered Location api request');
-
-                const latitude = res.data.results[0].geometry.location.lat
-                    , longitude = res.data.results[0].geometry.location.lng;
-
+            .then(mapRes => {
+                const latitude = mapRes.data.results[0].geometry.location.lat
+                    , longitude = mapRes.data.results[0].geometry.location.lng;
                 return {
                     parkLat: latitude,
                     parkLong: longitude
@@ -222,8 +200,9 @@ class Search extends Component {
             })
             .catch(err => console.log(err));
 
-
-
+        /* 
+            MELODIES API CALL COMMENTED OUT
+        */
 
         // return axios({
         //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
@@ -239,8 +218,7 @@ class Search extends Component {
         // })
         //     .catch(err => {
         //         console.error(err);
-        //     });
-
+        //     }); // END MELODIES API CALL
 
     }; // END LOCATION API REQUEST
 
