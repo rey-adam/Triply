@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASEURL = `https://developer.nps.gov/api/v1/`;
-const APIKEY = `&api_key=${process.env.NATIONAL_PARKS_API_KEY}`;
+const APIKEY = `&api_key=mm0VlZmyUBOFM415HKtSZdiXhfB27a1ntlZU7ZT4`;
 
 /*  
     =====================================================================================
