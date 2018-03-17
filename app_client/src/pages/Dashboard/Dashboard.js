@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Navbar from '../../components/Navbar';
 import './Dashboard.css';
 // import the Google Maps API Wrapper from google-maps-react
 import { GoogleApiWrapper } from 'google-maps-react';
@@ -8,7 +9,8 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-            <h1>Triply Dashboard</h1>
+                <Navbar />
+                <h1>Triply Dashboard</h1>
                 <MapContainer google={this.props.google}/>
             </div>
 
