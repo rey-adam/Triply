@@ -5,10 +5,13 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^5.0.1",
     "google-maps-react": "^1.1.4",
     "history": "^4.7.2",
     "query-string": "^6.0.0",
+    "npm": "^5.7.1",
     "react": "^16.2.0",
+    "react-app": "^1.1.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-modal": "^3.3.2",
