@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASEURL = `https://www.hikingproject.com/data/get-trails?`;
-const APIKEY = `&key=${process.env.HIKING_PROJECT_API_KEY}`;
+const APIKEY = `&key=200226857-fe7127b86ed2dd480ddc1b41b7d7b66c`;
 const MAXDISTANCE = "&maxDistance=15";
 
 /*  
@@ -15,7 +15,7 @@ const MAXDISTANCE = "&maxDistance=15";
 */
 
 export default {
-    search : (lat, lon) => {
+    trails : (lat, lon) => {
         return axios.get(BASEURL + `lat=${lat}&lon=${lon}` + MAXDISTANCE + APIKEY);
     }
 }; // END EXPORT

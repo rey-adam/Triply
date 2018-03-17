@@ -5,8 +5,12 @@ import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
 import axios from 'axios';
-import parks from '../../parks2.json';
+import parks from '../../helpers/api/npsApi/parkCodes/parks';
 import './Search.css';
+// APIS 
+import NPSAPI from "../../helpers/api/npsApi/npsAPI";
+import REIAPI from "../../helpers/api/reiApi/reiApi";
+import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
 
 const styles = {
     modalStyles: {
@@ -69,11 +73,11 @@ class Search extends Component {
     componentDidMount() {
         console.log(this.state.parks);
         // this.openModal('hello');
-    }
+    };
 
     openModal(message) {
         this.setState({ modalIsOpen: true, modalMessage: message });
-    }
+    };
 
     // afterOpenModal = () => {
     //     // references are now synced and can be accessed
@@ -82,7 +86,7 @@ class Search extends Component {
 
     closeModal() {
         this.setState({ modalIsOpen: false });
-    }
+    };
 
     handleSubmit(e) {
         e.preventDefault();
@@ -97,101 +101,153 @@ class Search extends Component {
                 userParkCode,
                 userParkName
             });
-
             this.handleParkAPIRequest(userParkCode)
-            .then(parkObj => {
-                console.log(parkObj);
-                this.setState({
-                    parkURL: parkObj.url,
-                    parkStates: parkObj.states,
-                    parkDesc: parkObj.description,
-                    parkWeather: parkObj.weather
+                .then(parkObj => {
+                    console.log(parkObj);
+                    this.setState({
+                        parkURL: parkObj.url,
+                        parkStates: parkObj.states,
+                        parkDesc: parkObj.description,
+                        parkWeather: parkObj.weather
+                    });
+                    this.openModal('hello');
+                })
+                .catch(err => {
+                    console.error(err);
                 });
-                this.openModal('hello');
+        };
+    }; // END HANDLE SUBMIT
+
+    handleModalConfirm() {
+        const park = this.state.userParkName;        
+        this.handleLocationAPIRequest(park)
+            .then(locationObj => {
+                console.log(locationObj);
+                this.setState({
+                    parkLat: locationObj.parkLat,
+                    parkLong: locationObj.parkLong
+                });
+                return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
             })
+
+            .then(trailRes => {
+                // console.log(trailsResponse);
+                this.setState({
+                    parkTrails: trailRes
+                });
+                console.log(this.state.parkTrails);
+                this.props.history.push('/search/trails');
+            })
+            
             .catch(err => {
                 console.error(err);
             });
-        }
-    }
+    }; // END HANDLE MODAL CONFIRM
 
-    handleModalConfirm() {
-        console.log(this.state.userParkName);
-        this.handleLocationAPIRequest(this.state.userParkName)
-        .then(locationObj => {
-            console.log(locationObj);
-            this.setState({
-                parkLat: locationObj.parkLat,
-                parkLong: locationObj.parkLong
-            });
-        return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
-        })
-        .then(trailsResponse => {
-            // console.log(trailsResponse);
-            this.setState({
-                parkTrails: trailsResponse
-            });
-            console.log(this.state.parkTrails);
-            this.props.history.push('/search/trails');
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    }
+    handleParkAPIRequest = query => {
+        return NPSAPI
+            .park(query)
+            .then(npsRes => {
+                console.log(npsRes.data);
+                const park = npsRes.data.data[0];
+                const parkObj = {
+                    name: park.fullName,
+                    url: park.url,
+                    states: park.states,
+                    description: park.description,
+                    weather: park.weatherInfo
+                };
+                return parkObj;
+            })
+            .catch(err => console.log(err));
 
-    handleParkAPIRequest(parkQuery) {
-        return axios({
-            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-            method: "GET",
-            url: `/api/parks/${parkQuery}`
-        }).then(function(response) {
-            console.log(response.data);
-            const park = response.data.data[0];
-            const parkObj = {
-                name: park.fullName,
-                url: park.url,
-                states: park.states,
-                description: park.description,
-                weather: park.weatherInfo
-            };
-            return parkObj;
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    }
+        /* 
+            MELODIES API CALL COMMENTED OUT
+        */
 
-    handleLocationAPIRequest(parkQuery) {
-        return axios({
-            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-            method: "GET",
-            url: `/api/parks/location/${parkQuery}`
-        }).then(function(response) {
-            console.log(response.data);
-            const locationObj = {
-                parkLat: response.data.latitude,
-                parkLong: response.data.longitude
-            };
-            return locationObj;
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    }
+        // return axios({
+        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+        //     method: "GET",
+        //     url: `/api/parks/${parkQuery}`
+        // }).then(function (response) {
+        //     console.log(response.data);
+        //     const park = response.data.data[0];
+        //     const parkObj = {
+        //         name: park.fullName,
+        //         url: park.url,
+        //         states: park.states,
+        //         description: park.description,
+        //         weather: park.weatherInfo
+        //     };
+        //     return parkObj;
+        // })
+        //     .catch(err => {
+        //         console.error(err);
+        //     }); 
+
+    }; // END PARK API REQUEST
+
+    handleLocationAPIRequest(query) {
+        return MAPAPI
+            .location(query)
+            .then(mapRes => {
+                const latitude = mapRes.data.results[0].geometry.location.lat
+                    , longitude = mapRes.data.results[0].geometry.location.lng;
+                return {
+                    parkLat: latitude,
+                    parkLong: longitude
+                };
+            })
+            .catch(err => console.log(err));
+
+        /* 
+            MELODIES API CALL COMMENTED OUT
+        */
+
+        // return axios({
+        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+        //     method: "GET",
+        //     url: `/api/parks/location/${parkQuery}`
+        // }).then(function (response) {
+        //     console.log(response.data);
+        //     const locationObj = {
+        //         parkLat: response.data.latitude,
+        //         parkLong: response.data.longitude
+        //     };
+        //     return locationObj;
+        // })
+        //     .catch(err => {
+        //         console.error(err);
+        //     }); // END MELODIES API CALL
+
+    }; // END LOCATION API REQUEST
 
     handleTrailAPIRequest(lat, long) {
-        return axios({
-            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-            method: "GET",
-            url: `/api/trails&lat=${lat}&long=${long}`
-        }).then(function(response) {
-            console.log(response.data);
-            return response.data;
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    }
+        return REIAPI
+            .trails(lat, long)
+            .then(res => {
+                console.log(res.data);
+                return res.data;
+            })
+            .catch(err => console.log(err));
+
+        /* 
+            MELODIES API CALL COMMENTED OUT
+        */
+       
+        // return axios({
+        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+        //     method: "GET",
+        //     url: `/api/trails&lat=${lat}&long=${long}`
+        // }).then(function (response) {
+        //     console.log(response.data);
+        //     return response.data;
+        // })
+        //     .catch(err => {
+        //         console.error(err);
+        //     });
+
+    }; // END TRAIL API REQUEST
 
     render() {
         return (
@@ -210,7 +266,7 @@ class Search extends Component {
                                 ))}
                             </select>
                         </div>
-                        <button 
+                        <button
                             id="park-btn"
                             className="btn btn-default select-btn pull-right"
                             type="submit"
@@ -218,7 +274,7 @@ class Search extends Component {
                         >Submit</button>
                     </form>
                 </SelectWrapper>
-                
+
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
