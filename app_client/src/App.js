@@ -8,9 +8,6 @@ import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import NoMatch from './components/NoMatch';
 import './App.css';
-// import the Google Maps API Wrapper from google-maps-react
-import { GoogleApiWrapper } from 'google-maps-react';
-// import child component
 import MapContainer from './pages/MapContainer';
 
 class App extends Component {
@@ -39,6 +36,4 @@ class App extends Component {
   };
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo',
-})(App);
+export default App;
