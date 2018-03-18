@@ -112,9 +112,9 @@ class Search extends Component {
 
     handleModalConfirm() {
         console.log(this.state.userParkName);
-        this.handleLocationAPIRequest(this.state.userParkName)
+        this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
         .then(locationObj => {
-            this.props.history.push(`/search/trails?park=${this.state.userParkName}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
+            this.props.history.push(`/search/trails?park=${this.state.userParkCode}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
         })
         .catch(err => {
             console.error(err);

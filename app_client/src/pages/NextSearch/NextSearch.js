@@ -6,6 +6,7 @@ import Hero from '../../components/Hero';
 import './NextSearch.css';
 import qs from "query-string";
 import REIAPI from '../../helpers/api/reiApi/reiApi';
+import npsAPI from '../../helpers/api/npsApi/npsAPI';
 
 class Search extends Component {
     constructor(props) {
@@ -18,7 +19,10 @@ class Search extends Component {
         };
         this.validateSearch = this.validateSearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleTrailAPIRequest = this.handleTrailAPIRequest.bind(this);
+        this.handleTrailRequest = this.handleTrailRequest.bind(this);
+        this.handleActivityRequest = this.handleActivityRequest.bind(this);
+        this.handleCampsiteRequest = this.handleCampsiteRequest.bind(this);
+        this.handleVCRequest = this.handleVCRequest.bind(this);
     };
 
     componentDidMount() {
@@ -41,13 +45,49 @@ class Search extends Component {
             * /search/trails?lat=44.42&lng=-110.58 === {lat: "44.42", lng: "-110.58"}   *
             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
         
-        this.handleTrailAPIRequest(locationObj.lat, locationObj.lng)
-        .then(trailResponse => {
-            // console.log(trailResponse);
+        this.handleTrailRequest(locationObj.lat, locationObj.lng)
+        .then(trailRes => {
+            // console.log(trailRes);
             this.setState({
-                trails: trailResponse.trails
+                trails: trailRes.trails
             });
+            console.log('======= TRAILS =======');
+            console.log(`Trails found: ${this.state.trails.length}`);
             console.log(this.state.trails);
+            console.log('======================');
+            return this.handleActivityRequest(locationObj.park);
+        })
+        .then(activityRes => {
+            // console.log(activityRes);
+            this.setState({
+                activities: activityRes.data
+            });
+            console.log('===== ACTIVITIES =====');
+            console.log(`Activities found: ${this.state.activities.length}`);
+            console.log(this.state.activities);
+            console.log('======================');
+            return this.handleCampsiteRequest(locationObj.park);
+        })
+        .then(campsiteRes => {
+            // console.log(campsiteRes);
+            this.setState({
+                campsites: campsiteRes.data
+            });
+            console.log('====== CAMPSITES ======');
+            console.log(`Campsites found: ${this.state.campsites.length}`);
+            console.log(this.state.campsites);
+            console.log('=======================');
+            return this.handleVCRequest(locationObj.park);
+        })
+        .then(vcRes => {
+            // console.log(vcRes);
+            this.setState({
+                visitorCenters: vcRes.data
+            });
+            console.log('=== VISITOR CENTERS ===');
+            console.log(`Visitor centers found: ${this.state.visitorCenters.length}`);
+            console.log(this.state.visitorCenters);
+            console.log('=======================');
         })
         .catch(err => {
             console.error(err);
@@ -56,9 +96,21 @@ class Search extends Component {
         smoothscroll.polyfill();
     }
 
-    handleTrailAPIRequest(lat, long) {
-        return REIAPI
-            .trails(lat, long)
+    handleTrailRequest(lat, long) {
+    return REIAPI
+        .trails(lat, long)
+        .then(response => {
+            // console.log(response.data);
+            return response.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    handleActivityRequest(parkCode) {
+        return npsAPI
+            .events(parkCode)
             .then(response => {
                 // console.log(response.data);
                 return response.data;
@@ -66,9 +118,32 @@ class Search extends Component {
             .catch(err => {
                 console.log(err);
             });
-        }
-            
+    }
 
+    handleCampsiteRequest(parkCode) {
+        return npsAPI
+            .campgrounds(parkCode)
+            .then(response => {
+                // console.log(response.data);
+                return response.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    handleVCRequest(parkCode) {
+        return npsAPI
+            .visitorCenters(parkCode)
+            .then(response => {
+                // console.log(response.data);
+                return response.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+            
     validateSearch(input) {
         return input !== '';
     }
