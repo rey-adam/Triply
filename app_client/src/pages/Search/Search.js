@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar';
 import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
-import axios from 'axios';
+// import axios from 'axios';
 import parks from '../../helpers/api/npsApi/parkCodes/parks';
 import './Search.css';
 // APIS 
@@ -26,7 +26,7 @@ const styles = {
             left: '50%',
             right: 'auto',
             bottom: 'auto',
-            marginTop: '2rem',
+            marginTop: '1%',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
             width: '60%',
@@ -36,9 +36,6 @@ const styles = {
             fontSize: '16px',
             fontWeight: '400',
         }
-    },
-    messageStyles: {
-        margin: '25px 10px 20px'
     }
 };
 
@@ -126,7 +123,7 @@ class Search extends Component {
             //     parkLat: locationObj.parkLat,
             //     parkLong: locationObj.parkLong
             // });
-            this.props.history.push(`/search/trails?lat=${locationObj.parkLat}&long=${locationObj.parkLong}`);
+            this.props.history.push(`/search/trails?lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
         //return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
         })
         // .then(trailsResponse => {
@@ -251,7 +248,7 @@ class Search extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <Navbar />
-                <ControlledCarousel />
+                {/* <ControlledCarousel /> */}
 
                 <SelectWrapper>
                     <form id="park-form" className="select-form">

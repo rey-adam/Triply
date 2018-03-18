@@ -49,7 +49,7 @@ class ControlledCarousel extends Component {
 
                 {/* timelapse night sky */}
                 <Carousel.Item>
-                    <video className="video-fluid d-block" autoPlay loop muted>
+                    <video id="video__night-sky" className="video-fluid d-block" autoPlay loop muted>
                         <source src="https://player.vimeo.com/external/236075858.hd.mp4?s=539faad12f040eb5afd8de3160db1220f1a5bac0&amp;profile_id=175&amp;oauth2_token_id=57447761" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>

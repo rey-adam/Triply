@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import smoothscroll from 'smoothscroll-polyfill'; // http://iamdustan.com/smoothscroll/
 import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
-import axios from 'axios';
+// import axios from 'axios';
 import './NextSearch.css';
 import qs from "query-string";
+
 class Search extends Component {
     constructor(props) {
         super(props);
@@ -19,13 +20,25 @@ class Search extends Component {
     };
 
     componentDidMount() {
-        //
-        console.log(this.props.location.search)
+        
+        console.log(this.props.location.search);
+           /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            *                       OUTPUT                        *
+            * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            * /search/trails === [nothing]                        *
+            * /search/trails === {?lat=44.42&lng=-110.58}         *
+            * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
         const locationObj = qs.parse(this.props.location.search);
+
         console.log(locationObj);
-        if (window.location.pathname === '/search') {
-            this.props.history.push('/search/trails');
-        }
+           /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+            *                                 OUTPUT                                    *
+            * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            * /search/trails === {}                                                     *
+            * /search/trails?lat=44.42&lng=-110.58 === {lat: "44.42", lng: "-110.58"}   *
+            * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
         smoothscroll.polyfill();
     }
 
@@ -49,7 +62,7 @@ class Search extends Component {
                     userCampsites={this.state.userCampsites}
                     userVisitorCenters={this.state.userVisitorCenters}
                 />
-                <div id="results"></div>
+                {/* <div id="results"></div> */}
             </div>
         );
     };
