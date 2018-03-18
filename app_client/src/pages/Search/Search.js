@@ -50,9 +50,6 @@ class Search extends Component {
             parkStates: '',
             parkDesc: '',
             parkWeather: '',
-            parkLat: '',
-            parkLong: '',
-            parkTrails: [],
             parks: parks,
             modalIsOpen: false,
         };
@@ -63,7 +60,6 @@ class Search extends Component {
         this.handleModalConfirm = this.handleModalConfirm.bind(this);
         this.handleParkAPIRequest = this.handleParkAPIRequest.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
-        this.handleTrailAPIRequest = this.handleTrailAPIRequest.bind(this);
     };
 
     componentDidMount() {
@@ -118,22 +114,8 @@ class Search extends Component {
         console.log(this.state.userParkName);
         this.handleLocationAPIRequest(this.state.userParkName)
         .then(locationObj => {
-            // console.log(locationObj);
-            // this.setState({
-            //     parkLat: locationObj.parkLat,
-            //     parkLong: locationObj.parkLong
-            // });
-            this.props.history.push(`/search/trails?lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
-        //return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
+            this.props.history.push(`/search/trails?park=${this.state.userParkName}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
         })
-        // .then(trailsResponse => {
-        //     // console.log(trailsResponse);
-        //     this.setState({
-        //         parkTrails: trailsResponse
-        //     });
-        //     console.log(this.state.parkTrails);
-        //     this.props.history.push('/search/trails?lat=&lng=');
-        // })
         .catch(err => {
             console.error(err);
         });
@@ -194,55 +176,7 @@ class Search extends Component {
                 };
             })
             .catch(err => console.log(err));
-
-        /* 
-            MELODIES API CALL COMMENTED OUT
-        */
-
-        // return axios({
-        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-        //     method: "GET",
-        //     url: `/api/parks/location/${parkQuery}`
-        // }).then(function (response) {
-        //     console.log(response.data);
-        //     const locationObj = {
-        //         parkLat: response.data.latitude,
-        //         parkLong: response.data.longitude
-        //     };
-        //     return locationObj;
-        // })
-        //     .catch(err => {
-        //         console.error(err);
-        //     }); // END MELODIES API CALL
-
-    }; // END LOCATION API REQUEST
-
-    handleTrailAPIRequest(lat, long) {
-        return REIAPI
-            .trails(lat, long)
-            .then(res => {
-                console.log(res.data);
-                return res.data;
-            })
-            .catch(err => console.log(err));
-
-        /* 
-            MELODIES API CALL COMMENTED OUT
-        */
-       
-        // return axios({
-        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-        //     method: "GET",
-        //     url: `/api/trails&lat=${lat}&long=${long}`
-        // }).then(function (response) {
-        //     console.log(response.data);
-        //     return response.data;
-        // })
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-
-    }; // END TRAIL API REQUEST
+        }
 
     render() {
         return (
@@ -257,7 +191,12 @@ class Search extends Component {
                             <select id="park-select" className="form-control select-options">
                                 <option>Choose a park...</option>
                                 {parks.map((park, i) => (
-                                    <option key={i} id={park.parkName} value={park.parkCode}>{`${park.parkName}`}</option>
+                                    <option
+                                        key={i}
+                                        id={park.parkName}
+                                        value={park.parkCode}>
+                                        {`${park.parkName}`}
+                                    </option>
                                 ))}
                             </select>
                         </div>

@@ -5,18 +5,20 @@ import Hero from '../../components/Hero';
 // import axios from 'axios';
 import './NextSearch.css';
 import qs from "query-string";
+import REIAPI from '../../helpers/api/reiApi/reiApi';
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userTrails: [],
-            userActivities: [],
-            userCampsites: [],
-            userVisitorCenters: []
+            trails: [],
+            activities: [],
+            campsites: [],
+            visitorCenters: []
         };
         this.validateSearch = this.validateSearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleTrailAPIRequest = this.handleTrailAPIRequest.bind(this);
     };
 
     componentDidMount() {
@@ -38,9 +40,34 @@ class Search extends Component {
             * /search/trails === {}                                                     *
             * /search/trails?lat=44.42&lng=-110.58 === {lat: "44.42", lng: "-110.58"}   *
             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+        
+        this.handleTrailAPIRequest(locationObj.lat, locationObj.lng)
+        .then(trailResponse => {
+            // console.log(trailResponse);
+            this.setState({
+                trails: trailResponse.trails
+            });
+            console.log(this.state.trails);
+        })
+        .catch(err => {
+            console.error(err);
+        });
 
         smoothscroll.polyfill();
     }
+
+    handleTrailAPIRequest(lat, long) {
+        return REIAPI
+            .trails(lat, long)
+            .then(response => {
+                // console.log(response.data);
+                return response.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+            
 
     validateSearch(input) {
         return input !== '';
@@ -57,10 +84,10 @@ class Search extends Component {
                 <Navbar/>
                 <Hero
                     handleChange={this.handleChange}
-                    userTrails={this.state.userTrails}
-                    userActivities={this.state.userActivities}
-                    userCampsites={this.state.userCampsites}
-                    userVisitorCenters={this.state.userVisitorCenters}
+                    trails={this.state.trails}
+                    activities={this.state.activities}
+                    campsites={this.state.campsites}
+                    visitorCenters={this.state.visitorCenters}
                 />
                 {/* <div id="results"></div> */}
             </div>
