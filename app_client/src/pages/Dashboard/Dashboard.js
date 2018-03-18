@@ -7,7 +7,9 @@ class Dashboard extends Component {
         return (
             <div>
             <h1>Triply Dashboard</h1>
+                <div id='mapDiv'>
                 <SimpleMap />
+                </div>
             </div>
 
         );
