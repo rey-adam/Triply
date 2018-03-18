@@ -23,7 +23,7 @@ class App extends Component {
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/campsites' component={NextSearch} />
               <ProtectedRoute exact path='/search/visitor' component={NextSearch} />
-              <Route exact path='/map' component={Dashboard} />;
+              <ProtectedRoute exact path='/map' component={Dashboard} />;
               }} />
               <ProtectedRoute exact path='/dashboard' component={Dashboard} />
               <ProtectedRoute exact path='/account' component={Account} />
