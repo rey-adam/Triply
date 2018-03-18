@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import NoMatch from './components/NoMatch';
 import './App.css';
-import MapContainer from './pages/MapContainer';
+import MapContainer from './pages/MapContainerB';
 
 class App extends Component {
   render() {
@@ -23,8 +23,7 @@ class App extends Component {
               <ProtectedRoute exact path='/search/activities' component={NextSearch} />
               <ProtectedRoute exact path='/search/campsites' component={NextSearch} />
               <ProtectedRoute exact path='/search/visitor' component={NextSearch} />
-              <Route exact path='/map' render={() => {
-                return <MapContainer google={this.props.google} />;
+              <Route exact path='/map' component={Dashboard} />;
               }} />
               <ProtectedRoute exact path='/dashboard' component={Dashboard} />
               <ProtectedRoute exact path='/account' component={Account} />
