@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASEURL = `https://developer.nps.gov/api/v1/`;
-const APIKEY = `&api_key=mm0VlZmyUBOFM415HKtSZdiXhfB27a1ntlZU7ZT4`;
+const APIKEY = `mm0VlZmyUBOFM415HKtSZdiXhfB27a1ntlZU7ZT4`;
 
 /*  
     =====================================================================================
@@ -20,18 +20,16 @@ const APIKEY = `&api_key=mm0VlZmyUBOFM415HKtSZdiXhfB27a1ntlZU7ZT4`;
 */
 
 export default {
-    campgrounds : (query) => {
-        const PARKCODE = `campgrounds?parkCode=${query}`;
-        return axios.get(BASEURL + PARKCODE + APIKEY);
+    campgrounds : (parkCode) => {
+        return axios.get(`${BASEURL}campgrounds?parkCode=${parkCode}&api_key=${APIKEY}`);
     },
-    events : (query) => {
-        return axios.get(`${BASEURL}events?${APIKEY}`);
+    events : (parkCode) => {
+        return axios.get(`${BASEURL}events?parkCode=${parkCode}&api_key=${APIKEY}`);
     },        
-    park : (query) => {
-        const PARKCODE = `parks?parkCode=${query}`;
-        return axios.get(BASEURL + PARKCODE + APIKEY);
+    park : (parkCode) => {
+        return axios.get(`${BASEURL}parks?parkCode=${parkCode}&api_key=${APIKEY}`);
     },
-    visitorCenters : (query) => {
-        return axios.get(`${BASEURL}visitorcenters?${APIKEY}`);
+    visitorCenters : (parkCode) => {
+        return axios.get(`${BASEURL}visitorcenters?parkCode=${parkCode}&api_key=${APIKEY}`);
     }
 }; // END EXPORT

@@ -11,7 +11,7 @@ const express = require('express')
 // must be logged in to view this route
 router.get('/parks/:userParkCode', ctrl.getParkData);
 router.get('/parks/location/:userPark', ctrl.getLocationData);
-router.get('/trails&lat=:lat&long=:long', ctrl.getTrailData);
+router.get('/trails?lat=:lat&lng=:lng', ctrl.getTrailData);
 
 // =====================================================================================
 // EXPORT

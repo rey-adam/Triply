@@ -77,24 +77,24 @@
     height: 37px;
 }
 
-/* TRAIL FORM */
-#trail-form {
+/* NEXT SELECT FORM */
+.next-select-form {
     position: absolute;
     width: 100%;
     top: 54px;
 }
 
-#trail-form,
-#trail-form .select-bar,
-#trail-form select,
-#trail-form .form-control {
+.next-select-form,
+.next-select-form .select-bar,
+.next-select-form select,
+.next-select-form .form-control {
     border-top-left-radius: 0 !important;
     -webkit-appearance: none;
     -webkit-border-top-leftradius: 0px;
 }
 
-#trail-form .form-control,
-#trail-form button {
+.next-select-form .form-control,
+.next-select-form button {
     font-size: 12px;
 }
 
@@ -102,8 +102,12 @@
        TABLE
 ******************/
 
+.modal-park-name {
+    margin-top: 4.5%;
+}
+
 .table-responsive {
-    margin: 25px 40px auto 40px;
+    margin: 25px 50px auto;
     font-size: 14px;
 }
 
@@ -119,7 +123,7 @@
     text-align: left;
 }
 
-#confirm-park-btn,
+.confirm-btn,
 #close-modal-btn {
     border-radius: 3px;
     text-transform: uppercase;
@@ -127,16 +131,21 @@
     height: 30px;
 }
 
-#confirm-park-btn {
-    margin: auto 20px;
+.confirm-btn {
+    margin: -5px 20px auto;
     font-weight: 400;
     background-color: grey;
     color: white;
     border: none;
 }
 
+.confirm-btn:hover {
+    background-color: grey;
+    color: white;
+}
+
 #close-modal-btn {
-    margin: 10px auto 20px;
+    margin: 10px auto 4.5%;
     font-weight: 500;
 }
 

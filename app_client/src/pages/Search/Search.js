@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import NextSearch from '../../pages/NextSearch';
 import Navbar from '../../components/Navbar';
 import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
-import axios from 'axios';
+// import axios from 'axios';
 import parks from '../../helpers/api/npsApi/parkCodes/parks';
 import './Search.css';
 // APIS 
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
-import REIAPI from "../../helpers/api/reiApi/reiApi";
 import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
 
 const styles = {
@@ -27,7 +25,7 @@ const styles = {
             left: '50%',
             right: 'auto',
             bottom: 'auto',
-            marginTop: '2rem',
+            marginTop: '1%',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
             width: '60%',
@@ -37,9 +35,6 @@ const styles = {
             fontSize: '16px',
             fontWeight: '400',
         }
-    },
-    messageStyles: {
-        margin: '25px 10px 20px'
     }
 };
 
@@ -54,9 +49,6 @@ class Search extends Component {
             parkStates: '',
             parkDesc: '',
             parkWeather: '',
-            parkLat: '',
-            parkLong: '',
-            parkTrails: [],
             parks: parks,
             modalIsOpen: false,
         };
@@ -67,7 +59,6 @@ class Search extends Component {
         this.handleModalConfirm = this.handleModalConfirm.bind(this);
         this.handleParkAPIRequest = this.handleParkAPIRequest.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
-        this.handleTrailAPIRequest = this.handleTrailAPIRequest.bind(this);
     };
 
     componentDidMount() {
@@ -119,138 +110,49 @@ class Search extends Component {
     }; // END HANDLE SUBMIT
 
     handleModalConfirm() {
-        const park = this.state.userParkName;        
-        this.handleLocationAPIRequest(park)
-            .then(locationObj => {
-                console.log(locationObj);
-                this.setState({
-                    parkLat: locationObj.parkLat,
-                    parkLong: locationObj.parkLong
-                });
-                return this.handleTrailAPIRequest(this.state.parkLat, this.state.parkLong)
-            })
-
-            .then(trailRes => {
-                // console.log(trailsResponse);
-                this.setState({
-                    parkTrails: trailRes
-                });
-                console.log(this.state.parkTrails);
-                this.props.history.push('/search/trails');
-            })
-            
-            .catch(err => {
-                console.error(err);
-            });
-    }; // END HANDLE MODAL CONFIRM
+        console.log(this.state.userParkName);
+        this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
+        .then(locationObj => {
+            this.props.history.push(`/search/trails?park=${this.state.userParkCode}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+    } // END HANDLE MODAL CONFIRM
 
     handleParkAPIRequest = query => {
-        return NPSAPI
-            .park(query)
-            .then(npsRes => {
-                console.log(npsRes.data);
-                const park = npsRes.data.data[0];
-                const parkObj = {
-                    name: park.fullName,
-                    url: park.url,
-                    states: park.states,
-                    description: park.description,
-                    weather: park.weatherInfo
-                };
-                return parkObj;
-            })
-            .catch(err => console.log(err));
-
-        /* 
-            MELODIES API CALL COMMENTED OUT
-        */
-
-        // return axios({
-        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-        //     method: "GET",
-        //     url: `/api/parks/${parkQuery}`
-        // }).then(function (response) {
-        //     console.log(response.data);
-        //     const park = response.data.data[0];
-        //     const parkObj = {
-        //         name: park.fullName,
-        //         url: park.url,
-        //         states: park.states,
-        //         description: park.description,
-        //         weather: park.weatherInfo
-        //     };
-        //     return parkObj;
-        // })
-        //     .catch(err => {
-        //         console.error(err);
-        //     }); 
-
-    }; // END PARK API REQUEST
+    return NPSAPI
+        .park(query)
+        .then(npsRes => {
+            console.log(npsRes.data);
+            const park = npsRes.data.data[0];
+            const parkObj = {
+                name: park.fullName,
+                url: park.url,
+                states: park.states,
+                description: park.description,
+                weather: park.weatherInfo
+            };
+            return parkObj;
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }
 
     handleLocationAPIRequest(query) {
-        return MAPAPI
-            .location(query)
-            .then(mapRes => {
-                const latitude = mapRes.data.results[0].geometry.location.lat
-                    , longitude = mapRes.data.results[0].geometry.location.lng;
-                return {
-                    parkLat: latitude,
-                    parkLong: longitude
-                };
-            })
-            .catch(err => console.log(err));
-
-        /* 
-            MELODIES API CALL COMMENTED OUT
-        */
-
-        // return axios({
-        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-        //     method: "GET",
-        //     url: `/api/parks/location/${parkQuery}`
-        // }).then(function (response) {
-        //     console.log(response.data);
-        //     const locationObj = {
-        //         parkLat: response.data.latitude,
-        //         parkLong: response.data.longitude
-        //     };
-        //     return locationObj;
-        // })
-        //     .catch(err => {
-        //         console.error(err);
-        //     }); // END MELODIES API CALL
-
-    }; // END LOCATION API REQUEST
-
-    handleTrailAPIRequest(lat, long) {
-        return REIAPI
-            .trails(lat, long)
-            .then(res => {
-                console.log(res.data);
-
-                console.log(res.data.trails[0]);
-                
-                return res.data;
-            })
-            .catch(err => console.log(err));
-
-        /* 
-            MELODIES API CALL COMMENTED OUT
-        */
-       
-        // return axios({
-        //     headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-        //     method: "GET",
-        //     url: `/api/trails&lat=${lat}&long=${long}`
-        // }).then(function (response) {
-        //     console.log(response.data);
-        //     return response.data;
-        // })
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-
-    }; // END TRAIL API REQUEST
+    return MAPAPI
+        .location(query)
+        .then(mapRes => {
+            const latitude = mapRes.data.results[0].geometry.location.lat
+                , longitude = mapRes.data.results[0].geometry.location.lng;
+            return {
+                parkLat: latitude,
+                parkLong: longitude
+            };
+        })
+        .catch(err => console.log(err));
+    }
 
     render() {
         return (
@@ -265,7 +167,12 @@ class Search extends Component {
                             <select id="park-select" className="form-control select-options">
                                 <option>Choose a park...</option>
                                 {parks.map((park, i) => (
-                                    <option key={i} id={park.parkName} value={park.parkCode}>{`${park.parkName}`}</option>
+                                    <option
+                                        key={i}
+                                        id={park.parkName}
+                                        value={park.parkCode}>
+                                        {`${park.parkName}`}
+                                    </option>
                                 ))}
                             </select>
                         </div>
@@ -292,7 +199,7 @@ class Search extends Component {
                         {`${this.state.userParkName} National Park`}
                         <button
                             id="confirm-park-btn"
-                            className='btn btn-default'
+                            className='btn btn-default confirm-btn'
                             onClick={this.handleModalConfirm}
                         >Create Trip</button>
                     </h3>
@@ -301,7 +208,7 @@ class Search extends Component {
                             <tbody>
                                 <tr>
                                     <td>Site</td>
-                                    <td><a href={this.state.parkURL}>{this.state.parkURL}</a></td>
+                                    <td><a href={this.state.parkURL} target="_blank">{this.state.parkURL}</a></td>
                                 </tr>
                                 <tr>
                                     <td>States</td>
@@ -313,7 +220,7 @@ class Search extends Component {
                                 </tr>
                                 <tr>
                                     <td>Weather</td>
-                                    <td>{this.state.parkWeather.includes('http') ? <a href={this.state.parkWeather}>{this.state.parkWeather}</a> : this.state.parkWeather}</td>
+                                    <td>{this.state.parkWeather.includes('http') ? <a href={this.state.parkWeather} target="_blank">{this.state.parkWeather}</a> : this.state.parkWeather}</td>
                                 </tr>
                             </tbody>
                         </table>
