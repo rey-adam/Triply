@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import authHelper from '../authHelper';
+import authHelper from '../helpers/authHelper';
 
 /**
  * this function authenticates/protects our frontend routes/data
@@ -10,7 +10,7 @@ import authHelper from '../authHelper';
  */
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        authHelper.isLoggedIn() === true
+        authHelper.isLoggedIn()
             ? <Component {...props} />
             : <Redirect to='/' />
     )} />
