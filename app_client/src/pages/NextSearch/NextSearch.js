@@ -17,8 +17,6 @@ class Search extends Component {
             campsites: [],
             visitorCenters: []
         };
-        this.validateSearch = this.validateSearch.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.handleTrailRequest = this.handleTrailRequest.bind(this);
         this.handleActivityRequest = this.handleActivityRequest.bind(this);
         this.handleCampsiteRequest = this.handleCampsiteRequest.bind(this);
@@ -109,48 +107,39 @@ class Search extends Component {
     }
 
     handleActivityRequest(parkCode) {
-        return npsAPI
-            .events(parkCode)
-            .then(response => {
-                // console.log(response.data);
-                return response.data;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    return npsAPI
+        .events(parkCode)
+        .then(response => {
+            // console.log(response.data);
+            return response.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     handleCampsiteRequest(parkCode) {
-        return npsAPI
-            .campgrounds(parkCode)
-            .then(response => {
-                // console.log(response.data);
-                return response.data;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    return npsAPI
+        .campgrounds(parkCode)
+        .then(response => {
+            // console.log(response.data);
+            return response.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     handleVCRequest(parkCode) {
-        return npsAPI
-            .visitorCenters(parkCode)
-            .then(response => {
-                // console.log(response.data);
-                return response.data;
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
-            
-    validateSearch(input) {
-        return input !== '';
-    }
-
-    handleChange(event) {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
+    return npsAPI
+        .visitorCenters(parkCode)
+        .then(response => {
+            // console.log(response.data);
+            return response.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     render() {
@@ -158,7 +147,6 @@ class Search extends Component {
             <div id="next-search-container">
                 <Navbar/>
                 <Hero
-                    handleChange={this.handleChange}
                     trails={this.state.trails}
                     activities={this.state.activities}
                     campsites={this.state.campsites}

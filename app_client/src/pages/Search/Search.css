@@ -123,7 +123,7 @@
     text-align: left;
 }
 
-#confirm-park-btn,
+.confirm-btn,
 #close-modal-btn {
     border-radius: 3px;
     text-transform: uppercase;
@@ -131,12 +131,17 @@
     height: 30px;
 }
 
-#confirm-park-btn {
+.confirm-btn {
     margin: -5px 20px auto;
     font-weight: 400;
     background-color: grey;
     color: white;
     border: none;
+}
+
+.confirm-btn:hover {
+    background-color: grey;
+    color: white;
 }
 
 #close-modal-btn {
