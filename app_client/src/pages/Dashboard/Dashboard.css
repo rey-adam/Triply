@@ -1,3 +1,30 @@
+#input {
+    width: auto;
+    margin: auto;
+}
+
+#tripName{
+    border: 1px solid #aaa;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+}
+
+.form {
+    display: flex;
+}
+
+.unordered-list {
+    list-style-type: none;
+  }
+
+  .list-group {
+    border: 1px solid #aaa;
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+  }
 #mapDiv {
     height: 75vh;
     width: 900px;
