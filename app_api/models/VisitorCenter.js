@@ -2,7 +2,10 @@
 module.exports = function (sequelize, DataTypes) {
 
     const VisitorCenter = sequelize.define("VisitorCenter", {
-        name: DataTypes.STRING
+        name: DataTypes.STRING,
+        centerId: DataTypes.INTEGER,
+        lat: DataTypes.INTEGER,
+        lon: DataTypes.INTEGER
     }); // END CONSTRUCTOR
 
     VisitorCenter.associate = function (models) {

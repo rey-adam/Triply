@@ -2,7 +2,10 @@
 module.exports = function (sequelize, DataTypes) {
 
     const Campsite = sequelize.define("Campsite", {
-        name: DataTypes.STRING
+        name: DataTypes.STRING,
+        campId: DataTypes.INTEGER,
+        lat: DataTypes.INTEGER,
+        lon: DataTypes.INTEGER
     }); // END CONSTRUCTOR
 
     Campsite.associate = function (models) {
