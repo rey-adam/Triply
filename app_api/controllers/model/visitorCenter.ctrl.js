@@ -3,24 +3,24 @@ const db = require("../../models");
 
 module.exports = {
     
-    createEatery: (req, res) => {
+    createVisitorCenter: (req, res) => {
         db
-            .Eatery
+            .VisitorCenter
             .create(req.body)
-            .then(dbEatery => {
-                res.json(dbEatery);
+            .then(dbVisitorCenter => {
+                res.json(dbVisitorCenter);
             })
             .catch(err => {
                 console.error(err);
             });
     }, // END CREATE
 
-    findAllEatery: (req, res) => {
+    findAllVisitorCenter: (req, res) => {
         db
-            .Eatery
+            .VisitorCenter
             .findAll({})
-            .then(dbEatery => {
-                res.json(dbEatery);
+            .then(dbVisitorCenter => {
+                res.json(dbVisitorCenter);
             })
             .catch(err => {
                 console.error(err);
@@ -28,16 +28,16 @@ module.exports = {
             });
     }, // END FIND ALL
 
-    findOneEatery: (req, res) => {
+    findOneVisitorCenter: (req, res) => {
         db
-            .Eatery
+            .VisitorCenter
             .findOne({
                 where: {
                     LocationId: req.params.id
                 }
             })
-            .then(dbEatery => {
-                res.json(dbEatery);
+            .then(dbVisitorCenter => {
+                res.json(dbVisitorCenter);
             })
             .catch(err => {
                 console.error(err);
@@ -45,15 +45,15 @@ module.exports = {
             });
     }, // END FIND ONE
 
-    deleteEatery: (req, res) => {
+    deleteVisitorCenter: (req, res) => {
         db
-            .Eatery
+            .VisitorCenter
             .destroy({
                 where: {
                     id: req.params.id
                 }
             })
-            .then(dbEatery => {
+            .then(dbVisitorCenter => {
                 res.json("Success!");
             })
             .catch(err => {

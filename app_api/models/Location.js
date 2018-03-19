@@ -29,9 +29,9 @@ module.exports = function (sequelize, DataTypes) {
 
     // JOINING EATERY TO LOCATION
     Location.associate = function (models) {
-        Location.hasMany(models.Eatery, {
+        Location.hasMany(models.VisitorCenter, {
             onDelete: 'cascade' 
-        }); // END LOCATION JOIN EATERY
+        }); // END LOCATION JOIN VISITOR CENTER
     }; // END ASSOCIATION
 
     return Location;
