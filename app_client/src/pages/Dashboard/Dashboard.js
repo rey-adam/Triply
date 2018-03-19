@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
 import './Dashboard.css';
-// import the Google Maps API Wrapper from google-maps-react
-import { GoogleApiWrapper } from 'google-maps-react';
-import MapContainer from '../MapContainer/MapContainer';
+import SimpleMap from '../MapContainerB/MapContainerB';
 
 class Dashboard extends Component {
     render() {
@@ -11,14 +9,14 @@ class Dashboard extends Component {
             <div>
                 <Navbar />
                 <h1>Triply Dashboard</h1>
-                <MapContainer google={this.props.google}/>
+                <div id='mapDiv'>
+                <SimpleMap />
+                </div>
             </div>
 
         );
     };
 };
 
+export default Dashboard;
 
-export default GoogleApiWrapper({
-    apiKey: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo',
-})(Dashboard);
