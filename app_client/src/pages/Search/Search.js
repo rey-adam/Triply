@@ -227,6 +227,9 @@ class Search extends Component {
             .trails(lat, long)
             .then(res => {
                 console.log(res.data);
+
+                console.log(res.data.trails[0]);
+                
                 return res.data;
             })
             .catch(err => console.log(err));
