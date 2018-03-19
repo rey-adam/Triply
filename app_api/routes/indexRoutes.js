@@ -8,7 +8,7 @@ const express = require('express')
     // ROUTES
     , activityRoute = require("./api/activity.route")
     , campsiteRoute = require("./api/campsite.route")
-    , eateryRoute = require("./api/eatery.route")
+    , visitorCenterRoute = require("./api/visitorCenter.route")
     , locationRoute = require("./api/location.route")
     , trailRoute = require("./api/trail.route")
     , tripRoute = require("./api/trip.route")
@@ -36,7 +36,7 @@ router.use('/api', apiRoutes);
 
 router.use("/api", activityRoute);
 router.use("/api", campsiteRoute);
-router.use("/api", eateryRoute);
+router.use("/api", visitorCenterRoute);
 router.use("/api", locationRoute);
 router.use("/api", trailRoute);
 router.use("/api", tripRoute);

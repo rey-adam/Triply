@@ -25,3 +25,7 @@
     margin: auto;
     margin-top: 10px;
   }
+#mapDiv {
+    height: 75vh;
+    width: 900px;
+}
