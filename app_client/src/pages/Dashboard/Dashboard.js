@@ -13,9 +13,9 @@ class Dashboard extends Component {
 
                 {/* create new trip form */}
             <div id="tripName">
-                <form id="input">
+                <form id="input" className="form">
                     <div className="form-group">
-                        <label for="formGroupExampleInput">Create new trip</label>
+                        <label htmlFor="formGroupExampleInput">Create new trip</label>
                         <input type="text" className="" id="" placeholder="Trip name..." />
                         <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </div>
@@ -24,7 +24,7 @@ class Dashboard extends Component {
 
             {/* Saved Trips  */}
             <div>
-            <ul className="list-group">
+        <ul className="list-group" className="unordered-list">
             <li className="list-group-item"><h1>Saved Trips</h1></li>
             <li className="list-group-item">Bryce</li>
 

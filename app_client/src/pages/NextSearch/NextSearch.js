@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import smoothscroll from 'smoothscroll-polyfill'; // http://iamdustan.com/smoothscroll/
 import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
-import axios from 'axios';
 import './NextSearch.css';
 
 class Search extends Component {

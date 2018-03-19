@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Login from './pages/Login';
 import Search from './pages/Search';
-import Accordion from './pages/Accordion';
 import NextSearch from './pages/NextSearch';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';

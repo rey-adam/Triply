@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import NextSearch from '../../pages/NextSearch';
 import Navbar from '../../components/Navbar';
 import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
-import axios from 'axios';
 import parks from '../../helpers/api/npsApi/parkCodes/parks';
 import './Search.css';
 // APIS 
