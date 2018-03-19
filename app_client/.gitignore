@@ -1,0 +1,27 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+/src/components/LoginForm/LoginForm2.js
+/src/components/LoginForm/LoginForm2.css
+/src/components/RegisterForm/RegisterForm2.js
+/src/components/RegisterForm/RegisterForm2.css
+/src/components/Carousel/Carousel2.js
+/src/pages/NextSearch/NextSearch2.js
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
