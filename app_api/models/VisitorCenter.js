@@ -1,21 +1,21 @@
 
 module.exports = function (sequelize, DataTypes) {
 
-    const Campsite = sequelize.define("Campsite", {
+    const VisitorCenter = sequelize.define("VisitorCenter", {
         name: DataTypes.STRING,
-        campId: DataTypes.INTEGER,
+        centerId: DataTypes.INTEGER,
         lat: DataTypes.INTEGER,
         lon: DataTypes.INTEGER
     }); // END CONSTRUCTOR
 
-    Campsite.associate = function (models) {
-        Campsite.belongsTo(models.Location, {
+    VisitorCenter.associate = function (models) {
+        VisitorCenter.belongsTo(models.Location, {
             foreignKey: {
                 allowNull: false
             }
-        }); // END CAMPSITE JOIN LOCATION
+        }); // END VISITOR CENTER JOIN LOCATION
     }; // END ASSOCIATION
 
-    return Campsite;
+    return VisitorCenter;
 
 }; // END EXPORT 
