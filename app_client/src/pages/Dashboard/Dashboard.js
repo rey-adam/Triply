@@ -6,6 +6,103 @@ import { GoogleApiWrapper } from 'google-maps-react';
 import SimpleMap from '../MapContainerB/MapContainerB';
 
 class Dashboard extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        };
+    };
+
+    componentDidMount() {
+        console.log(this.state.parks);
+        // this.openModal('hello');
+    };
+
+    openModal(message) {
+        this.setState({ modalIsOpen: true, modalMessage: message });
+    };
+
+    // afterOpenModal = () => {
+    //     // references are now synced and can be accessed
+    //     this.subtitle.style.color = '#f00';
+    // }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+    };
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const parks = document.getElementById("park-select");
+        const userParkCode = parks.options[parks.selectedIndex].value;
+        const userParkName = parks.options[parks.selectedIndex].text;
+        if (userParkName === 'Choose a park...') {
+            alert('Please choose a park');
+        } else {
+            console.log(`${userParkName}, ${userParkCode}`);
+            this.setState({
+                userParkCode,
+                userParkName
+            });
+            this.handleParkAPIRequest(userParkCode)
+                .then(parkObj => {
+                    console.log(parkObj);
+                    this.setState({
+                        parkURL: parkObj.url,
+                        parkStates: parkObj.states,
+                        parkDesc: parkObj.description,
+                        parkWeather: parkObj.weather
+                    });
+                    this.openModal('hello');
+                })
+                .catch(err => console.log(err));
+        };
+    }; // END HANDLE SUBMIT
+
+    handleModalConfirm() {
+        console.log(this.state.userParkName);
+        this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
+        .then(locationObj => {
+            this.props.history.push(`/search/trails?park=${this.state.userParkCode}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
+        })
+        .catch(err => console.log(err));
+    } // END HANDLE MODAL CONFIRM
+
+    npsApiCall = query => {
+        return NPSAPI
+            .park(query)
+            .then(npsRes => {
+                console.log(npsRes.data);
+                const park = npsRes.data.data[0];
+                const parkObj = {
+                    name: park.fullName,
+                    url: park.url,
+                    states: park.states,
+                    description: park.description,
+                    weather: park.weatherInfo
+                };
+                return parkObj;
+            })
+            .catch(err => console.log(err)); // END CALL
+    }; // END API
+
+    mapApiCall(query) {
+        return MAPAPI
+            .location(query)
+            .then(mapRes => {
+                const latitude = mapRes.data.results[0].geometry.location.lat
+                    , longitude = mapRes.data.results[0].geometry.location.lng;
+                return {
+                    parkLat: latitude,
+                    parkLong: longitude
+                };
+            })
+            .catch(err => console.log(err));
+    }; // END API
+
+
+
     render() {
         return (
             <div>
@@ -56,12 +153,12 @@ class Dashboard extends Component {
 
             <div className="card-body">
 
-                <div class="panel panel-default">
+            <div class="panel panel-default">
                 <div class="panel-body">
                     Campsite example (campsite name)
                 </div>
                 </div>
-            </div>
+                </div>
             </div>
 
         </div>
