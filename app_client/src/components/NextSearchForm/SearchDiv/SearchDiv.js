@@ -112,6 +112,13 @@ class SearchDiv extends Component {
             trails: this.props.trails
             // this.openModal('hello');
         });
+        const userInfo = {
+            token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
+            id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+            email: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).email
+        };
+
+        console.log(userInfo);
     }
 
     openModal(message) {
@@ -222,16 +229,6 @@ class SearchDiv extends Component {
             console.log(userActivityObj);
             this.openModal('activity');
         }
-    }
-
-    componentDidMount() {
-        const userInfo = {
-            token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
-            id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
-            email: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).email
-        };
-
-        console.log(userInfo);
     }
 
     handleCampSubmit(e) {
