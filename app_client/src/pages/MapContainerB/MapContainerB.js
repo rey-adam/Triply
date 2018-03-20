@@ -56,7 +56,6 @@ export default class SimpleMap extends Component {
                     latLng= {latLng}
                     marker='../../../public/assets/images/ballpin.png'
                     text={'label me'}
-                    
                 />
                 <Button
                     latLng={latLng}

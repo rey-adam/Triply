@@ -26,6 +26,7 @@ class Dashboard extends Component {
     };
 
     componentDidMount() {
+
         console.log(this.props.location.search);
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
          *                       OUTPUT                        *
@@ -45,9 +46,9 @@ class Dashboard extends Component {
         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
         this.setState({
-            weatherLat: locationObj.lat,
-            weatherLng: locationObj.lng,
-            weatherPlace: locationObj.place,
+            weatherLat: locationObj.lat || 37.84883288,
+            weatherLng: locationObj.lng || -119.5571873,
+            weatherPlace: locationObj.place || 'Yosemite National Park',
         });
     }
 
