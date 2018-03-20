@@ -3,24 +3,24 @@ const db = require("../../models");
 
 module.exports = {
     
-    createActivity: (req, res) => {
+    createUser: (req, res) => {
         db
-            .Activity
+            .User
             .create(req.body)
-            .then(dbActivity => {
-                res.json(dbActivity);
+            .then(dbUser => {
+                res.json(dbUser);
             })
             .catch(err => {
                 console.error(err);
             });
     }, // END CREATE
 
-    findAllActivity: (req, res) => {
+    findAllUser: (req, res) => {
         db
-            .Activity
+            .User
             .findAll({})
-            .then(dbActivity => {
-                res.json(dbActivity);
+            .then(dbUser => {
+                res.json(dbUser);
             })
             .catch(err => {
                 console.error(err);
@@ -28,16 +28,16 @@ module.exports = {
             });
     }, // END FIND ALL
 
-    findOneActivity: (req, res) => {
+    findOneUser: (req, res) => {
         db
-            .Activity
+            .User
             .findOne({
                 where: {
-                    LocationId: req.params.id
+                    id: req.params.id
                 }
             })
-            .then(dbActivity => {
-                res.json(dbActivity);
+            .then(dbUser => {
+                res.json(dbUser);
             })
             .catch(err => {
                 console.error(err);
@@ -45,15 +45,15 @@ module.exports = {
             });
     }, // END FIND ONE
 
-    deleteActivity: (req, res) => {
+    deleteUser: (req, res) => {
         db
-            .Activity
+            .User
             .destroy({
                 where: {
-                    LocationId: req.params.id
+                    id: req.params.id
                 }
             })
-            .then(dbActivity => {
+            .then(dbUser => {
                 res.json("Success!");
             })
             .catch(err => {

@@ -12,6 +12,7 @@ const express = require('express')
     , locationRoute = require("./api/location.route")
     , trailRoute = require("./api/trail.route")
     , tripRoute = require("./api/trip.route")
+    , userRoute = require("./api/user.route")
     
     , jwt = require('express-jwt');
 
@@ -40,5 +41,6 @@ router.use("/api", visitorCenterRoute);
 router.use("/api", locationRoute);
 router.use("/api", trailRoute);
 router.use("/api", tripRoute);
+router.use("/api", userRoute);
 
 module.exports = router;
