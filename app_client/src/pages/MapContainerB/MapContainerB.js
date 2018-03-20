@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
+import Button from '../../components/Button/Button';
+
 
 function createMapOptions(maps) {
     // next props are exposed at maps
@@ -31,8 +33,6 @@ function createMapOptions(maps) {
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-
-
 export default class SimpleMap extends Component {
 
     static defaultProps = {
@@ -53,8 +53,13 @@ export default class SimpleMap extends Component {
                 <AnyReactComponent
                     lat={37.8651}
                     lng={-119.5383}
+                    img='../../../public/assets/images/ballpin.png'
                     text={'label me'}
                     
+                />
+                <Button
+                    lat={37.8651}
+                    lng={-119.5383}
                 />
             </GoogleMapReact>
         );
