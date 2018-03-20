@@ -11,5 +11,13 @@ module.exports = function (sequelize, DataTypes) {
         }); // END TRIP JOIN LOCATION 
     }; // END TRIP ASSOCIATION
 
+    Trip.associate = function (models) {
+        Trip.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
+        }); // END TRIP JOIN USER
+    }; // END ASSOCIATION
+
     return Trip;
 }; // END EXPORT 
