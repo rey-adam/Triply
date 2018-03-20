@@ -11,20 +11,10 @@
     display: flex;
 }
 
-.form {
+.new-trip-form {
     display: flex;
 }
 
-.unordered-list {
-    list-style-type: none;
-  }
-
-  .list-group {
-    border: 1px solid #aaa;
-    width: 60%;
-    margin: auto;
-    margin-top: 10px;
-  }
 #mapDiv {
     height: 75vh;
     width: 900px;
