@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import smoothscroll from 'smoothscroll-polyfill'; // http://iamdustan.com/smoothscroll/
 import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
+import SearchDiv from '../../components/NextSearchForm/SearchDiv';
 // import axios from 'axios';
 import './NextSearch.css';
 import qs from "query-string";
@@ -146,7 +147,8 @@ class Search extends Component {
         return (
             <div id="next-search-container">
                 <Navbar/>
-                <Hero
+                <Hero />
+                <SearchDiv
                     trails={this.state.trails}
                     activities={this.state.activities}
                     campsites={this.state.campsites}
