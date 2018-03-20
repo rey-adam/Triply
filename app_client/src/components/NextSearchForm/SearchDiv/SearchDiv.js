@@ -73,6 +73,17 @@ class SearchDiv extends Component {
             campDir: '',
             campParkCode: '',
             campURL: '',
+            campInternet: '',
+            campShowers: '',
+            campToilets: '',
+            campElectricalHookups: '',
+            campTotalSites: '',
+            campFoodStorageLockers: '',
+            campWeather: '',
+            campRegOverview: '',
+            campRegURL: '',
+            campResDesc: '',
+            campResURL: '',
 
             visitorCenters: []
         }
@@ -211,13 +222,42 @@ class SearchDiv extends Component {
             const userCamp = this.props.campsites[userCampIndex];
             console.log(userCamp);
 
+            const summary = userCamp.description === "" ? 'N/A' : userCamp.description;
+
+            const directions = userCamp.directionsOverview === "" ? 'N/A' : userCamp.directionsOverview;
+
+            const url = userCamp.url === undefined ? 'N/A' : userCamp.url;
+
+            const internet = userCamp.accessibility.internetInfo === "" ? 'N/A' : userCamp.accessibility.internetInfo;
+
+            const foodStorageLockers = userCamp.amenities.foodStorageLockers === false ? 'No' : userCamp.amenities.foodStorageLockers === true ? 'Yes' : 'N/A';
+
+            const weather = userCamp.weatherOverview === "" ? 'N/A' : userCamp.weatherOverview;
+
+            const regOverview = userCamp.regulationsOverview === "" ? 'N/A' : userCamp.regulationsOverview;
+            const regURL = userCamp.regulationsUrl === "" ? 'N/A' : userCamp.regulationsUrl;
+
+            const resDesc = userCamp.reservationsDescription === "" ? 'N/A' : userCamp.reservationsDescription;
+            const resURL = userCamp.reservationsUrl === "" ? 'N/A' : userCamp.reservationsUrl;
+
             const userCampObj = {
                 id: userCamp.id,
                 name: userCamp.name,
-                summary: userCamp.description,
-                directions: userCamp.directionsOverview,
+                summary: summary,
+                directions: directions,
                 parkCode: userCamp.parkCode,
-                url: userCamp.url
+                url: url,
+                internet: internet,
+                showers: userCamp.amenities.showers[0],
+                toilets: userCamp.amenities.toilets[0],
+                electricalHookups: userCamp.campsites.electricalHookups,
+                totalSites: userCamp.campsites.totalSites,
+                foodStorageLockers: foodStorageLockers,
+                weather: weather,
+                regOverview: regOverview,
+                regURL: regURL,
+                resDesc: resDesc,
+                resURL: resURL
             };
 
             this.setState({
@@ -226,7 +266,18 @@ class SearchDiv extends Component {
                 campSum: userCampObj.summary,
                 campDir: userCampObj.directions,
                 campParkCode: userCampObj.parkCode,
-                campURL: userCampObj.url
+                campURL: userCampObj.url,
+                campInternet: userCampObj.internet,
+                campShowers: userCampObj.showers,
+                campToilets: userCampObj.toilets,
+                campElectricalHookups: userCampObj.electricalHookups,
+                campTotalSites: userCampObj.totalSites,
+                campFoodStorageLockers: userCampObj.foodStorageLockers,
+                campWeather: userCampObj.weather,
+                campRegOverview: userCampObj.regOverview,
+                campRegURL: userCampObj.regURL,
+                campResDesc: userCampObj.resDesc,
+                campResURL: userCampObj.resURL,
             });
 
             console.log(userCampObj);
