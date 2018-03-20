@@ -1,0 +1,21 @@
+#input {
+    width: auto;
+    margin: auto;
+}
+
+#tripName{
+    border: 1px solid #aaa;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+}
+
+.new-trip-form {
+    display: flex;
+}
+
+#mapDiv {
+    height: 75vh;
+    width: 900px;
+}
