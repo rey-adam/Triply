@@ -16,7 +16,7 @@ class Navbar extends Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-default">
+                <nav className={window.location.pathname === '/dashboard' || window.location.pathname === '/account' ? "navbar navbar-default dash-nav" : "navbar navbar-default"}>
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">

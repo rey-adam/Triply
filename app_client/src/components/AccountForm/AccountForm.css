@@ -1,0 +1,114 @@
+.account-form-div {
+    width: 65%;
+    position: relative;
+    /* border: 5px solid rgba(0,0,0,.26); */
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    margin: 5% auto 0;
+}
+
+.account-form-header {
+    background-color: rgb(12, 196, 209);
+    color: white;
+    height: 85px;
+    padding: 0; margin: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-align: center;
+}
+
+.account-form-header p {
+    margin-top: 0;
+    padding-top: 25px;
+    font-size: 26px;
+    font-weight: 400px;
+}
+
+#account-form {
+    width: 100%;
+    margin: 15px auto 15px 5%;
+    padding: 20px 40px 90px;
+}
+
+#account-form label {
+    font-weight: 500;
+}
+
+#account-form input {
+    width: 90% !important;
+    height: 37px;
+    border-color: rgb(221, 221, 221);
+    margin-bottom: 20px;
+}
+
+.account-btn-div {
+    width: 90%;
+}
+
+#delete-account-btn,
+#update-account-btn {
+    font-weight: 500;
+    color: white;
+    height: 37px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+#delete-account-btn {
+    color: black;
+}
+
+#delete-account-btn:hover {
+    background: rgba(241, 6, 6, 0.863);
+    color: white;
+    border: none;
+}
+
+#update-account-btn {
+    color: black;
+    margin-left: 20px;
+}
+
+#update-account-btn:hover {
+    background: rgb(0, 218, 189);
+    color: white;
+    border: none;
+}
+
+#confirm-delete-modal {
+    width: 400px;
+    padding-left: 25px;
+}
+
+#delete-modal__content {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.mdl-button:focus:not(:active) {
+    background: none;
+}
+
+.close-modal {
+    background: white;
+    color: black;
+}
+
+.close-modal:hover {
+    background: rgba(158, 158, 158, .2) !important;
+}
+
+.mdl-layout-title {
+    margin-top: 15px;
+    margin-left: -20px;
+}
+
+.mdl-layout-title a:hover {
+    text-decoration: none;
+}
+
+.mdl-layout-title,
+h4 {
+    margin-bottom: 10px;
+}

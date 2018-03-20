@@ -377,7 +377,7 @@ class SearchDiv extends Component {
                                         window.location.pathname === '/search/campsites' ? 'campsite-' :
                                             window.location.pathname === '/search/visitor' ? 'visitor-' :
                                                 ''}select`} className="form-control select-options">
-                                    
+
                                     <option>
                                         {`${window.location.pathname === '/search/trails' ? 'Choose a trail...' :
                                             window.location.pathname === '/search/activities' ? 'Choose an activity...' :
@@ -386,67 +386,67 @@ class SearchDiv extends Component {
                                                         'Choose a category...'}`}
                                     </option>
 
-                                    {window.location.pathname === '/search/trails' ? 
+                                    {window.location.pathname === '/search/trails' ?
                                         this.props.trails.length === 0 ? (
                                             <option disabled>No trails available</option>
                                         ) :
-                                        this.props.trails.map((trail, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={trail.id}
-                                                    value={trail.id}>
-                                                    {trail.name}
-                                                </option>
-                                            )
-                                        })
+                                            this.props.trails.map((trail, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={trail.id}
+                                                        value={trail.id}>
+                                                        {trail.name}
+                                                    </option>
+                                                )
+                                            })
                                     : window.location.pathname === '/search/activities' ?
                                         this.props.activities.length === 0 ? (
                                             <option disabled>No activities available</option>
                                         ) :
-                                        this.props.activities.map((act, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={act.id}
-                                                    value={act.id}>
-                                                    {act.title}
-                                                </option>
-                                            )
-                                        }) 
+                                            this.props.activities.map((act, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={act.id}
+                                                        value={act.id}>
+                                                        {act.title}
+                                                    </option>
+                                                )
+                                            })
                                     : window.location.pathname === '/search/campsites' ?
                                         this.props.campsites.length === 0 ? (
                                             <option disabled>No campsites available</option>
                                         ) :
-                                        this.props.campsites.map((camp, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={camp.id}
-                                                    value={camp.id}>
-                                                    {camp.name}
-                                                </option>
-                                            )
-                                        }) 
+                                            this.props.campsites.map((camp, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={camp.id}
+                                                        value={camp.id}>
+                                                        {camp.name}
+                                                    </option>
+                                                )
+                                            })
                                     : window.location.pathname === '/search/visitor' ?
                                         this.props.visitorCenters.length === 0 ? (
                                             <option disabled>No visitor centers available</option>
                                         ) :
-                                        this.props.visitorCenters.map((vc, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={vc.id}
-                                                    value={vc.id}>
-                                                    {vc.name}
-                                                </option>
-                                            )
-                                        }) : ''}
-                                    
+                                            this.props.visitorCenters.map((vc, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={vc.id}
+                                                        value={vc.id}>
+                                                        {vc.name}
+                                                    </option>
+                                                )
+                                            }) : ''}
+
                                 </select>
                             </div>
 
@@ -460,18 +460,18 @@ class SearchDiv extends Component {
                                 type="submit"
                                 onClick={window.location.pathname === '/search/trails' ?
                                     this.handleTrailSubmit :
-                                        window.location.pathname === '/search/activities' ?
-                                            this.handleActivitySubmit :
-                                            window.location.pathname === '/search/campsites' ?
-                                                this.handleCampSubmit :
-                                                window.location.pathname === '/search/visitor' ?
-                                                    this.handleVCSubmit : ''}
+                                    window.location.pathname === '/search/activities' ?
+                                        this.handleActivitySubmit :
+                                        window.location.pathname === '/search/campsites' ?
+                                            this.handleCampSubmit :
+                                            window.location.pathname === '/search/visitor' ?
+                                                this.handleVCSubmit : ''}
                             >Submit</button>
                         </form>
                     </SelectWrapper>
                 </div>
 
-                
+
                 {/* *  * * * * * * * * * * * * * * * * * * * * * */}
                 {/*                                              */}
                 {/*   DYNAMICALLY RENDER MODALS BASED ON ROUTES  */}
@@ -479,7 +479,7 @@ class SearchDiv extends Component {
                 {/* *  * * * * * * * * * * * * * * * * * * * * * */}
 
                 {window.location.pathname === '/search/trails' ?
-                    
+
                     <Modal
                         isOpen={this.state.modalIsOpen}
                         onAfterOpen={this.afterOpenModal}
@@ -563,299 +563,296 @@ class SearchDiv extends Component {
                         >Back</button>
                     </Modal>
 
-                : window.location.pathname === '/search/activities' ?
+                    : window.location.pathname === '/search/activities' ?
 
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={styles.modalStyles}
-                        contentLabel='Example Modal'
-                        shouldCloseOnOverlayClick={true}
-                        ariaHideApp={false}
-                    >
-                        {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
-                        <h3 className="modal-park-name">
-                            {this.state.activityName}
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            style={styles.modalStyles}
+                            contentLabel='Example Modal'
+                            shouldCloseOnOverlayClick={true}
+                            ariaHideApp={false}
+                        >
+                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
+                            <h3 className="modal-park-name">
+                                {this.state.activityName}
+                                <button
+                                    id="confirm-activity-btn"
+                                    className='btn btn-default confirm-btn'
+                                    onClick={this.handleModalConfirm}
+                                >Add</button>
+                            </h3>
+                            <div className="table-responsive">
+                                <table className="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Summary</td>
+                                            <td>{this.state.activitySum}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dates</td>
+                                            <td>{this.state.activityDates}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time</td>
+                                            <td>{this.state.activityTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Location</td>
+                                            <td>{this.state.activityLoc}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Site</td>
+                                            {this.state.activityURL === 'N/A' ?
+                                                <td>{this.state.activityURL}</td>
+                                                :
+                                                <td>
+                                                    <a href={this.state.activityURL} target="_blank">
+                                                        {this.state.activityURL}
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
                             <button
-                                id="confirm-activity-btn"
-                                className='btn btn-default confirm-btn'
-                                onClick={this.handleModalConfirm}
-                            >Add</button>
-                        </h3>
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td>Summary</td>
-                                        <td>{this.state.activitySum}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dates</td>
-                                        <td>{this.state.activityDates}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Time</td>
-                                        <td>{this.state.activityTime}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Location</td>
-                                        <td>{this.state.activityLoc}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Site</td>
-                                        {this.state.activityURL === 'N/A' ? 
-                                            <td>{this.state.activityURL}</td>
-                                            :
-                                            <td>
-                                                <a href={this.state.activityURL} target="_blank">
-                                                    {this.state.activityURL}
-                                                </a>
-                                            </td>
-                                        }
-                                    </tr>
+                                id="close-modal-btn"
+                                className='btn btn-default'
+                                onClick={this.closeModal}
+                            >Back</button>
+                        </Modal>
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <button
-                            id="close-modal-btn"
-                            className='btn btn-default'
-                            onClick={this.closeModal}
-                        >Back</button>
-                    </Modal> 
-                    
-                : window.location.pathname === '/search/campsites' ?
+                    : window.location.pathname === '/search/campsites' ?
 
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={styles.modalStyles}
-                        contentLabel='Example Modal'
-                        shouldCloseOnOverlayClick={true}
-                        ariaHideApp={false}
-                    >
-                        {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
-                        <h3 className="modal-park-name">
-                            {this.state.campName}
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            style={styles.modalStyles}
+                            contentLabel='Example Modal'
+                            shouldCloseOnOverlayClick={true}
+                            ariaHideApp={false}
+                        >
+                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
+                            <h3 className="modal-park-name">
+                                {this.state.campName}
+                                <button
+                                    id="confirm-park-btn"
+                                    className='btn btn-default confirm-btn'
+                                    onClick={this.handleModalConfirm}
+                                >Add</button>
+                            </h3>
+                            <div className="table-responsive">
+                                <table className="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Description</td>
+                                            <td>{this.state.campDesc}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Sites</td>
+                                            <td>{this.state.campTotalSites}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Internet</td>
+                                            <td>{this.state.campInternet}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Showers</td>
+                                            <td>{this.state.campShowers}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Toilets</td>
+                                            <td>{this.state.campToilets}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Electrical Hookups</td>
+                                            <td>{this.state.campElectricalHookups}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Food Storage Lockers</td>
+                                            <td>{this.state.campFoodStorageLockers}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Directions</td>
+                                            <td>{this.state.campDir}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weather</td>
+                                            {this.state.campWeather.includes('http') ?
+                                                <td>
+                                                    <a href={this.state.campWeather} target="_blank">
+                                                        {this.state.campWeather}
+                                                    </a>
+                                                </td>
+                                                :
+                                                <td>{this.state.campWeather}</td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Regulations</td>
+                                            {this.state.campRegOverview === 'N/A' && this.state.campRegURL === 'N/A' ?
+                                                <td>{this.state.campRegOverview}</td>
+
+                                                : this.state.campRegOverview === 'N/A' && this.state.campRegURL !== 'N/A' ?
+                                                    <td>{this.state.campRegURL}</td>
+
+                                                    : this.state.campRegOverview !== 'N/A' && this.state.campRegURL === 'N/A' ?
+                                                        <td>
+                                                            <a href={this.state.campRegURL}>
+                                                                {this.state.campRegURL}
+                                                            </a>
+                                                        </td>
+
+                                                        :
+                                                        <td>
+                                                            {this.state.campRegOverview}<br /><br />
+                                                            <a href={this.state.campRegURL}>
+                                                                {this.state.campRegURL}
+                                                            </a>
+                                                        </td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Reservations</td>
+                                            {this.state.campResDesc === 'N/A' && this.state.campResURL === 'N/A' ?
+                                                <td>{this.state.campResDesc}</td>
+
+                                                : this.state.campResDesc === 'N/A' && this.state.campResURL !== 'N/A' ?
+                                                    <td>{this.state.campResURL}</td>
+
+                                                    : this.state.campResDesc !== 'N/A' && this.state.campResURL === 'N/A' ?
+                                                        <td>
+                                                            <a href={this.state.campResURL}>
+                                                                {this.state.campResURL}
+                                                            </a>
+                                                        </td>
+
+                                                        :
+                                                        <td>
+                                                            {this.state.campResDesc}<br /><br />
+                                                            <a href={this.state.campResURL}>
+                                                                {this.state.campResURL}
+                                                            </a>
+                                                        </td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Site</td>
+                                            {this.state.campURL === 'N/A' ?
+                                                <td>{this.state.campURL}</td>
+                                                :
+                                                <td>
+                                                    <a href={this.state.campResURL} target="_blank">
+                                                        {this.state.campResURL}
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <button
-                                id="confirm-park-btn"
-                                className='btn btn-default confirm-btn'
-                                onClick={this.handleModalConfirm}
-                            >Add</button>
-                        </h3>
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td>Description</td>
-                                        <td>{this.state.campDesc}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total Sites</td>
-                                        <td>{this.state.campTotalSites}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Internet</td>
-                                        <td>{this.state.campInternet}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Showers</td>
-                                        <td>{this.state.campShowers}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Toilets</td>
-                                        <td>{this.state.campToilets}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Electrical Hookups</td>
-                                        <td>{this.state.campElectricalHookups}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Food Storage Lockers</td>
-                                        <td>{this.state.campFoodStorageLockers}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Directions</td>
-                                        <td>{this.state.campDir}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Weather</td>
-                                        {this.state.campWeather.includes('http') ? 
-                                            <td>
-                                                <a href={this.state.campWeather} target="_blank">
-                                                    {this.state.campWeather}    
-                                                </a>
-                                            </td>
-                                            : 
-                                            <td>{this.state.campWeather}</td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>Regulations</td>
-                                        {this.state.campRegOverview === 'N/A' && this.state.campRegURL === 'N/A' ? 
-                                            <td>{this.state.campRegOverview}</td>
-                                            
-                                            : this.state.campRegOverview === 'N/A' && this.state.campRegURL !== 'N/A' ? 
-                                            <td>{this.state.campRegURL}</td>
+                                id="close-modal-btn"
+                                className='btn btn-default'
+                                onClick={this.closeModal}
+                            >Back</button>
+                        </Modal>
 
-                                            : this.state.campRegOverview !== 'N/A' && this.state.campRegURL === 'N/A' ?
-                                            <td>
-                                                <a href={this.state.campRegURL}>
-                                                    {this.state.campRegURL}
-                                                </a>
-                                            </td>
+                    : window.location.pathname === '/search/visitor' ?
 
-                                            :
-                                            <td>
-                                                {this.state.campRegOverview}<br /><br />
-                                                <a href={this.state.campRegURL}>
-                                                    {this.state.campRegURL}
-                                                </a>
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            style={styles.modalStyles}
+                            contentLabel='Example Modal'
+                            shouldCloseOnOverlayClick={true}
+                            ariaHideApp={false}
+                        >
+                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
+                            <h3 className="modal-park-name">
+                                {this.state.VCName}
+                                <button
+                                    id="confirm-park-btn"
+                                    className='btn btn-default confirm-btn'
+                                    onClick={this.handleModalConfirm}
+                                >Add</button>
+                            </h3>
+                            <div className="table-responsive">
+                                <table className="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Description</td>
+                                            <td>{this.state.VCDescription}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address</td>
+                                            <td>{this.state.VCAddress}
                                             </td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>Reservations</td>
-                                        {this.state.campResDesc === 'N/A' && this.state.campResURL === 'N/A' ? 
-                                            <td>{this.state.campResDesc}</td>
-                                            
-                                            : this.state.campResDesc === 'N/A' && this.state.campResURL !== 'N/A' ? 
-                                            <td>{this.state.campResURL}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone</td>
+                                            <td>{this.state.VCPhone}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{this.state.VCEmail}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hours</td>
+                                            <td>{this.state.VCHours}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Directions</td>
+                                            {this.state.directions === 'N/A' && this.state.directionsURL === 'N/A' ?
+                                                <td>{this.state.VCDirections}</td>
 
-                                            : this.state.campResDesc !== 'N/A' && this.state.campResURL === 'N/A' ?
-                                            <td>
-                                                <a href={this.state.campResURL}>
-                                                    {this.state.campResURL}
-                                                </a>
-                                            </td>
+                                                : this.state.directions === 'N/A' && this.state.directionsURL !== 'N/A' ?
+                                                    <td>{this.state.VCDirectionsURL}</td>
 
-                                            :
-                                            <td>
-                                                {this.state.campResDesc}<br /><br />
-                                                <a href={this.state.campResURL}>
-                                                    {this.state.campResURL}
-                                                </a>
-                                            </td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>Site</td>
-                                        {this.state.campURL === 'N/A' ? 
-                                            <td>{this.state.campURL}</td>
-                                            :
-                                            <td>
-                                                <a href={this.state.campResURL} target="_blank">
-                                                    {this.state.campResURL}
-                                                </a>
-                                            </td>
-                                        }
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <button
-                            id="close-modal-btn"
-                            className='btn btn-default'
-                            onClick={this.closeModal}
-                        >Back</button>
-                    </Modal> 
+                                                    : this.state.directions !== 'N/A' && this.state.directionsURL === 'N/A' ?
+                                                        <td>
+                                                            <a href={this.state.VCDirectionsURL}>
+                                                                {this.state.VCDirectionsURL}
+                                                            </a>
+                                                        </td>
 
-                : window.location.pathname === '/search/visitor' ?
-
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={styles.modalStyles}
-                        contentLabel='Example Modal'
-                        shouldCloseOnOverlayClick={true}
-                        ariaHideApp={false}
-                    >
-                        {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
-                        <h3 className="modal-park-name">
-                            {this.state.VCName}
+                                                        :
+                                                        <td>
+                                                            {this.state.VCDirections}<br /><br />
+                                                            <a href={this.state.VCDirectionsURL}>
+                                                                {this.state.VCDirectionsURL}
+                                                            </a>
+                                                        </td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Site</td>
+                                            {this.state.VCURL === 'N/A' ?
+                                                <td>{this.state.VCURL}</td>
+                                                :
+                                                <td>
+                                                    <a href={this.state.VCURL} target="_blank">
+                                                        {this.state.VCURL}
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <button
-                                id="confirm-park-btn"
-                                className='btn btn-default confirm-btn'
-                                onClick={this.handleModalConfirm}
-                            >Add</button>
-                        </h3>
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td>Description</td>
-                                        <td>{this.state.VCDescription}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Address</td>
-                                        <td>{this.state.VCAddress}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone</td>
-                                        <td>{this.state.VCPhone}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                        <td>{this.state.VCEmail}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hours</td>
-                                        <td>{this.state.VCHours}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Directions</td>
-                                        {this.state.directions === 'N/A' && this.state.directionsURL === 'N/A' ? 
-                                            <td>{this.state.VCDirections}</td>
-                                            
-                                            : this.state.directions === 'N/A' && this.state.directionsURL !== 'N/A' ? 
-                                            <td>{this.state.VCDirectionsURL}</td>
+                                id="close-modal-btn"
+                                className='btn btn-default'
+                                onClick={this.closeModal}
+                            >Back</button>
+                        </Modal>
 
-                                            : this.state.directions !== 'N/A' && this.state.directionsURL === 'N/A' ?
-                                            <td>
-                                                <a href={this.state.VCDirectionsURL}>
-                                                    {this.state.VCDirectionsURL}
-                                                </a>
-                                            </td>
-
-                                            :
-                                            <td>
-                                                {this.state.VCDirections}<br /><br />
-                                                <a href={this.state.VCDirectionsURL}>
-                                                    {this.state.VCDirectionsURL}
-                                                </a>
-                                            </td>
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>Site</td>
-                                        {this.state.VCURL === 'N/A' ? 
-                                            <td>{this.state.VCURL}</td>
-                                            :
-                                            <td>
-                                                <a href={this.state.VCURL} target="_blank">
-                                                    {this.state.VCURL}
-                                                </a>
-                                            </td>
-                                        }
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <button
-                            id="close-modal-btn"
-                            className='btn btn-default'
-                            onClick={this.closeModal}
-                        >Back</button>
-                    </Modal> 
-                
-                : ''}
-
-            }
-                
+                        : ''}
             </div>
         );
     };
