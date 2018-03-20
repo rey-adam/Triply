@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
 import Navbar from '../../components/Navbar';
-// import the Google Maps API Wrapper from google-maps-react
-import { GoogleApiWrapper } from 'google-maps-react';
+
+
 import SimpleMap from '../MapContainerB/MapContainerB';
 
 class Dashboard extends Component {
