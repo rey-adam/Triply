@@ -39,7 +39,6 @@ export default class SimpleMap extends Component {
         center: { lat: 37.7566, lng: -119.5969 },
         zoom: 12,
         gestureHandling: 'greedy'
-        
     };
 
     render() {
@@ -55,7 +54,6 @@ export default class SimpleMap extends Component {
                     lng={-119.5383}
                     img='../../../public/assets/images/ballpin.png'
                     text={'label me'}
-                    
                 />
                 <Button
                     lat={37.8651}
