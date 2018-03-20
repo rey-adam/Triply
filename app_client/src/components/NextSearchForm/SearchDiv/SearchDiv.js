@@ -488,7 +488,7 @@ class SearchDiv extends Component {
                             onClick={this.closeModal}
                         >Back</button>
                     </Modal>
-                    
+
                 : window.location.pathname === '/search/activities' ?
 
                     <Modal
@@ -556,60 +556,104 @@ class SearchDiv extends Component {
                     >
                         {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
                         <h3 className="modal-park-name">
-                            {this.state.trailName}
+                            {this.state.campName}
                             <button
                                 id="confirm-park-btn"
                                 className='btn btn-default confirm-btn'
                                 onClick={this.handleModalConfirm}
-                            >Add Trail</button>
+                            >Add</button>
                         </h3>
-                        <img src={this.state.trailImg} alt={this.state.trailName} />
                         <div className="table-responsive">
                             <table className="table table-bordered table-hover">
                                 <tbody>
                                     <tr>
-                                        <td>
-                                            Rating <br />
-                                            {`(${trailVotes} ${trailVotes === 1 ? 'vote' : 'votes'})`}
-                                        </td>
-                                        <td>
-                                            <div style={{ display: 'flex' }}>
-                                                <StarRatingComponent
-                                                    name="rate2"
-                                                    editing={false}
-                                                    starCount={5}
-                                                    value={trailRating}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td>Summary</td>
-                                        <td>{this.state.trailSummary}</td>
+                                        <td>{this.state.campSum}</td>
                                     </tr>
                                     <tr>
-                                        <td>Length</td>
-                                        <td>{this.state.trailLength} miles</td>
+                                        <td>Total Sites</td>
+                                        <td>{this.state.campTotalSites}</td>
                                     </tr>
                                     <tr>
-                                        <td>Difficulty</td>
-
-                                        {/* https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript */}
-
+                                        <td>Internet</td>
+                                        <td>{this.state.campInternet}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Showers</td>
+                                        <td>{this.state.campShowers}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Toilets</td>
+                                        <td>{this.state.campToilets}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Electrical Hookups</td>
+                                        <td>{this.state.campElectricalHookups}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Food Storage Lockers</td>
+                                        <td>{this.state.campFoodStorageLockers}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Directions</td>
+                                        <td>{this.state.campDir}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weather</td>
+                                        {this.state.campWeather.includes('http') ? 
+                                            <td>
+                                                <a href={this.state.campWeather} target="_blank">
+                                                    {this.state.campWeather}    
+                                                </a>
+                                            </td>
+                                            : 
+                                            <td>{this.state.campWeather}</td>
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td>Regulations</td>
+                                        {this.state.campRegOverview === 'N/A' ? 
+                                            <td>{this.state.campRegOverview}</td>
+                                            :
+                                            <td>
+                                                {this.state.campRegOverview}<br /><br />
+                                                <a href={this.state.campRegURL}>
+                                                    {this.state.campRegURL}
+                                                </a>
+                                            </td>
+                                        }
                                         <td>
-                                            {this.state.trailDifficulty.replace(/([a-z])([A-Z])/g, '$1 $2').charAt(0).toUpperCase() + this.state.trailDifficulty.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1)}
+                                            {this.state.campRegOverview}<br />
+                                            <a href={this.state.campRegURL}>
+                                                {this.state.campRegURL}
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Location</td>
-                                        <td>{this.state.trailLocation}</td>
+                                        <td>Reservations</td>
+                                        {this.state.campResDesc === 'N/A' ? 
+                                            <td>{this.state.campResDesc}</td>
+                                            :
+                                            <td>
+                                                {this.state.campResDesc}<br /><br />
+                                                <a href={this.state.campResURL}>
+                                                    {this.state.campResURL}
+                                                </a>
+                                            </td>
+                                        }
                                     </tr>
                                     <tr>
                                         <td>Site</td>
-                                        <td><a href={this.state.trailURL} target="_blank">{this.state.trailURL}</a></td>
+                                        {this.state.campURL === 'N/A' ? 
+                                            <td>{this.state.campURL}</td>
+                                            :
+                                            <td>
+                                                <a href={this.state.campResURL} target="_blank">
+                                                    {this.state.campResURL}
+                                                </a>
+                                            </td>
+                                        }
                                     </tr>
-
-
                                 </tbody>
                             </table>
                         </div>
@@ -638,7 +682,7 @@ class SearchDiv extends Component {
                                 id="confirm-park-btn"
                                 className='btn btn-default confirm-btn'
                                 onClick={this.handleModalConfirm}
-                            >Add Trail</button>
+                            >Add</button>
                         </h3>
                         <img src={this.state.trailImg} alt={this.state.trailName} />
                         <div className="table-responsive">
