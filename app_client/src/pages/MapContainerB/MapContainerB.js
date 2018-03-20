@@ -37,7 +37,8 @@ export default class SimpleMap extends Component {
 
     static defaultProps = {
         center: { lat: 37.7566, lng: -119.5969 },
-        zoom: 12
+        zoom: 12,
+        gestureHandling: 'greedy'
         
     };
 
