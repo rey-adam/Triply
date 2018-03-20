@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar';
 import Forecast from 'react-forecast';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
+
 import SimpleMap from '../MapContainerB/MapContainerB';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import qs from 'query-string';
