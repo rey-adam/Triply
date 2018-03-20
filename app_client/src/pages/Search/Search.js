@@ -158,7 +158,7 @@ class Search extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <Navbar />
-                {/* <ControlledCarousel /> */}
+                <ControlledCarousel />
 
                 <SelectWrapper>
                     <form id="park-form" className="select-form">
