@@ -6,7 +6,7 @@ let Forecast = (props) => {
     const url = `http://forecast.io/embed/#lat=${latitude}&lon=${longitude}&name=${name}&color=${color}&font=${font}&units=${units}`;
 
     return (
-        <iframe type='text/html' height={height} width={width} frameBorder='0' src={url} />
+        <iframe title='forecast-widget' type='text/html' height={height} width={width} frameBorder='0' src={url} />
     );
 }
 

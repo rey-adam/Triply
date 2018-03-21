@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import SearchTabs from '../SearchTabs';
 import SelectWrapper from '../../SelectWrapper';
