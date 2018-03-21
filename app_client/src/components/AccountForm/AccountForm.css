@@ -65,7 +65,7 @@
 #delete-account-btn:hover {
     background: rgb(241, 6, 6);
     color: white;
-    border: none;
+    border-color: white;
 }
 
 #update-account-btn {
@@ -76,7 +76,7 @@
 #update-account-btn:hover {
     background: rgb(0, 212, 184);
     color: white;
-    border: none;
+    border-color: white;
 }
 
 #confirm-delete-modal {
