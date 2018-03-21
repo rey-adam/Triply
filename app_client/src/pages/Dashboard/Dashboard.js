@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import Forecast from 'react-forecast';
+// import Forecast from 'react-forecast';
+import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
 
@@ -67,7 +68,7 @@ class Dashboard extends Component {
                 weatherLng: locationRes.longitude,
                 weatherPlace: locationRes.name
             });
-            this.props.history.push(`/dashboard?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
+            this.props.history.push(`/?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
             window.location.reload();
         })
         .catch(err => {
@@ -204,7 +205,7 @@ class Dashboard extends Component {
                             </form>
                         </div>
                         <div className="weather-content">
-                            <Forecast
+                            <ForecastNew
                                 latitude={this.state.weatherLat}
                                 longitude={this.state.weatherLng}
                                 name={this.state.weatherPlace}

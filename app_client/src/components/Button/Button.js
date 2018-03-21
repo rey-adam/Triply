@@ -18,7 +18,7 @@ export default class Button extends React.Component {
 
     render() {
         return (
-            <button onClick={this.handleClick}>
+            <button className="google-maps-btn" onClick={this.handleClick}>
                 {this.state.counter}
             </button>
         );
