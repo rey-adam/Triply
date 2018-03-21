@@ -8,7 +8,7 @@ import parks from '../../helpers/api/npsApi/parkCodes/parks';
 import './Search.css';
 // APIS 
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
-import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
+import MAPAPI from "../../helpers/api/mapsApi/mapsApi";
 
 const styles = {
     modalStyles: {

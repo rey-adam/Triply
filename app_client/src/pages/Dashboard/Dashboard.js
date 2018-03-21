@@ -4,6 +4,9 @@ import Navbar from '../../components/Navbar';
 // import the Google Maps API Wrapper from google-maps-react
 import { GoogleApiWrapper } from 'google-maps-react';
 import SimpleMap from '../MapContainerB/MapContainerB';
+// APIS 
+import NPSAPI from "../../helpers/api/npsApi/npsAPI";
+import MAPAPI from "../../helpers/api/mapsApi/mapsApi";
 
 class Dashboard extends Component {
 
@@ -17,57 +20,7 @@ class Dashboard extends Component {
     componentDidMount() {
         console.log(this.state.parks);
         // this.openModal('hello');
-    };
-
-    openModal(message) {
-        this.setState({ modalIsOpen: true, modalMessage: message });
-    };
-
-    // afterOpenModal = () => {
-    //     // references are now synced and can be accessed
-    //     this.subtitle.style.color = '#f00';
-    // }
-
-    closeModal() {
-        this.setState({ modalIsOpen: false });
-    };
-
-    handleSubmit(e) {
-        e.preventDefault();
-        const parks = document.getElementById("park-select");
-        const userParkCode = parks.options[parks.selectedIndex].value;
-        const userParkName = parks.options[parks.selectedIndex].text;
-        if (userParkName === 'Choose a park...') {
-            alert('Please choose a park');
-        } else {
-            console.log(`${userParkName}, ${userParkCode}`);
-            this.setState({
-                userParkCode,
-                userParkName
-            });
-            this.handleParkAPIRequest(userParkCode)
-                .then(parkObj => {
-                    console.log(parkObj);
-                    this.setState({
-                        parkURL: parkObj.url,
-                        parkStates: parkObj.states,
-                        parkDesc: parkObj.description,
-                        parkWeather: parkObj.weather
-                    });
-                    this.openModal('hello');
-                })
-                .catch(err => console.log(err));
-        };
-    }; // END HANDLE SUBMIT
-
-    handleModalConfirm() {
-        console.log(this.state.userParkName);
-        this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
-        .then(locationObj => {
-            this.props.history.push(`/search/trails?park=${this.state.userParkCode}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
-        })
-        .catch(err => console.log(err));
-    } // END HANDLE MODAL CONFIRM
+    }; // DID MOUNT
 
     npsApiCall = query => {
         return NPSAPI
@@ -98,7 +51,7 @@ class Dashboard extends Component {
                     parkLong: longitude
                 };
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err)); // END CALL
     }; // END API
 
 
