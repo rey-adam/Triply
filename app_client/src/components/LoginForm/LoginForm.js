@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import './LoginForm.css';
 
 class LoginForm extends Component {
     render() {
         return (
+            
             <div className="form login-form">
                 <form>
                     <div id="logo"></div>
@@ -41,6 +43,8 @@ class LoginForm extends Component {
                     </button>
                     <Link to='/register' className="link register-link">New user?</Link>
                 </form>
+                
+                
             </div>
         );
     };

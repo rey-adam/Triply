@@ -14,12 +14,17 @@ export default class Button extends Component {
             counter: prevState.counter + 1
         }));
     };
-
+    
     render() {
         return (
-            <button className="google-maps-btn" onClick={this.handleClick}>
+            <div>
+            <button onClick={this.handleClick}>
                 {this.state.counter}
+                    
             </button>
+                {/* <img src={require('./ballpin.png')} /> */}
+
+            </div>
         );
     }
 }
