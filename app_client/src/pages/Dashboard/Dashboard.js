@@ -119,11 +119,18 @@ class Dashboard extends Component {
                                 <div className="card-header" id="headingTwo">
                                     <h5 className="mb-0">
                                         <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            <h4>Yosemite National Park <span className="spacer">|</span> <span className="trip-date">Mar 30 2018 - Apr 27 2018</span></h4>
+                                            <h4>Bday @ Yosemite! <span className="spacer">|</span> <span className="trip-date">Mar 30 2018 - Apr 27 2018</span></h4>
                                         </button>
                                     </h5>
                                 </div>
                                 <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div className="card-body">
+                                        <div className="panel panel-default">
+                                            <div className="panel-body">
+                                                <span style={{ fontWeight: 500 }}>Yosemite National Park</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="card-body">
                                         <div className="panel panel-default">
                                             <div className="panel-body">
@@ -154,11 +161,18 @@ class Dashboard extends Component {
                                 <div className="card-header" id="headingThree">
                                     <h5 className="mb-0">
                                         <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                            <h4>Glacier National Park <span className="spacer">|</span> <span className="trip-date">Jan 2 2019 - Feb 3 2019</span></h4>
+                                            <h4>Glacier Roadtrip w/ Fam <span className="spacer">|</span> <span className="trip-date">Jan 2 2019 - Feb 3 2019</span></h4>
                                         </button>
                                     </h5>
                                 </div>
                                 <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div className="card-body">
+                                        <div className="panel panel-default">
+                                            <div className="panel-body">
+                                                <span style={{ fontWeight: 500 }}>Glacier National Park</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="card-body">
                                         <div className="panel panel-default">
                                             <div className="panel-body">
