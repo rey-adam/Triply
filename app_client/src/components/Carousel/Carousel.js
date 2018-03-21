@@ -28,6 +28,7 @@ class ControlledCarousel extends Component {
             <Carousel
                 interval={8000}
                 controls={false}
+                indicators={false}
                 direction={direction}
                 onSelect={this.handleSelect}
             >
