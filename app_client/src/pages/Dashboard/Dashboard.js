@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import Forecast from 'react-forecast';
+// import Forecast from 'react-forecast';
+import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
 
@@ -23,6 +24,10 @@ class Dashboard extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
+
+        // added modal 
+        // this.openModal = this.openModal.bind(this);
+        // this.closeModal = this.closeModal.bind(this);
     };
 
     componentDidMount() {
@@ -56,6 +61,22 @@ class Dashboard extends Component {
         this.setState({ value: event.target.value });
     }
 
+
+    // START ----- submit button to take user to park search page 
+
+
+    // handleSubmit(e){
+    //     e.preventDefault();
+
+    //     onClick={this.handleSubmit}
+    // }
+
+
+
+        
+
+    // END ------ submit button to take user to park search page 
+
     handleZipSubmit(e) {
         e.preventDefault();
         const weatherSearch = document.getElementById('weather-search').value;
@@ -67,7 +88,7 @@ class Dashboard extends Component {
                 weatherLng: locationRes.longitude,
                 weatherPlace: locationRes.name
             });
-            this.props.history.push(`/dashboard?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
+            this.props.history.push(`/?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
             window.location.reload();
         })
         .catch(err => {
@@ -204,7 +225,7 @@ class Dashboard extends Component {
                             </form>
                         </div>
                         <div className="weather-content">
-                            <Forecast
+                            <ForecastNew
                                 latitude={this.state.weatherLat}
                                 longitude={this.state.weatherLng}
                                 name={this.state.weatherPlace}
@@ -213,6 +234,10 @@ class Dashboard extends Component {
                             />
                         </div>
                     </div>
+
+
+                    {/* modal */}
+
 
                     {/* google maps */}
                     <div id='mapDiv'>
