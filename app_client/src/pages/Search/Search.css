@@ -1,23 +1,23 @@
-#root {
+/* #root {
     position: relative;
-}
+} */
 
 /******************
     BACKGROUND
 ******************/
-
+/* 
 .park-background {
-    position: absolute;
+    position: absolute; */
 
     /*To support older browsers*/
-    height: 100%;
-    width: 100%;
+    /* height: 100%;
+    width: 100%; */
 
     /* Set the height to match that of the viewport. */
-    height: 100vh;
+    /* height: 100vh; */
 
     /* Set the width to match that of the viewport. */
-    width: 100vw;
+    /* width: 100vw;
 
     background-image: url('../../assets/img/fall-winter--igor-cibulsky.jpg');
     background-repeat: no-repeat;
@@ -35,7 +35,7 @@
     right: 0;
     background: white;
     opacity: 0.2;
-}
+} */
 
 /******************
     SELECT FORM

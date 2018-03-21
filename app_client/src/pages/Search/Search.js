@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
 // import ControlledCarousel from '../../components/Carousel';
+import Hero2 from '../../components/Hero2';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
 // import axios from 'axios';
@@ -181,7 +182,7 @@ class Search extends Component {
             <div className='park-background'>
                 <Navbar />
                 {/* <ControlledCarousel /> */}
-
+                <Hero2 />
                 <SelectWrapper>
                     <form id="park-form" className="select-form">
                         <div className="select-bar">
