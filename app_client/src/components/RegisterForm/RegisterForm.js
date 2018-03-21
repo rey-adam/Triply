@@ -51,7 +51,7 @@ class RegisterForm extends Component {
                         onClick={this.props.handleRegister}>
                         Register
                     </button>
-                    <Link to='/' className="login-link">Have an account?</Link>
+                    <Link to='/login' className="login-link">Have an account?</Link>
                 </form>
             </div>
         );

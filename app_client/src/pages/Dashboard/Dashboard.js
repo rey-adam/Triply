@@ -67,7 +67,7 @@ class Dashboard extends Component {
                 weatherLng: locationRes.longitude,
                 weatherPlace: locationRes.name
             });
-            this.props.history.push(`/dashboard?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
+            this.props.history.push(`/?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
             window.location.reload();
         })
         .catch(err => {
