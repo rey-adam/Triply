@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
+import Hero from '../../components/Hero';
 // import ControlledCarousel from '../../components/Carousel';
 import Hero2 from '../../components/Hero2';
 import SelectWrapper from '../../components/SelectWrapper';
@@ -178,11 +179,11 @@ class Search extends Component {
 
     render() {
         return (
-            <div style={{ height: '100%' }}>
-            <div className='park-background'>
+            <div className="park-search-container" style={{ height: '100%' }}>
                 <Navbar />
                 {/* <ControlledCarousel /> */}
-                <Hero2 />
+                <Hero />
+
                 <SelectWrapper>
                     <form id="park-form" className="select-form">
                         <div className="select-bar">
@@ -265,7 +266,6 @@ class Search extends Component {
                         onClick={this.closeModal}
                     >Back</button>
                 </Modal>
-            </div>
             </div>
         );
     };

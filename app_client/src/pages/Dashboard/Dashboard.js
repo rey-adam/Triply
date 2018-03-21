@@ -5,7 +5,6 @@ import Navbar from '../../components/Navbar';
 import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
-
 import SimpleMap from '../MapContainerB/MapContainerB';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import qs from 'query-string';
@@ -196,7 +195,7 @@ class Dashboard extends Component {
                         <div className="weather-header">
                             <form className="weather-form">
                                 <div className="form-group">
-                                    <input type="text" id="weather-search" placeholder="Zip code, city, or park name" />
+                                    <input type="text" id="weather-search" placeholder="Zip code, city &amp; state, or park name" />
                                     <button
                                         id="weather-btn"
                                         className="btn btn-default"
