@@ -162,22 +162,43 @@ class Account extends Component {
                     accountEmailLabel.innerHTML = 'Please enter a valid email';
                     accountEmailLabel.style.color = 'red';
                 } else { // if email is valid
-                    accountEmailLabel.innerHTML = 'Email';
-                    accountEmailLabel.style.color = 'rgb(0, 228, 197)';
-
+                    // see if email already exists in db
                     axios({
                         headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-                        method: "PUT",
-                        url: `/api/user/${id}`,
-                        data: updateInfo
-                    }).then(updatedUserResponse => {
-                        console.log('=========== frontend ===========');
-                        console.log(`email updated: ${updatedUserResponse.data.email}`);
-                        console.log('================================');
+                        method: "GET",
+                        url: `/api/user/email/${this.state.userEmail}`
+                    }).then(dbEmailResponse => {
+                        console.log(dbEmailResponse);
+
+                        // if email is available
+                        if (dbEmailResponse.data.success) {
+                            accountEmailLabel.innerHTML = 'Email';
+                            accountEmailLabel.style.color = 'rgb(0, 228, 197)';
+
+                            axios({
+                                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                                method: "PUT",
+                                url: `/api/user/${id}`,
+                                data: updateInfo
+                            }).then(updatedUserResponse => {
+                                console.log('=========== frontend ===========');
+                                console.log(`email updated: ${updatedUserResponse.data.email}`);
+                                console.log('================================');
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            });
+                        }
                     })
-                        .catch(err => {
-                            console.error(err);
-                        });
+                    .catch(err => {
+                        console.error(err.response);
+
+                        // if email is taken
+                        if (err.response.statusText === 'USER ALREADY EXISTS') {
+                            accountEmailLabel.innerHTML = 'User already exists';
+                            accountEmailLabel.style.color = 'red';
+                        }
+                    });
                 }
             }
         // if password field is empty but confirm field has input
@@ -194,8 +215,29 @@ class Account extends Component {
                     accountEmailLabel.innerHTML = 'Please enter a valid email';
                     accountEmailLabel.style.color = 'red';
                 } else { // if email is valid
-                    accountEmailLabel.innerHTML = 'Email';
-                    accountEmailLabel.style.color = 'rgb(0, 228, 197)';
+                    // see if email already exists in db
+                    axios({
+                        headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                        method: "GET",
+                        url: `/api/user/email/${this.state.userEmail}`
+                    }).then(dbEmailResponse => {
+                        console.log(dbEmailResponse);
+
+                        // if email is available
+                        if (dbEmailResponse.data.success) {
+                            accountEmailLabel.innerHTML = 'Email';
+                            accountEmailLabel.style.color = 'rgb(0, 228, 197)';
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err.response);
+
+                        // if email is taken
+                        if (err.response.statusText === 'USER ALREADY EXISTS') {
+                            accountEmailLabel.innerHTML = 'User already exists';
+                            accountEmailLabel.style.color = 'red';
+                        }
+                    });
                 }
             }
         // if password field has input but confirm field is empty
@@ -221,8 +263,29 @@ class Account extends Component {
                     accountEmailLabel.innerHTML = 'Please enter a valid email';
                     accountEmailLabel.style.color = 'red';
                 } else { // if email is valid
-                    accountEmailLabel.innerHTML = 'Email';
-                    accountEmailLabel.style.color = 'rgb(0, 228, 197)';
+                    // see if email already exists in db
+                    axios({
+                        headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                        method: "GET",
+                        url: `/api/user/email/${this.state.userEmail}`
+                    }).then(dbEmailResponse => {
+                        console.log(dbEmailResponse);
+
+                        // if email is available
+                        if (dbEmailResponse.data.success) {
+                            accountEmailLabel.innerHTML = 'Email';
+                            accountEmailLabel.style.color = 'rgb(0, 228, 197)';
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err.response);
+
+                        // if email is taken
+                        if (err.response.statusText === 'USER ALREADY EXISTS') {
+                            accountEmailLabel.innerHTML = 'User already exists';
+                            accountEmailLabel.style.color = 'red';
+                        }
+                    });
                 }
             }
         // if all fields have input
@@ -268,8 +331,29 @@ class Account extends Component {
                     accountEmailLabel.innerHTML = 'Please enter a valid email';
                     accountEmailLabel.style.color = 'red';
                 } else { // if email is valid
-                    accountEmailLabel.innerHTML = 'Email';
-                    accountEmailLabel.style.color = 'rgb(0, 228, 197)';
+                    // see if email already exists in db
+                    axios({
+                        headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                        method: "GET",
+                        url: `/api/user/email/${this.state.userEmail}`
+                    }).then(dbEmailResponse => {
+                        console.log(dbEmailResponse);
+
+                        // if email is available
+                        if (dbEmailResponse.data.success) {
+                            accountEmailLabel.innerHTML = 'Email';
+                            accountEmailLabel.style.color = 'rgb(0, 228, 197)';
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err.response);
+
+                        // if email is taken
+                        if (err.response.statusText === 'USER ALREADY EXISTS') {
+                            accountEmailLabel.innerHTML = 'User already exists';
+                            accountEmailLabel.style.color = 'red';
+                        }
+                    });
                 }
 
                 // validate password

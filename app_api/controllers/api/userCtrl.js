@@ -32,7 +32,7 @@ class UserCtrl {
                     id: userResponse.id,
                     email: userResponse.email
                 };
-                console.log('====== USER UPDATED ======');
+                console.log('======= USER FOUND =======');
                 console.log(`id: ${user.id}`);
                 console.log(`email: ${user.email}`);
                 console.log('==========================');
@@ -42,6 +42,36 @@ class UserCtrl {
                 console.error(err);
                 res.status(400).end();
             });
+    }
+
+    static getEmail(req, res) {
+        console.log('CHECKING FOR EMAIL');
+        models.User.findOne({
+            where: {
+                email: req.params.email
+            }
+        })
+        .then(dbUser => {
+            if (dbUser === null) {
+                console.log("=============================");
+                console.log(`Email ${req.params.email} is available`);
+                console.log("=============================");
+
+                res.json({
+                    success: true,
+                    msg: `Email ${req.params.email} is available`
+                });
+            } else {
+                console.log("=============================");
+                console.log(`USER ALREADY EXISTS: ${dbUser.dataValues.email}`);
+                console.log("=============================");
+                res.statusMessage = 'USER ALREADY EXISTS';
+                res.status(404).end();
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        });
     }
 
     static updateUser(req, res) {

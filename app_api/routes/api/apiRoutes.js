@@ -17,6 +17,7 @@ router.get('/trails?lat=:lat&lng=:lng', apiCtrl.getTrailData);
 // USER ACCOUNT
 router.get('/users', userCtrl.getAllUsers);
 router.get("/user/:id", userCtrl.getUser);
+router.get('/user/email/:email', userCtrl.getEmail);
 router.put('/user/:id', userCtrl.updateUser);
 router.put('/user/pass/:id', userCtrl.updateUserPass);
 router.delete('/user/:id', userCtrl.deleteUser);
