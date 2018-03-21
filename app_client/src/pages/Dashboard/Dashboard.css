@@ -2,6 +2,7 @@
     box-shadow: none;
     /* border-bottom: 1px solid rgb(207, 207, 207); */
     border-bottom: 1px solid rgba(184, 184, 184, 0.418);
+    margin-bottom: 10px;
 }
 
 .dash-content-wrapper {
@@ -126,6 +127,11 @@
     font-size: 14px;
     /* color: black; */
     font-weight: 400;
+}
+
+.user-trips .accordion-link:focus {
+    /* outline: 5px auto #a3cbff; */
+    outline-color: rgba(199, 211, 221, 0.158);
 }
 
 

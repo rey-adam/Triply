@@ -37,7 +37,7 @@ class Navbar extends Component {
                                     <Link to='#' className={window.location.pathname === '/account' ? "dropdown-toggle active" : "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span className="caret"></span></Link>
                                     <ul className="dropdown-menu">
                                         <li><Link to='/account' className="dropdown-link">Settings</Link></li>
-                                        <li><Link to='/' onClick={this.handleLogOut} className="dropdown-link">Log Out</Link></li>
+                                        <li><Link to='/login' onClick={this.handleLogOut} className="dropdown-link">Log Out</Link></li>
                                     </ul>
                                 </li>
                             </ul>
