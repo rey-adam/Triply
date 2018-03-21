@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
-import ControlledCarousel from '../../components/Carousel';
+// import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
 // import axios from 'axios';
@@ -178,6 +178,7 @@ class Search extends Component {
     render() {
         return (
             <div style={{ height: '100%' }}>
+            <div className='park-background'>
                 <Navbar />
                 {/* <ControlledCarousel /> */}
 
@@ -263,6 +264,7 @@ class Search extends Component {
                         onClick={this.closeModal}
                     >Back</button>
                 </Modal>
+            </div>
             </div>
         );
     };

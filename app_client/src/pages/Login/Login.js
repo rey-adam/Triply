@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LoginForm from '../../components/LoginForm';
 import RegisterForm from '../../components/RegisterForm';
 import axios from 'axios';
+import ControlledCarousel from '../../components/Carousel';
 import './Login.css';
 
 class Login extends Component {
@@ -281,6 +282,7 @@ class Login extends Component {
                         handleRegister={this.handleRegister}
                     />
                 }
+                <ControlledCarousel />
             </div>
         );
     };
