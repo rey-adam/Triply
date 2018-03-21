@@ -63,14 +63,14 @@
 
 .create-trip-form .glyphicon {
     font-size: 30px;
-    color: rgb(12, 196, 209);
+    color: rgb(2, 204, 204);
     margin-left: 10px;
 }
 
 .create-trip-form .glyphicon:hover {
     font-size: 30px;
-    background-color: rgb(12, 196, 209);
-    border: 1px solid rgb(12, 196, 209);
+    background-color: rgb(2, 204, 204);
+    border: 1px solid rgb(2, 204, 204);
     border-radius: 50%;
     color: white;
     margin-left: 10px;
@@ -88,7 +88,7 @@
 }
 
 .user-trips .trips-header {
-    background-color: rgb(12, 196, 209);
+    background-color: rgb(2, 204, 204);
     color: white;
     height: 85px;
     padding: 0; margin: 0;
@@ -110,7 +110,7 @@
 }
 
 .user-trips .accordion-link {
-    color: rgb(12, 196, 209);
+    color: black;
     text-align: left;
 }
 
@@ -155,7 +155,7 @@
 } */
 
 .weather-header {
-    background-color: rgb(12, 196, 209);
+    background-color: rgb(2, 204, 204);
     color: white;
     width: 100%;
     height: 85px;
@@ -236,7 +236,7 @@
 }
 
 .Cal__Header__root {
-    background-color: rgb(12, 196, 209) !important;
+    background-color: rgb(2, 204, 204) !important;
     min-height: 85px !important;
     height: 85px !important;
     font-family: 'Montserrat' !important;

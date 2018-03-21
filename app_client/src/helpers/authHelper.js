@@ -21,6 +21,10 @@ export default {
         // so not just remove token but also redirect to login page
         // can also do getToken() function to be safe
     },
+    deleteUser() {
+        window.localStorage.removeItem('token');
+        alert('Account has been deleted.');
+    },
     getToken() {
         const token = localStorage.getItem('token');
         // can make this more complicated if you want to send error message, etc.

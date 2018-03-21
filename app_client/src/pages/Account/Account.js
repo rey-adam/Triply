@@ -1,24 +1,57 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
 import AccountForm from '../../components/AccountForm';
+import Modal from 'react-modal';
 import './Account.css';
 import axios from 'axios';
+import authHelper from '../../helpers/authHelper';
+
+const styles = {
+    modalStyles: {
+        overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.589)',
+            position: 'fixed',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0'
+        },
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '30vw',
+            height: '30vh',
+            textAlign: 'center',
+            borderRadius: '6px',
+            fontSize: '16px',
+            fontWeight: '400'
+        }
+    }
+};
 
 class Account extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userId: 0,
             userEmail: '',
             userPass: '',
-            userConfirmPass: ''
+            userConfirmPass: '',
+            modalIsOpen: false,
         };
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleUpdateUser = this.handleUpdateUser.bind(this);
         this.handleDeleteUser = this.handleDeleteUser.bind(this);
+        this.handleConfirmDelete = this.handleConfirmDelete.bind(this);
     };
 
     componentDidMount() {
-
         const userInfo = {
             token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
             id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
@@ -36,14 +69,26 @@ class Account extends Component {
             console.log(`user email: ${userResponse.data.email}`);
             console.log('================================');
 
-            this.setState({ userEmail: userResponse.data.email });
+            this.setState({
+                userId: userResponse.data.id,
+                userEmail: userResponse.data.email
+            });
         })
         .catch(err => {
             console.error(err);
         });
-
-        
     }
+
+    // =====================================================================================
+    // MODAL FUNCTIONS
+    // =====================================================================================
+    openModal(message) {
+        this.setState({ modalIsOpen: true });
+    };
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+    };
 
     // =====================================================================================
     // VALIDATION FUNCTIONS
@@ -264,21 +309,30 @@ class Account extends Component {
         }
     }
 
-    handleDeleteUser() {
-        // trigger modal
+    handleDeleteUser(e) {
+        e.preventDefault();
+        this.openModal();
     }
 
     handleConfirmDelete(e) {
         e.preventDefault();
-                
-        // axios.delete('/api/user/' + updateInfo.id)
-        // .then(response => {
-        //     console.log(response);
-        // })
-        // .catch(err => {
-        //     console.error(err);
-        // });
-        // this.props.history.push('/deleted');
+        this.closeModal();
+
+        axios({
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            method: "DELETE",
+            url: `/api/user/${this.state.userId}`
+        }).then(deletedResponse => {
+            console.log('=========== frontend ===========');
+            console.log(`user deleted: ${this.state.userEmail}`);
+            console.log('================================');
+            
+            authHelper.deleteUser();
+            this.props.history.push('/login');
+        })
+        .catch(err => {
+            console.error(err);
+        });
     }
 
     render() {
@@ -293,20 +347,37 @@ class Account extends Component {
                     handleUpdateUser={this.handleUpdateUser}
                     handleDeleteUser={this.handleDeleteUser}
                 />
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={styles.modalStyles}
+                    contentLabel='Example Modal'
+                    shouldCloseOnOverlayClick={true}
+                    ariaHideApp={false}
+                >
+                    {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
+                    <p className="confirm-delete-message">
+                        Are you sure you want to delete your account?
+                    </p>
+
+                    <div className="delete-btn-div">
+                        <button
+                            id="confirm-delete-btn"
+                            className="btn btn-default"
+                            onClick={this.handleConfirmDelete}
+                        >Yes</button>
+                        <button
+                            id="exit-delete-btn"
+                            className="btn btn-default"
+                            onClick={this.closeModal}
+                        >No</button>
+                    </div>
+                </Modal>
             </div>
         );
     };
 };
 
 export default Account;
-
-// <dialog className="mdl-dialog" id="confirm-delete-modal">
-//     <h4 className="mdl-dialog__title"></h4>
-//     <div id="delete-modal__content" className="mdl-dialog__content">
-//             Are you sure you want to delete your account?
-//     </div>
-//     <div className="mdl-dialog__actions">
-//         <button type="button" className="mdl-button close-modal">NO</button>
-//         <button id="confirm-delete-btn" type="button" className="mdl-button">YES</button>
-//     </div>
-// </dialog>

@@ -6,35 +6,18 @@
     BACKGROUND
 ******************/
 
-.park-background {
-    position: absolute;
-
-    /*To support older browsers*/
-    height: 100%;
-    width: 100%;
-
-    /* Set the height to match that of the viewport. */
-    height: 100vh;
-
-    /* Set the width to match that of the viewport. */
-    width: 100vw;
-
-    background-image: url('../../assets/img/fall-winter--igor-cibulsky.jpg');
+.park-search-container .hero-img {
+    /* background-image: url('../../assets/img/fall-winter--igor-cibulsky.jpg'); */
+    /* background-image: url('../../assets/img/anton-repponen-103080-unsplash.jpg'); */
+    background-image: url('../../assets/img/luca-bravo-423211-unsplash.jpg');
+    /* background-image: url('../../assets/img/mark-basarab-122141-unsplash.jpg'); */
+    /* background-image: url('../../assets/img/michael-liao-391846-unsplash.jpg'); */
+    /* background-image: url('../../assets/img/teddy-kelley-194162-unsplash.jpg'); */
+    /* background-image: url('../../assets/img/val-vesa-396665-unsplash.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 50% 40%;
-}
-
-.park-background::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    opacity: 0.2;
+    /* background-position: 50% 40%; */
+    background-position: center;
 }
 
 /******************
@@ -88,7 +71,7 @@
     position: absolute;
     top: 0;
     background: rgb(0, 0, 0);
-    opacity: 0.2;
+    opacity: 0.3;
     z-index: 0;
 }
 

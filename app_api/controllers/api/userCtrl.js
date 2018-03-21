@@ -122,12 +122,14 @@ class UserCtrl {
                 id: req.params.id
             }
         })
-            .then(function(response) {
-                console.log(response);
-            })
-            .catch(function(err) {
-                console.error(err);
-            });
+        .then(function(deleteResponse) {
+            console.log(deleteResponse);
+            console.log('====== USER DELETED ======');
+            res.json(deleteResponse);
+        })
+        .catch(function(err) {
+            console.error(err);
+        });
     }
 };
 
