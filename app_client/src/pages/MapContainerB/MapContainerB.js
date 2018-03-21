@@ -38,17 +38,17 @@ const latLng = { lat: 37.7566, lng: -119.5969 }; // can we define latLng as what
 
 export default class SimpleMap extends Component {
 
-    static defaultProps = {
-        center: latLng,
-        zoom: 12,
-        gestureHandling: 'greedy'
-    };
-
     render() {
+        const lat = Number(this.props.latlng.lat);
+        const lng = Number(this.props.latlng.lng);
+
+        const latlng = {lat, lng}
+ 
+        console.log('im the map',latlng);
         return (
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo' }}
-                defaultCenter={this.props.center}
+                defaultCenter={latlng}
                 defaultZoom={this.props.zoom}
                 options={createMapOptions}
             >
@@ -57,11 +57,17 @@ export default class SimpleMap extends Component {
                     text={'label me'}
                 />
                 <Button
-                    latLng={latLng}
+                    latLng={this.props.latlng}
                 />
             </GoogleMapReact>
             
         );
     }
 }
+
+SimpleMap.defaultProps = {
+    // center: latLng,
+    zoom: 12,
+    gestureHandling: 'greedy'
+};
 
