@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LoginForm from '../../components/LoginForm';
 import RegisterForm from '../../components/RegisterForm';
 import axios from 'axios';
+import ControlledCarousel from '../../components/Carousel';
 import './Login.css';
 
 class Login extends Component {
@@ -134,7 +135,7 @@ class Login extends Component {
                 console.log('=====================');
 
                 window.localStorage.setItem('token', response.data.token);
-                this.props.history.push('/dashboard');
+                this.props.history.push('/');
             })
             .catch(err => {
                 console.error(err.response);
@@ -249,7 +250,7 @@ class Login extends Component {
                 console.log(response.data);
                 console.log('=====================');
 
-                this.props.history.push('/');
+                this.props.history.push('/login');
             })
             .catch(err => {
                 console.error(err.response);
@@ -266,7 +267,7 @@ class Login extends Component {
     render() {
         return (
             <div className="login-background">
-                {this.props.location.pathname === '/' ?
+                {this.props.location.pathname === '/login' ?
                     <LoginForm
                         email={this.state.email}
                         password={this.state.password}
@@ -281,6 +282,7 @@ class Login extends Component {
                         handleRegister={this.handleRegister}
                     />
                 }
+                <ControlledCarousel />
             </div>
         );
     };

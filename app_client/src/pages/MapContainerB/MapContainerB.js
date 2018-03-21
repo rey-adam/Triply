@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
 import Button from '../../components/Button/Button';
+
 
 
 function createMapOptions(maps) {
@@ -31,35 +31,43 @@ function createMapOptions(maps) {
     };
 }
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+// const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+const latLng = { lat: 37.7566, lng: -119.5969 }; // can we define latLng as whatever is served when you click on the trip you select on dashboard? Is it an array? TripMarker component perhaps?
 
 export default class SimpleMap extends Component {
 
-    static defaultProps = {
-        center: { lat: 37.7566, lng: -119.5969 },
-        zoom: 12,
-        gestureHandling: 'greedy'
-    };
-
     render() {
+        const lat = Number(this.props.latlng.lat);
+        const lng = Number(this.props.latlng.lng);
+
+        const latlng = {lat, lng}
+ 
+        console.log('im the map',latlng);
         return (
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo' }}
-                defaultCenter={this.props.center}
+                defaultCenter={latlng}
                 defaultZoom={this.props.zoom}
                 options={createMapOptions}
             >
-                <AnyReactComponent
-                    lat={37.8651}
-                    lng={-119.5383}
-                    img='../../../public/assets/images/ballpin.png'
+                {/* <AnyReactComponent
+                    latLng= {latLng}
                     text={'label me'}
-                />
-                <Button
-                    lat={37.8651}
-                    lng={-119.5383}
-                />
+                /> */}
+                {/* <Button
+                    latLng={this.props.latlng}
+                /> */}
             </GoogleMapReact>
+            
         );
     }
 }
+
+SimpleMap.defaultProps = {
+    // center: latLng,
+    zoom: 12,
+    gestureHandling: 'greedy'
+    
+};
+

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import Forecast from 'react-forecast';
+// import Forecast from 'react-forecast';
+import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
-
 import SimpleMap from '../MapContainerB/MapContainerB';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import qs from 'query-string';
@@ -27,7 +27,9 @@ class Dashboard extends Component {
 
     componentDidMount() {
 
-        console.log(this.props.location.search);
+        console.log(
+            
+        );
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
          *                       OUTPUT                        *
          * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -67,7 +69,7 @@ class Dashboard extends Component {
                 weatherLng: locationRes.longitude,
                 weatherPlace: locationRes.name
             });
-            this.props.history.push(`/dashboard?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
+            this.props.history.push(`/?lat=${this.state.weatherLat}&lng=${this.state.weatherLng}&place=${this.state.weatherPlace}`);
             window.location.reload();
         })
         .catch(err => {
@@ -193,7 +195,7 @@ class Dashboard extends Component {
                         <div className="weather-header">
                             <form className="weather-form">
                                 <div className="form-group">
-                                    <input type="text" id="weather-search" placeholder="Zip code, city, or park name" />
+                                    <input type="text" id="weather-search" placeholder="Zip code, city &amp; state, or park name" />
                                     <button
                                         id="weather-btn"
                                         className="btn btn-default"
@@ -204,7 +206,7 @@ class Dashboard extends Component {
                             </form>
                         </div>
                         <div className="weather-content">
-                            <Forecast
+                            <ForecastNew
                                 latitude={this.state.weatherLat}
                                 longitude={this.state.weatherLng}
                                 name={this.state.weatherPlace}
@@ -216,7 +218,8 @@ class Dashboard extends Component {
 
                     {/* google maps */}
                     <div id='mapDiv'>
-                        <SimpleMap />
+                        <SimpleMap latlng={{ lat: this.state.weatherLat, lng: this.state.weatherLng}} />
+                        {/* const latLng = {lat: 37.7566, lng: -119.5969 }; */}
                     </div>
 
                 </div>
