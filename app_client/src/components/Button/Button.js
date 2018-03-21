@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 export default class Button extends React.Component {
     constructor(props) {
         super(props);
@@ -15,12 +14,17 @@ export default class Button extends React.Component {
             counter: prevState.counter + 1
         }));
     };
-
+    
     render() {
         return (
+            <div>
             <button onClick={this.handleClick}>
                 {this.state.counter}
+                    
             </button>
+                {/* <img src={require('./ballpin.png')} /> */}
+
+            </div>
         );
     }
 }
