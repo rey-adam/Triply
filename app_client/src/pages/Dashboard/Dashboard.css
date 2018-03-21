@@ -1,21 +1,299 @@
-#input {
-    width: auto;
-    margin: auto;
+.dash-nav {
+    box-shadow: none;
+    /* border-bottom: 1px solid rgb(207, 207, 207); */
+    border-bottom: 1px solid rgba(184, 184, 184, 0.418);
 }
 
-#tripName{
-    border: 1px solid #aaa;
+.dash-content-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: center;
+    /* display: grid;
+    grid-template: repeat(2, 2fr) / auto; */
+    padding: 30px 50px;
+}
+
+.dash-content-wrapper > div {
+    margin: 20px;
+}
+
+/*******************
+  CREATE TRIP FORM
+*******************/
+
+#create-trip-div {
+    padding: 20px;
+    width: 85vw;
+    height: 75px;
+    margin: 0 auto 20px;
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    border-radius: 3px;
+}
+
+.create-trip-form input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(211, 211, 211) !important;
+    opacity: 1; /* Firefox */
+}
+
+.create-trip-form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(211, 211, 211) !important;
+}
+
+.create-trip-form input::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(211, 211, 211) !important;
+}
+
+.create-trip-form > .form-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.create-trip-form .form-control {
+    border-color: rgba(190, 190, 190, 0.445);
+    box-shadow: none;
+}
+
+.create-trip-form .form-control:focus {
+    border-color: rgba(190, 190, 190, 0.534);
+    -webkit-box-shadow: inset 0 1px 5px rgba(192, 192, 192, 0.212);
+    box-shadow: inset 0 1px 5px rgba(207, 207, 207, 0.212);
+}
+
+.create-trip-form .glyphicon {
+    font-size: 30px;
+    color: rgb(12, 196, 209);
+    margin-left: 10px;
+}
+
+.create-trip-form .glyphicon:hover {
+    font-size: 30px;
+    background-color: rgb(12, 196, 209);
+    border: 1px solid rgb(12, 196, 209);
+    border-radius: 50%;
+    color: white;
+    margin-left: 10px;
+}
+
+/******************
+    USER TRIPS
+******************/
+
+.user-trips {
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    width: 40vw;
+    margin: inherit 0;
+    border-radius: 4px;
+}
+
+.user-trips .trips-header {
+    background-color: rgb(12, 196, 209);
+    color: white;
+    height: 85px;
+    padding: 0; margin: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-align: center;
+}
+
+.user-trips .trips-header p {
+    margin-top: 0;
+    padding-top: 25px;
+    font-size: 26px;
+    font-weight: 400px;
+}
+
+.user-trips #accordion {
+    padding: 10px 30px;
     width: 100%;
-    margin: auto;
-    margin-top: 10px;
-    display: flex;
 }
 
-.new-trip-form {
-    display: flex;
+.user-trips .accordion-link {
+    color: rgb(12, 196, 209);
+    text-align: left;
 }
+
+.user-trips .accordion-link h4 {
+    line-height: 10px;
+}
+
+.user-trips .accordion-link .spacer {
+    margin: auto 10px;
+    font-size: 20px;
+}
+
+.user-trips .accordion-link > h4 > .trip-date {
+    font-size: 14px;
+    /* color: black; */
+    font-weight: 400;
+}
+
+
+/******************
+      WEATHER
+******************/
+
+.weather-div {
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    border-radius: 5px;
+    color: #63757A !important;
+    width: 85vw;
+    /* width: 80vw; */
+    margin: auto;
+    /* -webkit-transition: width 0.7s; Safari
+    transition: width 0.7s; */
+}
+
+/* .weather-div:hover {
+    width: 80vw;
+} */
+
+.weather-header {
+    background-color: rgb(12, 196, 209);
+    color: white;
+    width: 100%;
+    height: 85px;
+    padding-top: 25px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.weather-form {
+    text-align: center;
+}
+
+.weather-form input {
+    background: none;
+    border: 1px solid white;
+    width: 50%;
+    height: 33px;
+    border-radius: 3px;
+    padding-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.weather-form input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white !important;
+    opacity: 1; /* Firefox */
+}
+
+.weather-form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white !important;
+}
+
+.weather-form input::-ms-input-placeholder { /* Microsoft Edge */
+    color: white !important;
+}
+
+.weather-form input:focus {
+    outline: none;
+    outline-offset: 0;
+}
+
+#weather-btn {
+    margin-top: -4px;
+    border: 1px solid white;
+    background: none;
+    color: white;
+    font-size: 13px;
+    height: 33px;
+}
+
+#weather-btn:hover {
+    color: black;
+    background: white;
+}
+
+#weather-btn:focus {
+    outline: none;
+    outline-offset: 0;
+}
+
+.weather-content {
+    padding: 30px 40px 25px;
+}
+
+/******************
+     CALENDAR
+******************/
+
+.Cal__Container__root {
+    box-shadow: 0 1px 3px rgb(184, 184, 184) !important;
+    width: 40vw !important;
+    /* width: 360px !important; */
+    border-bottom-left-radius: 5px !important;
+}
+
+.Cal__Container__listWrapper {
+    border-bottom-right-radius: 5px !important;
+}
+
+.Cal__Header__root {
+    background-color: rgb(12, 196, 209) !important;
+    min-height: 85px !important;
+    height: 85px !important;
+    font-family: 'Montserrat' !important;
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    align-items: initial !important;
+}
+
+.Cal__Header__year {
+    font-size: 16px !important;
+    margin-bottom: 3px !important;
+}
+
+.Cal__Header__day {
+    font-size: 26px !important;
+    line-height: 30px !important;
+}
+.Cal__MonthList__root {
+    height: 250px !important;
+    /* height: 200px !important; */
+}
+
+.Cal__Month__rows {
+    background: none !important;
+}
+
+.Cal__Weekdays__root {
+    background-color: white !important;
+    color: black !important;
+}
+
+.Cal__Weekdays__day {
+    padding: 12.5px 0 !important;
+}
+
+.Cal__Day__selection {
+    background-color: rgb(22, 22, 22) !important;
+    color: white !important;
+}
+
+.Cal__Day__today {
+    color: rgba(184, 184, 184, 0.418) !important;
+}
+
+.Cal__Today__root,
+.Cal__Today__show {
+    background-color: rgba(124, 124, 124, 0.541) !important;
+}
+
+.Cal__Today__chevron {
+    opacity: 0;
+}
+
+/******************
+        MAP
+******************/
 
 #mapDiv {
-    height: 75vh;
-    width: 900px;
+    width: 85vw;
+    height: 60vh;
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+}
+
+#mapDiv > div > div {
+    border-radius: 4px;
 }
