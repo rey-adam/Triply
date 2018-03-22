@@ -2,7 +2,8 @@
 module.exports = function (sequelize, DataTypes) {
 
     const Location = sequelize.define("Location", {
-        name: DataTypes.STRING
+        name: DataTypes.STRING,
+        parkCode: DataTypes.STRING
     }); // END LOCATION CONSTRUCTOR
 
     Location.associate = function (models) {
@@ -11,24 +12,15 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             }
         }); // END LOCATION JOIN TRIP
-    }; // END ASSOCIATION
-
-    // JOINING TRAIL TO LOCATION
-    Location.associate = function (models) {
         Location.hasMany(models.Trail, {
             onDelete: 'cascade'
         }); // END LOCATION JOIN TRAIL
-    }; // END ASSOCIATION
-
-    // JOINING CAMPSITE TO LOCATION
-    Location.associate = function (models) {
         Location.hasMany(models.Campsite, {
             onDelete: 'cascade'
         }); // END LOCATION JOIN CAMPSITE
-    }; // END ASSOCIATION
-
-    // JOINING EATERY TO LOCATION
-    Location.associate = function (models) {
+        Location.hasMany(models.Activity, {
+            onDelete: 'cascade' 
+        }); // END LOCATION JOIN VISITOR CENTER
         Location.hasMany(models.VisitorCenter, {
             onDelete: 'cascade' 
         }); // END LOCATION JOIN VISITOR CENTER

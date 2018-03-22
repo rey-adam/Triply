@@ -33,7 +33,7 @@ module.exports = {
             .Trip
             .findOne({
                 where: {
-                    id: req.params.id
+                    UserId: req.params.id
                 }
             })
             .then(dbTrip => {
