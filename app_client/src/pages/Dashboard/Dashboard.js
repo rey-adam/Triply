@@ -10,15 +10,11 @@ import Modal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
 import REIAPI from "../../helpers/api/reiApi/reiApi";
-
-
 import qs from 'query-string';
 import './Dashboard.css';
-
-<<<<<<< HEAD
 import UserModel from "../../helpers/models/UserModel";
 import authHelper from '../../helpers/authHelper';
-=======
+
 const styles = {
     modalStyles: {
         overlay: {
@@ -45,7 +41,6 @@ const styles = {
         }
     }
 };
->>>>>>> a3055e802411509ee31f08b70b36ad76db333828
 
 class Dashboard extends Component {
     constructor(props) {
