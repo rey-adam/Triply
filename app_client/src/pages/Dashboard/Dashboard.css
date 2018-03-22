@@ -19,6 +19,21 @@
     margin: 20px;
 }
 
+/******************
+       MODAL
+******************/
+
+.new-user-message {
+    margin: 5% auto;
+    font-weight: 500;
+    width: 90%;
+}
+
+#exit-intro-btn {
+    margin: auto 5px;
+    text-transform: uppercase;
+}
+
 /*******************
   CREATE TRIP FORM
 *******************/
@@ -229,6 +244,7 @@
     width: 40vw !important;
     /* width: 360px !important; */
     border-bottom-left-radius: 5px !important;
+    z-index: 0;
 }
 
 .Cal__Container__listWrapper {

@@ -6,9 +6,37 @@ import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
 import SimpleMap from '../MapContainerB/MapContainerB';
+import Modal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import qs from 'query-string';
 import './Dashboard.css';
+
+const styles = {
+    modalStyles: {
+        overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.589)',
+            position: 'fixed',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0'
+        },
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '32vw',
+            height: '33vh',
+            textAlign: 'center',
+            borderRadius: '6px',
+            fontSize: '16px',
+            fontWeight: '400'
+        }
+    }
+};
 
 class Dashboard extends Component {
     constructor(props) {
@@ -18,8 +46,12 @@ class Dashboard extends Component {
             weatherLng: 0,
             weatherPlace: '',
             weatherUnits: 'us',
-            today: new Date()
+            today: new Date(),
+            modalIsOpen: false
         };
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.handleNewUser = this.handleNewUser.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
@@ -47,11 +79,36 @@ class Dashboard extends Component {
         * /search/trails?lat=44.42&lng=-110.58 === {lat: "44.42", lng: "-110.58"}   *
         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+        this.handleNewUser();
+
         this.setState({
             weatherLat: locationObj.lat || 37.84883288,
             weatherLng: locationObj.lng || -119.5571873,
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
+    }
+
+    // =====================================================================================
+    // MODAL FUNCTIONS
+    // =====================================================================================
+    openModal() {
+        this.setState({ modalIsOpen: true });
+    };
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+        window.localStorage.setItem('isNewUser', 1);
+    };
+
+    // =====================================================================================
+    // HANDLE FUNCTIONS
+    // =====================================================================================
+    handleNewUser() {
+        let isNewUser = window.localStorage.getItem('isNewUser');
+        // console.log(`isNewUser: ${isNewUser === null ? true : false}`);
+        if (isNewUser === null) {
+            this.openModal();
+        }
     }
 
     handleChange(event) {
@@ -237,6 +294,28 @@ class Dashboard extends Component {
                     </div>
 
                 </div>
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={styles.modalStyles}
+                    contentLabel='Example Modal'
+                    shouldCloseOnOverlayClick={true}
+                    ariaHideApp={false}
+                >
+                    <p className="new-user-message">
+                        Welcome to Triply!<br />
+                        Ready to start a new adventure?
+                        Enter a name for your trip and click on the check mark to begin!
+                    </p>
+
+                    <button
+                        id="exit-intro-btn"
+                        className="btn btn-default"
+                        onClick={this.closeModal}
+                    >Got it</button>
+                </Modal>
             </div>
         );
     };
