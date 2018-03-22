@@ -249,7 +249,7 @@ class Login extends Component {
                 console.log('post response: registration success');
                 console.log(response.data);
                 console.log('=====================');
-
+                
                 this.props.history.push('/login');
             })
             .catch(err => {
