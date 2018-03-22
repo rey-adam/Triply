@@ -3,14 +3,18 @@ import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
 // import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
-import DateRangePicker from 'react-dates';
 import Modal from 'react-modal';
 // import axios from 'axios';
 import parks from '../../helpers/api/npsApi/parkCodes/parks';
 import './Search.css';
 // APIS 
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
-import MAPAPI from "../../helpers/api/mapsApi/mapsApi";
+import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
+// date picker
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker } from 'react-dates';
+
 
 const styles = {
     modalStyles: {
@@ -108,7 +112,9 @@ class Search extends Component {
                     });
                     this.openModal('hello');
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    console.error(err);
+                });
         };
     }; // END HANDLE SUBMIT
 
@@ -130,7 +136,9 @@ class Search extends Component {
             .then(locationObj => {
                 this.props.history.push(`/search/trails?park=${this.state.userParkCode}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.error(err);
+            });
         }
     }
 
@@ -149,7 +157,9 @@ class Search extends Component {
             };
             return parkObj;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err)
+        });
     }
 
     handleLocationAPIRequest(query) {
