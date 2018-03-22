@@ -167,101 +167,103 @@ class Dashboard extends Component {
                         </form>
                     </div>
 
-                    <div className="user-trips">
-                        <div className="trips-header">
-                            <p>My Trips</p>
-                        </div>
-                        <div id="accordion">
-                            <div className="card">
-                                <div className="card-header" id="headingTwo">
-                                    <h5 className="mb-0">
-                                        <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            <h4>Bday @ Yosemite! <span className="spacer">|</span> <span className="trip-date">Mar 30 2018 - Apr 27 2018</span></h4>
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                <span style={{ fontWeight: 500 }}>Yosemite National Park</span>
+                    <div className="second-row">
+                        <div className="user-trips">
+                            <div className="trips-header">
+                                <p>My Trips</p>
+                            </div>
+                            <div id="accordion">
+                                <div className="card">
+                                    <div className="card-header" id="headingTwo">
+                                        <h5 className="mb-0">
+                                            <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h4>Bday @ Yosemite! <span className="spacer">|</span> <span className="trip-date">Mar 30 2018 - Apr 27 2018</span></h4>
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    <span style={{ fontWeight: 500 }}>Yosemite National Park</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Activity example (hike trail name)
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Activity example (hike trail name)
+                                            </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Visitor Center (visitor center name)
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Visitor Center (visitor center name)
+                                            </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Campsite example (campsite name)
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Campsite example (campsite name)
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div className="card">
+                                    <div className="card-header" id="headingThree">
+                                        <h5 className="mb-0">
+                                            <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h4>Glacier Roadtrip w/ Fam <span className="spacer">|</span> <span className="trip-date">Jan 2 2019 - Feb 3 2019</span></h4>
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    <span style={{ fontWeight: 500 }}>Glacier National Park</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Activity example (hike trail name)
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Visitor Center (visitor center name)
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Campsite example (campsite name)
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div className="card">
-                                <div className="card-header" id="headingThree">
-                                    <h5 className="mb-0">
-                                        <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                            <h4>Glacier Roadtrip w/ Fam <span className="spacer">|</span> <span className="trip-date">Jan 2 2019 - Feb 3 2019</span></h4>
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                <span style={{ fontWeight: 500 }}>Glacier National Park</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Activity example (hike trail name)
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Visitor Center (visitor center name)
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Campsite example (campsite name)
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+
+                        <InfiniteCalendar
+                            selected={this.state.today}
+                            minDate={new Date()}
+                            displayOptions={{ layout: 'portrait' }}
+                        />
                     </div>
-
-                    <InfiniteCalendar
-                        selected={this.state.today}
-                        minDate={new Date()}
-                        displayOptions={{ layout: 'portrait' }}
-                    />
-
+                    
                     <div className="weather-div">
                         <div className="weather-header">
                             <form className="weather-form">
