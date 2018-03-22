@@ -53,6 +53,7 @@ class Dashboard extends Component {
             visitorCenters: [],
             trails: [],
             // END API DATA
+            newTripName: '',
             weatherLat: 0,
             weatherLng: 0,
             weatherPlace: '',
@@ -63,6 +64,7 @@ class Dashboard extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleNewUser = this.handleNewUser.bind(this);
+        this.handleNewTrip = this.handleNewTrip.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
@@ -101,15 +103,19 @@ class Dashboard extends Component {
 
         //UserModel.getOne(authHelper.splitToken().id)
         let userInfo;
-        UserModel.getOne(1)
+        UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
 
             userInfo = res.data;
             
             console.log("user info data");
+            console.log(userInfo); // { id: 3, email: 'melodie@chi.com' }
+            console.log(this.state.userData); // {}
 
-            this.setState({userData: userInfo});
+            this.setState({ userData: userInfo });
+            console.log(this.state.userData); // { id: 3, email: 'melodie@chi.com' }
 
+            // .Trips/.Locations do not exist ^
             const parkCode = this.state.userData.Trips[0].Locations[0].parkCode;
 
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
@@ -211,8 +217,13 @@ class Dashboard extends Component {
         }
     }
 
+    handleNewTrip() {
+        console.log(this.state.newTripName);
+    }
+
     handleChange(event) {
-        this.setState({ value: event.target.value });
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
     }
 
     handleZipSubmit(e) {
@@ -261,8 +272,21 @@ class Dashboard extends Component {
                     <div id="create-trip-div">
                         <form className="create-trip-form">
                             <div className="form-group">
-                                <input type="text" id="new-trip-name" className="form-control" placeholder="New trip name..." />
-                                <Link to='#'><span className="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></Link>
+                                <input
+                                    type="text"
+                                    id="new-trip-name"
+                                    className="form-control"
+                                    name="newTripName"
+                                    value={this.state.newTripName}
+                                    onChange={this.handleChange}
+                                    placeholder="New trip name..." />
+                                <Link to='#'>
+                                    <span
+                                        className="glyphicon glyphicon-ok-sign"
+                                        aria-hidden="true"
+                                        onClick={this.handleNewTrip}>
+                                    </span>
+                                </Link>
                             </div>
                         </form>
                     </div>
