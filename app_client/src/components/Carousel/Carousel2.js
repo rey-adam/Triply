@@ -9,7 +9,7 @@ class Carousel extends Component {
                 <div id="carousel-example-generic" className="carousel slide" data-ride="carousel">
 
                     {/* <!-- Indicators --> */}
-                    <ol className="carousel-indicators">
+                    {/* <ol className="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
@@ -20,7 +20,7 @@ class Carousel extends Component {
                         <li data-target="#carousel-example-generic" data-slide-to="7"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="8"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="9"></li>
-                    </ol>
+                    </ol> */}
 
                     {/* <!-- Wrapper for slides --> */}
                     <div className="carousel-inner">

@@ -5,8 +5,8 @@ import Navbar from '../../components/Navbar';
 import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
-
 import SimpleMap from '../MapContainerB/MapContainerB';
+import Modal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
 import REIAPI from "../../helpers/api/reiApi/reiApi";
@@ -15,8 +15,37 @@ import REIAPI from "../../helpers/api/reiApi/reiApi";
 import qs from 'query-string';
 import './Dashboard.css';
 
+<<<<<<< HEAD
 import UserModel from "../../helpers/models/UserModel";
 import authHelper from '../../helpers/authHelper';
+=======
+const styles = {
+    modalStyles: {
+        overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.589)',
+            position: 'fixed',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0'
+        },
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            width: '32vw',
+            height: '33vh',
+            textAlign: 'center',
+            borderRadius: '6px',
+            fontSize: '16px',
+            fontWeight: '400'
+        }
+    }
+};
+>>>>>>> a3055e802411509ee31f08b70b36ad76db333828
 
 class Dashboard extends Component {
     constructor(props) {
@@ -33,8 +62,12 @@ class Dashboard extends Component {
             weatherLng: 0,
             weatherPlace: '',
             weatherUnits: 'us',
-            today: new Date()
+            today: new Date(),
+            modalIsOpen: false
         };
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.handleNewUser = this.handleNewUser.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
@@ -42,7 +75,9 @@ class Dashboard extends Component {
 
     componentDidMount() {
 
-        console.log(this.props.location.search);
+        console.log(
+            
+        );
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
          *                       OUTPUT                        *
          * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -59,6 +94,8 @@ class Dashboard extends Component {
         * /search/trails === {}                                                     *
         * /search/trails?lat=44.42&lng=-110.58 === {lat: "44.42", lng: "-110.58"}   *
         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+        this.handleNewUser();
 
         this.setState({
             weatherLat: locationObj.lat || 37.84883288,
@@ -156,6 +193,29 @@ class Dashboard extends Component {
 
     }; // END MOUNT
 
+    // =====================================================================================
+    // MODAL FUNCTIONS
+    // =====================================================================================
+    openModal() {
+        this.setState({ modalIsOpen: true });
+    };
+
+    closeModal() {
+        this.setState({ modalIsOpen: false });
+        window.localStorage.setItem('isNewUser', 1);
+    };
+
+    // =====================================================================================
+    // HANDLE FUNCTIONS
+    // =====================================================================================
+    handleNewUser() {
+        let isNewUser = window.localStorage.getItem('isNewUser');
+        // console.log(`isNewUser: ${isNewUser === null ? true : false}`);
+        if (isNewUser === null) {
+            this.openModal();
+        }
+    }
+
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
@@ -212,92 +272,108 @@ class Dashboard extends Component {
                         </form>
                     </div>
 
-                    <div className="user-trips">
-                        <div className="trips-header">
-                            <p>My Trips</p>
-                        </div>
-                        <div id="accordion">
-                            <div className="card">
-                                <div className="card-header" id="headingTwo">
-                                    <h5 className="mb-0">
-                                        <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            <h4>Yosemite National Park <span className="spacer">|</span> <span className="trip-date">Mar 30 2018 - Apr 27 2018</span></h4>
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Activity example (hike trail name)
+                    <div className="second-row">
+                        <div className="user-trips">
+                            <div className="trips-header">
+                                <p>My Trips</p>
+                            </div>
+                            <div id="accordion">
+                                <div className="card">
+                                    <div className="card-header" id="headingTwo">
+                                        <h5 className="mb-0">
+                                            <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h4>Bday @ Yosemite! <span className="spacer">|</span> <span className="trip-date">Mar 30 2018 - Apr 27 2018</span></h4>
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    <span style={{ fontWeight: 500 }}>Yosemite National Park</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Visitor Center (visitor center name)
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Activity example (hike trail name)
+                                            </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Visitor Center (visitor center name)
+                                            </div>
+                                            </div>
+                                        </div>
 
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Campsite example (campsite name)
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Campsite example (campsite name)
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div className="card">
+                                    <div className="card-header" id="headingThree">
+                                        <h5 className="mb-0">
+                                            <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h4>Glacier Roadtrip w/ Fam <span className="spacer">|</span> <span className="trip-date">Jan 2 2019 - Feb 3 2019</span></h4>
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    <span style={{ fontWeight: 500 }}>Glacier National Park</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Activity example (hike trail name)
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Visitor Center (visitor center name)
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div className="card-body">
+                                            <div className="panel panel-default">
+                                                <div className="panel-body">
+                                                    Campsite example (campsite name)
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div className="card">
-                                <div className="card-header" id="headingThree">
-                                    <h5 className="mb-0">
-                                        <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                            <h4>Glacier National Park <span className="spacer">|</span> <span className="trip-date">Jan 2 2019 - Feb 3 2019</span></h4>
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Activity example (hike trail name)
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Visitor Center (visitor center name)
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="card-body">
-                                        <div className="panel panel-default">
-                                            <div className="panel-body">
-                                                Campsite example (campsite name)
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+
+                        <InfiniteCalendar
+                            selected={this.state.today}
+                            minDate={new Date()}
+                            displayOptions={{ layout: 'portrait' }}
+                        />
                     </div>
-
-                    <InfiniteCalendar
-                        selected={this.state.today}
-                        minDate={new Date()}
-                        displayOptions={{ layout: 'portrait' }}
-                    />
-
+                    
                     <div className="weather-div">
                         <div className="weather-header">
                             <form className="weather-form">
                                 <div className="form-group">
-                                    <input type="text" id="weather-search" placeholder="Zip code, city, or park name" />
+                                    <input type="text" id="weather-search" placeholder="Zip code, city &amp; state, or park name" />
                                     <button
                                         id="weather-btn"
                                         className="btn btn-default"
@@ -320,10 +396,33 @@ class Dashboard extends Component {
 
                     {/* google maps */}
                     <div id='mapDiv'>
-                        <SimpleMap />
+                        <SimpleMap latlng={{ lat: this.state.weatherLat, lng: this.state.weatherLng}} />
+                        {/* const latLng = {lat: 37.7566, lng: -119.5969 }; */}
                     </div>
 
                 </div>
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={styles.modalStyles}
+                    contentLabel='Example Modal'
+                    shouldCloseOnOverlayClick={true}
+                    ariaHideApp={false}
+                >
+                    <p className="new-user-message">
+                        Welcome to Triply!<br />
+                        Ready to start a new adventure?
+                        Enter a name for your trip and click on the check mark to begin!
+                    </p>
+
+                    <button
+                        id="exit-intro-btn"
+                        className="btn btn-default"
+                        onClick={this.closeModal}
+                    >Got it</button>
+                </Modal>
             </div>
         );
     };

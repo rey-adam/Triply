@@ -5,11 +5,13 @@
     border-radius: 4px;
     background: white;
     box-shadow: 0 1px 3px rgb(184, 184, 184);
-    margin: 5% auto 0;
+    margin: 6.5rem auto 0;
 }
 
 .account-form-header {
-    background-color: rgb(12, 196, 209);
+    /* background-color: rgb(12, 196, 209); */
+    /* background-color: rgb(2, 96, 204); */
+    background-color: rgb(2, 204, 204);
     color: white;
     height: 85px;
     padding: 0; margin: 0;
@@ -27,7 +29,7 @@
 
 #account-form {
     width: 100%;
-    margin: 15px auto 15px 5%;
+    margin: 15px auto 15px;
     padding: 20px 40px 90px;
 }
 
@@ -36,14 +38,13 @@
 }
 
 #account-form input {
-    width: 90% !important;
     height: 37px;
     border-color: rgb(221, 221, 221);
     margin-bottom: 20px;
 }
 
 .account-btn-div {
-    width: 90%;
+    width: 100%;
 }
 
 #delete-account-btn,
@@ -53,6 +54,7 @@
     height: 37px;
     font-size: 13px;
     text-transform: uppercase;
+    margin-top: 10px;
 }
 
 #delete-account-btn {
@@ -60,9 +62,9 @@
 }
 
 #delete-account-btn:hover {
-    background: rgba(241, 6, 6, 0.863);
+    background: rgb(241, 6, 6);
     color: white;
-    border: none;
+    border-color: white;
 }
 
 #update-account-btn {
@@ -71,44 +73,21 @@
 }
 
 #update-account-btn:hover {
-    background: rgb(0, 218, 189);
+    background: rgb(0, 212, 184);
     color: white;
-    border: none;
+    border-color: white;
 }
 
-#confirm-delete-modal {
-    width: 400px;
-    padding-left: 25px;
-}
+/******************
+   MEDIA QUERIES
+******************/
 
-#delete-modal__content {
-    font-size: 18px;
-    line-height: 22px;
-}
+@media screen and (max-width: 768px) {
+    .account-form-div {
+        width: 80%;
+    }
 
-.mdl-button:focus:not(:active) {
-    background: none;
-}
-
-.close-modal {
-    background: white;
-    color: black;
-}
-
-.close-modal:hover {
-    background: rgba(158, 158, 158, .2) !important;
-}
-
-.mdl-layout-title {
-    margin-top: 15px;
-    margin-left: -20px;
-}
-
-.mdl-layout-title a:hover {
-    text-decoration: none;
-}
-
-.mdl-layout-title,
-h4 {
-    margin-bottom: 10px;
+    .account-btn-div {
+        width: 100%;
+    }
 }

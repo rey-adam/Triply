@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-
-export default class Button extends React.Component {
+export default class Button extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,12 +14,17 @@ export default class Button extends React.Component {
             counter: prevState.counter + 1
         }));
     };
-
+    
     render() {
         return (
-            <button className="google-maps-btn" onClick={this.handleClick}>
+            <div>
+            <button onClick={this.handleClick}>
                 {this.state.counter}
+                    
             </button>
+                {/* <img src={require('./ballpin.png')} /> */}
+
+            </div>
         );
     }
 }

@@ -3,13 +3,13 @@
 // =====================================================================================
 const express = require('express')
     , router = express.Router()
-    , ctrl = require('../../controllers/auth/authCtrl');
+    , authCtrl = require('../../controllers/auth/authCtrl');
 
 // =====================================================================================
 // ROUTES
 // =====================================================================================
-router.post('/register', ctrl.register);
-router.post('/login', ctrl.login);
+router.post('/register', authCtrl.register);
+router.post('/login', authCtrl.login);
 
 // =====================================================================================
 // EXPORT

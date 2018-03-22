@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
-import ControlledCarousel from '../../components/Carousel';
+import Hero from '../../components/Hero';
+// import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import DateRangePicker from 'react-dates';
 import Modal from 'react-modal';
@@ -167,9 +168,10 @@ class Search extends Component {
 
     render() {
         return (
-            <div style={{ height: '100%' }}>
+            <div className="park-search-container" style={{ height: '100%' }}>
                 <Navbar />
                 {/* <ControlledCarousel /> */}
+                <Hero />
 
                 <SelectWrapper>
                     <form id="park-form" className="select-form">
