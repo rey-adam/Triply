@@ -32,7 +32,9 @@ class Dashboard extends Component {
 
     componentDidMount() {
 
-        console.log(this.props.location.search);
+        console.log(
+            
+        );
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
          *                       OUTPUT                        *
          * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -241,7 +243,8 @@ class Dashboard extends Component {
 
                     {/* google maps */}
                     <div id='mapDiv'>
-                        <SimpleMap />
+                        <SimpleMap latlng={{ lat: this.state.weatherLat, lng: this.state.weatherLng}} />
+                        {/* const latLng = {lat: 37.7566, lng: -119.5969 }; */}
                     </div>
 
                 </div>
