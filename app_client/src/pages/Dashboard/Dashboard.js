@@ -8,9 +8,17 @@ import 'react-infinite-calendar/styles.css'; // Make sure to import the default 
 import SimpleMap from '../MapContainerB/MapContainerB';
 import Modal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
+import NPSAPI from "../../helpers/api/npsApi/npsAPI";
+import REIAPI from "../../helpers/api/reiApi/reiApi";
+
+
 import qs from 'query-string';
 import './Dashboard.css';
 
+<<<<<<< HEAD
+import UserModel from "../../helpers/models/UserModel";
+import authHelper from '../../helpers/authHelper';
+=======
 const styles = {
     modalStyles: {
         overlay: {
@@ -37,11 +45,19 @@ const styles = {
         }
     }
 };
+>>>>>>> a3055e802411509ee31f08b70b36ad76db333828
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // API DATA
+            userData: {},
+            camps: [],
+            activities: [],
+            visitorCenters: [],
+            trails: [],
+            // END API DATA
             weatherLat: 0,
             weatherLng: 0,
             weatherPlace: '',
@@ -86,7 +102,96 @@ class Dashboard extends Component {
             weatherLng: locationObj.lng || -119.5571873,
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
-    }
+
+
+        //UserModel.getOne(authHelper.splitToken().id)
+        let userInfo;
+        UserModel.getOne(1)
+        .then(res => {
+
+            userInfo = res.data;
+            
+            console.log("user info data");
+
+            this.setState({userData: userInfo});
+
+            const parkCode = this.state.userData.Trips[0].Locations[0].parkCode;
+
+            // RETURNING THE NATIONAL PARK API CAMPSITE CALL
+            return NPSAPI.allCamp();
+        })
+        .then(npsRes => {
+            // better idea to use seperate queries based on id from user info
+            // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
+            console.log("=============== ALL CAMPS API ==============");
+            
+            userInfo.Trips.forEach(trip => {
+                trip.Locations.forEach(loc => {
+                    const campsites = npsRes.data.data.filter(elem => {
+                        const val = loc.Campsites.find(camp => {
+                            return camp.campId === elem.id
+                        })
+                        return val != null;
+                    }); // END  
+
+                    console.log(campsites);
+                    this.state.camps.push(campsites);
+                }); // END FOR EACH
+            }); // END FOR EACH
+            
+            return NPSAPI.visitorCenter();
+
+        }).then(npsRes => {
+            // better idea to use seperate queries based on id from user info
+            // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
+            console.log("=============== VISITOR CENTER API ==============");
+            
+            userInfo.Trips.forEach(trip => {
+                trip.Locations.forEach(loc => {
+                    const visitorcenter = npsRes.data.data.filter(elem => {
+                        const val = loc.VisitorCenters.find(center => {
+                            return center.centerId === elem.id
+                        });
+                        return val != null;
+                    }); // END  
+
+                    console.log(visitorcenter);
+                    this.state.visitorCenters.push(visitorcenter);
+                }); // END FOR EACH
+            }); // END FOR EACH
+
+            return NPSAPI.event();
+
+        }).then(npsRes => {
+            // better idea to use seperate queries based on id from user info
+            // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
+            console.log("=============== EVENTS API ==============");
+            
+            userInfo.Trips.forEach(trip => {
+                trip.Locations.forEach(loc => {
+                    const events = npsRes.data.data.filter(elem => {
+                        const val = loc.Activities.find(events => {
+                            return events.eventId === elem.id
+                        });
+                        return val != null;
+                    }); // END  
+
+                    console.log(events);
+                    this.state.activities.push(events);
+                }); // END FOR EACH
+            }); // END FOR EACH
+
+            return NPSAPI.park("yose");
+
+        }).then(npsApi => {
+            console.log(npsApi.data.data);
+
+
+        })
+        .catch(err => console.error(err));
+
+
+    }; // END MOUNT
 
     // =====================================================================================
     // MODAL FUNCTIONS
