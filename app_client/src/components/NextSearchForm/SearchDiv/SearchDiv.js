@@ -27,7 +27,7 @@ const styles = {
             marginTop: '1%',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '60%',
+            width: '70%',
             height: '70%',
             textAlign: 'center',
             borderRadius: '4px',
@@ -69,12 +69,34 @@ class SearchDiv extends Component {
             campsites: [],
             campId: '',
             campName: '',
-            campSum: '',
+            campDesc: '',
             campDir: '',
             campParkCode: '',
             campURL: '',
+            campInternet: '',
+            campShowers: '',
+            campToilets: '',
+            campElectricalHookups: '',
+            campTotalSites: '',
+            campFoodStorageLockers: '',
+            campWeather: '',
+            campRegOverview: '',
+            campRegURL: '',
+            campResDesc: '',
+            campResURL: '',
 
-            visitorCenters: []
+            visitorCenters: [],
+            VCId: '',
+            VCName: '',
+            VCURL: '',
+            VCParkCode: '',
+            VCAddress: '',
+            VCPhone: '',
+            VCEmail: '',
+            VCHours: '',
+            VCDescription: '',
+            VCDirections: '',
+            VCDirectionsURL: ''
         }
         this.openModal = this.openModal.bind(this);
         // this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -90,6 +112,13 @@ class SearchDiv extends Component {
             trails: this.props.trails
             // this.openModal('hello');
         });
+        const userInfo = {
+            token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
+            id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+            email: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).email
+        };
+
+        console.log(userInfo);
     }
 
     openModal(message) {
@@ -116,6 +145,9 @@ class SearchDiv extends Component {
         } else {
             console.log(`${userTrailIndex}, ${userTrailId}, ${userTrailName}`);
             const userTrail = this.props.trails[userTrailIndex];
+
+            const url = userTrail.url === "" ? 'N/A' : userTrail.url;
+
             const userTrailObj = {
                 id: userTrail.id,
                 name: userTrail.name,
@@ -126,7 +158,7 @@ class SearchDiv extends Component {
                 length: userTrail.length,
                 stars: userTrail.stars,
                 starVotes: userTrail.starVotes,
-                url: userTrail.url
+                url: url
             };
 
             this.setState({ 
@@ -164,6 +196,7 @@ class SearchDiv extends Component {
             const startDate = recurrence.startDate;
             const frequency = recurrence.frequency;
             const endDate = recurrence.endDate;
+            const url = userActivity.url === "" ? 'N/A' : userActivity.url;
 
             const userActivityObj = {
                 id: userActivity.id,
@@ -176,7 +209,7 @@ class SearchDiv extends Component {
                 frequency: frequency,
                 endDate: endDate,
                 parkCode: userActivity.parkCode,
-                url: userActivity.url
+                url: url
             };
 
             this.setState({
@@ -211,22 +244,55 @@ class SearchDiv extends Component {
             const userCamp = this.props.campsites[userCampIndex];
             console.log(userCamp);
 
+            const description = userCamp.description === "" ? 'N/A' : userCamp.description;
+            const directions = userCamp.directionsOverview === "" ? 'N/A' : userCamp.directionsOverview;
+            const url = userCamp.url === undefined ? 'N/A' : userCamp.url;
+            const internet = userCamp.accessibility.internetInfo === "" ? 'N/A' : userCamp.accessibility.internetInfo;
+            const foodStorageLockers = userCamp.amenities.foodStorageLockers === false ? 'No' : userCamp.amenities.foodStorageLockers === true ? 'Yes' : 'N/A';
+            const weather = userCamp.weatherOverview === "" ? 'N/A' : userCamp.weatherOverview;
+            const regOverview = userCamp.regulationsOverview === "" ? 'N/A' : userCamp.regulationsOverview;
+            const regURL = userCamp.regulationsUrl === "" ? 'N/A' : userCamp.regulationsUrl;
+            const resDesc = userCamp.reservationsDescription === "" ? 'N/A' : userCamp.reservationsDescription;
+            const resURL = userCamp.reservationsUrl === "" ? 'N/A' : userCamp.reservationsUrl;
+
             const userCampObj = {
                 id: userCamp.id,
                 name: userCamp.name,
-                summary: userCamp.description,
-                directions: userCamp.directionsOverview,
+                description: description,
+                directions: directions,
                 parkCode: userCamp.parkCode,
-                url: userCamp.url
+                url: url,
+                internet: internet,
+                showers: userCamp.amenities.showers[0],
+                toilets: userCamp.amenities.toilets[0],
+                electricalHookups: userCamp.campsites.electricalHookups,
+                totalSites: userCamp.campsites.totalSites,
+                foodStorageLockers: foodStorageLockers,
+                weather: weather,
+                regOverview: regOverview,
+                regURL: regURL,
+                resDesc: resDesc,
+                resURL: resURL
             };
 
             this.setState({
                 campId: userCampObj.id,
                 campName: userCampObj.name,
-                campSum: userCampObj.summary,
+                campDesc: userCampObj.description,
                 campDir: userCampObj.directions,
                 campParkCode: userCampObj.parkCode,
-                campURL: userCampObj.url
+                campURL: userCampObj.url,
+                campInternet: userCampObj.internet,
+                campShowers: userCampObj.showers,
+                campToilets: userCampObj.toilets,
+                campElectricalHookups: userCampObj.electricalHookups,
+                campTotalSites: userCampObj.totalSites,
+                campFoodStorageLockers: userCampObj.foodStorageLockers,
+                campWeather: userCampObj.weather,
+                campRegOverview: userCampObj.regOverview,
+                campRegURL: userCampObj.regURL,
+                campResDesc: userCampObj.resDesc,
+                campResURL: userCampObj.resURL,
             });
 
             console.log(userCampObj);
@@ -236,6 +302,57 @@ class SearchDiv extends Component {
 
     handleVCSubmit(e) {
         e.preventDefault();
+        const visitorCenters = document.getElementById("visitor-select");
+        const userVCId = visitorCenters.options[visitorCenters.selectedIndex].value;
+        const userVCIndex = visitorCenters.options[visitorCenters.selectedIndex].getAttribute('data-index');
+        const userVCName = visitorCenters.options[visitorCenters.selectedIndex].text;
+        if (userVCName === 'Choose a visitor center...') {
+            alert('Please choose a visitor center');
+        } else {
+            console.log(`${userVCIndex}, ${userVCId}, ${userVCName}`);
+            const userVC = this.props.visitorCenters[userVCIndex];
+            console.log(userVC);
+
+            const address = userVC.addresses.length === 0 ? 'N/A' : userVC.addresses[0];
+            const phone = userVC.contacts.phoneNumbers.length === 0 ? 'N/A' : userVC.contacts.phoneNumbers[0];
+            const email = userVC.contacts.emailAddresses.length === 0 ? 'N/A' : userVC.contacts.emailAddresses[0];
+            const description = userVC.description === "" ? 'N/A' : userVC.description;
+            const directions = userVC.directionsInfo === "" ? 'N/A' : userVC.directionsInfo;
+            const directionsURL = userVC.directionsURL === "" ? 'N/A' : userVC.directionsURL;
+            const hours = userVC.operatingHours.length === 0 ? 'N/A' : userVC.operatingHours[0];
+            const url = userVC.url === "" ? 'N/A' : userVC.url;
+
+            const userVCObj = {
+                id: userVC.id,
+                name: userVC.name,
+                url: url,
+                parkCode: userVC.parkCode,
+                address: address,
+                phone: phone,
+                email: email,
+                hours: hours,
+                description: description,
+                directions: directions,
+                directionsURL: directionsURL
+            };
+
+            this.setState({
+                VCId: userVCObj.id,
+                VCName: userVCObj.name,
+                VCURL: userVCObj.url,
+                VCParkCode: userVCObj.parkCode,
+                VCAddress: userVCObj.address,
+                VCPhone: userVCObj.phone,
+                VCEmail: userVCObj.email,
+                VCHours: userVCObj.hours,
+                VCDescription: userVCObj.description,
+                VCDirections: userVCObj.directions,
+                VCDirectionsURL: userVCObj.directionsURL
+            });
+
+            console.log(userVCObj);
+            this.openModal('visitor center');
+        }
     }
 
     render() {
@@ -260,7 +377,7 @@ class SearchDiv extends Component {
                                         window.location.pathname === '/search/campsites' ? 'campsite-' :
                                             window.location.pathname === '/search/visitor' ? 'visitor-' :
                                                 ''}select`} className="form-control select-options">
-                                    
+
                                     <option>
                                         {`${window.location.pathname === '/search/trails' ? 'Choose a trail...' :
                                             window.location.pathname === '/search/activities' ? 'Choose an activity...' :
@@ -269,67 +386,67 @@ class SearchDiv extends Component {
                                                         'Choose a category...'}`}
                                     </option>
 
-                                    {window.location.pathname === '/search/trails' ? 
+                                    {window.location.pathname === '/search/trails' ?
                                         this.props.trails.length === 0 ? (
                                             <option disabled>No trails available</option>
                                         ) :
-                                        this.props.trails.map((trail, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={trail.id}
-                                                    value={trail.id}>
-                                                    {trail.name}
-                                                </option>
-                                            )
-                                        })
+                                            this.props.trails.map((trail, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={trail.id}
+                                                        value={trail.id}>
+                                                        {trail.name}
+                                                    </option>
+                                                )
+                                            })
                                     : window.location.pathname === '/search/activities' ?
                                         this.props.activities.length === 0 ? (
                                             <option disabled>No activities available</option>
                                         ) :
-                                        this.props.activities.map((act, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={act.id}
-                                                    value={act.id}>
-                                                    {act.title}
-                                                </option>
-                                            )
-                                        }) 
+                                            this.props.activities.map((act, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={act.id}
+                                                        value={act.id}>
+                                                        {act.title}
+                                                    </option>
+                                                )
+                                            })
                                     : window.location.pathname === '/search/campsites' ?
                                         this.props.campsites.length === 0 ? (
                                             <option disabled>No campsites available</option>
                                         ) :
-                                        this.props.campsites.map((camp, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={camp.id}
-                                                    value={camp.id}>
-                                                    {camp.name}
-                                                </option>
-                                            )
-                                        }) 
+                                            this.props.campsites.map((camp, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={camp.id}
+                                                        value={camp.id}>
+                                                        {camp.name}
+                                                    </option>
+                                                )
+                                            })
                                     : window.location.pathname === '/search/visitor' ?
                                         this.props.visitorCenters.length === 0 ? (
                                             <option disabled>No visitor centers available</option>
                                         ) :
-                                        this.props.visitorCenters.map((vc, i) => {
-                                            return (
-                                                <option
-                                                    key={i}
-                                                    data-index={i}
-                                                    id={vc.id}
-                                                    value={vc.id}>
-                                                    {vc.name}
-                                                </option>
-                                            )
-                                        }) : ''}
-                                    
+                                            this.props.visitorCenters.map((vc, i) => {
+                                                return (
+                                                    <option
+                                                        key={i}
+                                                        data-index={i}
+                                                        id={vc.id}
+                                                        value={vc.id}>
+                                                        {vc.name}
+                                                    </option>
+                                                )
+                                            }) : ''}
+
                                 </select>
                             </div>
 
@@ -343,18 +460,18 @@ class SearchDiv extends Component {
                                 type="submit"
                                 onClick={window.location.pathname === '/search/trails' ?
                                     this.handleTrailSubmit :
-                                        window.location.pathname === '/search/activities' ?
-                                            this.handleActivitySubmit :
-                                            window.location.pathname === '/search/campsites' ?
-                                                this.handleCampSubmit :
-                                                window.location.pathname === '/search/visitor' ?
-                                                    this.handleVCSubmit : ''}
+                                    window.location.pathname === '/search/activities' ?
+                                        this.handleActivitySubmit :
+                                        window.location.pathname === '/search/campsites' ?
+                                            this.handleCampSubmit :
+                                            window.location.pathname === '/search/visitor' ?
+                                                this.handleVCSubmit : ''}
                             >Submit</button>
                         </form>
                     </SelectWrapper>
                 </div>
 
-                
+
                 {/* *  * * * * * * * * * * * * * * * * * * * * * */}
                 {/*                                              */}
                 {/*   DYNAMICALLY RENDER MODALS BASED ON ROUTES  */}
@@ -362,7 +479,7 @@ class SearchDiv extends Component {
                 {/* *  * * * * * * * * * * * * * * * * * * * * * */}
 
                 {window.location.pathname === '/search/trails' ?
-                    
+
                     <Modal
                         isOpen={this.state.modalIsOpen}
                         onAfterOpen={this.afterOpenModal}
@@ -424,7 +541,15 @@ class SearchDiv extends Component {
                                     </tr>
                                     <tr>
                                         <td>Site</td>
-                                        <td><a href={this.state.trailURL} target="_blank">{this.state.trailURL}</a></td>
+                                        {this.state.trailURL === 'N/A' ?
+                                            <td>{this.state.trailURL}</td>
+                                            :
+                                            <td>
+                                                <a href={this.state.trailURL} target="_blank">
+                                                    {this.state.trailURL}
+                                                </a>
+                                            </td>
+                                        }
                                     </tr>
 
 
@@ -437,219 +562,297 @@ class SearchDiv extends Component {
                             onClick={this.closeModal}
                         >Back</button>
                     </Modal>
-                    
-                : window.location.pathname === '/search/activities' ?
 
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={styles.modalStyles}
-                        contentLabel='Example Modal'
-                        shouldCloseOnOverlayClick={true}
-                        ariaHideApp={false}
-                    >
-                        {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
-                        <h3 className="modal-park-name">
-                            {this.state.activityName}
+                    : window.location.pathname === '/search/activities' ?
+
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            style={styles.modalStyles}
+                            contentLabel='Example Modal'
+                            shouldCloseOnOverlayClick={true}
+                            ariaHideApp={false}
+                        >
+                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
+                            <h3 className="modal-park-name">
+                                {this.state.activityName}
+                                <button
+                                    id="confirm-activity-btn"
+                                    className='btn btn-default confirm-btn'
+                                    onClick={this.handleModalConfirm}
+                                >Add</button>
+                            </h3>
+                            <div className="table-responsive">
+                                <table className="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Summary</td>
+                                            <td>{this.state.activitySum}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dates</td>
+                                            <td>{this.state.activityDates}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time</td>
+                                            <td>{this.state.activityTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Location</td>
+                                            <td>{this.state.activityLoc}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Site</td>
+                                            {this.state.activityURL === 'N/A' ?
+                                                <td>{this.state.activityURL}</td>
+                                                :
+                                                <td>
+                                                    <a href={this.state.activityURL} target="_blank">
+                                                        {this.state.activityURL}
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
                             <button
-                                id="confirm-activity-btn"
-                                className='btn btn-default confirm-btn'
-                                onClick={this.handleModalConfirm}
-                            >Add</button>
-                        </h3>
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td>Summary</td>
-                                        <td>{this.state.activitySum}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dates</td>
-                                        <td>{this.state.activityDates}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Time</td>
-                                        <td>{this.state.activityTime}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Location</td>
-                                        <td>{this.state.activityLoc}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Site</td>
-                                        <td><a href={this.state.activityURL} target="_blank">{this.state.activityURL}</a></td>
-                                    </tr>
+                                id="close-modal-btn"
+                                className='btn btn-default'
+                                onClick={this.closeModal}
+                            >Back</button>
+                        </Modal>
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <button
-                            id="close-modal-btn"
-                            className='btn btn-default'
-                            onClick={this.closeModal}
-                        >Back</button>
-                    </Modal> 
-                    
-                : window.location.pathname === '/search/campsites' ?
+                    : window.location.pathname === '/search/campsites' ?
 
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={styles.modalStyles}
-                        contentLabel='Example Modal'
-                        shouldCloseOnOverlayClick={true}
-                        ariaHideApp={false}
-                    >
-                        {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
-                        <h3 className="modal-park-name">
-                            {this.state.trailName}
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            style={styles.modalStyles}
+                            contentLabel='Example Modal'
+                            shouldCloseOnOverlayClick={true}
+                            ariaHideApp={false}
+                        >
+                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
+                            <h3 className="modal-park-name">
+                                {this.state.campName}
+                                <button
+                                    id="confirm-park-btn"
+                                    className='btn btn-default confirm-btn'
+                                    onClick={this.handleModalConfirm}
+                                >Add</button>
+                            </h3>
+                            <div className="table-responsive">
+                                <table className="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Description</td>
+                                            <td>{this.state.campDesc}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Sites</td>
+                                            <td>{this.state.campTotalSites}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Internet</td>
+                                            <td>{this.state.campInternet}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Showers</td>
+                                            <td>{this.state.campShowers}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Toilets</td>
+                                            <td>{this.state.campToilets}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Electrical Hookups</td>
+                                            <td>{this.state.campElectricalHookups}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Food Storage Lockers</td>
+                                            <td>{this.state.campFoodStorageLockers}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Directions</td>
+                                            <td>{this.state.campDir}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weather</td>
+                                            {this.state.campWeather.includes('http') ?
+                                                <td>
+                                                    <a href={this.state.campWeather} target="_blank">
+                                                        {this.state.campWeather}
+                                                    </a>
+                                                </td>
+                                                :
+                                                <td>{this.state.campWeather}</td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Regulations</td>
+                                            {this.state.campRegOverview === 'N/A' && this.state.campRegURL === 'N/A' ?
+                                                <td>{this.state.campRegOverview}</td>
+
+                                                : this.state.campRegOverview === 'N/A' && this.state.campRegURL !== 'N/A' ?
+                                                    <td>{this.state.campRegURL}</td>
+
+                                                    : this.state.campRegOverview !== 'N/A' && this.state.campRegURL === 'N/A' ?
+                                                        <td>
+                                                            <a href={this.state.campRegURL}>
+                                                                {this.state.campRegURL}
+                                                            </a>
+                                                        </td>
+
+                                                        :
+                                                        <td>
+                                                            {this.state.campRegOverview}<br /><br />
+                                                            <a href={this.state.campRegURL}>
+                                                                {this.state.campRegURL}
+                                                            </a>
+                                                        </td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Reservations</td>
+                                            {this.state.campResDesc === 'N/A' && this.state.campResURL === 'N/A' ?
+                                                <td>{this.state.campResDesc}</td>
+
+                                                : this.state.campResDesc === 'N/A' && this.state.campResURL !== 'N/A' ?
+                                                    <td>{this.state.campResURL}</td>
+
+                                                    : this.state.campResDesc !== 'N/A' && this.state.campResURL === 'N/A' ?
+                                                        <td>
+                                                            <a href={this.state.campResURL}>
+                                                                {this.state.campResURL}
+                                                            </a>
+                                                        </td>
+
+                                                        :
+                                                        <td>
+                                                            {this.state.campResDesc}<br /><br />
+                                                            <a href={this.state.campResURL}>
+                                                                {this.state.campResURL}
+                                                            </a>
+                                                        </td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Site</td>
+                                            {this.state.campURL === 'N/A' ?
+                                                <td>{this.state.campURL}</td>
+                                                :
+                                                <td>
+                                                    <a href={this.state.campResURL} target="_blank">
+                                                        {this.state.campResURL}
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <button
-                                id="confirm-park-btn"
-                                className='btn btn-default confirm-btn'
-                                onClick={this.handleModalConfirm}
-                            >Add Trail</button>
-                        </h3>
-                        <img src={this.state.trailImg} alt={this.state.trailName} />
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Rating <br />
-                                            {`(${trailVotes} ${trailVotes === 1 ? 'vote' : 'votes'})`}
-                                        </td>
-                                        <td>
-                                            <div style={{ display: 'flex' }}>
-                                                <StarRatingComponent
-                                                    name="rate2"
-                                                    editing={false}
-                                                    starCount={5}
-                                                    value={trailRating}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Summary</td>
-                                        <td>{this.state.trailSummary}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Length</td>
-                                        <td>{this.state.trailLength} miles</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Difficulty</td>
+                                id="close-modal-btn"
+                                className='btn btn-default'
+                                onClick={this.closeModal}
+                            >Back</button>
+                        </Modal>
 
-                                        {/* https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript */}
+                    : window.location.pathname === '/search/visitor' ?
 
-                                        <td>
-                                            {this.state.trailDifficulty.replace(/([a-z])([A-Z])/g, '$1 $2').charAt(0).toUpperCase() + this.state.trailDifficulty.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1)}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Location</td>
-                                        <td>{this.state.trailLocation}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Site</td>
-                                        <td><a href={this.state.trailURL} target="_blank">{this.state.trailURL}</a></td>
-                                    </tr>
+                        <Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            style={styles.modalStyles}
+                            contentLabel='Example Modal'
+                            shouldCloseOnOverlayClick={true}
+                            ariaHideApp={false}
+                        >
+                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
+                            <h3 className="modal-park-name">
+                                {this.state.VCName}
+                                <button
+                                    id="confirm-park-btn"
+                                    className='btn btn-default confirm-btn'
+                                    onClick={this.handleModalConfirm}
+                                >Add</button>
+                            </h3>
+                            <div className="table-responsive">
+                                <table className="table table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Description</td>
+                                            <td>{this.state.VCDescription}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address</td>
+                                            <td>{this.state.VCAddress}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone</td>
+                                            <td>{this.state.VCPhone}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>{this.state.VCEmail}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hours</td>
+                                            <td>{this.state.VCHours}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Directions</td>
+                                            {this.state.directions === 'N/A' && this.state.directionsURL === 'N/A' ?
+                                                <td>{this.state.VCDirections}</td>
 
+                                                : this.state.directions === 'N/A' && this.state.directionsURL !== 'N/A' ?
+                                                    <td>{this.state.VCDirectionsURL}</td>
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <button
-                            id="close-modal-btn"
-                            className='btn btn-default'
-                            onClick={this.closeModal}
-                        >Back</button>
-                    </Modal> 
+                                                    : this.state.directions !== 'N/A' && this.state.directionsURL === 'N/A' ?
+                                                        <td>
+                                                            <a href={this.state.VCDirectionsURL}>
+                                                                {this.state.VCDirectionsURL}
+                                                            </a>
+                                                        </td>
 
-                : window.location.pathname === '/search/visitor' ?
-
-                    <Modal
-                        isOpen={this.state.modalIsOpen}
-                        onAfterOpen={this.afterOpenModal}
-                        onRequestClose={this.closeModal}
-                        style={styles.modalStyles}
-                        contentLabel='Example Modal'
-                        shouldCloseOnOverlayClick={true}
-                        ariaHideApp={false}
-                    >
-                        {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
-                        <h3 className="modal-park-name">
-                            {this.state.trailName}
+                                                        :
+                                                        <td>
+                                                            {this.state.VCDirections}<br /><br />
+                                                            <a href={this.state.VCDirectionsURL}>
+                                                                {this.state.VCDirectionsURL}
+                                                            </a>
+                                                        </td>
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <td>Site</td>
+                                            {this.state.VCURL === 'N/A' ?
+                                                <td>{this.state.VCURL}</td>
+                                                :
+                                                <td>
+                                                    <a href={this.state.VCURL} target="_blank">
+                                                        {this.state.VCURL}
+                                                    </a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <button
-                                id="confirm-park-btn"
-                                className='btn btn-default confirm-btn'
-                                onClick={this.handleModalConfirm}
-                            >Add Trail</button>
-                        </h3>
-                        <img src={this.state.trailImg} alt={this.state.trailName} />
-                        <div className="table-responsive">
-                            <table className="table table-bordered table-hover">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Rating <br />
-                                            {`(${trailVotes} ${trailVotes === 1 ? 'vote' : 'votes'})`}
-                                        </td>
-                                        <td>
-                                            <div style={{ display: 'flex' }}>
-                                                <StarRatingComponent
-                                                    name="rate2"
-                                                    editing={false}
-                                                    starCount={5}
-                                                    value={trailRating}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Summary</td>
-                                        <td>{this.state.trailSummary}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Length</td>
-                                        <td>{this.state.trailLength} miles</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Difficulty</td>
+                                id="close-modal-btn"
+                                className='btn btn-default'
+                                onClick={this.closeModal}
+                            >Back</button>
+                        </Modal>
 
-                                        {/* https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript */}
-
-                                        <td>
-                                            {this.state.trailDifficulty.replace(/([a-z])([A-Z])/g, '$1 $2').charAt(0).toUpperCase() + this.state.trailDifficulty.replace(/([a-z])([A-Z])/g, '$1 $2').slice(1)}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Location</td>
-                                        <td>{this.state.trailLocation}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Site</td>
-                                        <td><a href={this.state.trailURL} target="_blank">{this.state.trailURL}</a></td>
-                                    </tr>
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <button
-                            id="close-modal-btn"
-                            className='btn btn-default'
-                            onClick={this.closeModal}
-                        >Back</button>
-                    </Modal> 
-                
-                : ''}
-
-            }
-                
+                        : ''}
             </div>
         );
     };

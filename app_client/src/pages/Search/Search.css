@@ -104,10 +104,11 @@
 
 .modal-park-name {
     margin-top: 4.5%;
+    margin-bottom: 30px;
 }
 
 .table-responsive {
-    margin: 25px 50px auto;
+    margin: 35px 50px auto;
     font-size: 14px;
 }
 

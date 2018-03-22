@@ -16,7 +16,7 @@ class App extends Component {
       <div style={{ height: '100%' }}>
         <Router>
             <Switch>
-              <Route exact path='/' component={Login} />
+              <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Login} />
               <ProtectedRoute exact path='/park' component={Search} />
               <ProtectedRoute exact path='/search/trails' component={NextSearch} />
@@ -24,7 +24,7 @@ class App extends Component {
               <ProtectedRoute exact path='/search/campsites' component={NextSearch} />
               <ProtectedRoute exact path='/search/visitor' component={NextSearch} />
               <ProtectedRoute exact path='/map' component={MapContainerB} />
-              <ProtectedRoute exact path='/dashboard' component={Dashboard} />
+              <ProtectedRoute exact path='/' component={Dashboard} />
               <ProtectedRoute exact path='/account' component={Account} />
               <Route component={NoMatch} />
             </Switch>

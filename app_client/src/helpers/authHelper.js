@@ -29,6 +29,7 @@ export default {
         if (!this.isValid(token)) {
             this.logOut();
         }
+        return token
     },
     isValid(token) {
         /**

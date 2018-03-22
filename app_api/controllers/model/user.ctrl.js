@@ -34,7 +34,12 @@ module.exports = {
             .findOne({
                 where: {
                     id: req.params.id
-                }
+                },
+                include: [{
+                    model: db.Trip, include: [{
+                        model: db.Location, include: [{all:true}]
+                    }]
+                }]
             })
             .then(dbUser => {
                 res.json(dbUser);

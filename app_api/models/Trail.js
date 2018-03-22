@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
         hikeId: DataTypes.INTEGER
     }); // END CONSTRUCTOR
 
-    Trail.associate = function (models) {
+    Trail.associate = function(models) {
         Trail.belongsTo(models.Location, {
             foreignKey: {
                 allowNull: false

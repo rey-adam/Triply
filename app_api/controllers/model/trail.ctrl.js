@@ -33,7 +33,7 @@ module.exports = {
             .Trail
             .findOne({
                 where: {
-                    LocationId: req.params.id
+                    id: req.params.id
                 }
             })
             .then(dbTrail => {

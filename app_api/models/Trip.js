@@ -13,13 +13,12 @@ module.exports = function (sequelize, DataTypes) {
                 allowNull: false
             }
         }); // END JOIN 
-    }; // END ASSOCIATION
-
-    Trip.associate = function (models) {
         Trip.hasMany(models.Location, {
             onDelete: 'cascade'
         }); // END JOIN 
     }; // END ASSOCIATION
+
+  
 
     return Trip;
 }; // END EXPORT 

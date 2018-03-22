@@ -33,7 +33,7 @@ module.exports = {
             .Activity
             .findOne({
                 where: {
-                    LocationId: req.params.id
+                    id: req.params.id
                 }
             })
             .then(dbActivity => {

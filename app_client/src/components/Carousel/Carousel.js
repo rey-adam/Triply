@@ -33,7 +33,7 @@ class ControlledCarousel extends Component {
             >
                 {/* overlay trees */}
                 <Carousel.Item>
-                    <video className="video-fluid d-block" poster="/img/carousel1.png" autoPlay loop muted>
+                    <video className="video-fluid d-block" autoPlay loop muted>
                         <source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>
@@ -41,7 +41,7 @@ class ControlledCarousel extends Component {
 
                 {/* aerial snowy mountain */}
                 <Carousel.Item>
-                    <video className="video-fluid d-block" poster="/img/carousel2.png" autoPlay loop muted>
+                    <video className="video-fluid d-block" autoPlay loop muted>
                         <source src="https://player.vimeo.com/external/209332812.hd.mp4?s=9a45fce597d28295b7fda2f14907e19d0ab45b52&amp;profile_id=119&amp;oauth2_token_id=57447761" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>
@@ -49,7 +49,7 @@ class ControlledCarousel extends Component {
 
                 {/* timelapse night sky */}
                 <Carousel.Item>
-                    <video id="video__night-sky" className="video-fluid d-block" poster="/img/carousel3.png" autoPlay loop muted>
+                    <video id="video__night-sky" className="video-fluid d-block" autoPlay loop muted>
                         <source src="https://player.vimeo.com/external/236075858.hd.mp4?s=539faad12f040eb5afd8de3160db1220f1a5bac0&amp;profile_id=175&amp;oauth2_token_id=57447761" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>
@@ -57,7 +57,7 @@ class ControlledCarousel extends Component {
 
                 {/* tranquil river */}
                 <Carousel.Item>
-                    <video className="video-fluid d-block" poster="/img/carousel4.png" autoPlay loop muted>
+                    <video className="video-fluid d-block" autoPlay loop muted>
                         <source src="https://player.vimeo.com/external/206207917.hd.mp4?s=addbc8a868b5ccddbc0d9bf2a1013ada5eadf140&amp;profile_id=172&amp;oauth2_token_id=57447761" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>
@@ -65,7 +65,7 @@ class ControlledCarousel extends Component {
 
                 {/* mt baker */}
                 <Carousel.Item>
-                    <video className="video-fluid d-block" poster="/img/carousel5.png" autoPlay loop muted>
+                    <video className="video-fluid d-block" autoPlay loop muted>
                         <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4" />
                     </video>
                     <div className="overlay"></div>
