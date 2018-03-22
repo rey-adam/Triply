@@ -9,6 +9,8 @@ import 'react-infinite-calendar/styles.css'; // Make sure to import the default 
 import SimpleMap from '../MapContainerB/MapContainerB';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
+import REIAPI from "../../helpers/api/reiApi/reiApi";
+
 
 import qs from 'query-string';
 import './Dashboard.css';
@@ -70,19 +72,22 @@ class Dashboard extends Component {
         UserModel.getOne(1)
         .then(res => {
 
-
-            console.log(res.data);
-
-            this.setState({userData: res.data});
             userInfo = res.data;
+            
+            console.log("user info data");
+
+            this.setState({userData: userInfo});
+
             const parkCode = this.state.userData.Trips[0].Locations[0].parkCode;
 
-            return NPSAPI.camp(parkCode);
+            // RETURNING THE NATIONAL PARK API CAMPSITE CALL
+            return NPSAPI.allCamp();
         })
         .then(npsRes => {
             // better idea to use seperate queries based on id from user info
             // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
-            console.log(npsRes.data)
+            console.log("=============== ALL CAMPS API ==============");
+            
             userInfo.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
                     const campsites = npsRes.data.data.filter(elem => {
@@ -90,34 +95,63 @@ class Dashboard extends Component {
                             return camp.campId === elem.id
                         })
                         return val != null;
-                    })
+                    }); // END  
+
                     console.log(campsites);
-                })
-                
-            })
+                    this.state.camps.push(campsites);
+                }); // END FOR EACH
+            }); // END FOR EACH
             
-            // const campRes = npsRes.data.data;
+            return NPSAPI.visitorCenter();
+
+        }).then(npsRes => {
+            // better idea to use seperate queries based on id from user info
+            // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
+            console.log("=============== VISITOR CENTER API ==============");
             
-            // console.log(campRes);
+            userInfo.Trips.forEach(trip => {
+                trip.Locations.forEach(loc => {
+                    const visitorcenter = npsRes.data.data.filter(elem => {
+                        const val = loc.VisitorCenters.find(center => {
+                            return center.centerId === elem.id
+                        });
+                        return val != null;
+                    }); // END  
 
-            // campRes.forEach((elem) => {
+                    console.log(visitorcenter);
+                    this.state.visitorCenters.push(visitorcenter);
+                }); // END FOR EACH
+            }); // END FOR EACH
 
-            //     console.log(elem.id);
+            return NPSAPI.event();
 
-            //     if(elem.id === ){
+        }).then(npsRes => {
+            // better idea to use seperate queries based on id from user info
+            // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
+            console.log("=============== EVENTS API ==============");
+            
+            userInfo.Trips.forEach(trip => {
+                trip.Locations.forEach(loc => {
+                    const events = npsRes.data.data.filter(elem => {
+                        const val = loc.Activities.find(events => {
+                            return events.eventId === elem.id
+                        });
+                        return val != null;
+                    }); // END  
 
-            //     };
+                    console.log(events);
+                    this.state.activities.push(events);
+                }); // END FOR EACH
+            }); // END FOR EACH
 
-            // })
+            return NPSAPI.park("yose");
 
-            // this.setState({camps: npsRes.data});
+        }).then(npsApi => {
+            console.log(npsApi.data.data);
+
 
         })
         .catch(err => console.error(err));
-
-
-
-
 
 
     }; // END MOUNT
