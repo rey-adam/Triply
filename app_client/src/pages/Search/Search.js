@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
 // import ControlledCarousel from '../../components/Carousel';
-import Hero2 from '../../components/Hero2';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
 // import axios from 'axios';
