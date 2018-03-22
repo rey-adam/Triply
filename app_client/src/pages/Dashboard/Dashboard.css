@@ -375,6 +375,11 @@
 ******************/
 
 @media screen and (max-width: 1024px) {
+    .ReactModal__Content,
+    .ReactModal__Content--after-open {
+        width: 50% !important;
+    }
+
     .user-trips,
     .Cal__Container__root {
         width: 100% !important;
@@ -390,6 +395,11 @@
 }
 
 @media screen and (max-width: 768px) {
+    .ReactModal__Content,
+    .ReactModal__Content--after-open {
+        width: 70% !important;
+    }
+
     .new-trip-modal {
         width: 70%;
     }

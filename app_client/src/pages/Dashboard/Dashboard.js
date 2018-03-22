@@ -198,8 +198,6 @@ class Dashboard extends Component {
         })
         .catch(err => console.error(err));
 
-        this.openModal();
-
     }; // END MOUNT
 
     // =====================================================================================
@@ -488,7 +486,7 @@ class Dashboard extends Component {
                     <Modal.Body>
                         <p>Trip Created:</p>
                         <p className="new-trip-name">{this.state.newTripName}</p>
-                        <p>Click 'Next' to start planning your itinerary!</p>
+                        <p>Click 'Next' to start planning your itinerary</p>
 
                         <Button
                             onClick={this.handleHide}
