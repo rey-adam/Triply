@@ -94,6 +94,7 @@ class Dashboard extends Component {
     // =====================================================================================
     openModal() {
         this.setState({ modalIsOpen: true });
+
     };
 
     closeModal() {
@@ -120,13 +121,15 @@ class Dashboard extends Component {
     // START ----- submit button to take user to park search page 
 
 
-    // handleSubmit(e){
-    //     e.preventDefault();
+    handleSubmit(e){
+        e.preventDefault();
+        console.log('The button was clicked.');
+    //     // onClick={this.handleSubmit}
+        
+    //     this.openModal();
+    }
 
-    //     onClick={this.handleSubmit}
-    // }
-
-
+    
 
         
 
@@ -179,7 +182,17 @@ class Dashboard extends Component {
                         <form className="create-trip-form">
                             <div className="form-group">
                                 <input type="text" id="new-trip-name" className="form-control" placeholder="New trip name..." />
-                                <Link to='#'><span className="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></Link>
+                                <Link to='#' 
+
+                                // submit to create new trip name 
+                                id="new-trip-name"
+                                type="submit"
+                                onClick={this.handleSubmit}
+                                >
+
+
+
+                                <span className="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></Link>
                             </div>
                         </form>
                     </div>
