@@ -5,17 +5,28 @@
 }
 
 .dash-content-wrapper {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    align-content: center;
-    /* display: grid;
-    grid-template: repeat(2, 2fr) / auto; */
-    padding: 30px 50px;
+    padding-top: 40px;
+    padding-bottom: 20px;
 }
 
 .dash-content-wrapper > div {
-    margin: 20px;
+    margin: 40px auto;
+    width: 85vw;
+}
+
+/******************
+       MODAL
+******************/
+
+.new-user-message {
+    margin: 5% auto;
+    font-weight: 500;
+    width: 90%;
+}
+
+#exit-intro-btn {
+    margin: auto 5px;
+    text-transform: uppercase;
 }
 
 /*******************
@@ -24,7 +35,6 @@
 
 #create-trip-div {
     padding: 20px;
-    width: 85vw;
     height: 75px;
     margin: 0 auto 20px;
     box-shadow: 0 1px 3px rgb(184, 184, 184);
@@ -62,14 +72,14 @@
 
 .create-trip-form .glyphicon {
     font-size: 30px;
-    color: rgb(12, 196, 209);
+    color: rgb(2, 204, 204);
     margin-left: 10px;
 }
 
 .create-trip-form .glyphicon:hover {
     font-size: 30px;
-    background-color: rgb(12, 196, 209);
-    border: 1px solid rgb(12, 196, 209);
+    background-color: rgb(2, 204, 204);
+    border: 1px solid rgb(2, 204, 204);
     border-radius: 50%;
     color: white;
     margin-left: 10px;
@@ -78,16 +88,21 @@
 /******************
     USER TRIPS
 ******************/
+.second-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
 
 .user-trips {
     box-shadow: 0 1px 3px rgb(184, 184, 184);
-    width: 40vw;
     margin: inherit 0;
     border-radius: 4px;
+    width: 50%;
 }
 
 .user-trips .trips-header {
-    background-color: rgb(12, 196, 209);
+    background-color: rgb(2, 204, 204);
     color: white;
     height: 85px;
     padding: 0; margin: 0;
@@ -109,12 +124,14 @@
 }
 
 .user-trips .accordion-link {
-    color: rgb(12, 196, 209);
+    width: 100%;
     text-align: left;
+    color: black;
 }
 
 .user-trips .accordion-link h4 {
-    line-height: 10px;
+    white-space: pre-line;
+    line-height: 20px;
 }
 
 .user-trips .accordion-link .spacer {
@@ -128,6 +145,11 @@
     font-weight: 400;
 }
 
+.user-trips .accordion-link:focus {
+    /* outline: 5px auto #a3cbff; */
+    outline-color: rgba(199, 211, 221, 0.158);
+}
+
 
 /******************
       WEATHER
@@ -137,7 +159,6 @@
     box-shadow: 0 1px 3px rgb(184, 184, 184);
     border-radius: 5px;
     color: #63757A !important;
-    width: 85vw;
     /* width: 80vw; */
     margin: auto;
     /* -webkit-transition: width 0.7s; Safari
@@ -149,7 +170,7 @@
 } */
 
 .weather-header {
-    background-color: rgb(12, 196, 209);
+    background-color: rgb(2, 204, 204);
     color: white;
     width: 100%;
     height: 85px;
@@ -220,9 +241,10 @@
 
 .Cal__Container__root {
     box-shadow: 0 1px 3px rgb(184, 184, 184) !important;
-    width: 40vw !important;
+    width: 45% !important;
     /* width: 360px !important; */
     border-bottom-left-radius: 5px !important;
+    z-index: 0;
 }
 
 .Cal__Container__listWrapper {
@@ -230,7 +252,7 @@
 }
 
 .Cal__Header__root {
-    background-color: rgb(12, 196, 209) !important;
+    background-color: rgb(2, 204, 204) !important;
     min-height: 85px !important;
     height: 85px !important;
     font-family: 'Montserrat' !important;
@@ -289,11 +311,25 @@
 ******************/
 
 #mapDiv {
-    width: 85vw;
     height: 60vh;
     box-shadow: 0 1px 3px rgb(184, 184, 184);
 }
 
 #mapDiv > div > div {
     border-radius: 4px;
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+@media screen and (max-width: 1024px) {
+    .user-trips,
+    .Cal__Container__root {
+        width: 100% !important;
+    }
+
+    .user-trips {
+        margin-bottom: 40px;
+    }
 }

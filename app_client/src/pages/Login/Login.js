@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import LoginForm from '../../components/LoginForm';
 import RegisterForm from '../../components/RegisterForm';
 import axios from 'axios';
+import ControlledCarousel from '../../components/Carousel';
 import './Login.css';
 
 class Login extends Component {
@@ -248,8 +249,8 @@ class Login extends Component {
                 console.log('post response: registration success');
                 console.log(response.data);
                 console.log('=====================');
-
-                this.props.history.push('/');
+                
+                this.props.history.push('/login');
             })
             .catch(err => {
                 console.error(err.response);
@@ -281,6 +282,7 @@ class Login extends Component {
                         handleRegister={this.handleRegister}
                     />
                 }
+                <ControlledCarousel />
             </div>
         );
     };

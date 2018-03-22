@@ -130,7 +130,7 @@ class AuthCtrl {
     // generate JSON web token for route authentication
     static _generateJWT(user) {
         return jwt.sign({
-            userID: user._id,
+            id: user.id,
             email: user.email,
         }, process.env.JWT_SECRET, { expiresIn: '7h' });
     }

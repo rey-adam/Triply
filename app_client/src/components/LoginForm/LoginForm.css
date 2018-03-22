@@ -7,7 +7,7 @@
     z-index: 2;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 3px 20px rgb(68, 68, 68);
+    box-shadow: 0 3px 20px rgba(145, 145, 145, 0.411);
 }
 
 .login-form {
@@ -101,6 +101,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     border: none;
     border-radius: 3px;
     background-color: #63757A;
+    /* background-color: rgb(74, 102, 107); */
     text-transform: uppercase;
     font-size: 11px;
     margin-top: 5px;
@@ -124,7 +125,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     position: absolute;
     left: 0;
     bottom: -25px;
-    text-shadow: 0 2px 20px black;
+    text-shadow: 0 2px 10px black;
 }
 
 .register-link:hover,

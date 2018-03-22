@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
 import Button from '../../components/Button/Button';
 
@@ -32,7 +31,7 @@ function createMapOptions(maps) {
     };
 }
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+// const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const latLng = { lat: 37.7566, lng: -119.5969 }; // can we define latLng as whatever is served when you click on the trip you select on dashboard? Is it an array? TripMarker component perhaps?
 
@@ -52,13 +51,13 @@ export default class SimpleMap extends Component {
                 defaultZoom={this.props.zoom}
                 options={createMapOptions}
             >
-                <AnyReactComponent
+                {/* <AnyReactComponent
                     latLng= {latLng}
                     text={'label me'}
-                />
-                <Button
+                /> */}
+                {/* <Button
                     latLng={this.props.latlng}
-                />
+                /> */}
             </GoogleMapReact>
             
         );
@@ -69,5 +68,6 @@ SimpleMap.defaultProps = {
     // center: latLng,
     zoom: 12,
     gestureHandling: 'greedy'
+    
 };
 
