@@ -595,7 +595,7 @@ class SearchDiv extends Component {
                                         </tr>
                                         <tr>
                                             <td>Time</td>
-                                            <td>{this.state.activityTime}</td>
+                                            <td>{this.state.activityTime === '' ? 'N/A' : this.state.activityTime}</td>
                                         </tr>
                                         <tr>
                                             <td>Location</td>

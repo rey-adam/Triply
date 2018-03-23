@@ -3,24 +3,24 @@ const db = require("../../models");
 
 module.exports = {
     
-    createTrail: (req, res) => {
+    createUser: (req, res) => {
         db
-            .Trail
+            .User
             .create(req.body)
-            .then(dbTrail => {
-                res.json(dbTrail);
+            .then(dbUser => {
+                res.json(dbUser);
             })
             .catch(err => {
                 console.error(err);
             });
     }, // END CREATE
 
-    findAllTrail: (req, res) => {
+    findAllUser: (req, res) => {
         db
-            .Trail
+            .User
             .findAll({})
-            .then(dbTrail => {
-                res.json(dbTrail);
+            .then(dbUser => {
+                res.json(dbUser);
             })
             .catch(err => {
                 console.error(err);
@@ -28,16 +28,21 @@ module.exports = {
             });
     }, // END FIND ALL
 
-    findOneTrail: (req, res) => {
+    findOneUser: (req, res) => {
         db
-            .Trail
+            .User
             .findOne({
                 where: {
                     id: req.params.id
-                }
+                },
+                include: [{
+                    model: db.Trip, include: [{
+                        model: db.Location, include: [{all:true}]
+                    }]
+                }]
             })
-            .then(dbTrail => {
-                res.json(dbTrail);
+            .then(dbUser => {
+                res.json(dbUser);
             })
             .catch(err => {
                 console.error(err);
@@ -45,15 +50,15 @@ module.exports = {
             });
     }, // END FIND ONE
 
-    deleteTrail: (req, res) => {
+    deleteUser: (req, res) => {
         db
-            .Trail
+            .User
             .destroy({
                 where: {
                     id: req.params.id
                 }
             })
-            .then(dbTrail => {
+            .then(dbUser => {
                 res.json("Success!");
             })
             .catch(err => {

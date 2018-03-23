@@ -2,14 +2,23 @@
 module.exports = function (sequelize, DataTypes) {
 
     const Trip = sequelize.define("Trip", {
-        name: DataTypes.STRING
+        name: DataTypes.STRING,
+        start: DataTypes.INTEGER,
+        end: DataTypes.INTEGER
     }); // END TRIP CONSTRUCTOR
 
     Trip.associate = function (models) {
+        Trip.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
+        }); // END JOIN 
         Trip.hasMany(models.Location, {
             onDelete: 'cascade'
-        }); // END TRIP JOIN LOCATION 
-    }; // END TRIP ASSOCIATION
+        }); // END JOIN 
+    }; // END ASSOCIATION
+
+  
 
     return Trip;
 }; // END EXPORT 

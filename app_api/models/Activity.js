@@ -3,7 +3,7 @@ module.exports = function (sequelize, DataTypes) {
 
     const Activity = sequelize.define("Activity", {
         name: DataTypes.STRING,
-        centerId: DataTypes.INTEGER
+        eventId: DataTypes.INTEGER
     }); // END CONSTRUCTOR
 
     Activity.associate = function (models) {
