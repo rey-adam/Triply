@@ -22,7 +22,7 @@ class ControlledCarousel extends Component {
     }
 
     render() {
-        const { index, direction } = this.state;
+        const { direction } = this.state;
 
         return (
             <Carousel
