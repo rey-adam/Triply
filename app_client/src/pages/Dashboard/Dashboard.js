@@ -77,10 +77,6 @@ class Dashboard extends Component {
     };
 
     componentDidMount() {
-
-        console.log(
-            
-        );
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
          *                       OUTPUT                        *
          * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -106,12 +102,11 @@ class Dashboard extends Component {
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
 
-
         //UserModel.getOne(authHelper.splitToken().id)
         let userInfo;
         UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
-
+            
             userInfo = res.data;
             
             console.log("user info data");
@@ -121,8 +116,6 @@ class Dashboard extends Component {
             this.setState({ userData: userInfo });
             console.log(this.state.userData); // { id: 3, email: 'melodie@chi.com' }
 
-            // .Trips/.Locations do not exist ^
-            const parkCode = this.state.userData.Trips[0].Locations[0].parkCode;
 
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
             return NPSAPI.campgrounds('yose');
@@ -131,6 +124,8 @@ class Dashboard extends Component {
             // better idea to use seperate queries based on id from user info
             // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
             console.log("=============== ALL CAMPS API ==============");
+
+            console.log(npsRes.data.data);
             
             userInfo.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
@@ -152,6 +147,8 @@ class Dashboard extends Component {
             // better idea to use seperate queries based on id from user info
             // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
             console.log("=============== VISITOR CENTER API ==============");
+
+            console.log(npsRes.data.data);
             
             userInfo.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
@@ -174,6 +171,8 @@ class Dashboard extends Component {
             // I.E. NPSAPI.camp(parkCode, userInfo.Trips[0].Locations[0].Campsites[0].campId)
             console.log("=============== EVENTS API ==============");
             
+            console.log(npsRes.data.data);
+
             userInfo.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
                     const events = npsRes.data.data.filter(elem => {
@@ -188,11 +187,36 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.park("yose");
+            return MAPAPI.location("yosemite");
 
-        }).then(npsApi => {
-            console.log(npsApi.data.data);
+        }).then(mapRes => {
+            
+            console.log(mapRes.data.results[0].geometry.location);
+            
+            const lat = mapRes.data.results[0].geometry.location.lat;
+            const lon = mapRes.data.results[0].geometry.location.lng;
 
+            return REIAPI.trails(lat, lon);
+            
+        }).then(reiRes => {
+            
+            console.log("=============== TRAILS API ==============");
+
+            console.log(reiRes.data.trails);
+
+            userInfo.Trips.forEach(trip => {
+                trip.Locations.forEach(loc => {
+                    const hikes = reiRes.data.trails.filter(elem => {
+                        const val = loc.Trails.find(hikes => {
+                            return hikes.hikeId === elem.id
+                        });
+                        return val != null;
+                    }); // END  
+
+                    console.log(hikes);
+                    this.state.activities.push(hikes);
+                }); // END FOR EACH
+            }); // END FOR EACH
 
         })
         .catch(err => console.error(err));

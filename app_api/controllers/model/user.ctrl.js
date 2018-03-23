@@ -2,7 +2,7 @@
 const db = require("../../models");
 
 module.exports = {
-    
+
     createUser: (req, res) => {
         db
             .User
@@ -29,6 +29,7 @@ module.exports = {
     }, // END FIND ALL
 
     findOneUser: (req, res) => {
+        console.log("WTF")
         db
             .User
             .findOne({
@@ -37,7 +38,7 @@ module.exports = {
                 },
                 include: [{
                     model: db.Trip, include: [{
-                        model: db.Location, include: [{all:true}]
+                        model: db.Location, include: [{ all: true }]
                     }]
                 }]
             })
@@ -66,5 +67,5 @@ module.exports = {
                 res.json(err);
             });
     } // END DELETE
-    
+
 }; // END EXPORT
