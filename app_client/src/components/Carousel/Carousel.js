@@ -8,7 +8,7 @@ class ControlledCarousel extends Component {
         this.handleSelect = this.handleSelect.bind(this);
 
         this.state = {
-            index: 0,
+            // index: 0,
             direction: null
         };
     }
@@ -16,17 +16,17 @@ class ControlledCarousel extends Component {
     handleSelect(selectedIndex, e) {
         // alert(`selected=${selectedIndex}, direction=${e.direction}`);
         this.setState({
-            index: selectedIndex,
+            // index: selectedIndex,
             direction: e.direction
         });
     }
 
     render() {
-        const { index, direction } = this.state;
+        const { direction } = this.state;
 
         return (
             <Carousel
-                activeIndex={index}
+                
                 interval={8000}
                 controls={false}
                 indicators={false}
