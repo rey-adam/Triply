@@ -1,4 +1,5 @@
 // REQUIRE THE DATABASE MODELS
+const sequelize = require('sequelize');
 const db = require("../../models");
 const locationCtrl = require('./location.ctrl');
 
@@ -25,15 +26,7 @@ module.exports = {
     findAllTrip: (req, res) => {
         db
             .Trip
-            .findAll({
-                attributes: [
-                    'UserId',
-                    'id',
-                    'name',
-                    [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('start'), '%b %d %Y'), 'startDate'],
-                    [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('end'), '%b %d %Y'), 'endDate']
-                ]
-            })
+            .findAll({})
             .then(dbTrip => {
                 res.json(dbTrip);
             })
@@ -43,10 +36,10 @@ module.exports = {
             });
     }, // END FIND ALL
 
-    findOneTrip: (req, res) => {
+    findAllUserTrips: (req, res) => {
         db
             .Trip
-            .findOne({
+            .findAll({
                 where: {
                     UserId: req.params.id
                 },
@@ -57,6 +50,23 @@ module.exports = {
                     [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('start'), '%b %d %Y'), 'startDate'],
                     [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('end'), '%b %d %Y'), 'endDate']
                 ]
+            })
+            .then(dbTrips => {
+                res.json(dbTrips);
+            })
+            .catch(err => {
+                console.error(err);
+                res.json(err);
+            });
+    }, // END FIND ALL USER TRIPS
+
+    findOneTrip: (req, res) => {
+        db
+            .Trip
+            .findOne({
+                where: {
+                    UserId: req.params.id
+                }
             })
             .then(dbTrip => {
                 res.json(dbTrip);
