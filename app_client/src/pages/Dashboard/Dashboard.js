@@ -102,26 +102,23 @@ class Dashboard extends Component {
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
 
-        //UserModel.getOne(authHelper.splitToken().id)
         let userRes;
         let prkCode;
         let parkName;
+
 
         UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
             
             userRes = res.data;
+            console.log(userRes);
             prkCode = userRes.Trips[0].Locations[0].parkCode;
-            parkName = userRes.Trips[0].Locations[0].name;
-            
-            console.log(this.state.userData); // {}
 
             this.setState({ userData: userRes });
-            console.log(this.state.userData); // { id: 3, email: 'melodie@chi.com' }
+            console.log(`id: ${this.state.userData.id}, email: ${this.state.userData.email}`);
             
-            console.log(prkCode);
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
-            return NPSAPI.camp(prkCode);
+            return NPSAPI.campgrounds(prkCode);
         })
         .then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -144,7 +141,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
             
-            return NPSAPI.center(prkCode);
+            return NPSAPI.visitorCentersAll(prkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -167,7 +164,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.event(prkCode);
+            return NPSAPI.eventsAll(prkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -207,6 +204,7 @@ class Dashboard extends Component {
 
             userRes.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
+                    console.log(reiRes.data)
                     const hikes = reiRes.data.trails.filter(elem => {
                         const val = loc.Trails.find(hikes => {
                             return hikes.hikeId === elem.id
