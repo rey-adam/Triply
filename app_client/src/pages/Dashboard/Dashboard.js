@@ -127,16 +127,16 @@ class Dashboard extends Component {
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
             return NPSAPI.campgrounds(this.state.userParkCode);
         })
-        .then(npsRes => {
+        .then(npsCampRes => {
             // better idea to use seperate queries based on id from user info
             // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
             console.log("=============== ALL CAMPS API ==============");
 
-            console.log(npsRes.data.data);
+            console.log(npsCampRes.data.data);
             
             this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
-                    const campsites = npsRes.data.data.filter(elem => {
+                    const campsites = npsCampRes.data.data.filter(elem => {
                         const val = loc.Campsites.find(camp => {
                             return camp.campId === elem.id
                         })
@@ -148,18 +148,18 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
             
-            return NPSAPI.visitorCentersAll(this.state.userParkCode);
+            return NPSAPI.visitorCenters(this.state.userParkCode);
 
-        }).then(npsRes => {
+        }).then(npsVCRes => {
             // better idea to use seperate queries based on id from user info
             // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
             console.log("=============== VISITOR CENTER API ==============");
 
-            console.log(npsRes.data.data);
+            console.log(npsVCRes.data.data);
             
             this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
-                    const visitorcenter = npsRes.data.data.filter(elem => {
+                    const visitorcenter = npsVCRes.data.data.filter(elem => {
                         const val = loc.VisitorCenters.find(center => {
                             return center.centerId === elem.id
                         });
@@ -171,18 +171,18 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.eventsAll(this.state.userParkCode);
+            return NPSAPI.events(this.state.userParkCode);
 
-        }).then(npsRes => {
+        }).then(npsEventRes => {
             // better idea to use seperate queries based on id from user info
             // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
             console.log("=============== EVENTS API ==============");
             
-            console.log(npsRes.data.data);
+            console.log(npsEventRes.data.data);
 
             this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
-                    const events = npsRes.data.data.filter(elem => {
+                    const events = npsEventRes.data.data.filter(elem => {
                         const val = loc.Activities.find(events => {
                             return events.eventId === elem.id
                         });
@@ -194,7 +194,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return MAPAPI.location(this.state.userParkName);
+            return MAPAPI.location(`${this.state.userParkName} National Park`);
 
         }).then(mapRes => {
             
@@ -203,15 +203,15 @@ class Dashboard extends Component {
 
             return REIAPI.trails(lat, lon);
             
-        }).then(reiRes => {
+        }).then(reiTrailRes => {
             
             console.log("=============== TRAILS API ==============");
 
-            console.log(reiRes.data.trails);
+            console.log(reiTrailRes.data.trails);
 
             this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
-                    const hikes = reiRes.data.trails.filter(elem => {
+                    const hikes = reiTrailRes.data.trails.filter(elem => {
                         const val = loc.Trails.find(hikes => {
                             return hikes.hikeId === elem.id
                         });

@@ -6,12 +6,17 @@ module.exports = {
     createCampsite: (req, res) => {
         db
             .Campsite
-            .create(req.body)
+            .create({
+                LocationId: req.body.locationId,
+                name: req.body.campName,
+                campId: req.body.campId
+            })
             .then(dbCampsite => {
                 res.json(dbCampsite);
             })
             .catch(err => {
                 console.error(err);
+                res.json(err);
             });
     }, // END CREATE
 

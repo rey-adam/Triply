@@ -421,9 +421,9 @@ class SearchDiv extends Component {
             data: activityData
         })
         .then(dbActivity => {
-            console.log(`===== USER'S SELECTED TRAIL DATA =====`);
+            console.log(`===== USER'S SELECTED ACTIVITY DATA =====`);
             console.log(dbActivity.data);
-            console.log('=====================================');
+            console.log('=========================================');
         })
         .catch(err => {
             console.error(err);
@@ -431,11 +431,49 @@ class SearchDiv extends Component {
     }
 
     handleAddCamp() {
+        const campData = {
+            locationId: this.state.userLocationId,
+            campName: this.state.campName,
+            campId: this.state.campId
+        };
 
+        axios({
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            method: "POST",
+            url: `/api/campsite`,
+            data: campData
+        })
+        .then(dbCamp => {
+            console.log(`===== USER'S SELECTED CAMP DATA =====`);
+            console.log(dbCamp.data);
+            console.log('=====================================');
+        })
+        .catch(err => {
+            console.error(err);
+        });
     }
 
     handleAddVC() {
+        const VCData = {
+            locationId: this.state.userLocationId,
+            VCName: this.state.VCName,
+            VCId: this.state.VCId
+        };
 
+        axios({
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            method: "POST",
+            url: `/api/center`,
+            data: VCData
+        })
+        .then(dbVC => {
+            console.log(`====== USER'S SELECTED VC DATA ======`);
+            console.log(dbVC.data);
+            console.log('=====================================');
+        })
+        .catch(err => {
+            console.error(err);
+        });
     }
 
     render() {

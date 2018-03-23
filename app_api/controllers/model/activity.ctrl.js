@@ -9,13 +9,14 @@ module.exports = {
             .create({
                 LocationId: req.body.locationId,
                 name: req.body.activityName,
-                evntId: req.body.activityId
+                eventId: req.body.activityId
             })
             .then(dbActivity => {
                 res.json(dbActivity);
             })
             .catch(err => {
                 console.error(err);
+                res.json(err);
             });
     }, // END CREATE
 
