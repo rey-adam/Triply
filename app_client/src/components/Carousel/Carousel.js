@@ -16,7 +16,7 @@ class ControlledCarousel extends Component {
     handleSelect(selectedIndex, e) {
         // alert(`selected=${selectedIndex}, direction=${e.direction}`);
         this.setState({
-            // index: selectedIndex,
+            index: selectedIndex,
             direction: e.direction
         });
     }
