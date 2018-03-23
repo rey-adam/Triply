@@ -10,8 +10,6 @@ import 'react-infinite-calendar/styles.css'; // Make sure to import the default 
 import SimpleMap from '../MapContainerB/MapContainerB';
 import ReactModal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
-import NPSAPI from "../../helpers/api/npsApi/npsAPI";
-import REIAPI from "../../helpers/api/reiApi/reiApi";
 import qs from 'query-string';
 import './Dashboard.css';
 import UserModel from "../../helpers/models/UserModel";
@@ -21,9 +19,6 @@ import axios from 'axios';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
-// moment
-import Moment from 'react-moment';
-
 
 const styles = {
     modalStyles: {
@@ -130,13 +125,13 @@ class Dashboard extends Component {
             url: `/api/trips/${JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id}`
         })
         .then(dbUserTrips => {
-            console.log(dbUserTrips);
+            // console.log(dbUserTrips);
 
             this.setState({
                 numTrips: dbUserTrips.data === null ? 0 : dbUserTrips.data.length
             });
 
-            console.log(this.state.numTrips);
+            console.log(`num trips: ${this.state.numTrips}`);
 
             // get all trip details for user
             return UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id);

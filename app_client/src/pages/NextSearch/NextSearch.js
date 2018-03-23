@@ -45,7 +45,7 @@ class Search extends Component {
                 userTripId: urlObj.tripId,
                 userLocationId: urlObj.locationId
             });
-            console.log(this.state.userTripId);
+            console.log(`trip id: ${this.state.userTripId}`);
         }, 1000);
 
            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 

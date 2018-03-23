@@ -161,6 +161,7 @@ class SearchDiv extends Component {
         } else {
             console.log(`${userTrailIndex}, ${userTrailId}, ${userTrailName}`);
             const userTrail = this.props.trails[userTrailIndex];
+            // console.log(userTrail);
 
             const url = userTrail.url === "" ? 'N/A' : userTrail.url;
 
@@ -189,7 +190,7 @@ class SearchDiv extends Component {
                 trailRating: userTrailObj.stars,
                 trailVotes: userTrailObj.starVotes
             });
-            console.log(userTrailObj);
+            // console.log(userTrailObj);
             this.openModal('trail');
         }
     }
@@ -205,7 +206,7 @@ class SearchDiv extends Component {
         } else {
             console.log(`${userActivityIndex}, ${userActivityId}, ${userActivityName}`);
             const userActivity = this.props.activities[userActivityIndex];
-            console.log(userActivity);
+            // console.log(userActivity);
 
             const dates = userActivity.dates.split(',').join('\n');
             const recurrence = userActivity.recurrence;
@@ -242,7 +243,7 @@ class SearchDiv extends Component {
                 activityURL: userActivityObj.url
             });
 
-            console.log(userActivityObj);
+            // console.log(userActivityObj);
             this.openModal('activity');
         }
     }
@@ -258,7 +259,7 @@ class SearchDiv extends Component {
         } else {
             console.log(`${userCampIndex}, ${userCampId}, ${userCampName}`);
             const userCamp = this.props.campsites[userCampIndex];
-            console.log(userCamp);
+            // console.log(userCamp);
 
             const description = userCamp.description === "" ? 'N/A' : userCamp.description;
             const directions = userCamp.directionsOverview === "" ? 'N/A' : userCamp.directionsOverview;
@@ -311,7 +312,7 @@ class SearchDiv extends Component {
                 campResURL: userCampObj.resURL,
             });
 
-            console.log(userCampObj);
+            // console.log(userCampObj);
             this.openModal('campsite');
         }
     }
@@ -327,7 +328,7 @@ class SearchDiv extends Component {
         } else {
             console.log(`${userVCIndex}, ${userVCId}, ${userVCName}`);
             const userVC = this.props.visitorCenters[userVCIndex];
-            console.log(userVC);
+            // console.log(userVC);
 
             const address = userVC.addresses.length === 0 ? 'N/A' : userVC.addresses[0];
             const phone = userVC.contacts.phoneNumbers.length === 0 ? 'N/A' : userVC.contacts.phoneNumbers[0];
@@ -366,7 +367,7 @@ class SearchDiv extends Component {
                 VCDirectionsURL: userVCObj.directionsURL
             });
 
-            console.log(userVCObj);
+            // console.log(userVCObj);
             this.openModal('visitor center');
         }
     }
@@ -382,7 +383,7 @@ class SearchDiv extends Component {
             navDash.classList.remove('blink');
         }, 2500);
 
-        console.log(e.target.id);
+        // console.log(e.target.id);
         if (e.target.id === 'confirm-trail-btn') {
             this.handleAddTrail();
         } else if (e.target.id === 'confirm-activity-btn') {

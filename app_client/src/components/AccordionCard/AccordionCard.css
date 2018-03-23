@@ -1,0 +1,28 @@
+.no-trips-message {
+    text-align: center;
+    margin: 20px auto;
+    line-height: 200px;
+}
+
+.card .accordion-link .hyphen {
+    margin: auto 4.5px;
+}
+
+.card-body .panel-body {
+    position: relative;
+}
+
+.card-body .panel-body .card-title {
+    font-weight: 500;
+    margin: 0;
+}
+
+.card-body .panel-body .empty-card-title {
+    line-height: 33.5px;
+}
+
+.card-body .panel-body .card-add-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}

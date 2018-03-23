@@ -236,7 +236,7 @@ class Search extends Component {
                             id="confirm-park-btn"
                             className='btn btn-default confirm-btn'
                             onClick={this.handleModalConfirm}
-                        >Create Trip</button>
+                        >Add Park</button>
                     </h3>
 
                     <div className="table-responsive">

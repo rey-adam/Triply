@@ -81,3 +81,179 @@ this.state.numTrips === 0 ?
                         </div>
                     </div>
                 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                import React, { Component } from 'react';
+import Moment from 'react-moment';
+
+class AccordionCard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            numTrips: '',
+            userData: ''
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        this.state.numTrips = nextProps.numTrips;
+        this.state.userData = nextProps.userData;
+        console.log(this.state.numTrips);
+        console.log(this.state.userData);
+    }
+
+    render() {
+        const userData = this.state.userData;
+        console.log(userData);
+        return (
+            userData.Trips === undefined ||
+            userData.Trips.length === 0 ?
+                <h3>Add a trip!</h3>
+                :
+                <div className="card">
+                    <div className="card-header" id='headingOne'>
+                        <h5 className="mb-0">
+                            <button className="btn accordion-link collapsed" data-toggle="collapse" data-target='#collapseOne' aria-expanded="false" aria-controls='collapseOne'>
+                                <h4>{userData.Trips[0].name} 
+                                    <span className="spacer">|</span>
+                                    <span className="trip-date">
+                                        <Moment format="MMM DD YYYY">{userData.Trips[0].start}</Moment>
+                                        <span className="hyphen" style={{ margin: 'auto 4.5px' }}> - </span>
+                                        <Moment format="MMM DD YYYY">{userData.Trips[0].end}</Moment>
+                                    </span>
+                                </h4>
+                            </button>
+                        </h5>
+                    </div>
+                    <div id='collapseOne' className="collapse" aria-labelledby='headingOne' data-parent="#accordion">
+                        <div className="card-body">
+                            <div className="panel panel-default">
+                                <div className="panel-body">
+                                    <span style={{ fontWeight: 500 }}>{`${userData.Trips[0].Locations[0].name} National Park`}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card-body">
+                            <div className="panel panel-default">
+                                <div style={{ position: 'relative' }} className="panel-body">
+                                    {userData.Trips[0].Locations[0].Trails[0] === undefined ?
+                                        <p style={{ fontWeight: '500', margin: '0', lineHeight: '33.5px' }}>
+                                            Trails:
+                                            <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                        </p>
+                                        :
+                                        <div>
+                                            <p style={{ fontWeight: '500', margin: '0' }}>
+                                                Trails:
+                                                <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                            </p>
+                                            <ul>
+                                                <li>{userData.Trips[0].Locations[0].Trails[0].name}</li>
+                                            </ul>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card-body">
+                            <div className="panel panel-default">
+                                <div style={{ position: 'relative' }} className="panel-body">
+                                    {userData.Trips[0].Locations[0].Activities[0] === undefined ? 
+                                        <p style={{ fontWeight: '500', margin: '0', lineHeight: '33.5px' }}>
+                                            Activities:
+                                            <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                        </p> 
+                                        : 
+                                        <div>
+                                            <p style={{ fontWeight: '500', margin: '0' }}>
+                                                Activities:
+                                                <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                            </p>
+                                            <ul>
+                                                <li>{userData.Trips[0].Locations[0].Activities[0].name}</li>
+                                            </ul>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="card-body">
+                            <div className="panel panel-default">
+                                <div style={{ position: 'relative' }} className="panel-body">
+                                   {userData.Trips[0].Locations[0].Campsites[0] === undefined ?
+                                        <p style={{ fontWeight: '500', margin: '0', lineHeight: '33.5px' }}>
+                                            Campsites:
+                                            <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                        </p>
+                                        :
+                                        <div>
+                                            <p style={{ fontWeight: '500', margin: '0' }}>
+                                                Campsites:
+                                                <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                            </p>
+                                            <ul>
+                                                <li>{userData.Trips[0].Locations[0].Campsites[0].name}</li>
+                                            </ul>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="card-body">
+                            <div className="panel panel-default">
+                                <div style={{ position: 'relative' }} className="panel-body">
+                                     {userData.Trips[0].Locations[0].VisitorCenters[0] === undefined ?
+                                        <p style={{ fontWeight: '500', margin: '0', lineHeight: '33.5px' }}>
+                                            Visitor Centers:
+                                            <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                        </p>
+                                        :
+                                        <div>
+                                            <p style={{ fontWeight: '500', margin: '0' }}>
+                                                Visitor Centers:
+                                                <button className='btn btn-primary pull-right' style={{ position: 'absolute', right: '20px', top: '15px' }}>Add</button>
+                                            </p>
+                                            <ul>
+                                                <li>{userData.Trips[0].Locations[0].VisitorCenters[0].name}</li>
+                                            </ul>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        );
+    };
+};
+
+export default AccordionCard;
