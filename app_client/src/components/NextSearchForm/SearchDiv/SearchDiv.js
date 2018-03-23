@@ -372,6 +372,16 @@ class SearchDiv extends Component {
     }
 
     handleModalConfirm(e) {
+        this.closeModal();
+
+        // add class for css animation ("dashboard" in navbar blinks)
+        const navDash = document.getElementById('nav-dash');
+        navDash.classList.add('blink');
+        // remove class
+        setTimeout(() => {
+            navDash.classList.remove('blink');
+        }, 2500);
+
         console.log(e.target.id);
         if (e.target.id === 'confirm-trail-btn') {
             this.handleAddTrail();

@@ -66,6 +66,26 @@
     padding: 15px 20px;
 }
 
+/* css animation for "dashboard" tab */
+.blink {
+    animation-name: dash-blink;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+
+}
+
+@keyframes dash-blink {
+    0% {
+        color: #637579;
+    }
+    50% {
+        color: #fce300;
+    }
+    100% {
+        color: #637579;
+    }
+}
+
 @media only screen and (max-width: 767px) {
     a.dropdown-link {
         padding-left: 15px !important;

@@ -284,11 +284,11 @@ class Dashboard extends Component {
         } else if (this.state.startDate !== null && this.state.endDate === null) {
             alert('Please set an end date');
         } else {
-            console.log("=========== USER'S TRIP INFO ===========");
-            console.log(`Park: ${this.state.userParkName}`);
-            console.log(`Start Date: ${this.state.startDate._d}`);
-            console.log(`End date: ${this.state.endDate._d}`);
-            console.log("========================================");
+            // console.log("=========== USER'S TRIP INFO ===========");
+            // console.log(`Name: ${this.state.newTripName}`);
+            // console.log(`Start Date: ${this.state.startDate._d}`);
+            // console.log(`End date: ${this.state.endDate._d}`);
+            // console.log("========================================");
 
             const tripData = {
                 tripName: this.state.newTripName,

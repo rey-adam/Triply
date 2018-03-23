@@ -25,7 +25,15 @@ module.exports = {
     findAllTrip: (req, res) => {
         db
             .Trip
-            .findAll({})
+            .findAll({
+                attributes: [
+                    'UserId',
+                    'id',
+                    'name',
+                    [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('start'), '%b %d %Y'), 'startDate'],
+                    [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('end'), '%b %d %Y'), 'endDate']
+                ]
+            })
             .then(dbTrip => {
                 res.json(dbTrip);
             })
@@ -41,7 +49,14 @@ module.exports = {
             .findOne({
                 where: {
                     UserId: req.params.id
-                }
+                },
+                attributes: [
+                    'UserId',
+                    'id',
+                    'name',
+                    [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('start'), '%b %d %Y'), 'startDate'],
+                    [sequelize.Sequelize.fn('date_format', sequelize.Sequelize.col('end'), '%b %d %Y'), 'endDate']
+                ]
             })
             .then(dbTrip => {
                 res.json(dbTrip);
