@@ -105,12 +105,14 @@ class Dashboard extends Component {
         //UserModel.getOne(authHelper.splitToken().id)
         let userRes;
         let prkCode;
+        let parkName;
 
         UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
             
             userRes = res.data;
             prkCode = userRes.Trips[0].Locations[0].parkCode;
+            parkName = userRes.Trips[0].Locations[0].name;
             
             console.log(this.state.userData); // {}
 
@@ -188,7 +190,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return MAPAPI.location("yosemite");
+            return MAPAPI.location(parkName);
 
         }).then(mapRes => {
             

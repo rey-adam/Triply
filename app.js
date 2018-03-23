@@ -114,9 +114,6 @@ models.sequelize.sync({ force: isDev }).then(function () {
             ); // END CREATE
         }
         ); // END CREATE
-
-
-
     }; // END IF 
 
 
