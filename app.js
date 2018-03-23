@@ -107,10 +107,9 @@ models.sequelize.sync({ force: isDev }).then(function () {
             models.VisitorCenter.bulkCreate(
                 centerData
             ); // END CREATE
-        }); // END CREATE
-
-
-    } // END IF 
+        }
+        ); // END CREATE
+    }; // END IF 
 
 
     app.listen(PORT, function () {
