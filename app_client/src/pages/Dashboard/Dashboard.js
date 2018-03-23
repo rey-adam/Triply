@@ -113,6 +113,7 @@ class Dashboard extends Component {
             userRes = res.data;
             console.log(userRes);
             prkCode = userRes.Trips[0].Locations[0].parkCode;
+            parkName = userRes.Trips[0].Locations[0].name;
 
             this.setState({ userData: userRes });
             console.log(`id: ${this.state.userData.id}, email: ${this.state.userData.email}`);
@@ -204,7 +205,6 @@ class Dashboard extends Component {
 
             userRes.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
-                    console.log(reiRes.data)
                     const hikes = reiRes.data.trails.filter(elem => {
                         const val = loc.Trails.find(hikes => {
                             return hikes.hikeId === elem.id
