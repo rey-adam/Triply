@@ -25,13 +25,14 @@ class Navbar extends Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <Link to='/park' className="navbar-brand">
+                            <Link to='/?lat=37.84883288&amp;lng=-119.5571873&amp;place=Yosemite%20National%20Park' className="navbar-brand">
                                 <div id="nav-logo"></div>
                             </Link>
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
+                                <li><Link to='/park' className={window.location.pathname === '/park' ? "active" : ""}>Parks</Link></li>
                                 <li><Link to='/?lat=37.84883288&amp;lng=-119.5571873&amp;place=Yosemite%20National%20Park' className={window.location.pathname === '/dashboard' ? "active" : ""}>Dashboard</Link></li>
                                 <li className="dropdown">
                                     <Link to='#' className={window.location.pathname === '/account' ? "dropdown-toggle active" : "dropdown-toggle"} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span className="caret"></span></Link>
