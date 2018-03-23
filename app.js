@@ -58,66 +58,59 @@ if (isDev) {
 
 models.sequelize.sync({ force: isDev }).then(function () {
 
-    const salt = authCtrl._generateSalt();
+    const saltArr = [authCtrl._generateSalt(), authCtrl._generateSalt(), authCtrl._generateSalt(), authCtrl._generateSalt()];
     if (isDev) {
 
 
         models.User.bulkCreate([
             {
                 email: "josh@spears.com",
-                salt: salt,
-                hash: authCtrl._generateHash("joshspears", salt)
+                salt: saltArr[0],
+                hash: authCtrl._generateHash("joshspears", saltArr[0])
             },
             {
                 email: "jason@daniel.com",
-                salt: salt,
-                hash: authCtrl._generateHash("jasondaniel", salt)
+                salt: saltArr[1],
+                hash: authCtrl._generateHash("jasondaniel", saltArr[1])
             },
             {
                 email: "melodie@chi.com",
-                salt: salt,
-                hash: authCtrl._generateHash("melodiechi", salt)
+                salt: saltArr[2],
+                hash: authCtrl._generateHash("melodiechi", saltArr[2])
             },
             {
                 email: "rey@adam.com",
-                salt: salt,
-                hash: authCtrl._generateHash("reyadamcruz", salt)
+                salt: saltArr[3],
+                hash: authCtrl._generateHash("reyadamcruz", saltArr[3])
             }
         ]).then(() => {
             models.Trip.bulkCreate(
                 tripData
             ); // END CREATE
-        }
-        ).then(() => {
+        }).then(() => {
             models.Location.bulkCreate(
                 locationData
             ); // END CREATE
-        }
-        ).then(() => {
+        }).then(() => {
             models.Trail.bulkCreate(
                 trailData
             ); // END CREATE
-        }
-        ).then(() => {
+        }).then(() => {
             models.Campsite.bulkCreate(
                 campData
             ); // END CREATE
-        }
-        ).then(() => {
+        }).then(() => {
             models.Activity.bulkCreate(
                 activityData
             ); // END CREATE
-        }
-        ).then(() => {
+        }).then(() => {
             models.VisitorCenter.bulkCreate(
                 centerData
             ); // END CREATE
-        }
-        ); // END CREATE
+        }); // END CREATE
 
 
-
-    }; // END IF 
+    } // END IF 
 
 
     app.listen(PORT, function () {

@@ -103,7 +103,6 @@ class Dashboard extends Component {
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
 
-        //UserModel.getOne(authHelper.splitToken().id)
         let userRes;
         let prkCode;
 
@@ -112,15 +111,13 @@ class Dashboard extends Component {
             
             userRes = res.data;
             prkCode = userRes.Trips[0].Locations[0].parkCode;
-            
-            console.log(this.state.userData); // {}
 
             this.setState({ userData: userRes });
-            console.log(this.state.userData); // { id: 3, email: 'melodie@chi.com' }
+            console.log(`id: ${this.state.userData.id}, email: ${this.state.userData.email}`);
             
             console.log(prkCode);
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
-            return NPSAPI.camp(prkCode);
+            return NPSAPI.campgrounds(prkCode);
         })
         .then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -143,7 +140,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
             
-            return NPSAPI.center(prkCode);
+            return NPSAPI.visitorCenters(prkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -166,7 +163,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.event(prkCode);
+            return NPSAPI.events(prkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
