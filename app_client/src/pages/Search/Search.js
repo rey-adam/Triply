@@ -188,9 +188,9 @@ class Search extends Component {
                         <div className="select-bar">
                             <select className="form-control select2"></select>
                             <select id="park-select" className="form-control select-options">
-                                <option>Choose a park...</option>
+                                <option className="select-option">Choose a park...</option>
                                 {parks.map((park, i) => (
-                                    <option
+                                    <option className="select-option"
                                         key={i}
                                         id={park.parkName}
                                         value={park.parkCode}>
