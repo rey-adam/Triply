@@ -132,8 +132,8 @@ class Search extends Component {
                 tripId: this.state.userTripId,
                 parkName: this.state.userParkName,
                 parkCode: this.state.userParkCode,
-                startDate: this.state.startDate,
-                endDate: this.state.endDate
+                latitude: locationObj.parkLat,
+                longitude: locationObj.parkLong
             };
             
             return axios({

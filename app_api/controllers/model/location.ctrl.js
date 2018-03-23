@@ -9,7 +9,9 @@ module.exports = {
             .create({
                 TripId: req.body.tripId,
                 name: req.body.parkName,
-                parkCode: req.body.parkCode
+                parkCode: req.body.parkCode,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude
             })
             .then(dbLocation => {
                 res.json(dbLocation);
