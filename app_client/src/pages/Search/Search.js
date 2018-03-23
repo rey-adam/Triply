@@ -79,11 +79,6 @@ class Search extends Component {
         this.setState({ modalIsOpen: true, modalMessage: message });
     };
 
-    // afterOpenModal = () => {
-    //     // references are now synced and can be accessed
-    //     this.subtitle.style.color = '#f00';
-    // }
-
     closeModal() {
         this.setState({ modalIsOpen: false });
     };
@@ -180,7 +175,6 @@ class Search extends Component {
         return (
             <div className="park-search-container" style={{ height: '100%' }}>
                 <Navbar />
-                {/* <ControlledCarousel /> */}
                 <Hero />
 
                 <SelectWrapper>
@@ -188,9 +182,9 @@ class Search extends Component {
                         <div className="select-bar">
                             <select className="form-control select2"></select>
                             <select id="park-select" className="form-control select-options">
-                                <option>Choose a park...</option>
+                                <option className="select-option">Choose a park...</option>
                                 {parks.map((park, i) => (
-                                    <option
+                                    <option className="select-option"
                                         key={i}
                                         id={park.parkName}
                                         value={park.parkCode}>
@@ -217,7 +211,6 @@ class Search extends Component {
                     shouldCloseOnOverlayClick={true}
                     ariaHideApp={false}
                 >
-                    {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
                     <h3 className="modal-park-name">
                         {`${this.state.userParkName} National Park`}
                         <button
@@ -228,13 +221,13 @@ class Search extends Component {
                     </h3>
 
                     <DateRangePicker
-                        startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                        startDateId="start-date" // PropTypes.string.isRequired,
-                        endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                        endDateId="end-date" // PropTypes.string.isRequired,
-                        onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
-                        focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                        onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                        startDate={this.state.startDate}
+                        startDateId="start-date"
+                        endDate={this.state.endDate}
+                        endDateId="end-date"
+                        onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
+                        focusedInput={this.state.focusedInput}
+                        onFocusChange={focusedInput => this.setState({ focusedInput })}
                     />
 
                     <div className="table-responsive">
