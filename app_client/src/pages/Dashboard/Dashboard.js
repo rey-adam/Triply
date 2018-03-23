@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Modal, Button } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 // import Forecast from 'react-forecast';
 import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
 import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
 import SimpleMap from '../MapContainerB/MapContainerB';
-import Modal from 'react-modal';
+import ReactModal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
 import REIAPI from "../../helpers/api/reiApi/reiApi";
-
-
 import qs from 'query-string';
 import './Dashboard.css';
-
 import UserModel from "../../helpers/models/UserModel";
 import authHelper from '../../helpers/authHelper';
 
@@ -46,8 +43,8 @@ const styles = {
 };
 
 class Dashboard extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             // API DATA
             userData: {},
@@ -56,16 +53,24 @@ class Dashboard extends Component {
             visitorCenters: [],
             trails: [],
             // END API DATA
+            newTripName: '',
             weatherLat: 0,
             weatherLng: 0,
             weatherPlace: '',
             weatherUnits: 'us',
             today: new Date(),
-            modalIsOpen: false
+            modalIsOpen: false,
+            show: false
+
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+        this.handleHide = this.handleHide.bind(this);
         this.handleNewUser = this.handleNewUser.bind(this);
+        this.handleNewTrip = this.handleNewTrip.bind(this);
+        this.handleParkRedirect = this.handleParkRedirect.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
@@ -97,23 +102,23 @@ class Dashboard extends Component {
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
 
-        let userInfo;
-
-
         //UserModel.getOne(authHelper.splitToken().id)
-        UserModel.getOne(1)
+        let userInfo;
+        UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
             
             userInfo = res.data;
             
             console.log("user info data");
+            console.log(userInfo); // { id: 3, email: 'melodie@chi.com' }
+            console.log(this.state.userData); // {}
 
-            this.setState({userData: userInfo});
+            this.setState({ userData: userInfo });
+            console.log(this.state.userData); // { id: 3, email: 'melodie@chi.com' }
 
-            console.log(this.state.userData);
 
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
-            return NPSAPI.allCamp();
+            return NPSAPI.campgrounds('yose');
         })
         .then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -136,7 +141,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
             
-            return NPSAPI.visitorCenter();
+            return NPSAPI.visitorCenters('yose');
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -159,7 +164,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.event();
+            return NPSAPI.events('yose');
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -216,7 +221,6 @@ class Dashboard extends Component {
         })
         .catch(err => console.error(err));
 
-
     }; // END MOUNT
 
     // =====================================================================================
@@ -224,12 +228,20 @@ class Dashboard extends Component {
     // =====================================================================================
     openModal() {
         this.setState({ modalIsOpen: true });
-    };
+    }
 
     closeModal() {
         this.setState({ modalIsOpen: false });
         window.localStorage.setItem('isNewUser', 1);
-    };
+    }
+
+    handleShow() {
+        this.setState({ show: true });
+    }
+
+    handleHide() {
+        this.setState({ show: false });
+    }
 
     // =====================================================================================
     // HANDLE FUNCTIONS
@@ -242,8 +254,31 @@ class Dashboard extends Component {
         }
     }
 
+    handleNewTrip(e) {
+        e.preventDefault();
+        console.log(this.state.newTripName);
+        if (this.state.newTripName === '') {
+            alert('Please enter a trip name');
+        } else {
+            this.handleShow();
+        }
+    }
+
+    handleParkRedirect(e) {
+        e.preventDefault();
+        this.props.history.push('/park');
+    }
+
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            // e.preventDefault();
+            this.handleNewTrip(e);
+        }
+    }
+
     handleChange(event) {
-        this.setState({ value: event.target.value });
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
     }
 
     handleZipSubmit(e) {
@@ -292,8 +327,23 @@ class Dashboard extends Component {
                     <div id="create-trip-div">
                         <form className="create-trip-form">
                             <div className="form-group">
-                                <input type="text" id="new-trip-name" className="form-control" placeholder="New trip name..." />
-                                <Link to='#'><span className="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></Link>
+                                <input
+                                    type="text"
+                                    id="new-trip-name"
+                                    className="form-control"
+                                    name="newTripName"
+                                    value={this.state.newTripName}
+                                    onChange={this.handleChange}
+                                    onKeyPress={this.handleKeyPress}
+                                    onSubmit={this.handleNewTrip}
+                                    placeholder="New trip name..." />
+                                <button className="btn" type="submit">
+                                    <span
+                                        className="glyphicon glyphicon-ok-sign"
+                                        aria-hidden="true"
+                                        onClick={this.handleNewTrip}>
+                                    </span>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -428,7 +478,7 @@ class Dashboard extends Component {
 
                 </div>
 
-                <Modal
+                <ReactModal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
@@ -448,6 +498,27 @@ class Dashboard extends Component {
                         className="btn btn-default"
                         onClick={this.closeModal}
                     >Got it</button>
+                </ReactModal>
+
+                <Modal
+                    {...this.props}
+                    show={this.state.show}
+                    onHide={this.handleHide}
+                    dialogClassName="new-trip-modal"
+                >
+                    <Modal.Body>
+                        <p>Trip Created:</p>
+                        <p className="new-trip-name">{this.state.newTripName}</p>
+                        <p>Click 'Next' to start planning your itinerary</p>
+
+                        <Button
+                            onClick={this.handleHide}
+                        >Close</Button>
+                        <Button
+                            onClick={this.handleParkRedirect}
+                            id="park-redirect-btn"
+                        >Next</Button>
+                    </Modal.Body>
                 </Modal>
             </div>
         );
