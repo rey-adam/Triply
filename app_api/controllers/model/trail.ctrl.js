@@ -7,7 +7,6 @@ module.exports = {
         db
             .Trail
             .create({
-                UserId: req.body.userId,
                 LocationId: req.body.locationId,
                 name: req.body.trailName,
                 hikeId: req.body.trailId

@@ -17,6 +17,7 @@ class Search extends Component {
             activities: [],
             campsites: [],
             visitorCenters: [],
+            userTripId: '',
             userLocationId: ''
         };
         this.handleTrailRequest = this.handleTrailRequest.bind(this);
@@ -39,11 +40,14 @@ class Search extends Component {
         console.log(urlObj);
         console.log('======================');
 
-        this.setState({
-            userTripId: urlObj.userTripId,
-            userLocationId: urlObj.locationId
-        });
-        
+        setTimeout(() => {
+            this.setState({
+                userTripId: urlObj.tripId,
+                userLocationId: urlObj.locationId
+            });
+            console.log(this.state.userTripId);
+        }, 1000);
+
            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
             *                                 OUTPUT                                    *
             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

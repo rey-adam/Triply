@@ -8,7 +8,6 @@ import '../../Hero/Hero.css';
 import './SearchDiv.css';
 import '../../../pages/Search/Search.css';
 import axios from 'axios';
-import qs from 'query-string';
 
 const styles = {
     modalStyles: {
@@ -103,27 +102,45 @@ class SearchDiv extends Component {
             VCDirectionsURL: ''
         }
         this.openModal = this.openModal.bind(this);
-        // this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.handleTrailSubmit = this.handleTrailSubmit.bind(this);
         this.handleActivitySubmit = this.handleActivitySubmit.bind(this);
         this.handleCampSubmit = this.handleCampSubmit.bind(this);
         this.handleVCSubmit = this.handleVCSubmit.bind(this);
         this.handleModalConfirm = this.handleModalConfirm.bind(this);
+        this.handleAddTrail = this.handleAddTrail.bind(this);
+        this.handleAddActivity = this.handleAddActivity.bind(this);
+        this.handleAddCamp = this.handleAddCamp.bind(this);
+        this.handleAddVC = this.handleAddVC.bind(this);
     };
 
-    componentDidMount() {
+    componentWillReceiveProps(nextProps) {
+        // console.log(nextProps);
+        // console.log(this.props);
         this.setState({
-            trails: this.props.trails,
-            userTripId: this.props.userTripId,
-            userLocationId: this.props.userLocationId
+            trails: nextProps.trails,
+            userTripId: nextProps.userTripId,
+            userLocationId: nextProps.userLocationId
         });
-        const userInfo = {
-            token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
-            id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
-            email: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).email
-        };
+        // console.log(this.state.userTripId);
     }
+
+    // componentDidMount() {
+    //     setTimeout(() => {
+    //         this.setState({
+    //             trails: this.props.trails,
+    //             userTripId: this.props.userTripId,
+    //             userLocationId: this.props.userLocationId
+    //         });
+    //         console.log(this.props.userTripId);
+    //     }, 2000);
+
+    //     const userInfo = {
+    //         token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
+    //         id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+    //         email: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).email
+    //     };
+    // }
 
     openModal(message) {
         this.setState({ modalIsOpen: true, modalMessage: message });
@@ -369,8 +386,7 @@ class SearchDiv extends Component {
 
     handleAddTrail() {
         const trailData = {
-            userId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
-            locationId: Number(this.state.userLocationId),
+            locationId: this.state.userLocationId,
             trailName: this.state.trailName,
             trailId: this.state.trailId
         };
@@ -392,7 +408,26 @@ class SearchDiv extends Component {
     }
 
     handleAddActivity() {
+        const activityData = {
+            locationId: this.state.userLocationId,
+            activityName: this.state.activityName,
+            activityId: this.state.activityId
+        };
 
+        axios({
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            method: "POST",
+            url: `/api/activity`,
+            data: activityData
+        })
+        .then(dbActivity => {
+            console.log(`===== USER'S SELECTED TRAIL DATA =====`);
+            console.log(dbActivity.data);
+            console.log('=====================================');
+        })
+        .catch(err => {
+            console.error(err);
+        });
     }
 
     handleAddCamp() {

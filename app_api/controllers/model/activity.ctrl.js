@@ -6,7 +6,11 @@ module.exports = {
     createActivity: (req, res) => {
         db
             .Activity
-            .create(req.body)
+            .create({
+                LocationId: req.body.locationId,
+                name: req.body.activityName,
+                evntId: req.body.activityId
+            })
             .then(dbActivity => {
                 res.json(dbActivity);
             })
