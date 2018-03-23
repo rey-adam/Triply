@@ -104,6 +104,7 @@ class SearchDiv extends Component {
         this.handleActivitySubmit = this.handleActivitySubmit.bind(this);
         this.handleCampSubmit = this.handleCampSubmit.bind(this);
         this.handleVCSubmit = this.handleVCSubmit.bind(this);
+        this.handleModalConfirm = this.handleModalConfirm.bind(this);
     };
 
     componentDidMount() {
@@ -352,6 +353,35 @@ class SearchDiv extends Component {
             console.log(userVCObj);
             this.openModal('visitor center');
         }
+    }
+
+    handleModalConfirm(e) {
+        console.log(e.target.id);
+        if (e.target.id === 'confirm-trail-btn') {
+            this.handleAddTrail();
+        } else if (e.target.id === 'confirm-activity-btn') {
+            this.handleAddActivity();
+        } else if (e.target.id === 'confirm-camp-btn') {
+            this.handleAddACamp();
+        } else if (e.target.id === 'confirm-vc-btn') {
+            this.handleAddVC();
+        }
+    }
+
+    handleAddTrail() {
+
+    }
+
+    handleAddActivity() {
+
+    }
+
+    handleAddCamp() {
+
+    }
+
+    handleAddVC() {
+
     }
 
     render() {
@@ -639,7 +669,7 @@ class SearchDiv extends Component {
                             <h3 className="modal-park-name">
                                 {this.state.campName}
                                 <button
-                                    id="confirm-park-btn"
+                                    id="confirm-camp-btn"
                                     className='btn btn-default confirm-btn'
                                     onClick={this.handleModalConfirm}
                                 >Add</button>
@@ -776,7 +806,7 @@ class SearchDiv extends Component {
                             <h3 className="modal-park-name">
                                 {this.state.VCName}
                                 <button
-                                    id="confirm-park-btn"
+                                    id="confirm-vc-btn"
                                     className='btn btn-default confirm-btn'
                                     onClick={this.handleModalConfirm}
                                 >Add</button>
