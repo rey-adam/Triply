@@ -3,8 +3,8 @@ module.exports = function (sequelize, DataTypes) {
 
     const Trip = sequelize.define("Trip", {
         name: DataTypes.STRING,
-        start: DataTypes.INTEGER,
-        end: DataTypes.INTEGER
+        start: DataTypes.DATEONLY,
+        end: DataTypes.DATEONLY
     }); // END TRIP CONSTRUCTOR
 
     Trip.associate = function (models) {

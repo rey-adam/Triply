@@ -7,6 +7,8 @@ const express = require("express"),
 router.post("/trip", ctrl.createTrip);
 // READ
 router.get("/trip", ctrl.findAllTrip);
+// FIND ALL USER TRIPS
+router.get("/trips/:id", ctrl.findAllUserTrips);
 // READ ONE
 router.get("/trip/:id", ctrl.findOneTrip);
 // UPDATE

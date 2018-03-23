@@ -40,7 +40,7 @@ export default class SimpleMap extends Component {
 
         const latlng = {lat, lng}
  
-        console.log('im the map',latlng);
+        // console.log('im the map',latlng);
         return (
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo' }}

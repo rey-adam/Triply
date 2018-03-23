@@ -83,33 +83,34 @@ models.sequelize.sync({ force: isDev }).then(function () {
                 salt: saltArr[3],
                 hash: authCtrl._generateHash("reyadamcruz", saltArr[3])
             }
-        ]).then(() => {
-            models.Trip.bulkCreate(
-                tripData
-            ); // END CREATE
-        }).then(() => {
-            models.Location.bulkCreate(
-                locationData
-            ); // END CREATE
-        }).then(() => {
-            models.Trail.bulkCreate(
-                trailData
-            ); // END CREATE
-        }).then(() => {
-            models.Campsite.bulkCreate(
-                campData
-            ); // END CREATE
-        }).then(() => {
-            models.Activity.bulkCreate(
-                activityData
-            ); // END CREATE
-        }).then(() => {
-            models.VisitorCenter.bulkCreate(
-                centerData
-            ); // END CREATE
-        }
-        ); // END CREATE
-    }; // END IF 
+        ])
+        // .then(() => {
+        //     return models.Trip.bulkCreate(
+        //         tripData
+        //     ); // END CREATE
+        // }).then(() => {
+        //     return models.Location.bulkCreate(
+        //         locationData
+        //     ); // END CREATE
+        // }).then(() => {
+        //     return models.Trail.bulkCreate(
+        //         trailData
+        //     ); // END CREATE
+        // }).then(() => {
+        //     return models.Campsite.bulkCreate(
+        //         campData
+        //     ); // END CREATE
+        // }).then(() => {
+        //     return models.Activity.bulkCreate(
+        //         activityData
+        //     ); // END CREATE
+        // }).then(() => {
+        //     models.VisitorCenter.bulkCreate(
+        //         centerData
+        //     ); // END CREATE
+        // }
+        // ); // END CREATE
+    } // END IF 
 
 
     app.listen(PORT, function () {

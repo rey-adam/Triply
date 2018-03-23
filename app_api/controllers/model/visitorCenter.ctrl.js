@@ -6,11 +6,18 @@ module.exports = {
     createVisitorCenter: (req, res) => {
         db
             .VisitorCenter
-            .create(req.body)
+            .create({
+                LocationId: req.body.locationId,
+                name: req.body.VCName,
+                centerId: req.body.VCId
+            })
             .then(dbVisitorCenter => {
                 res.json(dbVisitorCenter);
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                res.json(err);
+            });
     }, // END CREATE
 
     findAllVisitorCenter: (req, res) => {

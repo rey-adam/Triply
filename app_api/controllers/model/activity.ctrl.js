@@ -6,11 +6,18 @@ module.exports = {
     createActivity: (req, res) => {
         db
             .Activity
-            .create(req.body)
+            .create({
+                LocationId: req.body.locationId,
+                name: req.body.activityName,
+                eventId: req.body.activityId
+            })
             .then(dbActivity => {
                 res.json(dbActivity);
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                res.json(err);
+            });
     }, // END CREATE
 
     findAllActivity: (req, res) => {
