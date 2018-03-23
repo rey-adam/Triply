@@ -7,6 +7,8 @@ import Modal from 'react-modal';
 import '../../Hero/Hero.css';
 import './SearchDiv.css';
 import '../../../pages/Search/Search.css';
+import axios from 'axios';
+import qs from 'query-string';
 
 const styles = {
     modalStyles: {
@@ -40,6 +42,9 @@ class SearchDiv extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userTripId: '',
+            userLocationId: '',
+
             trails: [],
             trailId: '',
             trailName: '',
@@ -109,26 +114,20 @@ class SearchDiv extends Component {
 
     componentDidMount() {
         this.setState({
-            trails: this.props.trails
-            // this.openModal('hello');
+            trails: this.props.trails,
+            userTripId: this.props.userTripId,
+            userLocationId: this.props.userLocationId
         });
         const userInfo = {
             token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
             id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
             email: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).email
         };
-
-        console.log(userInfo);
     }
 
     openModal(message) {
         this.setState({ modalIsOpen: true, modalMessage: message });
     };
-
-    // afterOpenModal = () => {
-    //     // references are now synced and can be accessed
-    //     this.subtitle.style.color = '#f00';
-    // }
 
     closeModal() {
         this.setState({ modalIsOpen: false });
@@ -369,7 +368,27 @@ class SearchDiv extends Component {
     }
 
     handleAddTrail() {
+        const trailData = {
+            userId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+            locationId: Number(this.state.userLocationId),
+            trailName: this.state.trailName,
+            trailId: this.state.trailId
+        };
 
+        axios({
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            method: "POST",
+            url: `/api/trail`,
+            data: trailData
+        })
+        .then(dbTrail => {
+            console.log(`===== USER'S SELECTED TRAIL DATA =====`);
+            console.log(dbTrail.data);
+            console.log('=====================================');
+        })
+        .catch (err => {
+            console.error(err);
+        });
     }
 
     handleAddActivity() {

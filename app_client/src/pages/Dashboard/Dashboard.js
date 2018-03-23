@@ -14,6 +14,7 @@ import qs from 'query-string';
 import './Dashboard.css';
 import UserModel from "../../helpers/models/UserModel";
 import authHelper from '../../helpers/authHelper';
+import axios from 'axios';
 
 const styles = {
     modalStyles: {
@@ -48,6 +49,8 @@ class Dashboard extends Component {
         this.state = {
             // API DATA
             userData: {},
+            userParkCode: '',
+            userParkName: '',
             camps: [],
             activities: [],
             visitorCenters: [],
@@ -68,8 +71,8 @@ class Dashboard extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleHide = this.handleHide.bind(this);
         this.handleNewUser = this.handleNewUser.bind(this);
-        this.handleNewTrip = this.handleNewTrip.bind(this);
-        this.handleParkRedirect = this.handleParkRedirect.bind(this);
+        this.handleNewTripSubmit = this.handleNewTripSubmit.bind(this);
+        this.handleNewTripCreate = this.handleNewTripCreate.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
@@ -84,9 +87,13 @@ class Dashboard extends Component {
          * /search/trails === {?lat=44.42&lng=-110.58}         *
          * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+        // parse url to get park lat, long, and name
         const locationObj = qs.parse(this.props.location.search);
 
+        console.log('===== PARSED URL =====');
         console.log(locationObj);
+        console.log('======================');
+
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
         *                                 OUTPUT                                    *
         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -102,24 +109,23 @@ class Dashboard extends Component {
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
 
-        let userRes;
-        let prkCode;
-        let parkName;
-
-
         UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
-            
-            userRes = res.data;
-            console.log(userRes);
-            prkCode = userRes.Trips[0].Locations[0].parkCode;
-            parkName = userRes.Trips[0].Locations[0].name;
+            this.setState({
+                userData: res.data,
+                userParkCode: res.data.Trips[0].Locations[0].parkCode,
+                userParkName: res.data.Trips[0].Locations[0].name
+            });
 
-            this.setState({ userData: userRes });
-            console.log(`id: ${this.state.userData.id}, email: ${this.state.userData.email}`);
+            console.log('========= USER INFO ========');
+            console.log(`id: ${this.state.userData.id}`);
+            console.log(`email: ${this.state.userData.email}`);
+            console.log('========== trips ===========');
+            console.log(this.state.userData.Trips);
+            console.log('============================');
             
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
-            return NPSAPI.campgrounds(prkCode);
+            return NPSAPI.campgrounds(this.state.userParkCode);
         })
         .then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -128,7 +134,7 @@ class Dashboard extends Component {
 
             console.log(npsRes.data.data);
             
-            userRes.Trips.forEach(trip => {
+            this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
                     const campsites = npsRes.data.data.filter(elem => {
                         const val = loc.Campsites.find(camp => {
@@ -142,7 +148,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
             
-            return NPSAPI.visitorCentersAll(prkCode);
+            return NPSAPI.visitorCentersAll(this.state.userParkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -151,7 +157,7 @@ class Dashboard extends Component {
 
             console.log(npsRes.data.data);
             
-            userRes.Trips.forEach(trip => {
+            this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
                     const visitorcenter = npsRes.data.data.filter(elem => {
                         const val = loc.VisitorCenters.find(center => {
@@ -165,7 +171,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.eventsAll(prkCode);
+            return NPSAPI.eventsAll(this.state.userParkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -174,7 +180,7 @@ class Dashboard extends Component {
             
             console.log(npsRes.data.data);
 
-            userRes.Trips.forEach(trip => {
+            this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
                     const events = npsRes.data.data.filter(elem => {
                         const val = loc.Activities.find(events => {
@@ -188,7 +194,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return MAPAPI.location(parkName);
+            return MAPAPI.location(this.state.userParkName);
 
         }).then(mapRes => {
             
@@ -203,7 +209,7 @@ class Dashboard extends Component {
 
             console.log(reiRes.data.trails);
 
-            userRes.Trips.forEach(trip => {
+            this.state.userData.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
                     const hikes = reiRes.data.trails.filter(elem => {
                         const val = loc.Trails.find(hikes => {
@@ -253,7 +259,7 @@ class Dashboard extends Component {
         }
     }
 
-    handleNewTrip(e) {
+    handleNewTripSubmit(e) {
         e.preventDefault();
         console.log(this.state.newTripName);
         if (this.state.newTripName === '') {
@@ -263,15 +269,36 @@ class Dashboard extends Component {
         }
     }
 
-    handleParkRedirect(e) {
+    handleNewTripCreate(e) {
         e.preventDefault();
-        this.props.history.push('/park');
+
+        const tripData = {
+            tripName: this.state.newTripName,
+            userId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id
+        };
+
+        axios({
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            method: "POST",
+            url: `/api/trip`,
+            data: tripData
+        })
+        .then(dbTrip => {
+            console.log(`===== USER'S NEW TRIP DATA =====`);
+            console.log(dbTrip.data);
+            console.log('================================');
+
+            this.props.history.push(`/park?tripId=${dbTrip.data.id}`);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
             // e.preventDefault();
-            this.handleNewTrip(e);
+            this.handleNewTripSubmit(e);
         }
     }
 
@@ -334,13 +361,13 @@ class Dashboard extends Component {
                                     value={this.state.newTripName}
                                     onChange={this.handleChange}
                                     onKeyPress={this.handleKeyPress}
-                                    onSubmit={this.handleNewTrip}
+                                    onSubmit={this.handleNewTripSubmit}
                                     placeholder="New trip name..." />
                                 <button className="btn" type="submit">
                                     <span
                                         className="glyphicon glyphicon-ok-sign"
                                         aria-hidden="true"
-                                        onClick={this.handleNewTrip}>
+                                        onClick={this.handleNewTripSubmit}>
                                     </span>
                                 </button>
                             </div>
@@ -514,7 +541,7 @@ class Dashboard extends Component {
                             onClick={this.handleHide}
                         >Close</Button>
                         <Button
-                            onClick={this.handleParkRedirect}
+                            onClick={this.handleNewTripCreate}
                             id="park-redirect-btn"
                         >Next</Button>
                     </Modal.Body>

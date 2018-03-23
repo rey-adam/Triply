@@ -16,7 +16,8 @@ class Search extends Component {
             trails: [],
             activities: [],
             campsites: [],
-            visitorCenters: []
+            visitorCenters: [],
+            userLocationId: ''
         };
         this.handleTrailRequest = this.handleTrailRequest.bind(this);
         this.handleActivityRequest = this.handleActivityRequest.bind(this);
@@ -25,8 +26,6 @@ class Search extends Component {
     };
 
     componentDidMount() {
-        
-        console.log(this.props.location.search);
            /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
             *                       OUTPUT                        *
             * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -34,9 +33,17 @@ class Search extends Component {
             * /search/trails === {?lat=44.42&lng=-110.58}         *
             * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-        const locationObj = qs.parse(this.props.location.search);
+        const urlObj = qs.parse(this.props.location.search);
 
-        console.log(locationObj);
+        console.log('===== PARSED URL =====');
+        console.log(urlObj);
+        console.log('======================');
+
+        this.setState({
+            userTripId: urlObj.userTripId,
+            userLocationId: urlObj.locationId
+        });
+        
            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
             *                                 OUTPUT                                    *
             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -44,7 +51,7 @@ class Search extends Component {
             * /search/trails?lat=44.42&lng=-110.58 === {lat: "44.42", lng: "-110.58"}   *
             * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
         
-        this.handleTrailRequest(locationObj.lat, locationObj.lng)
+        this.handleTrailRequest(urlObj.lat, urlObj.lng)
         .then(trailRes => {
             // console.log(trailRes);
             this.setState({
@@ -54,7 +61,7 @@ class Search extends Component {
             console.log(`Trails found: ${this.state.trails.length}`);
             console.log(this.state.trails);
             console.log('======================');
-            return this.handleActivityRequest(locationObj.park);
+            return this.handleActivityRequest(urlObj.parkCode);
         })
         .then(activityRes => {
             // console.log(activityRes);
@@ -65,7 +72,7 @@ class Search extends Component {
             console.log(`Activities found: ${this.state.activities.length}`);
             console.log(this.state.activities);
             console.log('======================');
-            return this.handleCampsiteRequest(locationObj.park);
+            return this.handleCampsiteRequest(urlObj.parkCode);
         })
         .then(campsiteRes => {
             // console.log(campsiteRes);
@@ -76,7 +83,7 @@ class Search extends Component {
             console.log(`Campsites found: ${this.state.campsites.length}`);
             console.log(this.state.campsites);
             console.log('=======================');
-            return this.handleVCRequest(locationObj.park);
+            return this.handleVCRequest(urlObj.parkCode);
         })
         .then(vcRes => {
             // console.log(vcRes);
@@ -153,6 +160,8 @@ class Search extends Component {
                     activities={this.state.activities}
                     campsites={this.state.campsites}
                     visitorCenters={this.state.visitorCenters}
+                    userTripId={this.state.userTripId}
+                    userLocationId={this.state.userLocationId}
                 />
                 {/* <div id="results"></div> */}
             </div>

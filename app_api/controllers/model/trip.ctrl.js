@@ -1,17 +1,22 @@
 // REQUIRE THE DATABASE MODELS
 const db = require("../../models");
+const locationCtrl = require('./location.ctrl');
 
 module.exports = {
     
     createTrip: (req, res) => {
         db
             .Trip
-            .create(req.body)
+            .create({
+                UserId: req.body.userId,
+                name: req.body.tripName
+             })
             .then(dbTrip => {
                 res.json(dbTrip);
             })
             .catch(err => {
                 console.error(err);
+                res.json(err);
             });
     }, // END CREATE
 

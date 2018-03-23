@@ -14,6 +14,8 @@ import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
+import axios from 'axios';
+import qs from 'query-string';
 
 
 const styles = {
@@ -49,8 +51,12 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userTripId: '',
+            userLocationId: '',
             userParkCode: '',
             userParkName: '',
+            parkLat: '',
+            parkLong: '',
             parkURL: '',
             parkStates: '',
             parkDesc: '',
@@ -71,8 +77,14 @@ class Search extends Component {
     };
 
     componentDidMount() {
+        console.log('====== NPS PARK DATA ======');
         console.log(this.state.parks);
-        // this.openModal('hello');
+        console.log('===========================');
+
+        // parse url to get tripId
+        const tripObj = qs.parse(this.props.location.search);
+        const tripId = tripObj.tripId;
+        this.setState({ userTripId: tripId });
     };
 
     openModal(message) {
@@ -129,7 +141,32 @@ class Search extends Component {
 
             this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
             .then(locationObj => {
-                this.props.history.push(`/search/trails?park=${this.state.userParkCode}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
+                console.log(locationObj);
+                this.setState({
+                    parkLat: locationObj.parkLat,
+                    parkLong: locationObj.parkLong
+                });
+
+                const locationData = {
+                    tripId: this.state.userTripId,
+                    parkName: this.state.userParkName,
+                    parkCode: this.state.userParkCode
+                };
+                
+                return axios({
+                    headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                    method: "POST",
+                    url: `/api/location`,
+                    data: locationData
+                });
+            })
+            .then(dbLocation => {
+                console.log(`===== USER'S SELECTED PARK DATA =====`);
+                console.log(dbLocation.data);
+                console.log('=====================================');
+
+                this.setState({ userLocationId: dbLocation.data.id });
+                this.props.history.push(`/search/trails?tripId=${this.state.userTripId}&locationId=${this.state.userLocationId}&parkCode=${this.state.userParkCode}&lat=${this.state.parkLat}&lng=${this.state.parkLong}`);
             })
             .catch(err => {
                 console.error(err);
