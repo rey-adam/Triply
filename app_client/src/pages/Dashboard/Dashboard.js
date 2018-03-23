@@ -108,10 +108,13 @@ class Dashboard extends Component {
         UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
             
-            userInfo = res.data;
+            userInfo = {
+                id: res.data.id,
+                email: res.data.email
+            };
             
             console.log("user info data");
-            console.log(userInfo); // { id: 3, email: 'melodie@chi.com' }
+            console.log(`id: ${userInfo.id}, email: ${userInfo.email}`); // { id: 3, email: 'melodie@chi.com' }
             console.log(this.state.userData); // {}
 
             this.setState({ userData: userInfo });
