@@ -15,6 +15,10 @@ import './Dashboard.css';
 import UserModel from "../../helpers/models/UserModel";
 import authHelper from '../../helpers/authHelper';
 import axios from 'axios';
+// date picker
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker } from 'react-dates';
 
 const styles = {
     modalStyles: {
@@ -63,7 +67,9 @@ class Dashboard extends Component {
             weatherUnits: 'us',
             today: new Date(),
             modalIsOpen: false,
-            show: false
+            show: false,
+            startDate: null,
+            endDate: null
 
         };
         this.openModal = this.openModal.bind(this);
@@ -271,28 +277,43 @@ class Dashboard extends Component {
 
     handleNewTripCreate(e) {
         e.preventDefault();
+        if (this.state.startDate === null && this.state.endDate === null) {
+            alert('Please set a date range for your trip');
+        } else if (this.state.startDate === null && this.state.endDate !== null) {
+            alert('Please set a start date');
+        } else if (this.state.startDate !== null && this.state.endDate === null) {
+            alert('Please set an end date');
+        } else {
+            console.log("=========== USER'S TRIP INFO ===========");
+            console.log(`Park: ${this.state.userParkName}`);
+            console.log(`Start Date: ${this.state.startDate._d}`);
+            console.log(`End date: ${this.state.endDate._d}`);
+            console.log("========================================");
 
-        const tripData = {
-            tripName: this.state.newTripName,
-            userId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id
-        };
+            const tripData = {
+                tripName: this.state.newTripName,
+                userId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+                startDate: this.state.startDate._d,
+                endDate: this.state.endDate._d
+            };
 
-        axios({
-            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-            method: "POST",
-            url: `/api/trip`,
-            data: tripData
-        })
-        .then(dbTrip => {
-            console.log(`===== USER'S NEW TRIP DATA =====`);
-            console.log(dbTrip.data);
-            console.log('================================');
+            axios({
+                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                method: "POST",
+                url: `/api/trip`,
+                data: tripData
+            })
+            .then(dbTrip => {
+                console.log(`===== USER'S NEW TRIP DATA =====`);
+                console.log(dbTrip.data);
+                console.log('================================');
 
-            this.props.history.push(`/park?tripId=${dbTrip.data.id}`);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+                this.props.history.push(`/park?tripId=${dbTrip.data.id}`);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
     }
 
     handleKeyPress(e) {
@@ -533,13 +554,22 @@ class Dashboard extends Component {
                     dialogClassName="new-trip-modal"
                 >
                     <Modal.Body>
-                        <p>Trip Created:</p>
-                        <p className="new-trip-name">{this.state.newTripName}</p>
-                        <p>Click 'Next' to start planning your itinerary</p>
+                        <p>Set a date for <span className="new-trip-name">{this.state.newTripName}</span>:</p>
+                        
+                        <DateRangePicker
+                            startDate={this.state.startDate}
+                            startDateId="start-date"
+                            endDate={this.state.endDate}
+                            endDateId="end-date"
+                            onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
+                            focusedInput={this.state.focusedInput}
+                            onFocusChange={focusedInput => this.setState({ focusedInput })}
+                        />
+                        {/* <p>Click 'Next' to start planning your itinerary</p> */}
 
-                        <Button
+                        {/* <Button
                             onClick={this.handleHide}
-                        >Close</Button>
+                        >Close</Button> */}
                         <Button
                             onClick={this.handleNewTripCreate}
                             id="park-redirect-btn"

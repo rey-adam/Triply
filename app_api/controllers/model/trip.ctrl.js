@@ -9,7 +9,9 @@ module.exports = {
             .Trip
             .create({
                 UserId: req.body.userId,
-                name: req.body.tripName
+                name: req.body.tripName,
+                start: req.body.startDate,
+                end: req.body.endDate
              })
             .then(dbTrip => {
                 res.json(dbTrip);

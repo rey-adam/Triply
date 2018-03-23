@@ -10,10 +10,6 @@ import './Search.css';
 // APIS 
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
 import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
-// date picker
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-import { DateRangePicker } from 'react-dates';
 import axios from 'axios';
 import qs from 'query-string';
 
@@ -63,8 +59,6 @@ class Search extends Component {
             parkWeather: '',
             parks: parks,
             modalIsOpen: false,
-            startDate: null,
-            endDate: null,
             focusedInput: null
         };
         this.openModal = this.openModal.bind(this);
@@ -126,52 +120,40 @@ class Search extends Component {
     }; // END HANDLE SUBMIT
 
     handleModalConfirm() {
-        if (this.state.startDate === null && this.state.endDate === null) {
-            alert('Please set a date range for your trip');
-        } else if (this.state.startDate === null && this.state.endDate !== null) {
-            alert('Please set a start date');
-        } else if (this.state.startDate !== null && this.state.endDate === null) {
-            alert('Please set an end date');
-        } else {
-            console.log("=========== USER'S TRIP INFO ===========");
-            console.log(`Park: ${this.state.userParkName}`);
-            console.log(`Start Date: ${this.state.startDate._d}`);
-            console.log(`End date: ${this.state.endDate._d}`);
-            console.log("========================================");
-
-            this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
-            .then(locationObj => {
-                console.log(locationObj);
-                this.setState({
-                    parkLat: locationObj.parkLat,
-                    parkLong: locationObj.parkLong
-                });
-
-                const locationData = {
-                    tripId: this.state.userTripId,
-                    parkName: this.state.userParkName,
-                    parkCode: this.state.userParkCode
-                };
-                
-                return axios({
-                    headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-                    method: "POST",
-                    url: `/api/location`,
-                    data: locationData
-                });
-            })
-            .then(dbLocation => {
-                console.log(`===== USER'S SELECTED PARK DATA =====`);
-                console.log(dbLocation.data);
-                console.log('=====================================');
-
-                this.setState({ userLocationId: dbLocation.data.id });
-                this.props.history.push(`/search/trails?tripId=${this.state.userTripId}&locationId=${this.state.userLocationId}&parkCode=${this.state.userParkCode}&lat=${this.state.parkLat}&lng=${this.state.parkLong}`);
-            })
-            .catch(err => {
-                console.error(err);
+        this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
+        .then(locationObj => {
+            console.log(locationObj);
+            this.setState({
+                parkLat: locationObj.parkLat,
+                parkLong: locationObj.parkLong
             });
-        }
+
+            const locationData = {
+                tripId: this.state.userTripId,
+                parkName: this.state.userParkName,
+                parkCode: this.state.userParkCode,
+                startDate: this.state.startDate,
+                endDate: this.state.endDate
+            };
+            
+            return axios({
+                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                method: "POST",
+                url: `/api/location`,
+                data: locationData
+            });
+        })
+        .then(dbLocation => {
+            console.log(`===== USER'S SELECTED PARK DATA =====`);
+            console.log(dbLocation.data);
+            console.log('=====================================');
+
+            this.setState({ userLocationId: dbLocation.data.id });
+            this.props.history.push(`/search/trails?tripId=${this.state.userTripId}&locationId=${this.state.userLocationId}&parkCode=${this.state.userParkCode}&lat=${this.state.parkLat}&lng=${this.state.parkLong}`);
+        })
+        .catch(err => {
+            console.error(err);
+        });
     }
 
     handleParkAPIRequest = query => {
@@ -256,16 +238,6 @@ class Search extends Component {
                             onClick={this.handleModalConfirm}
                         >Create Trip</button>
                     </h3>
-
-                    <DateRangePicker
-                        startDate={this.state.startDate}
-                        startDateId="start-date"
-                        endDate={this.state.endDate}
-                        endDateId="end-date"
-                        onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
-                        focusedInput={this.state.focusedInput}
-                        onFocusChange={focusedInput => this.setState({ focusedInput })}
-                    />
 
                     <div className="table-responsive">
                         <table className="table table-bordered table-hover">
