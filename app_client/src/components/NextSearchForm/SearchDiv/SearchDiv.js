@@ -159,7 +159,7 @@ class SearchDiv extends Component {
         if (userTrailName === 'Choose a trail...') {
             alert('Please choose a trail');
         } else {
-            console.log(`${userTrailIndex}, ${userTrailId}, ${userTrailName}`);
+            // console.log(`${userTrailIndex}, ${userTrailId}, ${userTrailName}`);
             const userTrail = this.props.trails[userTrailIndex];
             // console.log(userTrail);
 
@@ -204,7 +204,7 @@ class SearchDiv extends Component {
         if (userActivityName === 'Choose an activity...') {
             alert('Please choose an activity');
         } else {
-            console.log(`${userActivityIndex}, ${userActivityId}, ${userActivityName}`);
+            // console.log(`${userActivityIndex}, ${userActivityId}, ${userActivityName}`);
             const userActivity = this.props.activities[userActivityIndex];
             // console.log(userActivity);
 
@@ -257,7 +257,7 @@ class SearchDiv extends Component {
         if (userCampName === 'Choose a campsite...') {
             alert('Please choose a campsite');
         } else {
-            console.log(`${userCampIndex}, ${userCampId}, ${userCampName}`);
+            // console.log(`${userCampIndex}, ${userCampId}, ${userCampName}`);
             const userCamp = this.props.campsites[userCampIndex];
             // console.log(userCamp);
 
@@ -326,7 +326,7 @@ class SearchDiv extends Component {
         if (userVCName === 'Choose a visitor center...') {
             alert('Please choose a visitor center');
         } else {
-            console.log(`${userVCIndex}, ${userVCId}, ${userVCName}`);
+            // console.log(`${userVCIndex}, ${userVCId}, ${userVCName}`);
             const userVC = this.props.visitorCenters[userVCIndex];
             // console.log(userVC);
 
@@ -409,9 +409,10 @@ class SearchDiv extends Component {
             data: trailData
         })
         .then(dbTrail => {
-            console.log(`===== USER'S SELECTED TRAIL DATA =====`);
-            console.log(dbTrail.data);
-            console.log('=====================================');
+            // console.log(`===== USER'S SELECTED TRAIL DATA =====`);
+            // console.log(dbTrail.data);
+            // console.log('=====================================');
+            console.log(`Trail added: ${dbTrail.data.name}`);
         })
         .catch (err => {
             console.error(err);
@@ -432,9 +433,10 @@ class SearchDiv extends Component {
             data: activityData
         })
         .then(dbActivity => {
-            console.log(`===== USER'S SELECTED ACTIVITY DATA =====`);
-            console.log(dbActivity.data);
-            console.log('=========================================');
+            // console.log(`===== USER'S SELECTED ACTIVITY DATA =====`);
+            // console.log(dbActivity.data);
+            // console.log('=========================================');
+            console.log(`Activity added: ${dbActivity.data.name}`);
         })
         .catch(err => {
             console.error(err);
@@ -455,9 +457,10 @@ class SearchDiv extends Component {
             data: campData
         })
         .then(dbCamp => {
-            console.log(`===== USER'S SELECTED CAMP DATA =====`);
-            console.log(dbCamp.data);
-            console.log('=====================================');
+            // console.log(`===== USER'S SELECTED CAMP DATA =====`);
+            // console.log(dbCamp.data);
+            // console.log('=====================================');
+            console.log(`Camp added: ${dbCamp.data.name}`);
         })
         .catch(err => {
             console.error(err);
@@ -478,9 +481,10 @@ class SearchDiv extends Component {
             data: VCData
         })
         .then(dbVC => {
-            console.log(`====== USER'S SELECTED VC DATA ======`);
-            console.log(dbVC.data);
-            console.log('=====================================');
+            // console.log(`====== USER'S SELECTED VC DATA ======`);
+            // console.log(dbVC.data);
+            // console.log('=====================================');
+            console.log(`VC added: ${dbVC.data.name}`);
         })
         .catch(err => {
             console.error(err);

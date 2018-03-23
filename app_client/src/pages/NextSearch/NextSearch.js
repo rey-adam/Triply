@@ -36,16 +36,16 @@ class Search extends Component {
 
         const urlObj = qs.parse(this.props.location.search);
 
-        console.log('===== PARSED URL =====');
-        console.log(urlObj);
-        console.log('======================');
+        // console.log('===== PARSED URL =====');
+        // console.log(urlObj);
+        // console.log('======================');
 
         setTimeout(() => {
             this.setState({
                 userTripId: urlObj.tripId,
                 userLocationId: urlObj.locationId
             });
-            console.log(`trip id: ${this.state.userTripId}`);
+            console.log(`Trip id: ${this.state.userTripId}`);
         }, 1000);
 
            /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
@@ -61,10 +61,10 @@ class Search extends Component {
             this.setState({
                 trails: trailRes.trails
             });
-            console.log('======= TRAILS =======');
-            console.log(`Trails found: ${this.state.trails.length}`);
-            console.log(this.state.trails);
-            console.log('======================');
+            // console.log('======= TRAILS =======');
+            // console.log(`Trails found: ${this.state.trails.length}`);
+            // console.log(this.state.trails);
+            // console.log('======================');
             return this.handleActivityRequest(urlObj.parkCode);
         })
         .then(activityRes => {
@@ -72,10 +72,10 @@ class Search extends Component {
             this.setState({
                 activities: activityRes.data
             });
-            console.log('===== ACTIVITIES =====');
-            console.log(`Activities found: ${this.state.activities.length}`);
-            console.log(this.state.activities);
-            console.log('======================');
+            // console.log('===== ACTIVITIES =====');
+            // console.log(`Activities found: ${this.state.activities.length}`);
+            // console.log(this.state.activities);
+            // console.log('======================');
             return this.handleCampsiteRequest(urlObj.parkCode);
         })
         .then(campsiteRes => {
@@ -83,10 +83,10 @@ class Search extends Component {
             this.setState({
                 campsites: campsiteRes.data
             });
-            console.log('====== CAMPSITES ======');
-            console.log(`Campsites found: ${this.state.campsites.length}`);
-            console.log(this.state.campsites);
-            console.log('=======================');
+            // console.log('====== CAMPSITES ======');
+            // console.log(`Campsites found: ${this.state.campsites.length}`);
+            // console.log(this.state.campsites);
+            // console.log('=======================');
             return this.handleVCRequest(urlObj.parkCode);
         })
         .then(vcRes => {
@@ -94,10 +94,10 @@ class Search extends Component {
             this.setState({
                 visitorCenters: vcRes.data
             });
-            console.log('=== VISITOR CENTERS ===');
-            console.log(`Visitor centers found: ${this.state.visitorCenters.length}`);
-            console.log(this.state.visitorCenters);
-            console.log('=======================');
+            // console.log('=== VISITOR CENTERS ===');
+            // console.log(`Visitor centers found: ${this.state.visitorCenters.length}`);
+            // console.log(this.state.visitorCenters);
+            // console.log('=======================');
         })
         .catch(err => {
             console.error(err);
