@@ -10,9 +10,7 @@ module.exports = {
             .then(dbUser => {
                 res.json(dbUser);
             })
-            .catch(err => {
-                console.error(err);
-            });
+            .catch(err => console.error(err));
     }, // END CREATE
 
     findAllUser: (req, res) => {
@@ -22,11 +20,8 @@ module.exports = {
             .then(dbUser => {
                 res.json(dbUser);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ALL
+            .catch(err => console.error(err));
+    }, // END READ
 
     findOneUser: (req, res) => {
         console.log("WTF")
@@ -45,11 +40,21 @@ module.exports = {
             .then(dbUser => {
                 res.json(dbUser);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ONE
+            .catch(err => console.error(err));
+    }, // END READ ONE
+
+    updateUser: (req, res) => {
+        db.User.update(
+            req.body,
+            {
+                where: {
+                    id: req.params.id
+                }
+            }).then(dbUser => {
+                res.json(dbUser);
+            })
+            .catch(err => console.error(err));
+    }, // END UPDATE
 
     deleteUser: (req, res) => {
         db
@@ -62,10 +67,7 @@ module.exports = {
             .then(dbUser => {
                 res.json("Success!");
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
+            .catch(err => console.error(err));
     } // END DELETE
 
 }; // END EXPORT

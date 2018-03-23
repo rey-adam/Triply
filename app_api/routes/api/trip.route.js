@@ -3,13 +3,15 @@ const express = require("express"),
     ctrl = require("../../controllers/model/trip.ctrl"),
     router = express.Router();
 
-// CREATE A TRIP
+// CREATE
 router.post("/trip", ctrl.createTrip);
-// FIND ALL TRIP
+// READ
 router.get("/trip", ctrl.findAllTrip);
-// FIND ONE TRIP @ ID
+// READ ONE
 router.get("/trip/:id", ctrl.findOneTrip);
-// DELETE ONE TRIP
+// UPDATE
+router.put("/trip/:id", ctrl.updateTrip);
+// DELETE
 router.delete("/trip/:id", ctrl.deleteTrip);
 
 module.exports = router;

@@ -5,11 +5,13 @@ const express = require("express"),
 
 // CREATE
 router.post("/activity", ctrl.createActivity);
-// FIND ALL
+// READ
 router.get("/activity", ctrl.findAllActivity);
-// FIND ONE @ ID
+// READ ONE @ ID
 router.get("/activity/:id", ctrl.findOneActivity);
-// DELETE ONE
+// UPDATE
+router.put("/activity/:id", ctrl.updateActivity);
+// DELETE
 router.delete("/activity/:id", ctrl.deleteActivity);
 
 module.exports = router;

@@ -3,13 +3,15 @@ const express = require("express"),
     ctrl = require("../../controllers/model/location.ctrl"),
     router = express.Router();
 
-// CREATE AN LOCATION
+// CREATE
 router.post("/location", ctrl.createLocation);
-// FIND ALL LOCATION
+// READ
 router.get("/location", ctrl.findAllLocation);
-// FIND ONE LOCATION @ ID
+// READ ONE
 router.get("/location/:id", ctrl.findOneLocation);
-// DELETE ONE LOCATION
+// UPDATE
+router.put("/location/:id", ctrl.updateLocation);
+// DELETE 
 router.delete("/location/:id", ctrl.deleteLocation);
 
 module.exports = router;
