@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 // import Forecast from 'react-forecast';
@@ -126,7 +125,7 @@ class Dashboard extends Component {
             const parkCode = this.state.userData.Trips[0].Locations[0].parkCode;
 
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
-            return NPSAPI.allCamp();
+            return NPSAPI.campgrounds('yose');
         })
         .then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -147,7 +146,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
             
-            return NPSAPI.visitorCenter();
+            return NPSAPI.visitorCenters('yose');
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -168,7 +167,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.event();
+            return NPSAPI.events('yose');
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
