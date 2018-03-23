@@ -377,7 +377,7 @@ class SearchDiv extends Component {
                                             window.location.pathname === '/search/visitor' ? 'visitor-' :
                                                 ''}select`} className="form-control select-options">
 
-                                    <option>
+                                    <option className="select-option">
                                         {`${window.location.pathname === '/search/trails' ? 'Choose a trail...' :
                                             window.location.pathname === '/search/activities' ? 'Choose an activity...' :
                                                 window.location.pathname === '/search/campsites' ? 'Choose a campsite...' :
@@ -391,7 +391,7 @@ class SearchDiv extends Component {
                                         ) :
                                             this.props.trails.map((trail, i) => {
                                                 return (
-                                                    <option
+                                                    <option className="select-option"
                                                         key={i}
                                                         data-index={i}
                                                         id={trail.id}
@@ -406,7 +406,7 @@ class SearchDiv extends Component {
                                         ) :
                                             this.props.activities.map((act, i) => {
                                                 return (
-                                                    <option
+                                                    <option className="select-option"
                                                         key={i}
                                                         data-index={i}
                                                         id={act.id}
@@ -421,7 +421,7 @@ class SearchDiv extends Component {
                                         ) :
                                             this.props.campsites.map((camp, i) => {
                                                 return (
-                                                    <option
+                                                    <option className="select-option"
                                                         key={i}
                                                         data-index={i}
                                                         id={camp.id}
@@ -436,7 +436,7 @@ class SearchDiv extends Component {
                                         ) :
                                             this.props.visitorCenters.map((vc, i) => {
                                                 return (
-                                                    <option
+                                                    <option className="select-option"
                                                         key={i}
                                                         data-index={i}
                                                         id={vc.id}
