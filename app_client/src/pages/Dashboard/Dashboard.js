@@ -104,17 +104,19 @@ class Dashboard extends Component {
 
         let userRes;
         let prkCode;
+        let parkName;
+
 
         UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
             
             userRes = res.data;
+            console.log(userRes);
             prkCode = userRes.Trips[0].Locations[0].parkCode;
 
             this.setState({ userData: userRes });
             console.log(`id: ${this.state.userData.id}, email: ${this.state.userData.email}`);
             
-            console.log(prkCode);
             // RETURNING THE NATIONAL PARK API CAMPSITE CALL
             return NPSAPI.campgrounds(prkCode);
         })
@@ -139,7 +141,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
             
-            return NPSAPI.visitorCenters(prkCode);
+            return NPSAPI.visitorCentersAll(prkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -162,7 +164,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return NPSAPI.events(prkCode);
+            return NPSAPI.eventsAll(prkCode);
 
         }).then(npsRes => {
             // better idea to use seperate queries based on id from user info
@@ -185,7 +187,7 @@ class Dashboard extends Component {
                 }); // END FOR EACH
             }); // END FOR EACH
 
-            return MAPAPI.location("yosemite");
+            return MAPAPI.location(parkName);
 
         }).then(mapRes => {
             
@@ -202,6 +204,7 @@ class Dashboard extends Component {
 
             userRes.Trips.forEach(trip => {
                 trip.Locations.forEach(loc => {
+                    console.log(reiRes.data)
                     const hikes = reiRes.data.trails.filter(elem => {
                         const val = loc.Trails.find(hikes => {
                             return hikes.hikeId === elem.id

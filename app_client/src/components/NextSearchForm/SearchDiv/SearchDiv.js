@@ -362,7 +362,7 @@ class SearchDiv extends Component {
         } else if (e.target.id === 'confirm-activity-btn') {
             this.handleAddActivity();
         } else if (e.target.id === 'confirm-camp-btn') {
-            this.handleAddACamp();
+            this.handleAddCamp();
         } else if (e.target.id === 'confirm-vc-btn') {
             this.handleAddVC();
         }
