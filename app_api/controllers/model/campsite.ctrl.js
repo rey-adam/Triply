@@ -10,9 +10,7 @@ module.exports = {
             .then(dbCampsite => {
                 res.json(dbCampsite);
             })
-            .catch(err => {
-                console.error(err);
-            });
+            .catch(err => console.error(err));
     }, // END CREATE
 
     findAllCampsite: (req, res) => {
@@ -22,11 +20,8 @@ module.exports = {
             .then(dbCampsite => {
                 res.json(dbCampsite);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ALL
+            .catch(err => console.error(err));
+    }, // END READ
 
     findOneCampsite: (req, res) => {
         db
@@ -39,11 +34,21 @@ module.exports = {
             .then(dbCampsite => {
                 res.json(dbCampsite);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ONE
+            .catch(err => console.error(err));
+    }, // END READ ONE
+
+    updateCampsite: (req, res) => {
+        db.Campsite.update(
+            req.body,
+            {
+                where: {
+                    id: req.params.id
+                }
+            }).then(dbCampsite => {
+                res.json(dbCampsite);
+            })
+            .catch(err => console.error(err));
+    }, // END UPDATE 
 
     deleteCampsite: (req, res) => {
         db
@@ -56,10 +61,7 @@ module.exports = {
             .then(dbCampsite => {
                 res.json("Success!");
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
+            .catch(err => console.error(err));
     } // END DELETE
     
 }; // END EXPORT

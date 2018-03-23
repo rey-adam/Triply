@@ -4,13 +4,15 @@ const express = require("express"),
     router = express.Router();
 
     
-// CREATE A CENTER
+// CREATE
 router.post("/center", ctrl.createVisitorCenter);
-// FIND ALL CENTER
+// READ
 router.get("/center", ctrl.findAllVisitorCenter);
-// FIND ONE CENTER @ ID
+// READ ONE
 router.get("/center/:id", ctrl.findOneVisitorCenter);
-// DELETE ONE CENTER
+// UPDATE
+router.put("/center/:id", ctrl.updateVisitorCenter);
+// DELETE
 router.delete("/center/:id", ctrl.deleteVisitorCenter);
 
 module.exports = router;

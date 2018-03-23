@@ -3,13 +3,15 @@ const express = require("express"),
     ctrl = require("../../controllers/model/user.ctrl"),
     router = express.Router();
 
-// CREATE ONE
+// CREATE 
 router.post("/user", ctrl.createUser);
-// FIND ALL 
+// READ 
 router.get("/user", ctrl.findAllUser);
-// FIND ONE @ ID
+// READ ONE 
 router.get("/user/:id", ctrl.findOneUser);
-// DELETE ONE 
+// UPDATE
+router.put("/user/:id", ctrl.updateUser);
+// DELETE
 router.delete("/user/:id", ctrl.deleteUser);
 
 module.exports = router;
