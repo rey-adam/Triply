@@ -30,10 +30,7 @@ module.exports = {
             .then(dbTrip => {
                 res.json(dbTrip);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
+            .catch(err => console.error(err));
     }, // END FIND ALL
 
     findAllUserTrips: (req, res) => {
@@ -71,11 +68,21 @@ module.exports = {
             .then(dbTrip => {
                 res.json(dbTrip);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
+            .catch(err => console.error(err));
     }, // END FIND ONE
+
+    updateTrip: (req, res) => {
+        db.Trip.update(
+            req.body,
+            {
+                where: {
+                    id: req.params.id
+                }
+            }).then(dbTrip => {
+                res.json(dbTrip);
+            })
+            .catch(err => console.error(err));
+    }, // END UPDATE
 
     deleteTrip: (req, res) => {
         db
@@ -88,10 +95,7 @@ module.exports = {
             .then(dbTrip => {
                 res.json("Success!");
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
+            .catch(err => console.error(err));
     } // END DELETE
     
 }; // END EXPORT

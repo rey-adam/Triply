@@ -2,7 +2,7 @@
 const db = require("../../models");
 
 module.exports = {
-    
+
     createActivity: (req, res) => {
         db
             .Activity
@@ -27,11 +27,8 @@ module.exports = {
             .then(dbActivity => {
                 res.json(dbActivity);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ALL
+            .catch(err => console.error(err));
+    }, // END READ
 
     findOneActivity: (req, res) => {
         db
@@ -44,11 +41,21 @@ module.exports = {
             .then(dbActivity => {
                 res.json(dbActivity);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ONE
+            .catch(err => console.error(err));
+    }, // END READ ONE
+
+    updateActivity: (req, res) => {
+        db.Activity.update(
+            req.body,
+            {
+                where: {
+                    id: req.params.id
+                }
+            }).then(dbActivity => {
+                res.json(dbActivity);
+            })
+            .catch(err => console.error(err));
+    }, // END UPDATE
 
     deleteActivity: (req, res) => {
         db
@@ -61,10 +68,7 @@ module.exports = {
             .then(dbActivity => {
                 res.json("Success!");
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
+            .catch(err => console.error(err));
     } // END DELETE
-    
-}; // END EXPORT
+
+}; // END CRUD
