@@ -24,8 +24,16 @@ export default {
         return axios.get(`${BASEURL}visitorcenters?parkCode=${parkCode}&api_key=${APIKEY}`);
     },
 
+    visitorCentersAll : (parkCode) => {
+        return axios.get(`${BASEURL}visitorcenters?api_key=${APIKEY}`);
+    },
+
     events : (parkCode) => {
         return axios.get(`${BASEURL}events?parkCode=${parkCode}&api_key=${APIKEY}`);
+    }, 
+
+    eventsAll : (parkCode) => {
+        return axios.get(`${BASEURL}events?&api_key=${APIKEY}`);
     }, 
     
     park : (parkCode) => {
