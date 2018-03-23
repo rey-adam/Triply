@@ -102,7 +102,6 @@ class Dashboard extends Component {
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
 
-        //UserModel.getOne(authHelper.splitToken().id)
         let userInfo;
         UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
         .then(res => {
@@ -113,7 +112,7 @@ class Dashboard extends Component {
             };
             
             console.log("user info data");
-            console.log(`id: ${userInfo.id}, email: ${userInfo.email}`); // { id: 3, email: 'melodie@chi.com' }
+            console.log(`id: ${userInfo.id}, email: ${userInfo.email}`);
             console.log(this.state.userData); // {}
 
             this.setState({ userData: userInfo });

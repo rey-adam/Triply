@@ -1,22 +1,11 @@
-/* #root {
-    position: relative;
-} */
-
 /******************
     BACKGROUND
 ******************/
 
 .park-search-container .hero-img {
-    /* background-image: url('../../assets/img/fall-winter--igor-cibulsky.jpg'); */
-    /* background-image: url('../../assets/img/anton-repponen-103080-unsplash.jpg'); */
     background-image: url('../../assets/img/luca-bravo-423211-unsplash.jpg');
-    /* background-image: url('../../assets/img/mark-basarab-122141-unsplash.jpg'); */
-    /* background-image: url('../../assets/img/michael-liao-391846-unsplash.jpg'); */
-    /* background-image: url('../../assets/img/teddy-kelley-194162-unsplash.jpg'); */
-    /* background-image: url('../../assets/img/val-vesa-396665-unsplash.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-position: 50% 40%; */
     background-position: center;
 }
 
