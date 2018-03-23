@@ -22,25 +22,25 @@ class UserCtrl {
 
     static getUser(req, res) {
         console.log("GETTING USER");
-        models.User.findOne({
-            where: {
-                id: req.params.id
-            }
-        })
-            .then(userResponse => {
-                const user = {
-                    id: userResponse.id,
-                    email: userResponse.email
-                };
-                console.log('======= USER FOUND =======');
-                console.log(`id: ${user.id}`);
-                console.log(`email: ${user.email}`);
-                console.log('==========================');
-                res.json(user);
+        console.log("WTF")
+        models
+            .User
+            .findOne({
+                where: {
+                    id: req.params.id
+                },
+                include: [{
+                    model: models.Trip, include: [{
+                        model: models.Location, include: [{ all: true }]
+                    }]
+                }]
+            })
+            .then(dbUser => {
+                res.json(dbUser);
             })
             .catch(err => {
                 console.error(err);
-                res.status(400).end();
+                res.json(err);
             });
     }
 
