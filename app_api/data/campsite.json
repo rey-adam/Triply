@@ -1,0 +1,59 @@
+[
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 1,
+        "campId": 2399
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 1,
+        "campId": 4508
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 1,
+        "campId": 4570
+    },    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 2,
+        "campId": 2399
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 2,
+        "campId": 4508
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 2,
+        "campId": 4570
+    },    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 3,
+        "campId": 2399
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 3,
+        "campId": 4508
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 3,
+        "campId": 4570
+    },    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 4,
+        "campId": 2399
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 4,
+        "campId": 4508
+    },
+    {
+        "name": "Slithery Snake Pass",
+        "LocationId": 4,
+        "campId": 4570
+    }
+]

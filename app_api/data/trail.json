@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 1,
+        "hikeId": 7012515
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 1,
+        "hikeId": 7004777
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 1,
+        "hikeId": 7004501
+    },    
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 2,
+        "hikeId": 7012515
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 2,
+        "hikeId": 7004777
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 2,
+        "hikeId": 7004501
+    },    
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 3,
+        "hikeId": 7012515
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 3,
+        "hikeId": 7004777
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 3,
+        "hikeId": 7004501
+    },    
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 4,
+        "hikeId": 7012515
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 4,
+        "hikeId": 7004777
+    },
+    {
+        "name": "Squirrel Dance",
+        "LocationId": 4,
+        "hikeId": 7004501
+    }
+]
