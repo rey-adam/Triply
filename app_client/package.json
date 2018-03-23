@@ -23,6 +23,7 @@
     "react-google-maps": "^9.4.5",
     "react-infinite-calendar": "^2.3.1",
     "react-modal": "^3.3.2",
+    "react-moment": "^0.7.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "react-select": "^1.2.1",

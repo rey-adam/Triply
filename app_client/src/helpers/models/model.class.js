@@ -16,7 +16,7 @@ export default class Model {
      * @param {*} id 
      */
     getOne(id) {
-        console.log(helper.getToken());
+        // console.log(helper.getToken());
         return axios({
             url: `${this.ROUTE}/${id}`,
             method: "GET",

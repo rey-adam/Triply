@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
+import Accordion from '../../components/Accordion';
+import AccordionCard from '../../components/AccordionCard';
 // import Forecast from 'react-forecast';
 import ForecastNew from '../../components/ForecastNew';
 import InfiniteCalendar from 'react-infinite-calendar';
@@ -8,12 +10,15 @@ import 'react-infinite-calendar/styles.css'; // Make sure to import the default 
 import SimpleMap from '../MapContainerB/MapContainerB';
 import ReactModal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
-import NPSAPI from "../../helpers/api/npsApi/npsAPI";
-import REIAPI from "../../helpers/api/reiApi/reiApi";
 import qs from 'query-string';
 import './Dashboard.css';
 import UserModel from "../../helpers/models/UserModel";
 import authHelper from '../../helpers/authHelper';
+import axios from 'axios';
+// date picker
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import { DateRangePicker } from 'react-dates';
 
 const styles = {
     modalStyles: {
@@ -48,6 +53,11 @@ class Dashboard extends Component {
         this.state = {
             // API DATA
             userData: {},
+            numTrips: '',
+            tripStart: '',
+            tripEnd: '',
+            userParkCode: '',
+            userParkName: '',
             camps: [],
             activities: [],
             visitorCenters: [],
@@ -60,7 +70,9 @@ class Dashboard extends Component {
             weatherUnits: 'us',
             today: new Date(),
             modalIsOpen: false,
-            show: false
+            show: false,
+            startDate: null,
+            endDate: null
 
         };
         this.openModal = this.openModal.bind(this);
@@ -68,8 +80,8 @@ class Dashboard extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleHide = this.handleHide.bind(this);
         this.handleNewUser = this.handleNewUser.bind(this);
-        this.handleNewTrip = this.handleNewTrip.bind(this);
-        this.handleParkRedirect = this.handleParkRedirect.bind(this);
+        this.handleNewTripSubmit = this.handleNewTripSubmit.bind(this);
+        this.handleNewTripCreate = this.handleNewTripCreate.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
@@ -84,9 +96,13 @@ class Dashboard extends Component {
          * /search/trails === {?lat=44.42&lng=-110.58}         *
          * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+        // parse url to get park lat, long, and name
         const locationObj = qs.parse(this.props.location.search);
 
-        console.log(locationObj);
+        // console.log('===== PARSED URL =====');
+        // console.log(locationObj);
+        // console.log('======================');
+
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
         *                                 OUTPUT                                    *
         * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -102,122 +118,144 @@ class Dashboard extends Component {
             weatherPlace: locationObj.place || 'Yosemite National Park',
         });
 
-        let userRes;
-        let prkCode;
-        let parkName;
-
-
-        UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id)
-        .then(res => {
-            
-            userRes = res.data;
-            console.log(userRes);
-            prkCode = userRes.Trips[0].Locations[0].parkCode;
-            parkName = userRes.Trips[0].Locations[0].name;
-
-            this.setState({ userData: userRes });
-            console.log(`id: ${this.state.userData.id}, email: ${this.state.userData.email}`);
-            
-            // RETURNING THE NATIONAL PARK API CAMPSITE CALL
-            return NPSAPI.campgrounds(prkCode);
+        // get request to return number of trips
+        axios({
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+            method: "GET",
+            url: `/api/trips/${JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id}`
         })
-        .then(npsRes => {
-            // better idea to use seperate queries based on id from user info
-            // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
-            console.log("=============== ALL CAMPS API ==============");
+        .then(dbUserTrips => {
+            // console.log(dbUserTrips);
 
-            console.log(npsRes.data.data);
+            this.setState({
+                numTrips: dbUserTrips.data === null ? 0 : dbUserTrips.data.length
+            });
+
+            // console.log(`num trips: ${this.state.numTrips}`);
+
+            // get all trip details for user
+            return UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id);
+
+        }).then(dbUser => {
+
+            setTimeout(() => {
+                this.setState({
+                    userData: dbUser.data,
+                    // userParkCode: dbUser.data.Trips[0].Locations[0].parkCode,
+                    // userParkName: dbUser.data.Trips[0].Locations[0].name
+                });
+                console.log('========= USER INFO ========');
+                console.log(`id: ${this.state.userData.id}`);
+                console.log(`email: ${this.state.userData.email}`);
+                console.log('========== trips ===========');
+                console.log(`trips: ${this.state.userData.Trips.length}`);
+                console.log(this.state.userData.Trips);
+                console.log('============================');
+            }, 1000);
             
-            userRes.Trips.forEach(trip => {
-                trip.Locations.forEach(loc => {
-                    const campsites = npsRes.data.data.filter(elem => {
-                        const val = loc.Campsites.find(camp => {
-                            return camp.campId === elem.id
-                        })
-                        return val != null;
-                    }); // END  
-
-                    console.log(campsites);
-                    this.state.camps.push(campsites);
-                }); // END FOR EACH
-            }); // END FOR EACH
             
-            return NPSAPI.visitorCentersAll(prkCode);
-
-        }).then(npsRes => {
-            // better idea to use seperate queries based on id from user info
-            // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
-            console.log("=============== VISITOR CENTER API ==============");
-
-            console.log(npsRes.data.data);
-            
-            userRes.Trips.forEach(trip => {
-                trip.Locations.forEach(loc => {
-                    const visitorcenter = npsRes.data.data.filter(elem => {
-                        const val = loc.VisitorCenters.find(center => {
-                            return center.centerId === elem.id
-                        });
-                        return val != null;
-                    }); // END  
-
-                    console.log(visitorcenter);
-                    this.state.visitorCenters.push(visitorcenter);
-                }); // END FOR EACH
-            }); // END FOR EACH
-
-            return NPSAPI.eventsAll(prkCode);
-
-        }).then(npsRes => {
-            // better idea to use seperate queries based on id from user info
-            // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
-            console.log("=============== EVENTS API ==============");
-            
-            console.log(npsRes.data.data);
-
-            userRes.Trips.forEach(trip => {
-                trip.Locations.forEach(loc => {
-                    const events = npsRes.data.data.filter(elem => {
-                        const val = loc.Activities.find(events => {
-                            return events.eventId === elem.id
-                        });
-                        return val != null;
-                    }); // END  
-
-                    console.log(events);
-                    this.state.activities.push(events);
-                }); // END FOR EACH
-            }); // END FOR EACH
-
-            return MAPAPI.location(parkName);
-
-        }).then(mapRes => {
-            
-            const lat = mapRes.data.results[0].geometry.location.lat;
-            const lon = mapRes.data.results[0].geometry.location.lng;
-
-            return REIAPI.trails(lat, lon);
-            
-        }).then(reiRes => {
-            
-            console.log("=============== TRAILS API ==============");
-
-            console.log(reiRes.data.trails);
-
-            userRes.Trips.forEach(trip => {
-                trip.Locations.forEach(loc => {
-                    const hikes = reiRes.data.trails.filter(elem => {
-                        const val = loc.Trails.find(hikes => {
-                            return hikes.hikeId === elem.id
-                        });
-                        return val != null;
-                    }); // END  
-
-                    console.log(hikes);
-                    this.state.trails.push(hikes);
-                }); // END FOR EACH
-            }); // END FOR EACH
 
         })
+            
+        //     // RETURNING THE NATIONAL PARK API CAMPSITE CALL
+        //     return NPSAPI.campgrounds(this.state.userParkCode);
+        // })
+        // .then(npsCampRes => {
+        //     // better idea to use seperate queries based on id from user info
+        //     // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
+        //     console.log("=============== ALL CAMPS API ==============");
+        //     console.log(npsCampRes.data.data);
+            
+        //     this.state.userData.Trips.forEach(trip => {
+        //         trip.Locations.forEach(loc => {
+        //             const campsites = npsCampRes.data.data.filter(elem => {
+        //                 const val = loc.Campsites.find(camp => {
+        //                     return camp.campId === elem.id
+        //                 })
+        //                 return val != null;
+        //             }); // END  
+
+        //             console.log(campsites);
+        //             this.state.camps.push(campsites);
+        //         }); // END FOR EACH
+        //     }); // END FOR EACH
+            
+        //     return NPSAPI.visitorCenters(this.state.userParkCode);
+
+        // }).then(npsVCRes => {
+        //     // better idea to use seperate queries based on id from user info
+        //     // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
+        //     console.log("=============== VISITOR CENTER API ==============");
+
+        //     console.log(npsVCRes.data.data);
+            
+        //     this.state.userData.Trips.forEach(trip => {
+        //         trip.Locations.forEach(loc => {
+        //             const visitorcenter = npsVCRes.data.data.filter(elem => {
+        //                 const val = loc.VisitorCenters.find(center => {
+        //                     return center.centerId === elem.id
+        //                 });
+        //                 return val != null;
+        //             }); // END  
+
+        //             console.log(visitorcenter);
+        //             this.state.visitorCenters.push(visitorcenter);
+        //         }); // END FOR EACH
+        //     }); // END FOR EACH
+
+        //     return NPSAPI.events(this.state.userParkCode);
+
+        // }).then(npsEventRes => {
+        //     // better idea to use seperate queries based on id from user info
+        //     // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
+        //     console.log("=============== EVENTS API ==============");
+            
+        //     console.log(npsEventRes.data.data);
+
+        //     this.state.userData.Trips.forEach(trip => {
+        //         trip.Locations.forEach(loc => {
+        //             const events = npsEventRes.data.data.filter(elem => {
+        //                 const val = loc.Activities.find(events => {
+        //                     return events.eventId === elem.id
+        //                 });
+        //                 return val != null;
+        //             }); // END  
+
+        //             console.log(events);
+        //             this.state.activities.push(events);
+        //         }); // END FOR EACH
+        //     }); // END FOR EACH
+
+        //     return MAPAPI.location(`${this.state.userParkName} National Park`);
+
+        // }).then(mapRes => {
+            
+        //     const lat = mapRes.data.results[0].geometry.location.lat;
+        //     const lon = mapRes.data.results[0].geometry.location.lng;
+
+        //     return REIAPI.trails(lat, lon);
+            
+        // }).then(reiTrailRes => {
+            
+        //     console.log("=============== TRAILS API ==============");
+
+        //     console.log(reiTrailRes.data.trails);
+
+        //     this.state.userData.Trips.forEach(trip => {
+        //         trip.Locations.forEach(loc => {
+        //             const hikes = reiTrailRes.data.trails.filter(elem => {
+        //                 const val = loc.Trails.find(hikes => {
+        //                     return hikes.hikeId === elem.id
+        //                 });
+        //                 return val != null;
+        //             }); // END  
+
+        //             console.log(hikes);
+        //             this.state.trails.push(hikes);
+        //         }); // END FOR EACH
+        //     }); // END FOR EACH
+
+        // })
         .catch(err => console.error(err));
 
     }; // END MOUNT
@@ -253,7 +291,7 @@ class Dashboard extends Component {
         }
     }
 
-    handleNewTrip(e) {
+    handleNewTripSubmit(e) {
         e.preventDefault();
         console.log(this.state.newTripName);
         if (this.state.newTripName === '') {
@@ -263,15 +301,51 @@ class Dashboard extends Component {
         }
     }
 
-    handleParkRedirect(e) {
+    handleNewTripCreate(e) {
         e.preventDefault();
-        this.props.history.push('/park');
+        if (this.state.startDate === null && this.state.endDate === null) {
+            alert('Please set a date range for your trip');
+        } else if (this.state.startDate === null && this.state.endDate !== null) {
+            alert('Please set a start date');
+        } else if (this.state.startDate !== null && this.state.endDate === null) {
+            alert('Please set an end date');
+        } else {
+            // console.log("=========== USER'S TRIP INFO ===========");
+            // console.log(`Name: ${this.state.newTripName}`);
+            // console.log(`Start Date: ${this.state.startDate._d}`);
+            // console.log(`End date: ${this.state.endDate._d}`);
+            // console.log("========================================");
+
+            const tripData = {
+                tripName: this.state.newTripName,
+                userId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
+                startDate: this.state.startDate._d,
+                endDate: this.state.endDate._d
+            };
+
+            axios({
+                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                method: "POST",
+                url: `/api/trip`,
+                data: tripData
+            })
+            .then(dbTrip => {
+                console.log(`===== USER'S NEW TRIP DATA =====`);
+                console.log(dbTrip.data);
+                console.log('================================');
+
+                this.props.history.push(`/park?tripId=${dbTrip.data.id}`);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
     }
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
             // e.preventDefault();
-            this.handleNewTrip(e);
+            this.handleNewTripSubmit(e);
         }
     }
 
@@ -334,13 +408,13 @@ class Dashboard extends Component {
                                     value={this.state.newTripName}
                                     onChange={this.handleChange}
                                     onKeyPress={this.handleKeyPress}
-                                    onSubmit={this.handleNewTrip}
+                                    onSubmit={this.handleNewTripSubmit}
                                     placeholder="New trip name..." />
                                 <button className="btn" type="submit">
                                     <span
                                         className="glyphicon glyphicon-ok-sign"
                                         aria-hidden="true"
-                                        onClick={this.handleNewTrip}>
+                                        onClick={this.handleNewTripSubmit}>
                                     </span>
                                 </button>
                             </div>
@@ -352,89 +426,13 @@ class Dashboard extends Component {
                             <div className="trips-header">
                                 <p>My Trips</p>
                             </div>
-                            <div id="accordion">
-                                <div className="card">
-                                    <div className="card-header" id="headingTwo">
-                                        <h5 className="mb-0">
-                                            <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                <h4>Bday @ Yosemite! <span className="spacer">|</span> <span className="trip-date">Mar 30 2018 - Apr 27 2018</span></h4>
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    <span style={{ fontWeight: 500 }}>Yosemite National Park</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    Activity example (hike trail name)
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    Visitor Center (visitor center name)
-                                            </div>
-                                            </div>
-                                        </div>
 
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    Campsite example (campsite name)
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div className="card">
-                                    <div className="card-header" id="headingThree">
-                                        <h5 className="mb-0">
-                                            <button className="btn accordion-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
-                                                <h4>Glacier Roadtrip w/ Fam <span className="spacer">|</span> <span className="trip-date">Jan 2 2019 - Feb 3 2019</span></h4>
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    <span style={{ fontWeight: 500 }}>Glacier National Park</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    Activity example (hike trail name)
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    Visitor Center (visitor center name)
-                                            </div>
-                                            </div>
-                                        </div>
-                                        <div className="card-body">
-                                            <div className="panel panel-default">
-                                                <div className="panel-body">
-                                                    Campsite example (campsite name)
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <Accordion>
+                                <AccordionCard
+                                    numTrips={this.state.numTrips}
+                                    userData={this.state.userData}
+                                />
+                            </Accordion>
                         </div>
 
                         <InfiniteCalendar
@@ -506,15 +504,24 @@ class Dashboard extends Component {
                     dialogClassName="new-trip-modal"
                 >
                     <Modal.Body>
-                        <p>Trip Created:</p>
-                        <p className="new-trip-name">{this.state.newTripName}</p>
-                        <p>Click 'Next' to start planning your itinerary</p>
+                        <p>Set a date for <span className="new-trip-name">{this.state.newTripName}</span>:</p>
+                        
+                        <DateRangePicker
+                            startDate={this.state.startDate}
+                            startDateId="start-date"
+                            endDate={this.state.endDate}
+                            endDateId="end-date"
+                            onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
+                            focusedInput={this.state.focusedInput}
+                            onFocusChange={focusedInput => this.setState({ focusedInput })}
+                        />
+                        {/* <p>Click 'Next' to start planning your itinerary</p> */}
 
-                        <Button
+                        {/* <Button
                             onClick={this.handleHide}
-                        >Close</Button>
+                        >Close</Button> */}
                         <Button
-                            onClick={this.handleParkRedirect}
+                            onClick={this.handleNewTripCreate}
                             id="park-redirect-btn"
                         >Next</Button>
                     </Modal.Body>

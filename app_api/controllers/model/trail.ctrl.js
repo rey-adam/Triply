@@ -6,11 +6,18 @@ module.exports = {
     createTrail: (req, res) => {
         db
             .Trail
-            .create(req.body)
+            .create({
+                LocationId: req.body.locationId,
+                name: req.body.trailName,
+                hikeId: req.body.trailId
+            })
             .then(dbTrail => {
                 res.json(dbTrail);
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                res.json(err);
+            });
     }, // END CREATE
 
     findAllTrail: (req, res) => {

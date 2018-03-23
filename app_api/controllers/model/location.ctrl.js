@@ -6,7 +6,13 @@ module.exports = {
     createLocation: (req, res) => {
         db
             .Location
-            .create(req.body)
+            .create({
+                TripId: req.body.tripId,
+                name: req.body.parkName,
+                parkCode: req.body.parkCode,
+                latitude: req.body.latitude,
+                longitude: req.body.longitude
+            })
             .then(dbLocation => {
                 res.json(dbLocation);
             })

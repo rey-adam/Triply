@@ -56,11 +56,17 @@
 .new-trip-modal .new-trip-name {
     overflow-wrap: break-word;
     margin: auto;
+    margin-right: 1.5px;
     color: rgb(2, 204, 204);
 }
 
+.DateRangePicker {
+    display: block !important;
+    margin: 20px auto !important;
+}
+
 .new-trip-modal button {
-    margin: 20px 6px 5px;
+    margin: auto 6px 5px;
 }
 
 .new-trip-modal button:nth-of-type(1):hover {
