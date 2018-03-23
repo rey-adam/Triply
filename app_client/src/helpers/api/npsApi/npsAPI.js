@@ -16,16 +16,27 @@ const APIKEY = `mm0VlZmyUBOFM415HKtSZdiXhfB27a1ntlZU7ZT4`;
 */
 
 export default {
-    campgrounds: (parkCode) => {
+    camp : (parkCode) => {
         return axios.get(`${BASEURL}campgrounds?parkCode=${parkCode}&api_key=${APIKEY}`);
     },
-    events: (parkCode) => {
-        return axios.get(`${BASEURL}events?parkCode=${parkCode}&api_key=${APIKEY}`);
+
+    allCamp : (parkCode) => {
+        return axios.get(`${BASEURL}campgrounds?api_key=${APIKEY}`);
     },
-    park: (parkCode) => {
+
+    visitorCenter : (parkCode) => {
+        return axios.get(`${BASEURL}visitorcenters?api_key=${APIKEY}`);
+    },
+
+    event : (parkCode) => {
+        return axios.get(`${BASEURL}events?&api_key=${APIKEY}`);
+    }, 
+    
+    park : (parkCode) => {
         return axios.get(`${BASEURL}parks?parkCode=${parkCode}&api_key=${APIKEY}`);
     },
-    visitorCenters: (parkCode) => {
-        return axios.get(`${BASEURL}visitorcenters?parkCode=${parkCode}&api_key=${APIKEY}`);
+    
+    center : (parkCode) => {
+        return axios.get(`${BASEURL}visitorcenters?&api_key=${APIKEY}`);
     }
 }; // END EXPORT

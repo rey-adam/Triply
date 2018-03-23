@@ -23,7 +23,14 @@ const express = require('express')
     // ROUTES
     , routes = require('./app_api/routes/indexRoutes')
 
-    , app = express();
+    , app = express()
+
+    , tripData = require("./app_api/data/trip")
+    , locationData = require("./app_api/data/location")
+    , trailData = require("./app_api/data/trail")
+    , campData = require("./app_api/data/campsite")
+    , activityData = require("./app_api/data/activity")
+    , centerData = require("./app_api/data/visitorCenter");
 
 /*  
     =====================================================================================
@@ -41,7 +48,7 @@ app.use(express.static('app_client/build/'));
 
 if (isDev) {
     app.use(express.static('app_client/public'));
-}; 
+};
 
 /*  
     =====================================================================================
@@ -51,29 +58,67 @@ if (isDev) {
 
 models.sequelize.sync({ force: isDev }).then(function () {
 
-    const saltArr = [authCtrl._generateSalt(), authCtrl._generateSalt(), authCtrl._generateSalt(), authCtrl._generateSalt()];
-    models.User.bulkCreate([
-        {
-            email: "josh@spears.com",
-            salt: saltArr[0],
-            hash: authCtrl._generateHash("joshspears", saltArr[0])
-        },
-        {
-            email: "jason@daniel.com",
-            salt: saltArr[1],
-            hash: authCtrl._generateHash("jasondaniel", saltArr[1])
-        },
-        {
-            email: "melodie@chi.com",
-            salt: saltArr[2],
-            hash: authCtrl._generateHash("melodiechi", saltArr[2])
-        },
-        {
-            email: "rey@adam.com",
-            salt: saltArr[3],
-            hash: authCtrl._generateHash("reyadamcruz", saltArr[3])
+    const salt = authCtrl._generateSalt();
+    if (isDev) {
+
+
+        models.User.bulkCreate([
+            {
+                email: "josh@spears.com",
+                salt: salt,
+                hash: authCtrl._generateHash("joshspears", salt)
+            },
+            {
+                email: "jason@daniel.com",
+                salt: salt,
+                hash: authCtrl._generateHash("jasondaniel", salt)
+            },
+            {
+                email: "melodie@chi.com",
+                salt: salt,
+                hash: authCtrl._generateHash("melodiechi", salt)
+            },
+            {
+                email: "rey@adam.com",
+                salt: salt,
+                hash: authCtrl._generateHash("reyadamcruz", salt)
+            }
+        ]).then(() => {
+            models.Trip.bulkCreate(
+                tripData
+            ); // END CREATE
         }
-    ]); // END CREATE
+        ).then(() => {
+            models.Location.bulkCreate(
+                locationData
+            ); // END CREATE
+        }
+        ).then(() => {
+            models.Trail.bulkCreate(
+                trailData
+            ); // END CREATE
+        }
+        ).then(() => {
+            models.Campsite.bulkCreate(
+                campData
+            ); // END CREATE
+        }
+        ).then(() => {
+            models.Activity.bulkCreate(
+                activityData
+            ); // END CREATE
+        }
+        ).then(() => {
+            models.VisitorCenter.bulkCreate(
+                centerData
+            ); // END CREATE
+        }
+        ); // END CREATE
+
+
+
+    }; // END IF 
+
 
     app.listen(PORT, function () {
         console.log("=============================");
