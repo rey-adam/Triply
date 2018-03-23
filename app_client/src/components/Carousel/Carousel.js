@@ -26,7 +26,6 @@ class ControlledCarousel extends Component {
 
         return (
             <Carousel
-                
                 interval={8000}
                 controls={false}
                 indicators={false}
