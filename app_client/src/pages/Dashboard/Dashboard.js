@@ -99,9 +99,9 @@ class Dashboard extends Component {
         // parse url to get park lat, long, and name
         const locationObj = qs.parse(this.props.location.search);
 
-        console.log('===== PARSED URL =====');
-        console.log(locationObj);
-        console.log('======================');
+        // console.log('===== PARSED URL =====');
+        // console.log(locationObj);
+        // console.log('======================');
 
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
         *                                 OUTPUT                                    *
@@ -131,7 +131,7 @@ class Dashboard extends Component {
                 numTrips: dbUserTrips.data === null ? 0 : dbUserTrips.data.length
             });
 
-            console.log(`num trips: ${this.state.numTrips}`);
+            // console.log(`num trips: ${this.state.numTrips}`);
 
             // get all trip details for user
             return UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id);

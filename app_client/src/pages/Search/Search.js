@@ -71,9 +71,9 @@ class Search extends Component {
     };
 
     componentDidMount() {
-        console.log('====== NPS PARK DATA ======');
-        console.log(this.state.parks);
-        console.log('===========================');
+        // console.log('====== NPS PARK DATA ======');
+        // console.log(this.state.parks);
+        // console.log('===========================');
 
         // parse url to get tripId
         const tripObj = qs.parse(this.props.location.search);
@@ -104,7 +104,7 @@ class Search extends Component {
             });
             this.handleParkAPIRequest(userParkCode)
                 .then(parkObj => {
-                    console.log(parkObj);
+                    // console.log(parkObj);
                     this.setState({
                         parkURL: parkObj.url,
                         parkStates: parkObj.states,
@@ -122,7 +122,7 @@ class Search extends Component {
     handleModalConfirm() {
         this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
         .then(locationObj => {
-            console.log(locationObj);
+            // console.log(locationObj);
             this.setState({
                 parkLat: locationObj.parkLat,
                 parkLong: locationObj.parkLong
