@@ -17,6 +17,47 @@
     position: absolute;
     right: 20px;
     top: 15px;
+    background-color: white;
+}
+
+#trail-add-btn {
+    background-color: rgb(211, 167, 48);
+    border-color: rgb(211, 167, 48);
+    color: white;
+}
+
+#trail-add-btn:hover {
+    background-color: rgb(204, 162, 47);
+}
+
+#activity-add-btn {
+    background-color: rgb(211, 146, 48);
+    border-color: rgb(211, 146, 48);
+    color: white;
+}
+
+#activity-add-btn:hover {
+    background-color: rgb(202, 140, 47);
+}
+
+#camp-add-btn {
+    background-color: rgb(211, 113, 48);
+    border-color: rgb(211, 113, 48);
+    color: white;
+}
+
+#camp-add-btn:hover {
+    background-color: rgb(202, 108, 46);
+}
+
+#vc-add-btn {
+    background-color: rgb(211, 80, 48);
+    border-color: rgb(211, 80, 48);
+    color: white;
+}
+
+#vc-add-btn:hover {
+    background-color: rgb(202, 77, 45);
 }
 
 .card-body .panel-body {

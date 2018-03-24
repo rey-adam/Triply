@@ -3,7 +3,7 @@ import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
-import parks from '../../helpers/api/npsApi/parkCodes/parks';
+import parks from '../../helpers/api/npsApi/parkCodes/parksAll';
 import './Search.css';
 import axios from 'axios';
 import qs from 'query-string';
