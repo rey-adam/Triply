@@ -13,16 +13,12 @@ class AccordionCard extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // console.log(nextProps);
         this.state.numTrips = nextProps.numTrips;
         this.state.userData = nextProps.userData;
-        // console.log(this.state.numTrips);
-        // console.log(this.state.userData);
     }
 
     render() {
         const userData = this.state.userData;
-        // console.log(userData);
         return (
             userData.Trips == undefined || userData.Trips.length === 0 ? <h3 className="no-trips-message">No trips added</h3> : 
             userData.Trips.map((trip, i) => (
@@ -37,11 +33,6 @@ class AccordionCard extends Component {
                                             <span className="hyphen"> - </span>
                                         <Moment format="MMM DD YYYY">{trip.end}</Moment>
                                     </span>
-                                    {/* 
-                                        <Link to={`/search/trails?tripId=${trip.id}&locationId=${trip.Locations[0].id}&parkCode=${trip.Locations[0].parkCode}&lat=${trip.Locations[0].latitude}&lng=${trip.Locations[0].longitude}`}>
-                                            <button data-trip-id={trip.id} className='btn btn-primary pull-right trip-edit-btn'>Edit</button>
-                                        </Link>
-                                    */}
                                 </h4>
                             </button>
                         </h5>

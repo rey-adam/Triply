@@ -36,7 +36,6 @@
 .select-form select,
 .select-form .select2 {
     height: 37px;
-    /* box-shadow: 0 1px 10px rgb(102, 102, 102); */
     font-size: calc(11px + 3 * (140vw - 320px)/ 2000);
     border: 1px solid white;
     text-indent: 10px;
@@ -92,7 +91,10 @@
     color: rgb(31, 31, 31);
 }
 
-/* NEXT SELECT FORM */
+/******************
+  NEXT SELECT FORM
+******************/
+
 .next-select-form {
     position: absolute;
     width: 100%;

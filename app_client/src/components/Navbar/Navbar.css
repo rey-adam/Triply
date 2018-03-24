@@ -4,7 +4,6 @@
 .navbar-default {
     background-color: white;
     margin-bottom: 0;
-    /* box-shadow: 0 1px 7px rgb(128, 128, 128); */
     box-shadow: 0 0.5px 15px rgb(58, 58, 58);
     z-index: 2;
     border-radius: 0;
@@ -74,6 +73,10 @@
 
 }
 
+/******************
+     KEYFRAMES
+******************/
+
 @keyframes dash-blink {
     0% {
         color: #637579;
@@ -85,6 +88,10 @@
         color: #637579;
     }
 }
+
+/******************
+   MEDIA QUERIES
+******************/
 
 @media only screen and (max-width: 767px) {
     a.dropdown-link {
