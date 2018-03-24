@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
     "password": null,
-=======
-    "password": "root",
->>>>>>> c86dd3fcccbc96a8169b97caf7b6c01dd916aece
     "database": "triply_db",
     "host": "127.0.0.1",
     "dialect": "mysql"

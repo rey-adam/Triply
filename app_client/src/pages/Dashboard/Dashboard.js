@@ -470,6 +470,7 @@ class Dashboard extends Component {
                     {/* google maps */}
                     <div id='mapDiv'>
                         <SimpleMap latlng={{ lat: this.state.weatherLat, lng: this.state.weatherLng}} />
+                        {/* <SimpleMap latlng={{ lat: this.state.userData.trip.Locations[0].latitude, lng: this.state.userData.trip.Locations[0].longitude }} /> */}
                         {/* const latLng = {lat: 37.7566, lng: -119.5969 }; */}
                     </div>
 
