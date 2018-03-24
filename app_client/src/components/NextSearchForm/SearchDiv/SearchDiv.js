@@ -3,7 +3,6 @@ import StarRatingComponent from 'react-star-rating-component';
 import SearchTabs from '../SearchTabs';
 import SelectWrapper from '../../SelectWrapper';
 import Modal from 'react-modal';
-// import SearchBar from '../SearchBar';
 import '../../Hero/Hero.css';
 import './SearchDiv.css';
 import '../../../pages/Search/Search.css';
@@ -115,32 +114,12 @@ class SearchDiv extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        // console.log(nextProps);
-        // console.log(this.props);
         this.setState({
             trails: nextProps.trails,
             userTripId: nextProps.userTripId,
             userLocationId: nextProps.userLocationId
         });
-        // console.log(this.state.userTripId);
     }
-
-    // componentDidMount() {
-    //     setTimeout(() => {
-    //         this.setState({
-    //             trails: this.props.trails,
-    //             userTripId: this.props.userTripId,
-    //             userLocationId: this.props.userLocationId
-    //         });
-    //         console.log(this.props.userTripId);
-    //     }, 2000);
-
-    //     const userInfo = {
-    //         token: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])),
-    //         id: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
-    //         email: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).email
-    //     };
-    // }
 
     openModal(message) {
         this.setState({ modalIsOpen: true, modalMessage: message });
@@ -159,9 +138,7 @@ class SearchDiv extends Component {
         if (userTrailName === 'Choose a trail...') {
             alert('Please choose a trail');
         } else {
-            // console.log(`${userTrailIndex}, ${userTrailId}, ${userTrailName}`);
             const userTrail = this.props.trails[userTrailIndex];
-            // console.log(userTrail);
 
             const url = userTrail.url === "" ? 'N/A' : userTrail.url;
 
@@ -190,7 +167,7 @@ class SearchDiv extends Component {
                 trailRating: userTrailObj.stars,
                 trailVotes: userTrailObj.starVotes
             });
-            // console.log(userTrailObj);
+
             this.openModal('trail');
         }
     }
@@ -204,9 +181,7 @@ class SearchDiv extends Component {
         if (userActivityName === 'Choose an activity...') {
             alert('Please choose an activity');
         } else {
-            // console.log(`${userActivityIndex}, ${userActivityId}, ${userActivityName}`);
             const userActivity = this.props.activities[userActivityIndex];
-            // console.log(userActivity);
 
             const dates = userActivity.dates.split(',').join('\n');
             const recurrence = userActivity.recurrence;
@@ -243,7 +218,6 @@ class SearchDiv extends Component {
                 activityURL: userActivityObj.url
             });
 
-            // console.log(userActivityObj);
             this.openModal('activity');
         }
     }
@@ -257,9 +231,7 @@ class SearchDiv extends Component {
         if (userCampName === 'Choose a campsite...') {
             alert('Please choose a campsite');
         } else {
-            // console.log(`${userCampIndex}, ${userCampId}, ${userCampName}`);
             const userCamp = this.props.campsites[userCampIndex];
-            // console.log(userCamp);
 
             const description = userCamp.description === "" ? 'N/A' : userCamp.description;
             const directions = userCamp.directionsOverview === "" ? 'N/A' : userCamp.directionsOverview;
@@ -312,7 +284,6 @@ class SearchDiv extends Component {
                 campResURL: userCampObj.resURL,
             });
 
-            // console.log(userCampObj);
             this.openModal('campsite');
         }
     }
@@ -326,9 +297,7 @@ class SearchDiv extends Component {
         if (userVCName === 'Choose a visitor center...') {
             alert('Please choose a visitor center');
         } else {
-            // console.log(`${userVCIndex}, ${userVCId}, ${userVCName}`);
             const userVC = this.props.visitorCenters[userVCIndex];
-            // console.log(userVC);
 
             const address = userVC.addresses.length === 0 ? 'N/A' : userVC.addresses[0];
             const phone = userVC.contacts.phoneNumbers.length === 0 ? 'N/A' : userVC.contacts.phoneNumbers[0];
@@ -367,7 +336,6 @@ class SearchDiv extends Component {
                 VCDirectionsURL: userVCObj.directionsURL
             });
 
-            // console.log(userVCObj);
             this.openModal('visitor center');
         }
     }
@@ -383,7 +351,6 @@ class SearchDiv extends Component {
             navDash.classList.remove('blink');
         }, 2500);
 
-        // console.log(e.target.id);
         if (e.target.id === 'confirm-trail-btn') {
             this.handleAddTrail();
         } else if (e.target.id === 'confirm-activity-btn') {
@@ -409,9 +376,6 @@ class SearchDiv extends Component {
             data: trailData
         })
         .then(dbTrail => {
-            // console.log(`===== USER'S SELECTED TRAIL DATA =====`);
-            // console.log(dbTrail.data);
-            // console.log('=====================================');
             console.log(`Trail added: ${dbTrail.data.name}`);
         })
         .catch (err => {
@@ -433,9 +397,6 @@ class SearchDiv extends Component {
             data: activityData
         })
         .then(dbActivity => {
-            // console.log(`===== USER'S SELECTED ACTIVITY DATA =====`);
-            // console.log(dbActivity.data);
-            // console.log('=========================================');
             console.log(`Activity added: ${dbActivity.data.name}`);
         })
         .catch(err => {
@@ -457,9 +418,6 @@ class SearchDiv extends Component {
             data: campData
         })
         .then(dbCamp => {
-            // console.log(`===== USER'S SELECTED CAMP DATA =====`);
-            // console.log(dbCamp.data);
-            // console.log('=====================================');
             console.log(`Camp added: ${dbCamp.data.name}`);
         })
         .catch(err => {
@@ -481,9 +439,6 @@ class SearchDiv extends Component {
             data: VCData
         })
         .then(dbVC => {
-            // console.log(`====== USER'S SELECTED VC DATA ======`);
-            // console.log(dbVC.data);
-            // console.log('=====================================');
             console.log(`VC added: ${dbVC.data.name}`);
         })
         .catch(err => {
@@ -625,7 +580,6 @@ class SearchDiv extends Component {
                         shouldCloseOnOverlayClick={true}
                         ariaHideApp={false}
                     >
-                        {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
                         <h3 className="modal-park-name">
                             {this.state.trailName}
                             <button
@@ -710,7 +664,6 @@ class SearchDiv extends Component {
                             shouldCloseOnOverlayClick={true}
                             ariaHideApp={false}
                         >
-                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
                             <h3 className="modal-park-name">
                                 {this.state.activityName}
                                 <button
@@ -772,7 +725,6 @@ class SearchDiv extends Component {
                             shouldCloseOnOverlayClick={true}
                             ariaHideApp={false}
                         >
-                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
                             <h3 className="modal-park-name">
                                 {this.state.campName}
                                 <button
@@ -909,7 +861,6 @@ class SearchDiv extends Component {
                             shouldCloseOnOverlayClick={true}
                             ariaHideApp={false}
                         >
-                            {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
                             <h3 className="modal-park-name">
                                 {this.state.VCName}
                                 <button

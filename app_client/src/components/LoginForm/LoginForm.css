@@ -22,7 +22,10 @@
     margin: auto -10px;
 }
 
-/* LOGO */
+/*
+** LOGO
+*/
+
 #logo {
     width: 120px;
     height: 40px;
@@ -35,11 +38,13 @@
     background-position: center;
 }
 
-/* LABEL */
+/*
+** LABEL
+*/
+
 .login-form .form-group,
 .register-form .form-group {
     position: relative;
-    /* margin-top: 40px; */
 }
 
 .login-form .form-group label,
@@ -55,13 +60,14 @@
 }
 
 .login-form .form-group .form-control:focus + label,
-.register-form .form-group .form-control:focus + label
-{
-    /* color: rgb(209, 176, 30); */
+.register-form .form-group .form-control:focus + label {
     color: rgb(160, 204, 202);
 }
 
-/* INPUT */
+/*
+** INPUT
+*/
+
 input#email,
 input#password,
 input#confirm-password {
@@ -95,13 +101,15 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     box-shadow: inset 0 1px 1px rgba(190, 190, 190, 0.534), 0 0 8px rgba(190, 190, 190, 0.534);
 }
 
-/* BUTTON */
+/*
+** BUTTON
+*/
+
 .login-btn {
     height: 40px;
     border: none;
     border-radius: 3px;
     background-color: #63757A;
-    /* background-color: rgb(74, 102, 107); */
     text-transform: uppercase;
     font-size: 11px;
     margin-top: 5px;
@@ -114,7 +122,10 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     color: white;
 }
 
-/* REGISTER LINK */
+/*
+** REGISTER LINK
+*/
+
 .register-link,
 .login-link {
     color: rgb(255, 255, 255);

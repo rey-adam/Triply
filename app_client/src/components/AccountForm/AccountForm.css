@@ -1,7 +1,6 @@
 .account-form-div {
     width: 65%;
     position: relative;
-    /* border: 5px solid rgba(0,0,0,.26); */
     border-radius: 4px;
     background: white;
     box-shadow: 0 1px 3px rgb(184, 184, 184);
@@ -9,8 +8,6 @@
 }
 
 .account-form-header {
-    /* background-color: rgb(12, 196, 209); */
-    /* background-color: rgb(2, 96, 204); */
     background-color: rgb(2, 204, 204);
     color: white;
     height: 85px;
