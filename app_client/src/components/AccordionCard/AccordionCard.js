@@ -65,7 +65,7 @@ class AccordionCard extends Component {
                                             {trip.Locations[0] === undefined ?
                                                 <div>
                                                     <span className=" empty-card-title card-park-title card-title">No park added</span>
-                                                    <button className='btn btn-primary pull-right card-add-btn'>Add</button>
+                                                    <button id="park-add-btn" className='btn btn-primary pull-right card-add-btn'>Add</button>
                                                 </div>
                                                 : 
                                                 <span className="card-park-title card-title">{`${trip.Locations[0].name} National Park`}</span>
@@ -82,6 +82,7 @@ class AccordionCard extends Component {
                                                         Trails:
                                                         <Link to={`/search/trails?tripId=${trip.id}&locationId=${trip.Locations[0].id}&parkCode=${trip.Locations[0].parkCode}&lat=${trip.Locations[0].latitude}&lng=${trip.Locations[0].longitude}`}>
                                                             <button
+                                                                id="trail-add-btn"
                                                                 className='btn btn-primary pull-right card-add-btn'>
                                                             Add</button>
                                                         </Link>
@@ -106,6 +107,7 @@ class AccordionCard extends Component {
                                                         Activities:
                                                         <Link to={`/search/activities?tripId=${trip.id}&locationId=${trip.Locations[0].id}&parkCode=${trip.Locations[0].parkCode}&lat=${trip.Locations[0].latitude}&lng=${trip.Locations[0].longitude}`}>
                                                             <button
+                                                                id="activity-add-btn"
                                                                 className='btn btn-primary pull-right card-add-btn'>
                                                                 Add</button>
                                                         </Link>
@@ -130,6 +132,7 @@ class AccordionCard extends Component {
                                                         Campsites:
                                                         <Link to={`/search/campsites?tripId=${trip.id}&locationId=${trip.Locations[0].id}&parkCode=${trip.Locations[0].parkCode}&lat=${trip.Locations[0].latitude}&lng=${trip.Locations[0].longitude}`}>
                                                             <button
+                                                                id="camp-add-btn"
                                                                 className='btn btn-primary pull-right card-add-btn'>
                                                                 Add</button>
                                                         </Link>
@@ -154,6 +157,7 @@ class AccordionCard extends Component {
                                                         Visitor Centers:
                                                         <Link to={`/search/visitor?tripId=${trip.id}&locationId=${trip.Locations[0].id}&parkCode=${trip.Locations[0].parkCode}&lat=${trip.Locations[0].latitude}&lng=${trip.Locations[0].longitude}`}>
                                                             <button
+                                                                id="vc-add-btn"
                                                                 className='btn btn-primary pull-right card-add-btn'>
                                                                 Add</button>
                                                         </Link>

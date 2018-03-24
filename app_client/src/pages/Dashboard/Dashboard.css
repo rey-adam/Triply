@@ -56,7 +56,7 @@
     overflow-wrap: break-word;
     margin: auto;
     margin-right: 1.5px;
-    color: rgb(53, 94, 69)
+    color: rgb(211, 167, 48);
 }
 
 .DateRangePicker {
@@ -124,14 +124,13 @@
 
 .create-trip-form .glyphicon {
     font-size: 30px;
-    color: rgb(53, 94, 69);
+    color: rgb(8, 128, 128);
 }
 
 .create-trip-form .glyphicon:hover {
     font-size: 30px;
-    background-color: rgb(53, 94, 69);
-    background-color: rgb(53, 94, 69);
-    border: 1px solid rgb(53, 94, 69);
+    background-color: rgb(8, 128, 128);
+    border: 1px solid rgb(8, 128, 128);
     border-radius: 50%;
     color: white;
     margin-left: -2px;
@@ -140,6 +139,7 @@
 /******************
     USER TRIPS
 ******************/
+
 .second-row {
     display: flex;
     flex-flow: row wrap;
@@ -154,7 +154,7 @@
 }
 
 .user-trips .trips-header {
-    background-color: rgb(53, 94, 69);
+    background-color: rgb(8, 128, 118);
     color: white;
     height: 85px;
     padding: 0; margin: 0;
@@ -193,12 +193,10 @@
 
 .user-trips .accordion-link > h4 > .trip-date {
     font-size: 14px;
-    /* color: black; */
     font-weight: 400;
 }
 
 .user-trips .accordion-link:focus {
-    /* outline: 5px auto #a3cbff; */
     outline-color: rgba(199, 211, 221, 0.158);
 }
 
@@ -214,7 +212,7 @@
 }
 
 .weather-header {
-    background-color: rgb(53, 94, 69);
+    background-color: rgb(8, 128, 118);
     color: white;
     width: 100%;
     height: 85px;
@@ -295,7 +293,7 @@
 }
 
 .Cal__Header__root {
-    background-color: rgb(53, 94, 69) !important;
+    background-color: rgb(8, 128, 118) !important;
     min-height: 85px !important;
     height: 85px !important;
     font-family: 'Montserrat' !important;
@@ -313,9 +311,20 @@
     font-size: 26px !important;
     line-height: 30px !important;
 }
+
+.Cal__Years__year,
+.Cal__Years__withMonths {
+    color: rgb(211, 167, 48) !important;
+}
+
+.Cal__Years__selected {
+    background-color: rgb(211, 167, 48) !important;
+    border-color: rgb(211, 167, 48) !important;
+    color: white !important;
+}
+
 .Cal__MonthList__root {
     height: 250px !important;
-    /* height: 200px !important; */
 }
 
 .Cal__Month__rows {
@@ -332,8 +341,19 @@
 }
 
 .Cal__Day__selection {
-    background-color: rgb(22, 22, 22) !important;
+    /* background-color: rgb(22, 22, 22) !important;
+    color: white !important; */
+    background-color: rgb(211, 167, 48) !important;
     color: white !important;
+    border: 1px solid rgb(211, 167, 48);
+}
+
+.Cal__Day__selection:hover {
+    background-color: rgb(197, 156, 43) !important;
+}
+
+.Cal__Day__month {
+    font-weight: 400 !important;
 }
 
 .Cal__Day__today {
