@@ -7,7 +7,6 @@ import NextSearch from './pages/NextSearch';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import NoMatch from './components/NoMatch';
-import './App.css';
 import MapContainerB from './pages/MapContainerB';
 
 class App extends Component {

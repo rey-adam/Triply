@@ -8,8 +8,6 @@
     position: fixed;
     width: 65%;
     margin: auto;
-    /* margin-top: calc(-230px - 20 * (140vw - 320px)/ 1000); */
-    /* margin-top: -20.5%; */
 }
 
 .select-option {
