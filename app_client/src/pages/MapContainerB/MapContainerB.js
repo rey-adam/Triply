@@ -30,7 +30,7 @@ function createMapOptions(maps) {
 }
 
 
-// const latLng = { lat: 37.7566, lng: -119.5969 }; 
+
 
 export default class SimpleMap extends Component {
 
@@ -40,7 +40,7 @@ export default class SimpleMap extends Component {
 
         const latlng = {lat, lng}
  
-        // console.log('im the map',latlng);
+
         return (
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyCLUrcCEzJa-tci8ygkhPWjK2zbr3kZ1uo' }}
