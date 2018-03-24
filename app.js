@@ -44,11 +44,10 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(logger('dev'));
 app.use(routes);
-app.use(express.static('app_client/build/'));
-
 if (isDev) {
     app.use(express.static('app_client/public'));
-};
+}
+app.use(express.static('app_client/build'));
 
 /*  
     =====================================================================================
