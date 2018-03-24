@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// http://iamdustan.com/smoothscroll/
-import smoothscroll from 'smoothscroll-polyfill';
 import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
 import SearchDiv from '../../components/NextSearchForm/SearchDiv';
@@ -78,8 +76,6 @@ class Search extends Component {
         .catch(err => {
             console.error(err);
         });
-
-        smoothscroll.polyfill();
     }
 
     handleTrailRequest(lat, long) {

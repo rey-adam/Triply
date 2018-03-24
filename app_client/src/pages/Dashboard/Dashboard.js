@@ -182,7 +182,6 @@ class Dashboard extends Component {
 
     handleNewTripSubmit(e) {
         e.preventDefault();
-        console.log(this.state.newTripName);
         if (this.state.newTripName === '') {
             alert('Please enter a trip name');
         } else {
@@ -236,24 +235,6 @@ class Dashboard extends Component {
         const { name, value } = event.target;
         this.setState({ [name]: value });
     }
-
-
-    // START ----- submit button to take user to park search page 
-
-
-    handleSubmit(e){
-        e.preventDefault();
-        console.log('The button was clicked.');
-    //     // onClick={this.handleSubmit}
-        
-    //     this.openModal();
-    }
-
-    
-
-        
-
-    // END ------ submit button to take user to park search page 
 
     handleZipSubmit(e) {
         e.preventDefault();

@@ -9,14 +9,22 @@
     text-transform: uppercase;
 }
 
-#confirm-delete-btn:hover {
-    background-color: rgb(241, 6, 6);
+#confirm-delete-btn {
+    background-color: rgb(211, 113, 48);
+    border-color: rgb(211, 113, 48);
     color: white;
-    border-color: white;
+}
+
+#confirm-delete-btn:hover {
+    background-color: rgb(202, 108, 46);
+}
+
+#exit-delete-btn {
+    background-color: rgb(211, 80, 48);
+    border-color: rgb(211, 80, 48);
+    color: white;
 }
 
 #exit-delete-btn:hover {
-    background-color: rgb(0, 212, 184);
-    color: white;
-    border-color: white;
+    background-color: rgb(202, 77, 45);
 }
