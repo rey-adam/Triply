@@ -24,7 +24,7 @@ const express = require('express')
 router.use('/auth', authRoutes);
 
 // authentication middleware: every route declared after this use statement is protected
-router.use(jwt({ secret: process.env.JWT_SECRET }));
+router.use('/api', jwt({ secret: process.env.JWT_SECRET }));
 
 // protected routes
 router.use('/api', apiRoutes);

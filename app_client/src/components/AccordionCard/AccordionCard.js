@@ -48,6 +48,7 @@ class AccordionCard extends Component {
                                         <span className=" empty-card-title card-park-title card-title">No park added</span>
                                         <Link to={`/park?tripId=${trip.id}`}>
                                             <button
+                                                id="park-add-btn"
                                                 data-trip-id={trip.id}
                                                 className='btn btn-primary pull-right card-add-btn'
                                             >Add</button>
@@ -62,14 +63,9 @@ class AccordionCard extends Component {
                                 <div className="card-body">
                                     <div className="panel panel-default">
                                         <div className="panel-body">
-                                            {trip.Locations[0] === undefined ?
-                                                <div>
-                                                    <span className=" empty-card-title card-park-title card-title">No park added</span>
-                                                    <button id="park-add-btn" className='btn btn-primary pull-right card-add-btn'>Add</button>
-                                                </div>
-                                                : 
-                                                <span className="card-park-title card-title">{`${trip.Locations[0].name} National Park`}</span>
-                                            }
+                                            <span className="card-park-title card-title">
+                                                {`${trip.Locations[0].name} National Park`}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

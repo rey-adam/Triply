@@ -3,7 +3,7 @@ import React from 'react';
 let Forecast = (props) => {
     const { height, width, latitude, longitude, name, color, font, units } = props;
 
-    const url = `http://forecast.io/embed/#lat=${latitude}&lon=${longitude}&name=${name}&color=${color}&font=${font}&units=${units}`;
+    const url = `https://forecast.io/embed/#lat=${latitude}&lon=${longitude}&name=${name}&color=${color}&font=${font}&units=${units}`;
 
     return (
         <iframe title='forecast-widget' type='text/html' height={height} width={width} frameBorder='0' src={url} />
