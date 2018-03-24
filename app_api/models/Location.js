@@ -3,7 +3,9 @@ module.exports = function (sequelize, DataTypes) {
 
     const Location = sequelize.define("Location", {
         name: DataTypes.STRING,
-        parkCode: DataTypes.STRING
+        parkCode: DataTypes.STRING,
+        latitude: DataTypes.FLOAT,
+        longitude: DataTypes.FLOAT
     }); // END LOCATION CONSTRUCTOR
 
     Location.associate = function (models) {

@@ -10,10 +10,8 @@ import './Search.css';
 // APIS 
 import NPSAPI from "../../helpers/api/npsApi/npsAPI";
 import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
-// date picker
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-import { DateRangePicker } from 'react-dates';
+import axios from 'axios';
+import qs from 'query-string';
 
 
 const styles = {
@@ -49,16 +47,18 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userTripId: '',
+            userLocationId: '',
             userParkCode: '',
             userParkName: '',
+            parkLat: '',
+            parkLong: '',
             parkURL: '',
             parkStates: '',
             parkDesc: '',
             parkWeather: '',
             parks: parks,
             modalIsOpen: false,
-            startDate: null,
-            endDate: null,
             focusedInput: null
         };
         this.openModal = this.openModal.bind(this);
@@ -71,8 +71,14 @@ class Search extends Component {
     };
 
     componentDidMount() {
-        console.log(this.state.parks);
-        // this.openModal('hello');
+        // console.log('====== NPS PARK DATA ======');
+        // console.log(this.state.parks);
+        // console.log('===========================');
+
+        // parse url to get tripId
+        const tripObj = qs.parse(this.props.location.search);
+        const tripId = tripObj.tripId;
+        this.setState({ userTripId: tripId });
     };
 
     openModal(message) {
@@ -91,14 +97,14 @@ class Search extends Component {
         if (userParkName === 'Choose a park...') {
             alert('Please choose a park');
         } else {
-            console.log(`${userParkName}, ${userParkCode}`);
+            // console.log(`${userParkName}, ${userParkCode}`);
             this.setState({
                 userParkCode,
                 userParkName
             });
             this.handleParkAPIRequest(userParkCode)
                 .then(parkObj => {
-                    console.log(parkObj);
+                    // console.log(parkObj);
                     this.setState({
                         parkURL: parkObj.url,
                         parkStates: parkObj.states,
@@ -114,34 +120,47 @@ class Search extends Component {
     }; // END HANDLE SUBMIT
 
     handleModalConfirm() {
-        if (this.state.startDate === null && this.state.endDate === null) {
-            alert('Please set a date range for your trip');
-        } else if (this.state.startDate === null && this.state.endDate !== null) {
-            alert('Please set a start date');
-        } else if (this.state.startDate !== null && this.state.endDate === null) {
-            alert('Please set an end date');
-        } else {
-            console.log("=========== USER'S TRIP INFO ===========");
-            console.log(`Park: ${this.state.userParkName}`);
-            console.log(`Start Date: ${this.state.startDate._d}`);
-            console.log(`End date: ${this.state.endDate._d}`);
-            console.log("========================================");
-
-            this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
-            .then(locationObj => {
-                this.props.history.push(`/search/trails?park=${this.state.userParkCode}&lat=${locationObj.parkLat}&lng=${locationObj.parkLong}`);
-            })
-            .catch(err => {
-                console.error(err);
+        this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
+        .then(locationObj => {
+            // console.log(locationObj);
+            this.setState({
+                parkLat: locationObj.parkLat,
+                parkLong: locationObj.parkLong
             });
-        }
+
+            const locationData = {
+                tripId: this.state.userTripId,
+                parkName: this.state.userParkName,
+                parkCode: this.state.userParkCode,
+                latitude: locationObj.parkLat,
+                longitude: locationObj.parkLong
+            };
+            
+            return axios({
+                headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
+                method: "POST",
+                url: `/api/location`,
+                data: locationData
+            });
+        })
+        .then(dbLocation => {
+            console.log(`===== USER'S SELECTED PARK DATA =====`);
+            console.log(dbLocation.data);
+            console.log('=====================================');
+
+            this.setState({ userLocationId: dbLocation.data.id });
+            this.props.history.push(`/search/trails?tripId=${this.state.userTripId}&locationId=${this.state.userLocationId}&parkCode=${this.state.userParkCode}&lat=${this.state.parkLat}&lng=${this.state.parkLong}`);
+        })
+        .catch(err => {
+            console.error(err);
+        });
     }
 
     handleParkAPIRequest = query => {
     return NPSAPI
         .park(query)
         .then(npsRes => {
-            console.log(npsRes.data);
+            // console.log(npsRes.data);
             const park = npsRes.data.data[0];
             const parkObj = {
                 name: park.fullName,
@@ -217,18 +236,8 @@ class Search extends Component {
                             id="confirm-park-btn"
                             className='btn btn-default confirm-btn'
                             onClick={this.handleModalConfirm}
-                        >Create Trip</button>
+                        >Add Park</button>
                     </h3>
-
-                    <DateRangePicker
-                        startDate={this.state.startDate}
-                        startDateId="start-date"
-                        endDate={this.state.endDate}
-                        endDateId="end-date"
-                        onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
-                        focusedInput={this.state.focusedInput}
-                        onFocusChange={focusedInput => this.setState({ focusedInput })}
-                    />
 
                     <div className="table-responsive">
                         <table className="table table-bordered table-hover">

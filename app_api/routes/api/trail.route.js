@@ -3,13 +3,15 @@ const express = require("express"),
     ctrl = require("../../controllers/model/trail.ctrl"),
     router = express.Router();
 
-// CREATE A TRAIL
+// CREATE 
 router.post("/trail", ctrl.createTrail);
-// FIND ALL TRAIL
+// READ
 router.get("/trail", ctrl.findAllTrail);
-// FIND ONE TRAIL @ ID
+// READ ONE
 router.get("/trail/:id", ctrl.findOneTrail);
-// DELETE ONE TRAIL
+// UPDATE
+router.put("/trail/:id", ctrl.updateTrail);
+// DELETE
 router.delete("/trail/:id", ctrl.deleteTrail);
 
 module.exports = router;

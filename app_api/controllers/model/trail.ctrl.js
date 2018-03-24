@@ -6,12 +6,17 @@ module.exports = {
     createTrail: (req, res) => {
         db
             .Trail
-            .create(req.body)
+            .create({
+                LocationId: req.body.locationId,
+                name: req.body.trailName,
+                hikeId: req.body.trailId
+            })
             .then(dbTrail => {
                 res.json(dbTrail);
             })
             .catch(err => {
                 console.error(err);
+                res.json(err);
             });
     }, // END CREATE
 
@@ -22,11 +27,8 @@ module.exports = {
             .then(dbTrail => {
                 res.json(dbTrail);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ALL
+            .catch(err => console.error(err));
+    }, // END READ
 
     findOneTrail: (req, res) => {
         db
@@ -39,11 +41,21 @@ module.exports = {
             .then(dbTrail => {
                 res.json(dbTrail);
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
-    }, // END FIND ONE
+            .catch(err => console.error(err));
+    }, // END READ ONE
+
+    updateTrail: (req, res) => {
+        db.Trail.update(
+            req.body,
+            {
+                where: {
+                    id: req.params.id
+                }
+            }).then(dbTrail => {
+                res.json(dbTrail);
+            })
+            .catch(err => console.error(err));
+    }, // END UPDATE
 
     deleteTrail: (req, res) => {
         db
@@ -56,10 +68,7 @@ module.exports = {
             .then(dbTrail => {
                 res.json("Success!");
             })
-            .catch(err => {
-                console.error(err);
-                res.json(err);
-            });
+            .catch(err => console.error(err));
     } // END DELETE
     
 }; // END EXPORT
