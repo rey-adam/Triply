@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/Navbar';
 import Hero from '../../components/Hero';
-// import ControlledCarousel from '../../components/Carousel';
 import SelectWrapper from '../../components/SelectWrapper';
 import Modal from 'react-modal';
-// import axios from 'axios';
 import parks from '../../helpers/api/npsApi/parkCodes/parks';
 import './Search.css';
-// APIS 
-import NPSAPI from "../../helpers/api/npsApi/npsAPI";
-import MAPAPI from "../../helpers/api/mapsApi/mapsApi"
 import axios from 'axios';
 import qs from 'query-string';
+// APIS 
+import NPSAPI from "../../helpers/api/npsApi/npsAPI";
+import MAPAPI from "../../helpers/api/mapsApi/mapsApi";
 
 
 const styles = {
@@ -71,10 +69,6 @@ class Search extends Component {
     };
 
     componentDidMount() {
-        // console.log('====== NPS PARK DATA ======');
-        // console.log(this.state.parks);
-        // console.log('===========================');
-
         // parse url to get tripId
         const tripObj = qs.parse(this.props.location.search);
         const tripId = tripObj.tripId;
@@ -97,14 +91,12 @@ class Search extends Component {
         if (userParkName === 'Choose a park...') {
             alert('Please choose a park');
         } else {
-            // console.log(`${userParkName}, ${userParkCode}`);
             this.setState({
                 userParkCode,
                 userParkName
             });
             this.handleParkAPIRequest(userParkCode)
                 .then(parkObj => {
-                    // console.log(parkObj);
                     this.setState({
                         parkURL: parkObj.url,
                         parkStates: parkObj.states,
@@ -122,7 +114,6 @@ class Search extends Component {
     handleModalConfirm() {
         this.handleLocationAPIRequest(`${this.state.userParkName} National Park`)
         .then(locationObj => {
-            // console.log(locationObj);
             this.setState({
                 parkLat: locationObj.parkLat,
                 parkLong: locationObj.parkLong
@@ -160,7 +151,6 @@ class Search extends Component {
     return NPSAPI
         .park(query)
         .then(npsRes => {
-            // console.log(npsRes.data);
             const park = npsRes.data.data[0];
             const parkObj = {
                 name: park.fullName,
