@@ -122,18 +122,9 @@ class Login extends Component {
                 labels[i].style.color = 'rgb(0, 228, 197)';
             }
 
-            // console.log('====== frontend ======');
-            // console.log('login form validated');
-            // console.log(`email: ${userData.email}`);
-            // console.log('======================');
-
             axios.post('/auth/login', userData)
             .then(response => {
-                // console.log('====== backend ======');
                 console.log('post response: login success');
-                // console.log(response.data);
-                // console.log('=====================');
-
                 window.localStorage.setItem('token', response.data.token);
                 this.props.history.push('/');
             })
@@ -238,18 +229,9 @@ class Login extends Component {
                 labels[i].style.color = 'rgb(0, 228, 197)';
             }
 
-            // console.log('====== frontend ======');
-            // console.log('registration form validated');
-            // console.log(`email: ${userData.email}`);
-            // console.log('======================');
-
             axios.post('/auth/register', userData)
             .then(response => {
-                // console.log('====== backend ======');
                 console.log('post response: registration success');
-                // console.log(response.data);
-                // console.log('=====================');
-                
                 this.props.history.push('/login');
             })
             .catch(err => {

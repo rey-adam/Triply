@@ -1,7 +1,6 @@
 .account-form-div {
     width: 65%;
     position: relative;
-    /* border: 5px solid rgba(0,0,0,.26); */
     border-radius: 4px;
     background: white;
     box-shadow: 0 1px 3px rgb(184, 184, 184);
@@ -9,9 +8,7 @@
 }
 
 .account-form-header {
-    /* background-color: rgb(12, 196, 209); */
-    /* background-color: rgb(2, 96, 204); */
-    background-color: rgb(2, 204, 204);
+    background-color: rgb(8, 128, 118);
     color: white;
     height: 85px;
     padding: 0; margin: 0;
@@ -49,33 +46,30 @@
 
 #delete-account-btn,
 #update-account-btn {
-    font-weight: 500;
     color: white;
     height: 37px;
-    font-size: 13px;
-    text-transform: uppercase;
     margin-top: 10px;
 }
 
 #delete-account-btn {
-    color: black;
+    background-color: rgb(211, 167, 48);
+    border-color: rgb(211, 167, 48);
+    color: white;
 }
 
 #delete-account-btn:hover {
-    background: rgb(241, 6, 6);
-    color: white;
-    border-color: white;
+    background: rgb(204, 162, 47);
 }
 
 #update-account-btn {
-    color: black;
+    background-color: rgb(211, 146, 48);
+    border-color: rgb(211, 146, 48);
+    color: white;
     margin-left: 20px;
 }
 
 #update-account-btn:hover {
-    background: rgb(0, 212, 184);
-    color: white;
-    border-color: white;
+    background: rgb(202, 140, 47);
 }
 
 /******************

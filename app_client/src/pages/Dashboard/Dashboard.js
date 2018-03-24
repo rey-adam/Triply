@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import { Modal, Button } from 'react-bootstrap';
 import Navbar from '../../components/Navbar';
 import Accordion from '../../components/Accordion';
 import AccordionCard from '../../components/AccordionCard';
-// import Forecast from 'react-forecast';
 import ForecastNew from '../../components/ForecastNew';
+// calendar
 import InfiniteCalendar from 'react-infinite-calendar';
-import 'react-infinite-calendar/styles.css'; // Make sure to import the default stylesheet
+import 'react-infinite-calendar/styles.css';
+// google maps
 import SimpleMap from '../MapContainerB/MapContainerB';
-import ReactModal from 'react-modal';
 import MAPAPI from '../../helpers/api/mapsApi/mapsApi';
-import qs from 'query-string';
-import './Dashboard.css';
-import UserModel from "../../helpers/models/UserModel";
-import authHelper from '../../helpers/authHelper';
-import axios from 'axios';
+// modal
+import { Modal, Button } from 'react-bootstrap';
+import ReactModal from 'react-modal';
 // date picker
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
+import axios from 'axios';
+import qs from 'query-string';
+import UserModel from "../../helpers/models/UserModel";
+import authHelper from '../../helpers/authHelper';
+import './Dashboard.css';
 
 const styles = {
     modalStyles: {
@@ -46,7 +48,6 @@ const styles = {
         }
     }
 };
-
 class Dashboard extends Component {
     constructor(props, context) {
         super(props, context);
@@ -86,6 +87,7 @@ class Dashboard extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
+
     };
 
     componentDidMount() {
@@ -98,10 +100,6 @@ class Dashboard extends Component {
 
         // parse url to get park lat, long, and name
         const locationObj = qs.parse(this.props.location.search);
-
-        // console.log('===== PARSED URL =====');
-        // console.log(locationObj);
-        // console.log('======================');
 
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
         *                                 OUTPUT                                    *
@@ -125,137 +123,29 @@ class Dashboard extends Component {
             url: `/api/trips/${JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id}`
         })
         .then(dbUserTrips => {
-            // console.log(dbUserTrips);
-
             this.setState({
                 numTrips: dbUserTrips.data === null ? 0 : dbUserTrips.data.length
             });
-
-            // console.log(`num trips: ${this.state.numTrips}`);
 
             // get all trip details for user
             return UserModel.getOne(authHelper.splitToken(authHelper.getToken()).id);
 
         }).then(dbUser => {
-
             setTimeout(() => {
                 this.setState({
-                    userData: dbUser.data,
-                    // userParkCode: dbUser.data.Trips[0].Locations[0].parkCode,
-                    // userParkName: dbUser.data.Trips[0].Locations[0].name
+                    userData: dbUser.data
                 });
-                console.log('========= USER INFO ========');
-                console.log(`id: ${this.state.userData.id}`);
-                console.log(`email: ${this.state.userData.email}`);
-                console.log('========== trips ===========');
-                console.log(`trips: ${this.state.userData.Trips.length}`);
-                console.log(this.state.userData.Trips);
-                console.log('============================');
+                if (this.state.userData != null) {
+                    console.log('========= USER INFO ========');
+                    console.log(`id: ${this.state.userData.id}`);
+                    console.log(`email: ${this.state.userData.email}`);
+                    console.log('========== trips ===========');
+                    console.log(`trips: ${this.state.userData.Trips.length}`);
+                    console.log(this.state.userData.Trips);
+                    console.log('============================');
+                }
             }, 1000);
-            
-            
-
         })
-            
-        //     // RETURNING THE NATIONAL PARK API CAMPSITE CALL
-        //     return NPSAPI.campgrounds(this.state.userParkCode);
-        // })
-        // .then(npsCampRes => {
-        //     // better idea to use seperate queries based on id from user info
-        //     // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
-        //     console.log("=============== ALL CAMPS API ==============");
-        //     console.log(npsCampRes.data.data);
-            
-        //     this.state.userData.Trips.forEach(trip => {
-        //         trip.Locations.forEach(loc => {
-        //             const campsites = npsCampRes.data.data.filter(elem => {
-        //                 const val = loc.Campsites.find(camp => {
-        //                     return camp.campId === elem.id
-        //                 })
-        //                 return val != null;
-        //             }); // END  
-
-        //             console.log(campsites);
-        //             this.state.camps.push(campsites);
-        //         }); // END FOR EACH
-        //     }); // END FOR EACH
-            
-        //     return NPSAPI.visitorCenters(this.state.userParkCode);
-
-        // }).then(npsVCRes => {
-        //     // better idea to use seperate queries based on id from user info
-        //     // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
-        //     console.log("=============== VISITOR CENTER API ==============");
-
-        //     console.log(npsVCRes.data.data);
-            
-        //     this.state.userData.Trips.forEach(trip => {
-        //         trip.Locations.forEach(loc => {
-        //             const visitorcenter = npsVCRes.data.data.filter(elem => {
-        //                 const val = loc.VisitorCenters.find(center => {
-        //                     return center.centerId === elem.id
-        //                 });
-        //                 return val != null;
-        //             }); // END  
-
-        //             console.log(visitorcenter);
-        //             this.state.visitorCenters.push(visitorcenter);
-        //         }); // END FOR EACH
-        //     }); // END FOR EACH
-
-        //     return NPSAPI.events(this.state.userParkCode);
-
-        // }).then(npsEventRes => {
-        //     // better idea to use seperate queries based on id from user info
-        //     // I.E. NPSAPI.camp(parkCode, userRes.Trips[0].Locations[0].Campsites[0].campId)
-        //     console.log("=============== EVENTS API ==============");
-            
-        //     console.log(npsEventRes.data.data);
-
-        //     this.state.userData.Trips.forEach(trip => {
-        //         trip.Locations.forEach(loc => {
-        //             const events = npsEventRes.data.data.filter(elem => {
-        //                 const val = loc.Activities.find(events => {
-        //                     return events.eventId === elem.id
-        //                 });
-        //                 return val != null;
-        //             }); // END  
-
-        //             console.log(events);
-        //             this.state.activities.push(events);
-        //         }); // END FOR EACH
-        //     }); // END FOR EACH
-
-        //     return MAPAPI.location(`${this.state.userParkName} National Park`);
-
-        // }).then(mapRes => {
-            
-        //     const lat = mapRes.data.results[0].geometry.location.lat;
-        //     const lon = mapRes.data.results[0].geometry.location.lng;
-
-        //     return REIAPI.trails(lat, lon);
-            
-        // }).then(reiTrailRes => {
-            
-        //     console.log("=============== TRAILS API ==============");
-
-        //     console.log(reiTrailRes.data.trails);
-
-        //     this.state.userData.Trips.forEach(trip => {
-        //         trip.Locations.forEach(loc => {
-        //             const hikes = reiTrailRes.data.trails.filter(elem => {
-        //                 const val = loc.Trails.find(hikes => {
-        //                     return hikes.hikeId === elem.id
-        //                 });
-        //                 return val != null;
-        //             }); // END  
-
-        //             console.log(hikes);
-        //             this.state.trails.push(hikes);
-        //         }); // END FOR EACH
-        //     }); // END FOR EACH
-
-        // })
         .catch(err => console.error(err));
 
     }; // END MOUNT
@@ -285,7 +175,6 @@ class Dashboard extends Component {
     // =====================================================================================
     handleNewUser() {
         let isNewUser = window.localStorage.getItem('isNewUser');
-        // console.log(`isNewUser: ${isNewUser === null ? true : false}`);
         if (isNewUser === null) {
             this.openModal();
         }
@@ -293,7 +182,6 @@ class Dashboard extends Component {
 
     handleNewTripSubmit(e) {
         e.preventDefault();
-        console.log(this.state.newTripName);
         if (this.state.newTripName === '') {
             alert('Please enter a trip name');
         } else {
@@ -310,12 +198,6 @@ class Dashboard extends Component {
         } else if (this.state.startDate !== null && this.state.endDate === null) {
             alert('Please set an end date');
         } else {
-            // console.log("=========== USER'S TRIP INFO ===========");
-            // console.log(`Name: ${this.state.newTripName}`);
-            // console.log(`Start Date: ${this.state.startDate._d}`);
-            // console.log(`End date: ${this.state.endDate._d}`);
-            // console.log("========================================");
-
             const tripData = {
                 tripName: this.state.newTripName,
                 userId: JSON.parse(window.atob(localStorage.getItem('token').split('.')[1])).id,
@@ -344,7 +226,7 @@ class Dashboard extends Component {
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            // e.preventDefault();
+            e.preventDefault();
             this.handleNewTripSubmit(e);
         }
     }
@@ -467,6 +349,10 @@ class Dashboard extends Component {
                         </div>
                     </div>
 
+
+                    {/* modal */}
+
+
                     {/* google maps */}
                     <div id='mapDiv'>
                         <SimpleMap latlng={{ lat: this.state.weatherLat, lng: this.state.weatherLng}} />
@@ -515,11 +401,7 @@ class Dashboard extends Component {
                             focusedInput={this.state.focusedInput}
                             onFocusChange={focusedInput => this.setState({ focusedInput })}
                         />
-                        {/* <p>Click 'Next' to start planning your itinerary</p> */}
-
-                        {/* <Button
-                            onClick={this.handleHide}
-                        >Close</Button> */}
+                        
                         <Button
                             onClick={this.handleNewTripCreate}
                             id="park-redirect-btn"

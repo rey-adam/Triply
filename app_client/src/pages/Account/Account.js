@@ -441,7 +441,6 @@ class Account extends Component {
                     shouldCloseOnOverlayClick={true}
                     ariaHideApp={false}
                 >
-                    {/* <h2 ref={subtitle => this.subtitle = subtitle}></h2> */}
                     <p className="confirm-delete-message">
                         Are you sure you want to delete your account?
                     </p>

@@ -58,24 +58,6 @@ class ApiCtrl {
             console.error(err);
         });
     }
-    
-    // static getTrailData(req, res) {
-    //     ApiCtrl._queryGoogleMapsAPI(res, req.params.userTrail)
-    //     .then(locationResponse => {
-    //         if (locationResponse) {
-    //             ApiCtrl._queryHikingProjectAPI(res, locationResponse.latitude, locationResponse.longitude)
-    //             .then(trailResponse => {
-    //                 console.log('====================');
-    //                 console.log(`${trailResponse.length} trails found`);
-    //                 console.log('====================');
-    //                 res.json(trailResponse);
-    //             })
-    //             .catch(err => {
-    //                 console.error(err);
-    //             });
-    //         }
-    //     });
-    // }
 
     static _queryNationalParkAPI(res, userParkCode) {
         const url = `https://developer.nps.gov/api/v1/parks?limit=1&parkCode=${userParkCode}&api_key=${process.env.NATIONAL_PARKS_API_KEY}`;

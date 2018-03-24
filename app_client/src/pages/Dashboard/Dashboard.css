@@ -1,6 +1,5 @@
 .dash-nav {
     box-shadow: none;
-    /* border-bottom: 1px solid rgb(207, 207, 207); */
     border-bottom: 1px solid rgba(184, 184, 184, 0.418);
 }
 
@@ -57,7 +56,7 @@
     overflow-wrap: break-word;
     margin: auto;
     margin-right: 1.5px;
-    color: rgb(2, 204, 204);
+    color: rgb(211, 167, 48);
 }
 
 .DateRangePicker {
@@ -70,15 +69,10 @@
 }
 
 .new-trip-modal button:nth-of-type(1):hover {
-    /* background-color: rgb(161, 161, 161);
-    color: white; */
     border-color: #e6e6e6;
 }
 
 .new-trip-modal #park-redirect-btn:hover {
-    /* background: rgb(2, 204, 204);
-    color: white;
-    border-color: white; */
     border-color: #e6e6e6;
 }
 
@@ -130,13 +124,13 @@
 
 .create-trip-form .glyphicon {
     font-size: 30px;
-    color: rgb(2, 204, 204);
+    color: rgb(8, 128, 128);
 }
 
 .create-trip-form .glyphicon:hover {
     font-size: 30px;
-    background-color: rgb(2, 204, 204);
-    border: 1px solid rgb(2, 204, 204);
+    background-color: rgb(8, 128, 128);
+    border: 1px solid rgb(8, 128, 128);
     border-radius: 50%;
     color: white;
     margin-left: -2px;
@@ -145,6 +139,7 @@
 /******************
     USER TRIPS
 ******************/
+
 .second-row {
     display: flex;
     flex-flow: row wrap;
@@ -159,7 +154,7 @@
 }
 
 .user-trips .trips-header {
-    background-color: rgb(2, 204, 204);
+    background-color: rgb(8, 128, 118);
     color: white;
     height: 85px;
     padding: 0; margin: 0;
@@ -198,15 +193,12 @@
 
 .user-trips .accordion-link > h4 > .trip-date {
     font-size: 14px;
-    /* color: black; */
     font-weight: 400;
 }
 
 .user-trips .accordion-link:focus {
-    /* outline: 5px auto #a3cbff; */
     outline-color: rgba(199, 211, 221, 0.158);
 }
-
 
 /******************
       WEATHER
@@ -216,18 +208,11 @@
     box-shadow: 0 1px 3px rgb(184, 184, 184);
     border-radius: 5px;
     color: #63757A !important;
-    /* width: 80vw; */
     margin: auto;
-    /* -webkit-transition: width 0.7s; Safari
-    transition: width 0.7s; */
 }
 
-/* .weather-div:hover {
-    width: 80vw;
-} */
-
 .weather-header {
-    background-color: rgb(2, 204, 204);
+    background-color: rgb(8, 128, 118);
     color: white;
     width: 100%;
     height: 85px;
@@ -299,7 +284,6 @@
 .Cal__Container__root {
     box-shadow: 0 1px 3px rgb(184, 184, 184) !important;
     width: 45% !important;
-    /* width: 360px !important; */
     border-bottom-left-radius: 5px !important;
     z-index: 0;
 }
@@ -309,7 +293,7 @@
 }
 
 .Cal__Header__root {
-    background-color: rgb(2, 204, 204) !important;
+    background-color: rgb(8, 128, 118) !important;
     min-height: 85px !important;
     height: 85px !important;
     font-family: 'Montserrat' !important;
@@ -327,9 +311,20 @@
     font-size: 26px !important;
     line-height: 30px !important;
 }
+
+.Cal__Years__year,
+.Cal__Years__withMonths {
+    color: rgb(211, 167, 48) !important;
+}
+
+.Cal__Years__selected {
+    background-color: rgb(211, 167, 48) !important;
+    border-color: rgb(211, 167, 48) !important;
+    color: white !important;
+}
+
 .Cal__MonthList__root {
     height: 250px !important;
-    /* height: 200px !important; */
 }
 
 .Cal__Month__rows {
@@ -346,8 +341,19 @@
 }
 
 .Cal__Day__selection {
-    background-color: rgb(22, 22, 22) !important;
+    /* background-color: rgb(22, 22, 22) !important;
+    color: white !important; */
+    background-color: rgb(211, 167, 48) !important;
     color: white !important;
+    border: 1px solid rgb(211, 167, 48);
+}
+
+.Cal__Day__selection:hover {
+    background-color: rgb(197, 156, 43) !important;
+}
+
+.Cal__Day__month {
+    font-weight: 400 !important;
 }
 
 .Cal__Day__today {
