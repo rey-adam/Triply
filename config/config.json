@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "",
     "database": "triply_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "hfbgmio07nafjoqy",
-    "password": "k2xhznltm7818ppd",
-    "database": "z7fry0db2l0pqiv4",
-    "host": "ixqxr3ajmyapuwmi.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "mu2bae10s7jeklo9",
+    "password": "ctayxnhew6upncmi",
+    "database": "vc09h3jp8jm251xo",
+    "host": "cig4l2op6r0fxymw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
