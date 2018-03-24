@@ -87,6 +87,7 @@ class Dashboard extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleZipSubmit = this.handleZipSubmit.bind(this);
         this.handleLocationAPIRequest = this.handleLocationAPIRequest.bind(this);
+
     };
 
     componentDidMount() {
@@ -236,6 +237,24 @@ class Dashboard extends Component {
         this.setState({ [name]: value });
     }
 
+
+    // START ----- submit button to take user to park search page 
+
+
+    handleSubmit(e){
+        e.preventDefault();
+        console.log('The button was clicked.');
+    //     // onClick={this.handleSubmit}
+        
+    //     this.openModal();
+    }
+
+    
+
+        
+
+    // END ------ submit button to take user to park search page 
+
     handleZipSubmit(e) {
         e.preventDefault();
         const weatherSearch = document.getElementById('weather-search').value;
@@ -348,6 +367,10 @@ class Dashboard extends Component {
                             />
                         </div>
                     </div>
+
+
+                    {/* modal */}
+
 
                     {/* google maps */}
                     <div id='mapDiv'>
