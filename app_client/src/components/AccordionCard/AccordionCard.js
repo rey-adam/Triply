@@ -20,7 +20,7 @@ class AccordionCard extends Component {
     render() {
         const userData = this.state.userData;
         return (
-            userData.Trips == undefined || userData.Trips.length === 0 ? <h3 className="no-trips-message">No trips added</h3> : 
+            userData == null || userData.Trips == undefined || userData.Trips.length === 0 ? <h3 className="no-trips-message">No trips added</h3> : 
             userData.Trips.map((trip, i) => (
                 <div key={i} className="card">
                     <div className="card-header" id={`heading${i}`}>

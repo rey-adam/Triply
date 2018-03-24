@@ -134,13 +134,15 @@ class Dashboard extends Component {
                 this.setState({
                     userData: dbUser.data
                 });
-                console.log('========= USER INFO ========');
-                console.log(`id: ${this.state.userData.id}`);
-                console.log(`email: ${this.state.userData.email}`);
-                console.log('========== trips ===========');
-                console.log(`trips: ${this.state.userData.Trips.length}`);
-                console.log(this.state.userData.Trips);
-                console.log('============================');
+                if (this.state.userData != null) {
+                    console.log('========= USER INFO ========');
+                    console.log(`id: ${this.state.userData.id}`);
+                    console.log(`email: ${this.state.userData.email}`);
+                    console.log('========== trips ===========');
+                    console.log(`trips: ${this.state.userData.Trips.length}`);
+                    console.log(this.state.userData.Trips);
+                    console.log('============================');
+                }
             }, 1000);
         })
         .catch(err => console.error(err));
