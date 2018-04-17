@@ -1,0 +1,418 @@
+.dash-nav {
+    box-shadow: none;
+    border-bottom: 1px solid rgba(184, 184, 184, 0.418);
+}
+
+.dash-content-wrapper {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.dash-content-wrapper > div {
+    margin: 40px auto;
+    width: 85vw;
+}
+
+/******************
+    INTRO MODAL
+******************/
+
+.new-user-message {
+    margin: 5% auto;
+    font-weight: 500;
+    width: 90%;
+}
+
+#exit-intro-btn {
+    margin: auto 5px;
+    text-transform: uppercase;
+}
+
+/******************
+   NEW TRIP MODAL
+******************/
+
+.new-trip-modal {
+    width: 30%;
+    margin: 18rem auto auto;
+    text-align: center;
+}
+
+.modal-backdrop.in {
+    opacity: 0.59;
+}
+
+.new-trip-modal .modal-body {
+    padding: 35px 40px;
+}
+
+.new-trip-modal p {
+    margin: 0; padding: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.new-trip-modal .new-trip-name {
+    overflow-wrap: break-word;
+    margin: auto;
+    margin-right: 1.5px;
+    color: rgb(211, 167, 48);
+}
+
+.DateRangePicker {
+    display: block !important;
+    margin: 20px auto !important;
+}
+
+.new-trip-modal button {
+    margin: auto 6px 5px;
+}
+
+.new-trip-modal button:nth-of-type(1):hover {
+    border-color: #e6e6e6;
+}
+
+.new-trip-modal #park-redirect-btn:hover {
+    border-color: #e6e6e6;
+}
+
+/*******************
+  CREATE TRIP FORM
+*******************/
+
+#create-trip-div {
+    padding: 20px;
+    height: 75px;
+    margin: 0 auto 20px;
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    border-radius: 3px;
+}
+
+.create-trip-form input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(211, 211, 211) !important;
+    opacity: 1; /* Firefox */
+}
+
+.create-trip-form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(211, 211, 211) !important;
+}
+
+.create-trip-form input::-ms-input-placeholder { /* Microsoft Edge */
+    color: rgb(211, 211, 211) !important;
+}
+
+.create-trip-form > .form-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.create-trip-form .form-control {
+    border-color: rgba(190, 190, 190, 0.445);
+    box-shadow: none;
+    margin-right: 10px;
+}
+
+.create-trip-form .form-control:focus {
+    border-color: rgba(190, 190, 190, 0.534);
+    -webkit-box-shadow: inset 0 1px 5px rgba(192, 192, 192, 0.212);
+    box-shadow: inset 0 1px 5px rgba(207, 207, 207, 0.212);
+}
+
+.create-trip-form .btn {
+    margin: 0; padding: 0;
+}
+
+.create-trip-form .glyphicon {
+    font-size: 30px;
+    color: rgb(8, 128, 128);
+}
+
+.create-trip-form .glyphicon:hover {
+    font-size: 30px;
+    background-color: rgb(8, 128, 128);
+    border: 1px solid rgb(8, 128, 128);
+    border-radius: 50%;
+    color: white;
+    margin-left: -2px;
+}
+
+/******************
+    USER TRIPS
+******************/
+
+.second-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.user-trips {
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    margin: inherit 0;
+    border-radius: 4px;
+    width: 50%;
+}
+
+.user-trips .trips-header {
+    background-color: rgb(8, 124, 128);
+    color: white;
+    height: 85px;
+    padding: 0; margin: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-align: center;
+}
+
+.user-trips .trips-header p {
+    margin-top: 0;
+    padding-top: 25px;
+    font-size: 26px;
+    font-weight: 400px;
+}
+
+.user-trips #accordion {
+    padding: 10px 30px;
+    width: 100%;
+}
+
+.user-trips .accordion-link {
+    width: 100%;
+    text-align: left;
+    color: black;
+}
+
+.user-trips .accordion-link h4 {
+    white-space: pre-line;
+    line-height: 20px;
+}
+
+.user-trips .accordion-link .spacer {
+    margin: auto 10px;
+    font-size: 20px;
+}
+
+.user-trips .accordion-link > h4 > .trip-date {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.user-trips .accordion-link:focus {
+    outline-color: rgba(199, 211, 221, 0.158);
+}
+
+/******************
+      WEATHER
+******************/
+
+.weather-div {
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    border-radius: 5px;
+    color: #63757A !important;
+    margin: auto;
+}
+
+.weather-header {
+    background-color: rgb(8, 124, 128);
+    color: white;
+    width: 100%;
+    height: 85px;
+    padding-top: 25px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.weather-form {
+    text-align: center;
+}
+
+.weather-form input {
+    background: none;
+    border: 1px solid white;
+    width: 50%;
+    height: 33px;
+    border-radius: 3px;
+    padding-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+.weather-form input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white !important;
+    opacity: 1; /* Firefox */
+}
+
+.weather-form input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white !important;
+}
+
+.weather-form input::-ms-input-placeholder { /* Microsoft Edge */
+    color: white !important;
+}
+
+.weather-form input:focus {
+    outline: none;
+    outline-offset: 0;
+}
+
+#weather-btn {
+    margin-top: -4px;
+    border: 1px solid white;
+    background: none;
+    color: white;
+    font-size: 13px;
+    height: 33px;
+}
+
+#weather-btn:hover {
+    color: black;
+    background: white;
+}
+
+#weather-btn:focus {
+    outline: none;
+    outline-offset: 0;
+}
+
+.weather-content {
+    padding: 30px 40px 25px;
+}
+
+/******************
+     CALENDAR
+******************/
+
+.Cal__Container__root {
+    box-shadow: 0 1px 3px rgb(184, 184, 184) !important;
+    width: 45% !important;
+    border-bottom-left-radius: 5px !important;
+    z-index: 0;
+}
+
+.Cal__Container__listWrapper {
+    border-bottom-right-radius: 5px !important;
+}
+
+.Cal__Header__root {
+    background-color: rgb(8, 124, 128) !important;
+    min-height: 85px !important;
+    height: 85px !important;
+    font-family: 'Montserrat' !important;
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    align-items: initial !important;
+}
+
+.Cal__Header__year {
+    font-size: 16px !important;
+    margin-bottom: 3px !important;
+}
+
+.Cal__Header__day {
+    font-size: 26px !important;
+    line-height: 30px !important;
+}
+
+.Cal__Years__year,
+.Cal__Years__withMonths {
+    color: rgb(211, 167, 48) !important;
+}
+
+.Cal__Years__selected {
+    background-color: rgb(211, 167, 48) !important;
+    border-color: rgb(211, 167, 48) !important;
+    color: white !important;
+}
+
+.Cal__MonthList__root {
+    height: 250px !important;
+}
+
+.Cal__Month__rows {
+    background: none !important;
+}
+
+.Cal__Weekdays__root {
+    background-color: white !important;
+    color: black !important;
+}
+
+.Cal__Weekdays__day {
+    padding: 12.5px 0 !important;
+}
+
+.Cal__Day__selection {
+    /* background-color: rgb(22, 22, 22) !important;
+    color: white !important; */
+    background-color: rgb(211, 167, 48) !important;
+    color: white !important;
+    border: 1px solid rgb(211, 167, 48);
+}
+
+.Cal__Day__selection:hover {
+    background-color: rgb(197, 156, 43) !important;
+}
+
+.Cal__Day__month {
+    font-weight: 400 !important;
+}
+
+.Cal__Day__today {
+    color: rgba(184, 184, 184, 0.418) !important;
+}
+
+.Cal__Today__root,
+.Cal__Today__show {
+    background-color: rgba(124, 124, 124, 0.541) !important;
+}
+
+.Cal__Today__chevron {
+    opacity: 0;
+}
+
+/******************
+        MAP
+******************/
+
+#mapDiv {
+    height: 60vh;
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+}
+
+#mapDiv > div > div {
+    border-radius: 4px;
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+@media screen and (max-width: 1024px) {
+    .ReactModal__Content,
+    .ReactModal__Content--after-open {
+        width: 50% !important;
+    }
+
+    .user-trips,
+    .Cal__Container__root {
+        width: 100% !important;
+    }
+
+    .user-trips {
+        margin-bottom: 40px;
+    }
+
+    .new-trip-modal {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .ReactModal__Content,
+    .ReactModal__Content--after-open {
+        width: 70% !important;
+    }
+
+    .new-trip-modal {
+        width: 70%;
+    }
+}

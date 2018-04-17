@@ -1,0 +1,110 @@
+/******************
+      NAVBAR
+******************/
+.navbar-default {
+    background-color: white;
+    margin-bottom: 0;
+    box-shadow: 0 0.5px 15px rgb(58, 58, 58);
+    z-index: 2;
+    border-radius: 0;
+}
+
+.navbar-default > div {
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+#nav-logo {
+    width: 80px;
+    height: 30px;
+    margin: auto;
+    margin-top: -5px;
+    background-image: url('../../assets/img/logotype.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar-default .navbar-nav {
+    margin-right: -45px;
+}
+
+.navbar-default .active {
+    background-color: #f5f5f5;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #637579;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #445153;
+    font-size: 12.5px;
+    font-weight: 500;
+    background-color: #f5f5f5;
+}
+
+.collapsing > .navbar-nav,
+.in > .navbar-nav {
+    text-align: center;
+}
+
+.dropdown-menu {
+    padding: 0;
+}
+
+.dropdown-menu>li>a {
+    font-size: 12px;
+    color: #445153;
+    text-align: center;
+    font-weight: 500;
+    padding: 15px 20px;
+}
+
+/* css animation for "dashboard" tab */
+.blink {
+    animation-name: dash-blink;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+
+}
+
+/******************
+     KEYFRAMES
+******************/
+
+@keyframes dash-blink {
+    0% {
+        color: #637579;
+    }
+    50% {
+        color: #fce300;
+    }
+    100% {
+        color: #637579;
+    }
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+@media only screen and (max-width: 767px) {
+    a.dropdown-link {
+        padding-left: 15px !important;
+    }
+    
+    .navbar-nav .open .dropdown-menu>li>a {
+        line-height: 30px;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus, 
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+        color: #445153;
+        background-color: #f5f5f5;
+    }
+}

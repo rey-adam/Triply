@@ -1,0 +1,179 @@
+/******************
+    BACKGROUND
+******************/
+
+.park-search-container .hero-img {
+    background-image: url('../../assets/img/luca-bravo-423211-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/******************
+    SELECT FORM
+******************/
+
+.select-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 22.5%;
+}
+
+.select-form {
+    position: fixed;
+    width: 50%;
+    margin: auto;
+}
+
+.select-form label {
+    display: none;
+}
+
+.select-bar {
+    position: relative;
+}
+
+.select-form select,
+.select-form .select2 {
+    height: 37px;
+    font-size: calc(11px + 3 * (140vw - 320px)/ 2000);
+    border: 1px solid white;
+    text-indent: 10px;
+}
+
+.select-form select {
+    background: none;
+    display: inline;
+    color: white;
+    text-shadow: 0 1px 10px black;
+    z-index: 1;
+    position: absolute;
+    padding-left: 10px;
+}
+
+.select-form select:hover {
+    cursor: pointer;
+}
+
+.select-form .select2 {
+    position: absolute;
+    top: 0;
+    background: rgb(0, 0, 0);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.select-form select .form-control {
+    border-color: white !important;
+}
+
+.select-form .form-control:focus {
+    border-color: white;
+    box-shadow: none;
+}
+
+.select-form select option {
+    text-shadow: 0 1px 10px black;
+}
+
+.select-form .select-btn {
+    position: absolute;
+    right: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: 1;
+    border: 1px solid white;
+    font-size: calc(10.5px + 3 * (140vw - 320px)/ 2000);
+    height: 37px;
+}
+
+.select-option {
+    color: rgb(31, 31, 31);
+}
+
+/******************
+  NEXT SELECT FORM
+******************/
+
+.next-select-form {
+    position: absolute;
+    width: 100%;
+    top: 54px;
+}
+
+.next-select-form,
+.next-select-form .select-bar,
+.next-select-form select,
+.next-select-form .form-control {
+    border-top-left-radius: 0 !important;
+    -webkit-appearance: none;
+    -webkit-border-top-leftradius: 0px;
+}
+
+.next-select-form .form-control,
+.next-select-form button {
+    font-size: 12px;
+}
+
+/******************
+       TABLE
+******************/
+
+.modal-park-name {
+    margin-top: 4.5%;
+    margin-bottom: 30px;
+}
+
+.table-responsive {
+    margin: 35px 50px auto;
+    font-size: 14px;
+}
+
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>thead>tr>th {
+    padding: 12px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    text-align: left;
+}
+
+.confirm-btn,
+#close-modal-btn {
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 12px;
+    height: 30px;
+}
+
+.confirm-btn {
+    margin: -5px 20px auto;
+    font-weight: 400;
+    background-color: grey;
+    color: white;
+    border: none;
+}
+
+.confirm-btn:hover {
+    background-color: grey;
+    color: white;
+}
+
+#close-modal-btn {
+    margin: 10px auto 4.5%;
+    font-weight: 500;
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+@media only screen and (max-width: 500px) {
+    #park-form {
+        width: 80% !important;
+        
+    }
+}

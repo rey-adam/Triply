@@ -1,0 +1,30 @@
+.confirm-delete-message {
+    margin: 7% auto;
+    font-weight: 500;
+    width: 70%;
+}
+
+.delete-btn-div button {
+    margin: auto 5px;
+    text-transform: uppercase;
+}
+
+#confirm-delete-btn {
+    background-color: rgb(211, 113, 48);
+    border-color: rgb(211, 113, 48);
+    color: white;
+}
+
+#confirm-delete-btn:hover {
+    background-color: rgb(202, 108, 46);
+}
+
+#exit-delete-btn {
+    background-color: rgb(211, 80, 48);
+    border-color: rgb(211, 80, 48);
+    color: white;
+}
+
+#exit-delete-btn:hover {
+    background-color: rgb(202, 77, 45);
+}

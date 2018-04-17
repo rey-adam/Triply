@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Yosemite",
+        "TripId": 1,
+        "parkCode": "yose"
+    },
+    {
+        "name": "Yosemite",
+        "TripId": 2,
+        "parkCode": "yose"
+    },
+    {
+        "name": "Yosemite",
+        "TripId": 3,
+        "parkCode": "yose"
+    },
+    {
+        "name": "Yosemite",
+        "TripId": 4,
+        "parkCode": "yose"
+    }
+]

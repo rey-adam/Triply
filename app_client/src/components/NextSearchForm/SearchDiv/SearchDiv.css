@@ -1,0 +1,25 @@
+.search-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 18%;
+}
+
+.search-div {
+    position: fixed;
+    width: 65%;
+    margin: auto;
+}
+
+.select-option {
+    color: rgb(31, 31, 31);
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+@media only screen and (max-width: 768px) {
+    .search-div {
+        width: 80% !important;
+    }
+}

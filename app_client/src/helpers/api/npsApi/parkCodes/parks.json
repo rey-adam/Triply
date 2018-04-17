@@ -1,0 +1,7 @@
+[
+    { "parkName": "Glacier", "parkCode": "glac" },
+    { "parkName": "Bryce Canyon", "parkCode": "brca" },
+    { "parkName": "Yellowstone", "parkCode": "yell" },
+    { "parkName": "Yosemite", "parkCode": "yose" },
+    { "parkName": "Zion", "parkCode": "zion" }
+]

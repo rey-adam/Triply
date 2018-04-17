@@ -1,0 +1,61 @@
+.carousel-indicators {
+	position: fixed;
+	left: 50vw;
+}
+
+.carousel-inner .item {
+	position: fixed;
+	top: 0; right: 0; left: 0; bottom: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+video {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#carousel_night-sky video {
+	transform: scale(1.2, 1);
+	-webkit-transform: scale(1.2, 1);
+	-moz-transform: scale(1.2, 1);
+	-ms-transform: scale(1.2, 1);
+}
+
+.overlay {
+	position: absolute;
+	top: 0; right: 0; left: 0; bottom: 0;
+	background-color: white;
+	opacity: 0.15;
+}
+
+#carousel__lake-camp .overlay {
+	opacity: 0.14;
+}
+
+#carousel__lake-cliffs .overlay {
+	opacity: 0.09;
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+@media screen and (min-aspect-ratio: 16/9) {
+  video {
+    width: 100%;
+	height: 300%;
+    top: -100%;
+  }
+}
+
+@media screen and (max-aspect-ratio: 16/9) {
+  video {
+	height: 100%;
+	width: 300%;
+    left: -100%;
+  }
+}

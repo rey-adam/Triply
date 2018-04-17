@@ -1,0 +1,39 @@
+{
+  "name": "trippy",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3001",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "create-react-class": "^15.6.3",
+    "dotenv": "^5.0.1",
+    "google-map-react": "^0.34.0",
+    "google-maps-react": "^1.1.4",
+    "history": "^4.7.2",
+    "moment": "^2.21.0",
+    "npm": "^5.7.1",
+    "object-assign": "^4.1.1",
+    "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-app": "^1.1.2",
+    "react-bootstrap": "^0.32.1",
+    "react-dates": "^16.3.6",
+    "react-dom": "^16.2.0",
+    "react-forecast": "0.0.7",
+    "react-google-maps": "^9.4.5",
+    "react-infinite-calendar": "^2.3.1",
+    "react-modal": "^3.3.2",
+    "react-moment": "^0.7.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "react-select": "^1.2.1",
+    "react-star-rating-component": "^1.4.1",
+    "strict-uri-encode": "^2.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

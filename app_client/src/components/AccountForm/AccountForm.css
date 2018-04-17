@@ -1,0 +1,87 @@
+.account-form-div {
+    width: 65%;
+    position: relative;
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 1px 3px rgb(184, 184, 184);
+    margin: 6.5rem auto 0;
+}
+
+.account-form-header {
+    background-color: rgb(8, 124, 128);
+    color: white;
+    height: 85px;
+    padding: 0; margin: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    text-align: center;
+}
+
+.account-form-header p {
+    margin-top: 0;
+    padding-top: 25px;
+    font-size: 26px;
+    font-weight: 400px;
+}
+
+#account-form {
+    width: 100%;
+    margin: 15px auto 15px;
+    padding: 20px 40px 90px;
+}
+
+#account-form label {
+    font-weight: 500;
+}
+
+#account-form input {
+    height: 37px;
+    border-color: rgb(221, 221, 221);
+    margin-bottom: 20px;
+}
+
+.account-btn-div {
+    width: 100%;
+}
+
+#delete-account-btn,
+#update-account-btn {
+    color: white;
+    height: 37px;
+    margin-top: 10px;
+}
+
+#delete-account-btn {
+    background-color: rgb(211, 167, 48);
+    border-color: rgb(211, 167, 48);
+    color: white;
+}
+
+#delete-account-btn:hover {
+    background: rgb(204, 162, 47);
+}
+
+#update-account-btn {
+    background-color: rgb(211, 146, 48);
+    border-color: rgb(211, 146, 48);
+    color: white;
+    margin-left: 20px;
+}
+
+#update-account-btn:hover {
+    background: rgb(202, 140, 47);
+}
+
+/******************
+   MEDIA QUERIES
+******************/
+
+@media screen and (max-width: 768px) {
+    .account-form-div {
+        width: 80%;
+    }
+
+    .account-btn-div {
+        width: 100%;
+    }
+}

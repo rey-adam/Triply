@@ -1,0 +1,72 @@
+/******************
+     JUMBOTRON
+******************/
+.jumbotron {
+	position: fixed;
+    top: 0; 
+    right: 0;
+    left: 0; 
+    bottom: 0;
+    padding: 0;
+    margin-bottom: 0px;
+    z-index: 0;
+}
+
+.jumbotron .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: auto;
+    background-color: white;
+    opacity: 0.2;
+}
+
+.jumbotron .hero-img {
+    height: 100%;
+    background-image: url('../../assets/img/mountain-blue-lake-snow.png');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: -38%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .jumbotron .hero-img {
+        margin-bottom: -43%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .jumbotron .hero-img {
+        margin-bottom: -48%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .jumbotron .hero-img {
+        margin-bottom: -56%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .jumbotron .hero-img {
+        margin-bottom: -74%;
+    }
+}
+
+@media only screen and (max-width: 615px) {
+    .jumbotron .hero-img {
+        margin-bottom: -90%;
+    }
+}
+
+@media only screen and (max-width: 476px) {
+    nav > .pagination > li > a {
+        padding: 8px 10px;
+    }
+    
+    .jumbotron .hero-img {
+        margin-bottom: -100%;
+    }
+}
