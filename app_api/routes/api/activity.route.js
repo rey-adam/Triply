@@ -1,7 +1,7 @@
 // DEPENDENCIES
-const express = require("express"),
-    ctrl = require("../../controllers/model/activity.ctrl"),
-    router = express.Router();
+const express = require("express")
+    , ctrl = require("../../controllers/model/activity.ctrl")
+    , router = express.Router();
 
 // CREATE
 router.post("/activity", ctrl.createActivity);
